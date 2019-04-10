@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featureModel>
+    <properties/>
+    <struct>
+        <and abstract="true" mandatory="true" name="AplicacionesFit">
+            <feature mandatory="true" name="Ejercicios"/>
+            <and name="Rutas">
+                <feature name="DistanciaRecorrida"/>
+            </and>
+            <feature name="Logros"/>
+            <feature name="Progreso"/>
+            <feature name="Pago"/>
+            <or name="Social">
+                <feature name="Chat"/>
+                <and name="Asesoria">
+                    <feature name="Entrenador"/>
+                </and>
+                <feature name="Redes"/>
+            </or>
+            <feature name="Rutinas"/>
+            <feature name="Parques"/>
+        </and>
+    </struct>
+    <constraints>
+        <rule>
+            <imp>
+                <var>Rutinas</var>
+                <var>Ejercicios</var>
+            </imp>
+        </rule>
+    </constraints>
+    <calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+    <comments/>
+    <featureOrder userDefined="false"/>
+</featureModel>
