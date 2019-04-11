@@ -8,12 +8,18 @@
                     <feature name="Auditivas"/>
                     <feature name="Visuales"/>
                 </or>
+                <feature mandatory="true" name="Rutas"/>
             </and>
-            <and mandatory="true" name="Rutas">
-                <feature mandatory="true" name="DistanciaRecorrida"/>
+            <and mandatory="true" name="Progreso">
+                <feature mandatory="true" name="Logros"/>
+                <and mandatory="true" name="Estadisticas">
+                    <feature mandatory="true" name="DistanciaRecorrida"/>
+                    <feature mandatory="true" name="Repeticiones"/>
+                    <feature name="Calorias"/>
+                    <feature mandatory="true" name="HorasEntrenamiento"/>
+                    <feature name="Peso"/>
+                </and>
             </and>
-            <feature mandatory="true" name="Logros"/>
-            <feature mandatory="true" name="Progreso"/>
             <and name="Membresia">
                 <feature name="Pago"/>
             </and>
@@ -21,18 +27,34 @@
                 <feature mandatory="true" name="Entrenador"/>
                 <feature name="Nutricionista"/>
             </and>
-            <and name="MostrarParques">
-                <feature name="DibujoDeRutas"/>
+            <and mandatory="true" name="Parques">
+                <and mandatory="true" name="Ubicación">
+                    <feature name="DibujoDeRutas"/>
+                </and>
             </and>
-            <and mandatory="true" name="Sociales">
-                <feature mandatory="true" name="Chat"/>
+            <and mandatory="true" name="InteraciónUsuarios">
+                <and mandatory="true" name="Chat">
+                    <feature mandatory="true" name="ChatEntrenador"/>
+                    <feature name="ChatUsuario"/>
+                </and>
                 <feature name="RedesSociales"/>
-                <feature mandatory="true" name="Comentarios"/>
                 <feature mandatory="true" name="SeguirUsuario"/>
+                <and mandatory="true" name="Valoraciones">
+                    <and mandatory="true" name="Comentarios">
+                        <feature name="Likes"/>
+                        <feature mandatory="true" name="ComentarioRutinas"/>
+                        <feature mandatory="true" name="ComentarioEntrenadores"/>
+                        <feature mandatory="true" name="ComentarioParques"/>
+                    </and>
+                    <feature mandatory="true" name="Calificaciones"/>
+                </and>
             </and>
-            <and mandatory="true" name="Rutinas">
-                <feature mandatory="true" name="Calendario"/>
+            <and mandatory="true" name="Notificaciones">
+                <feature name="NotificacionChat"/>
+                <feature name="NotificacionCalendario"/>
             </and>
+            <feature mandatory="true" name="Calendario"/>
+            <feature mandatory="true" name="Rutinas"/>
             <and mandatory="true" name="Autenticación">
                 <feature mandatory="true" name="Normal"/>
                 <feature name="Facebook"/>
