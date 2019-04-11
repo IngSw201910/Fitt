@@ -2,33 +2,46 @@
 <featureModel>
     <properties/>
     <struct>
-        <and abstract="true" mandatory="true" name="AplicacionesFit">
-            <feature mandatory="true" name="Ejercicios"/>
-            <and name="Rutas">
-                <feature name="DistanciaRecorrida"/>
+        <and abstract="true" mandatory="true" name="Fitt">
+            <and mandatory="true" name="Ejercicios">
+                <or mandatory="true" name="Guias">
+                    <feature name="Auditivas"/>
+                    <feature name="Visuales"/>
+                </or>
             </and>
-            <feature name="Logros"/>
-            <feature name="Progreso"/>
-            <feature name="Pago"/>
-            <or name="Social">
-                <feature name="Chat"/>
-                <and name="Asesoria">
-                    <feature name="Entrenador"/>
-                </and>
-                <feature name="Redes"/>
-            </or>
-            <feature name="Rutinas"/>
-            <feature name="Parques"/>
+            <and mandatory="true" name="Rutas">
+                <feature mandatory="true" name="DistanciaRecorrida"/>
+            </and>
+            <feature mandatory="true" name="Logros"/>
+            <feature mandatory="true" name="Progreso"/>
+            <and name="Membresia">
+                <feature name="Pago"/>
+            </and>
+            <and mandatory="true" name="Asesoria">
+                <feature mandatory="true" name="Entrenador"/>
+                <feature name="Nutricionista"/>
+            </and>
+            <and name="MostrarParques">
+                <feature name="DibujoDeRutas"/>
+            </and>
+            <and mandatory="true" name="Sociales">
+                <feature mandatory="true" name="Chat"/>
+                <feature name="RedesSociales"/>
+                <feature mandatory="true" name="Comentarios"/>
+                <feature mandatory="true" name="SeguirUsuario"/>
+            </and>
+            <and mandatory="true" name="Rutinas">
+                <feature mandatory="true" name="Calendario"/>
+            </and>
+            <and mandatory="true" name="Autenticación">
+                <feature mandatory="true" name="Normal"/>
+                <feature name="Facebook"/>
+                <feature name="Google"/>
+            </and>
+            <feature mandatory="true" name="UbicaciónUsuario"/>
         </and>
     </struct>
-    <constraints>
-        <rule>
-            <imp>
-                <var>Rutinas</var>
-                <var>Ejercicios</var>
-            </imp>
-        </rule>
-    </constraints>
+    <constraints/>
     <calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
     <comments/>
     <featureOrder userDefined="false"/>
