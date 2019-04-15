@@ -15,9 +15,9 @@
                 <and mandatory="true" name="Estadisticas">
                     <feature mandatory="true" name="DistanciaRecorrida"/>
                     <feature mandatory="true" name="Repeticiones"/>
-                    <feature name="Calorias"/>
+                    <feature mandatory="true" name="Calorias"/>
                     <feature mandatory="true" name="HorasEntrenamiento"/>
-                    <feature name="Peso"/>
+                    <feature mandatory="true" name="Peso"/>
                 </and>
             </and>
             <and name="Membresia">
@@ -29,13 +29,13 @@
             </and>
             <and mandatory="true" name="Parques">
                 <and mandatory="true" name="Ubicación">
-                    <feature name="DibujoDeRutas"/>
+                    <feature mandatory="true" name="DibujoDeRutas"/>
                 </and>
             </and>
             <and mandatory="true" name="InteraciónUsuarios">
                 <and mandatory="true" name="Chat">
                     <feature mandatory="true" name="ChatEntrenador"/>
-                    <feature name="ChatUsuario"/>
+                    <feature mandatory="true" name="ChatUsuario"/>
                 </and>
                 <feature name="RedesSociales"/>
                 <feature mandatory="true" name="SeguirUsuario"/>
@@ -50,8 +50,8 @@
                 </and>
             </and>
             <and mandatory="true" name="Notificaciones">
-                <feature name="NotificacionChat"/>
-                <feature name="NotificacionCalendario"/>
+                <feature mandatory="true" name="NotificacionChat"/>
+                <feature mandatory="true" name="NotificacionCalendario"/>
             </and>
             <feature mandatory="true" name="Calendario"/>
             <feature mandatory="true" name="Rutinas"/>
