@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".CrearRutinaActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MenuPrincipalUsuario" />
-        <activity android:name=".MenuPrincipalUsuarioActivity"></activity>
+        <activity android:name=".MenuPrincipalUsuarioActivity" />
     </application>
 
 </manifest>
