@@ -40,7 +40,7 @@ public class MenuPrincipalUsuarioActivity extends AppCompatActivity {
         crearRutinaB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(MenuPrincipalUsuarioActivity.this, CrearRutinaActivity.class));
             }
         });
 
