@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         correoET = (EditText) findViewById(R.id.correo);
         passET = (EditText) findViewById(R.id.pass);
 
