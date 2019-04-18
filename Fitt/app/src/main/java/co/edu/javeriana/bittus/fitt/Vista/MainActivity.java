@@ -1,4 +1,4 @@
-package co.edu.javeriana.bittus.fitt;
+package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Adapters.Utils;
 
 public class MainActivity extends AppCompatActivity {
 

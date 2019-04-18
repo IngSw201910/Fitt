@@ -1,4 +1,4 @@
-package co.edu.javeriana.bittus.fitt;
+package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Adapters.Utils;
 
 public class MenuPrincipalUsuarioActivity extends AppCompatActivity {
 

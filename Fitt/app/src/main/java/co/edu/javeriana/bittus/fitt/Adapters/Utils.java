@@ -1,4 +1,4 @@
-package co.edu.javeriana.bittus.fitt;
+package co.edu.javeriana.bittus.fitt.Adapters;
 
 import com.google.firebase.auth.FirebaseAuth;
 

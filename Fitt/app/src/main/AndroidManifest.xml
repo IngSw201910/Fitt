@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".CrearRutinaActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".Vista.CrearSesionActivity"></activity>
+        <activity android:name=".Vista.CrearRutinaSesionesActivity" />
+        <activity android:name=".Vista.CrearRutinaActivity" />
+        <activity android:name=".Vista.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MenuPrincipalUsuario" />
-        <activity android:name=".MenuPrincipalUsuarioActivity" />
+        <activity android:name=".Vista.MenuPrincipalUsuarioActivity" />
     </application>
 
 </manifest>
