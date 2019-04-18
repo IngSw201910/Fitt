@@ -8,7 +8,6 @@ public class Sesion {
     private String duracion;
 
 
-
     public Sesion(String nombre, String duracion) {
         this.nombre = nombre;
         this.duracion = duracion;

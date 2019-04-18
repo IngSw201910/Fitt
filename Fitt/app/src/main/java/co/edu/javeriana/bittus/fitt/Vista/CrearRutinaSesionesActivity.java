@@ -12,7 +12,7 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
-import co.edu.javeriana.bittus.fitt.Adapters.ModeloSesionesAdapter;
+import co.edu.javeriana.bittus.fitt.Adapters.SesionesAdapter;
 
 public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
     private Button siguienteB;
     private Button adicionarB;
     private ListView listViewL;
-    private ModeloSesionesAdapter adapterSesion;
+    private SesionesAdapter adapterSesion;
     private List<Sesion> modeloList;
 
     @Override
@@ -29,7 +29,7 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crear_rutina_sesiones);
 
 
-        siguienteB = (Button) findViewById(R.id.buttonAceptar);
+        siguienteB = (Button) findViewById(R.id.buttonAceptarCrearRutina);
         listViewL = (ListView) findViewById(R.id.listSesiones);
         adicionarB = (Button)findViewById(R.id.buttonAdicionarSesion);
 
@@ -42,7 +42,7 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         //Fin datos de prueba
 
 
-        adapterSesion = new ModeloSesionesAdapter(CrearRutinaSesionesActivity.this, R.layout.item_sesiones_nuevas_row, modeloList);
+        adapterSesion = new SesionesAdapter(CrearRutinaSesionesActivity.this, R.layout.item_sesiones_nuevas_row, modeloList);
 
 
         listViewL.setAdapter(adapterSesion);

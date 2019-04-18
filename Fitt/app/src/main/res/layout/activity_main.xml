@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/iniciarsesion"
+        android:id="@+id/buttonIniciarSesion"
         android:layout_width="130dp"
         android:layout_height="54dp"
         android:layout_marginStart="8dp"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iniciarsesion"
+        app:layout_constraintTop_toBottomOf="@+id/buttonIniciarSesion"
         app:layout_constraintVertical_bias="0.112" />
 
 </android.support.constraint.ConstraintLayout>

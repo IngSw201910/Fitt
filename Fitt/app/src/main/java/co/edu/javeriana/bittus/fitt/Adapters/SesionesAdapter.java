@@ -14,17 +14,17 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.R;
 
-public class ModeloSesionesAdapter extends ArrayAdapter<Sesion> {
+public class SesionesAdapter extends ArrayAdapter<Sesion> {
 
 
-    private List<Sesion> modeloList;
+    private List<Sesion> listSesion;
     private Context context;
     private int resource;
 
 
-    public ModeloSesionesAdapter(@NonNull Context context, int resource, List<Sesion> objects) {
+    public SesionesAdapter(@NonNull Context context, int resource, List<Sesion> objects) {
         super(context, resource, objects);
-        this.modeloList = objects;
+        this.listSesion = objects;
         this.context = context;
         this.resource = resource;
     }
@@ -38,13 +38,13 @@ public class ModeloSesionesAdapter extends ArrayAdapter<Sesion> {
         if(view == null){
             view = LayoutInflater.from(context).inflate(resource, null);
         }
-        Sesion modelo = modeloList.get(position);
+        Sesion sesion = listSesion.get(position);
 
         TextView nombre = view.findViewById(R.id.textNombreSesion);
-        nombre.setText(modelo.getNombre());
+        nombre.setText(sesion.getNombre());
 
         TextView duracion = view.findViewById(R.id.textDuracion);
-        duracion.setText(modelo.getDuracion());
+        duracion.setText(sesion.getDuracion()+ " segundos");
 
         return  view;
     }

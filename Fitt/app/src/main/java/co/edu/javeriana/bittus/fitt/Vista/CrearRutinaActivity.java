@@ -18,7 +18,7 @@ public class CrearRutinaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_rutina);
 
-        aceptarB = (Button) findViewById(R.id.buttonSiguiente);
+        aceptarB = (Button) findViewById(R.id.buttonSiguienteCrearRutina);
 
 
         aceptarB.setOnClickListener(new View.OnClickListener() {

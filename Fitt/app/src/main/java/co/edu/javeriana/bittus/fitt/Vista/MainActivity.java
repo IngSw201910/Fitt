@@ -42,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
         correoET = (EditText) findViewById(R.id.correo);
         passET = (EditText) findViewById(R.id.pass);
 
-        iniciarSesionB = (Button) findViewById(R.id.iniciarsesion);
+        iniciarSesionB = (Button) findViewById(R.id.buttonIniciarSesion);
 
         mAuth = FirebaseAuth.getInstance();
-                mAuthListener = new FirebaseAuth.AuthStateListener() {
-                    @Override
-                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
 // User is signed in
