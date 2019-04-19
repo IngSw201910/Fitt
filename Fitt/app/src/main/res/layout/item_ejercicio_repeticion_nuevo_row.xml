@@ -14,9 +14,9 @@
         android:layout_width="85dp"
         android:layout_height="38dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="48dp"
         android:text="Editar"
-        app:layout_constraintStart_toEndOf="@+id/textNombreEjercicioDuracion"
+        app:layout_constraintStart_toEndOf="@+id/textNombreEjercicioRepeticion"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -24,16 +24,16 @@
         android:layout_width="85dp"
         android:layout_height="38dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:text="Borrar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintHorizontal_bias="0.033"
         app:layout_constraintStart_toEndOf="@+id/buttonEdit"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textNombreEjercicioDuracion"
+        android:id="@+id/textNombreEjercicioRepeticion"
         android:layout_width="140dp"
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
@@ -43,13 +43,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textEjercicioDuracion"
+        android:id="@+id/textEjercicioRepeticiones"
         android:layout_width="140dp"
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:text="Distancia"
+        android:text="Repeticiones"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioDuracion" />
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioRepeticion" />
+
+    <TextView
+        android:id="@+id/textEjercicioSeries"
+        android:layout_width="140dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="12dp"
+        android:text="Series"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textEjercicioRepeticiones" />
+
+    <TextView
+        android:id="@+id/textEjercicioDescanso"
+        android:layout_width="140dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="12dp"
+        android:text="Descanso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textEjercicioSeries" />
 
 </android.support.constraint.ConstraintLayout>

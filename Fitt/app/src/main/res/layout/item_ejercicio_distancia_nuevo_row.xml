@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/textNombreEjercicioDistancia"
-        android:layout_width="125dp"
+        android:layout_width="140dp"
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
@@ -44,7 +44,7 @@
 
     <TextView
         android:id="@+id/textEjercicioDistancia"
-        android:layout_width="100dp"
+        android:layout_width="140dp"
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"

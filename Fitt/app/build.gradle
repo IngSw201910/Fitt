@@ -30,4 +30,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.1'
+
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.16'
+    implementation 'org.jetbrains:annotations-java5:15.0'
 }

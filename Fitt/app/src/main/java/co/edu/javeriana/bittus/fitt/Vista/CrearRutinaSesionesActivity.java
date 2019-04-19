@@ -21,7 +21,7 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
     private Button adicionarB;
     private ListView listViewL;
     private SesionesAdapter adapterSesion;
-    private List<Sesion> modeloList;
+    private List<Sesion> sesionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +33,16 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         listViewL = (ListView) findViewById(R.id.listSesiones);
         adicionarB = (Button)findViewById(R.id.buttonAdicionarSesion);
 
-        modeloList = new ArrayList<Sesion>();
+        sesionList = new ArrayList<Sesion>();
 
         //Datos de prueba
 
-        modeloList.add(new Sesion("Piernas", "20:00"));
+        sesionList.add(new Sesion("Piernas", "20:00"));
 
         //Fin datos de prueba
 
 
-        adapterSesion = new SesionesAdapter(CrearRutinaSesionesActivity.this, R.layout.item_sesiones_nuevas_row, modeloList);
+        adapterSesion = new SesionesAdapter(CrearRutinaSesionesActivity.this, R.layout.item_sesiones_nuevas_row, sesionList);
 
 
         listViewL.setAdapter(adapterSesion);

@@ -1,6 +1,7 @@
 package co.edu.javeriana.bittus.fitt.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,73 +10,65 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-
 import java.util.List;
 
-
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioSesion;
+import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Vista.BuscarEjercicioActivity;
+import co.edu.javeriana.bittus.fitt.Vista.PopCrearEjercicioSesionDistancia;
+import pl.droidsonroids.gif.GifImageView;
 
+public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
 
-public class EjerciciosAdapter extends ArrayAdapter<EjercicioSesion> {
-
-
-    protected List<EjercicioSesion> listEjercios;
+    protected List<Ejercicio> listEjercicios;
     protected Context context;
+    private int resource;
 
 
-    public EjerciciosAdapter(@NonNull Context context, List<EjercicioSesion> objects) {
-        super(context, R.layout.item_ejercicio_duracion_nuevo_row, objects);
-        this.listEjercios = objects;
+    public EjerciciosAdapter(@NonNull Context context, int resource, List<Ejercicio> objects) {
+        super(context, resource, objects);
+        this.listEjercicios = objects;
         this.context = context;
-
+        this.resource = resource;
     }
 
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
-        if(listEjercios.get(position) instanceof EjercicioDistancia){
-            return getViewEjercicioDistancia(position,view, parent);
+
+        if(view == null){
+            view = LayoutInflater.from(context).inflate(resource, null);
         }
-        if(listEjercios.get(position) instanceof EjercicioDuracion){
-            return getViewEjercicioDuracion(position,view, parent);
-        }
+        final Ejercicio ejercicio = listEjercicios.get(position);
+
+        TextView nombre = view.findViewById(R.id.textNombreEjercicioBuscar);
+        nombre.setText(ejercicio.getNombre());
+
+        TextView musculos = view.findViewById(R.id.textMusculosEjercicioBuscar);
+        musculos.setText(ejercicio.getMusculos());
+
+        TextView tipo = view.findViewById(R.id.textTipoEjercicio);
+        tipo.setText(ejercicio.getTipo());
+
+        TextView dificultad = view.findViewById(R.id.textDificultadEjercicio);
+        dificultad.setText(ejercicio.getDificultad());
+
+        GifImageView gifImageView = view.findViewById(R.id.gifImageView);
+        gifImageView.setImageResource(ejercicio.getGif());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(ejercicio.getTipo().equals("Distancia")){
+                    context.startActivity(new Intent(context, PopCrearEjercicioSesionDistancia.class));
+                }
+
+            }
+        });
+
 
         return  view;
-    }
-
-    private View getViewEjercicioDuracion(int position, View view, ViewGroup parent) {
-
-        if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_duracion_nuevo_row, null);
-        }
-        EjercicioDuracion ejercicio = (EjercicioDuracion) listEjercios.get(position);
-
-        TextView nombre = view.findViewById(R.id.textNombreEjercicioDuracion);
-        nombre.setText(ejercicio.getEjercicio().getNombre());
-
-        TextView duracion = view.findViewById(R.id.textEjercicioDuracion);
-        String duracionS = Integer.toString(ejercicio.getDuracion());
-        duracion.setText(duracionS);
-        return view;
-    }
-
-    private View getViewEjercicioDistancia(int position, View view, ViewGroup parent) {
-
-        if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_distancia_nuevo_row, null);
-        }
-        EjercicioDistancia ejercicio = (EjercicioDistancia) listEjercios.get(position);
-
-        TextView nombre = view.findViewById(R.id.textNombreEjercicioDistancia);
-        nombre.setText(ejercicio.getEjercicio().getNombre());
-
-        TextView distancia = view.findViewById(R.id.textEjercicioDistancia);
-        String distanciaS = Integer.toString(ejercicio.getDistancia());
-        distancia.setText(distanciaS + " metros");
-        return view;
     }
 
 
