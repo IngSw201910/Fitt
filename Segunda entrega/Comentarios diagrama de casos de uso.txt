@@ -1,20 +1,7 @@
-Separar las reseñas en tres casos de uso:
-Reseñar parque
-Reseñar rutina
-Reseñar entrenador
+
+Agregar ver entrenador
 
 
+Cambiar progreso!
 
-Crear:
-
-Chatear con entrenador (actor usuario)
-Chatear con usuario (actor usuario)
-Chatear con cliente (actor entrenador)
-
-
-
-Corregir formato - documento
-Separar registro de usuario y de entrenador en dos casos de uso
-
-
-Mostrar rutinas o ver rutinas?
+Reseñar con S!
