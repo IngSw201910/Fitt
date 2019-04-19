@@ -12,8 +12,9 @@ Chatear con usuario (actor usuario)
 Chatear con cliente (actor entrenador)
 
 
-Ver información entrenador (actor usuario).
-
 
 Corregir formato - documento
 Separar registro de usuario y de entrenador en dos casos de uso
+
+
+Mostrar rutinas o ver rutinas?
