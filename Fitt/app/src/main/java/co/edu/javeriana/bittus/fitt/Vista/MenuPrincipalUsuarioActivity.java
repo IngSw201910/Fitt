@@ -36,7 +36,7 @@ public class MenuPrincipalUsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Utils.cerrarSesion();
-                startActivity(new Intent(MenuPrincipalUsuarioActivity.this, MainActivity.class));
+                finish();
             }
         });
 

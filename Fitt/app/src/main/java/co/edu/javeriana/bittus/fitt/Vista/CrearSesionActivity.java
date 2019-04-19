@@ -24,16 +24,21 @@ public class CrearSesionActivity extends AppCompatActivity {
     private List<EjercicioSesion> ejerciciosList;
     private Button aceptarCrearSesionB;
     private Button agregarEjercicioB;
-
+    private Button agregarDescansoB;
+    private EjerciciosSesionAdapter ejerciciosSesionAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_sesion);
 
+
+
+
         listaEjerciciosV = findViewById(R.id.listEjercicios);
         aceptarCrearSesionB = findViewById(R.id.buttonAceptarCrearSesion);
         agregarEjercicioB = findViewById(R.id.buttonAdicionarEjercicio);
+        agregarDescansoB = findViewById(R.id.buttonAgregarDescanso);
 
         ejerciciosList = new ArrayList<EjercicioSesion>();
 
@@ -49,7 +54,9 @@ public class CrearSesionActivity extends AppCompatActivity {
 
         //Fin de datos de prueba
 
-        listaEjerciciosV.setAdapter(new EjerciciosSesionAdapter(CrearSesionActivity.this,ejerciciosList));
+        ejerciciosSesionAdapter = new EjerciciosSesionAdapter(CrearSesionActivity.this,ejerciciosList);
+
+        listaEjerciciosV.setAdapter(ejerciciosSesionAdapter);
 
 
         agregarEjercicioB.setOnClickListener(new View.OnClickListener() {
@@ -62,21 +69,44 @@ public class CrearSesionActivity extends AppCompatActivity {
         aceptarCrearSesionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CrearSesionActivity.this, CrearRutinaSesionesActivity.class));
+                finish();
+            }
+        });
+
+
+        agregarDescansoB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDescanso.class));
             }
         });
 
 
 
 
-
-
-
-
     }
 
+    public void abrirPopUpCrearEjercicioDistancia(){
 
+        startActivity(new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDistancia.class));
 
+    }
+    public void abrirPopUpCrearEjercicioDuracion(){
+
+        startActivity(new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDuracion.class));
+
+    }
+    public void abrirPopUpCrearEjercicioRepeticion(){
+
+        startActivity(new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionRepeticion.class));
+
+    }
+    public void eliminarEjercicio(EjercicioSesion ejercicioSesion) {
+
+        ejerciciosList.remove(ejercicioSesion);
+        ejerciciosSesionAdapter.notifyDataSetChanged();
+
+    }
 
 
 

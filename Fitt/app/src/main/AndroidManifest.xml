@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Vista.BuscarEjercicioActivity"></activity>
+        <activity android:name=".Vista.InformacionEjercicioActivity"></activity>
+        <activity android:name=".Vista.BuscarEjercicioActivity" />
         <activity android:name=".Vista.CrearSesionActivity" />
         <activity android:name=".Vista.CrearRutinaSesionesActivity" />
         <activity android:name=".Vista.CrearRutinaActivity" />
@@ -20,8 +21,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuPrincipalUsuario" />
         <activity android:name=".Vista.MenuPrincipalUsuarioActivity" />
+        <activity
+            android:name=".Vista.PopCrearEjercicioSesionDistancia"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
+        <activity
+            android:name=".Vista.PopCrearEjercicioSesionDuracion"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
+        <activity
+            android:name=".Vista.PopCrearEjercicioSesionRepeticion"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
+        <activity
+            android:name=".Vista.PopCrearEjercicioSesionDescanso"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
     </application>
 
 </manifest>

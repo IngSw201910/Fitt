@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Vista.CrearRutinaSesionesActivity;
 
 public class SesionesAdapter extends ArrayAdapter<Sesion> {
 
@@ -38,13 +40,34 @@ public class SesionesAdapter extends ArrayAdapter<Sesion> {
         if(view == null){
             view = LayoutInflater.from(context).inflate(resource, null);
         }
-        Sesion sesion = listSesion.get(position);
+        final Sesion sesion = listSesion.get(position);
 
         TextView nombre = view.findViewById(R.id.textNombreSesion);
         nombre.setText(sesion.getNombre());
 
         TextView duracion = view.findViewById(R.id.textDuracion);
         duracion.setText(sesion.getDuracion()+ " segundos");
+
+        Button editarB = view.findViewById(R.id.buttonEditarSesion);
+
+        editarB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CrearRutinaSesionesActivity crearRutinaSesionesActivity = (CrearRutinaSesionesActivity) context;
+                crearRutinaSesionesActivity.editarSesion(sesion);
+            }
+        });
+
+        Button eliminarB = view.findViewById(R.id.buttonDelete);
+
+        eliminarB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CrearRutinaSesionesActivity crearRutinaSesionesActivity = (CrearRutinaSesionesActivity) context;
+                crearRutinaSesionesActivity.eliminarSesion(sesion);
+            }
+        });
+
 
         return  view;
     }

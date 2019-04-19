@@ -10,7 +10,7 @@ import co.edu.javeriana.bittus.fitt.R;
 
 public class CrearRutinaActivity extends AppCompatActivity {
 
-    private Button aceptarB;
+    private Button siguienteB;
 
 
     @Override
@@ -18,17 +18,36 @@ public class CrearRutinaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_rutina);
 
-        aceptarB = (Button) findViewById(R.id.buttonSiguienteCrearRutina);
+        siguienteB = (Button) findViewById(R.id.buttonSiguienteCrearRutina);
 
 
-        aceptarB.setOnClickListener(new View.OnClickListener() {
+
+
+        siguienteB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CrearRutinaActivity.this, CrearRutinaSesionesActivity.class));
+                siguientePantalla();
             }
         });
 
     }
+
+    private void siguientePantalla(){
+        startActivityForResult(new Intent(CrearRutinaActivity.this, CrearRutinaSesionesActivity.class),1);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        // check if the request code is same as what is passed  here it is 2
+        if(requestCode==1)
+        {
+            finish();
+        }
+    }
+
 }
 
 

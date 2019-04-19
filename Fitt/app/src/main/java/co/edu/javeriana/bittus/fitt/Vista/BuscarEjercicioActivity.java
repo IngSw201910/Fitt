@@ -1,5 +1,6 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -29,15 +30,39 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
         //Datos de prueba
 
-        Ejercicio ejercicio = new Ejercicio("Flexión con pies levantados", "Brazos", "Repeticion","Media",R.drawable.gif_prueba,"Flexión con un apoyo en los pies");
+        Ejercicio ejercicio = new Ejercicio("Flexión con pies levantados", "Brazos", "Distancia","Media",R.drawable.gif_prueba,"Flexión con un apoyo en los pies");
         ejerciciosList.add(ejercicio);
 
         //Fin datos de prueba
 
-        adapterSesion = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.itema_ejercicio_row,ejerciciosList);
+        adapterSesion = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.item_ejercicio_row,ejerciciosList);
 
         listViewL.setAdapter(adapterSesion);
 
 
     }
+
+    public void abrirPopUpCrearEjercicioDistancia(){
+
+        startActivity(new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDistancia.class));
+        finish();
+    }
+    public void abrirPopUpCrearEjercicioDuracion(){
+
+        startActivity(new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDuracion.class));
+        finish();
+
+    }
+    public void abrirPopUpCrearEjercicioRepeticion(){
+
+        startActivity(new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionRepeticion.class));
+        finish();
+
+    }
+
+
+
+
+
+
 }

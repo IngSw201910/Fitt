@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/buttonEdit"
+        android:id="@+id/buttonEditarSesion"
         android:layout_width="85dp"
         android:layout_height="38dp"
         android:layout_marginStart="44dp"
@@ -20,13 +20,12 @@
         android:id="@+id/buttonDelete"
         android:layout_width="85dp"
         android:layout_height="38dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:text="Borrar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
-        app:layout_constraintStart_toEndOf="@+id/buttonEdit"
+        app:layout_constraintStart_toEndOf="@+id/buttonEditarSesion"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

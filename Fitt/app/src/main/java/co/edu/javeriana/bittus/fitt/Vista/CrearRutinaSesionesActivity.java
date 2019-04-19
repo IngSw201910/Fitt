@@ -17,11 +17,12 @@ import co.edu.javeriana.bittus.fitt.Adapters.SesionesAdapter;
 public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
 
-    private Button siguienteB;
+    private Button aceptarB;
     private Button adicionarB;
     private ListView listViewL;
     private SesionesAdapter adapterSesion;
     private List<Sesion> sesionList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,11 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crear_rutina_sesiones);
 
 
-        siguienteB = (Button) findViewById(R.id.buttonAceptarCrearRutina);
+
+
+
+
+        aceptarB = (Button) findViewById(R.id.buttonAceptarCrearRutina);
         listViewL = (ListView) findViewById(R.id.listSesiones);
         adicionarB = (Button)findViewById(R.id.buttonAdicionarSesion);
 
@@ -47,10 +52,13 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
         listViewL.setAdapter(adapterSesion);
 
-        siguienteB.setOnClickListener(new View.OnClickListener() {
+        aceptarB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CrearRutinaSesionesActivity.this, MenuPrincipalUsuarioActivity.class));
+
+
+                finalizar();
+
             }
         });
 
@@ -63,6 +71,22 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
     }
 
+    private void finalizar() {
+        Intent intent=new Intent();
+        setResult(1,intent);
+        finish();
+    }
 
 
+    public void editarSesion(Sesion sesion) {
+
+        startActivity(new Intent(CrearRutinaSesionesActivity.this, CrearSesionActivity.class));
+    }
+
+    public void eliminarSesion(Sesion sesion) {
+
+        sesionList.remove(sesion);
+        adapterSesion.notifyDataSetChanged();
+
+    }
 }

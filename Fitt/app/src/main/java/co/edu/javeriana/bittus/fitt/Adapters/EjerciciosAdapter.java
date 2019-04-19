@@ -53,7 +53,7 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
         TextView dificultad = view.findViewById(R.id.textDificultadEjercicio);
         dificultad.setText(ejercicio.getDificultad());
 
-        GifImageView gifImageView = view.findViewById(R.id.gifImageView);
+        GifImageView gifImageView = view.findViewById(R.id.gifBuscarEjercicio);
         gifImageView.setImageResource(ejercicio.getGif());
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -61,8 +61,18 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
             public void onClick(View v) {
 
                 if(ejercicio.getTipo().equals("Distancia")){
-                    context.startActivity(new Intent(context, PopCrearEjercicioSesionDistancia.class));
+                    BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
+                    b.abrirPopUpCrearEjercicioDistancia();
                 }
+                if(ejercicio.getTipo().equals("Duración")){
+                    BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
+                    b.abrirPopUpCrearEjercicioDuracion();
+                }
+                if(ejercicio.getTipo().equals("Repetición")){
+                    BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
+                    b.abrirPopUpCrearEjercicioRepeticion();
+                }
+
 
             }
         });
