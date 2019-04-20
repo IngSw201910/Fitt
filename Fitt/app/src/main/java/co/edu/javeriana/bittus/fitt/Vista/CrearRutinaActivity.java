@@ -95,7 +95,7 @@ public class CrearRutinaActivity extends AppCompatActivity {
             int diasDescanso = Integer.parseInt(sDiasDescanso);
 
             Rutina rutina = new Rutina(0,diasDescanso,descripcion,dificultad,publica,nombreRutina,frecuencia);
-
+            rutina.setSesionList(sesionList);
 
 
             //está es la rutina que toca subir a firebase
