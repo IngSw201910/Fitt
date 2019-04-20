@@ -70,4 +70,12 @@ public class Ejercicio {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public String getRutaGIF() {
+        return rutaGIF;
+    }
+
+    public void setRutaGIF(String rutaGIF) {
+        this.rutaGIF = rutaGIF;
+    }
 }

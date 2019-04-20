@@ -1,8 +1,27 @@
 package co.edu.javeriana.bittus.fitt.Utilidades;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.support.annotation.NonNull;
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
+
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 
 public class Utils {
+
+
+    private static StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
 
@@ -21,5 +40,40 @@ public class Utils {
         mAuth.signOut();
     }
 
+    public static void descargarYMostrarGIF (String ruta, final GifImageView gifImageView) {
+        Log.i("Ruta:", ruta);
+        final StorageReference gif = mStorageRef.child(ruta);
+        File localFile = null;
+        try {
+            localFile = File.createTempFile("images", "gif");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        final File finalLocalFile = localFile;
+        gif.getFile(localFile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        // Successfully downloaded data to local file
+                        // ...
+                        String filePath = finalLocalFile.getPath();
+                        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+                        try {
+                            GifDrawable gif = new GifDrawable(finalLocalFile);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle failed download
+                // ...
+            }
+        });
+    }
 }
+
+
+

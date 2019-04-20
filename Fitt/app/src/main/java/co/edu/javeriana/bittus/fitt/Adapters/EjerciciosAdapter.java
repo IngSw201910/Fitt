@@ -14,6 +14,7 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.BuscarEjercicioActivity;
 import co.edu.javeriana.bittus.fitt.Vista.PopCrearEjercicioSesionDistancia;
 import pl.droidsonroids.gif.GifImageView;
@@ -53,8 +54,10 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
         TextView dificultad = view.findViewById(R.id.textDificultadEjercicio);
         dificultad.setText(ejercicio.getDificultad());
 
+        /*GifImageView gifImageView = view.findViewById(R.id.gifBuscarEjercicio);
+        gifImageView.setImageResource(ejercicio.getGif());*/
         GifImageView gifImageView = view.findViewById(R.id.gifBuscarEjercicio);
-        gifImageView.setImageResource(ejercicio.getGif());
+        Utils.descargarYMostrarGIF(ejercicio.getRutaGIF(), gifImageView);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override

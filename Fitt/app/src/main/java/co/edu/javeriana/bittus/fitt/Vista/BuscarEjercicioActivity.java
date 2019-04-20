@@ -42,8 +42,8 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
         //Datos de prueba
 
-        Ejercicio ejercicio = new Ejercicio("Flexión con pies levantados", "Brazos", "Distancia","Media",R.drawable.gif_prueba,"Flexión con un apoyo en los pies");
-        listaEjercicios.add(ejercicio);
+        //Ejercicio ejercicio = new Ejercicio("Flexión con pies levantados", "Brazos", "Distancia","Media",R.drawable.gif_prueba,"Flexión con un apoyo en los pies");
+        //listaEjercicios.add(ejercicio);
 
         //Fin datos de prueba
 
@@ -86,6 +86,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
                     listaEjercicios.add(singleSnapshot.getValue(Ejercicio.class));
+                    Log.i("Prueba", singleSnapshot.getValue(Ejercicio.class).getRutaGIF());
                 }
                 adapterEjercicios.notifyDataSetChanged();
             }
