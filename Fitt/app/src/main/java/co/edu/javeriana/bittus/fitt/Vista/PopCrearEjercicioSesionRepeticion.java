@@ -5,12 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
@@ -18,9 +17,9 @@ import pl.droidsonroids.gif.GifImageView;
 
 public class PopCrearEjercicioSesionRepeticion extends Activity {
 
-    private Button informacionEjercicioB;
-    private Button aceptarButton;
-    private Button cancelarButton;
+    private ImageButton informacionEjercicioB;
+    private ImageButton aceptarButton;
+    private ImageButton cancelarButton;
 
     private TextView nombreEjercicioT;
     private TextView musculosEjercicioT;
@@ -39,18 +38,18 @@ public class PopCrearEjercicioSesionRepeticion extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_repeticion);
 
-        aceptarButton = findViewById(R.id.buttonAceptar);
-        cancelarButton = findViewById(R.id.buttonCancelar);
-        informacionEjercicioB = findViewById(R.id.buttonInformacionEjercicio);
-        repeticionesT = findViewById(R.id.editText5);
-        seriesT = findViewById(R.id.editText4);
-        descansoT = findViewById(R.id.editText6);
+        aceptarButton = findViewById(R.id.buttonAceptar4);
+        cancelarButton = findViewById(R.id.buttonCancelar4);
+        informacionEjercicioB = findViewById(R.id.buttonInformacionEjercicio3);
+        repeticionesT = findViewById(R.id.editTextRepeticiones);
+        seriesT = findViewById(R.id.editTextSeries);
+        descansoT = findViewById(R.id.editTextDescansos);
 
-        nombreEjercicioT = findViewById(R.id.textNombreEjercicio);
-        musculosEjercicioT = findViewById(R.id.textMusculosEjercicio);
-        tipoEjercicioT = findViewById(R.id.textTipoEjercicio);
-        dificultadEjercicioT = findViewById(R.id.textDificultadEjercicio);
-        gifImageView = findViewById(R.id.gifEjercicio);
+        nombreEjercicioT = findViewById(R.id.textNombreEjercicio3);
+        musculosEjercicioT = findViewById(R.id.textMusculosEjercicio3);
+        tipoEjercicioT = findViewById(R.id.textTipoEjercicio3);
+        dificultadEjercicioT = findViewById(R.id.textDificultadEjercicio3);
+        gifImageView = findViewById(R.id.gifEjercicio3);
 
         Bundle bundle = this.getIntent().getExtras();
 

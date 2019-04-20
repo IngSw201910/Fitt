@@ -4,131 +4,196 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="#00DCDCDC">
 
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00DCDCDC"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <TextView
+            android:id="@+id/txtCancelar1"
+            android:layout_width="69dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="288dp"
+            android:layout_marginBottom="28dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Cancelar"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonCancelar"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/buttonCancelar4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="56dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.141"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/cancelar" />
+
+        <ImageButton
+            android:id="@+id/buttonAceptar4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="56dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.858"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/aceptar" />
+
+        <TextView
+            android:id="@+id/textViewAceptar4"
+            android:layout_width="69dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="28dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Aceptar"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.858"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAceptar"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageButton
+            android:id="@+id/buttonInformacionEjercicio3"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.785"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.057"
+            app:srcCompat="@drawable/informacion" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifEjercicio"
+        android:id="@+id/gifEjercicio3"
         android:layout_width="125dp"
-        android:layout_height="108dp"
 
+        android:layout_height="108dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/gif_prueba"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
     <TextView
-        android:id="@+id/textNombreEjercicio"
+        android:id="@+id/textNombreEjercicio3"
         android:layout_width="190dp"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="NombreEjercicio"
-        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio3"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textMusculosEjercicio"
+        android:id="@+id/textMusculosEjercicio3"
         android:layout_width="190dp"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Músculos"
-        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicio" />
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio3"
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicio3" />
 
     <TextView
-        android:id="@+id/textTipoEjercicio"
+        android:id="@+id/textTipoEjercicio3"
         android:layout_width="100dp"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Tipo"
-        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicio" />
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio3"
+        app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicio3" />
 
     <TextView
-        android:id="@+id/textDificultadEjercicio"
+        android:id="@+id/textDificultadEjercicio3"
         android:layout_width="100dp"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="Dificultad"
-        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/textTipoEjercicio" />
-
-    <Button
-        android:id="@+id/buttonInformacionEjercicio"
-        android:layout_width="127dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Información"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAceptar"
-        app:layout_constraintHorizontal_bias="0.35"
-        app:layout_constraintStart_toEndOf="@+id/buttonCancelar" />
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio3"
+        app:layout_constraintTop_toBottomOf="@+id/textTipoEjercicio3" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/editTextRepeticiones"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="number"
         android:text="Repeticiones"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicio" />
+        app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicio3" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/editTextSeries"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="number"
         android:text="Series"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText5" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRepeticiones" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/editTextDescansos"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="number"
-        android:text="Descanso"
+        android:text="Descansos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
-
-    <Button
-        android:id="@+id/buttonCancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Cancelar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/buttonAceptar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Aceptar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextSeries" />
 
 </android.support.constraint.ConstraintLayout>

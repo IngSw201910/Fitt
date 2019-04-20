@@ -3,11 +3,11 @@ package co.edu.javeriana.bittus.fitt.Vista;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
@@ -18,9 +18,9 @@ import pl.droidsonroids.gif.GifImageView;
 
 public class PopCrearEjercicioSesionDistancia extends Activity {
 
-    private Button informacionEjercicioB;
-    private Button aceptarButton;
-    private Button cancelarButton;
+    private ImageButton informacionEjercicioB;
+    private ImageButton aceptarButton;
+    private ImageButton cancelarButton;
 
     private TextView nombreEjercicioT;
     private TextView musculosEjercicioT;
@@ -38,9 +38,9 @@ public class PopCrearEjercicioSesionDistancia extends Activity {
 
         informacionEjercicioB = findViewById(R.id.buttonInformacionEjercicio);
 
-        aceptarButton = findViewById(R.id.buttonAceptar);
-        cancelarButton = findViewById(R.id.buttonCancelar);
-        distanciaT = findViewById(R.id.editText5);
+        aceptarButton = findViewById(R.id.buttonAceptar2);
+        cancelarButton = findViewById(R.id.buttonCancelar2);
+        distanciaT = findViewById(R.id.editText5Distanciasd);
 
         nombreEjercicioT = findViewById(R.id.textNombreEjercicio);
         musculosEjercicioT = findViewById(R.id.textMusculosEjercicio);

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
@@ -16,8 +17,8 @@ import pl.droidsonroids.gif.GifImageView;
 public class PopCrearEjercicioSesionDescanso extends Activity {
 
 
-    private Button aceptarButton;
-    private Button cancelarButton;
+    private ImageButton aceptarButton;
+    private ImageButton cancelarButton;
 
 
     @Override
