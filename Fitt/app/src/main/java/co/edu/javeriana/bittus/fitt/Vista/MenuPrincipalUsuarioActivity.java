@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 import co.edu.javeriana.bittus.fitt.R;
-import co.edu.javeriana.bittus.fitt.Adapters.Utils;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
 public class MenuPrincipalUsuarioActivity extends AppCompatActivity {
 

@@ -1,9 +1,17 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +19,17 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
 public class BuscarEjercicioActivity extends AppCompatActivity {
 
     private ListView listViewL;
-    private EjerciciosAdapter adapterSesion;
-    private List<Ejercicio> ejerciciosList;
+    private EjerciciosAdapter adapterEjercicios;
+    private List<Ejercicio> listaEjercicios;
 
+
+    FirebaseDatabase database;
+    DatabaseReference myRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +37,23 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_buscar_ejercicio);
 
         listViewL = findViewById(R.id.listEjerciciosBuscar);
-        ejerciciosList = new ArrayList<Ejercicio>();
+        listaEjercicios = new ArrayList<Ejercicio>();
 
 
         //Datos de prueba
 
         Ejercicio ejercicio = new Ejercicio("Flexión con pies levantados", "Brazos", "Distancia","Media",R.drawable.gif_prueba,"Flexión con un apoyo en los pies");
-        ejerciciosList.add(ejercicio);
+        listaEjercicios.add(ejercicio);
 
         //Fin datos de prueba
 
-        adapterSesion = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.item_ejercicio_row,ejerciciosList);
+        adapterEjercicios = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.item_ejercicio_row,listaEjercicios);
 
-        listViewL.setAdapter(adapterSesion);
+        listViewL.setAdapter(adapterEjercicios);
+        database = FirebaseDatabase.getInstance();
+
+        descargarEjercicios();
+
 
 
     }
@@ -61,7 +77,24 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
     }
 
 
+    //El sistema descarga la lista de ejercicios de Firebase con la información correspondiente.
+    private void descargarEjercicios (){
 
+        myRef = database.getReference(RutasBaseDeDatos.getRutaEjercicios());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
+                    listaEjercicios.add(singleSnapshot.getValue(Ejercicio.class));
+                }
+                adapterEjercicios.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("Error:", "Error en la consulta", databaseError.toException());
+            }
+        });
+    }
 
 
 

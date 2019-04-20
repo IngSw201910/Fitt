@@ -1,4 +1,4 @@
-package co.edu.javeriana.bittus.fitt.Adapters;
+package co.edu.javeriana.bittus.fitt.Utilidades;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -20,5 +20,6 @@ public class Utils {
         FirebaseAuth mAuth =  FirebaseAuth.getInstance();
         mAuth.signOut();
     }
+
 
 }

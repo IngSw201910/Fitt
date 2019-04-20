@@ -8,6 +8,11 @@ public class Ejercicio {
     private String dificultad;
     private int gif;
     private String descripcion;
+    private String rutaGIF;
+
+    public Ejercicio(){
+        super();
+    };
 
     public Ejercicio(String nombre, String musculos, String tipo, String dificultad, int gif, String descripcion) {
         this.nombre = nombre;
