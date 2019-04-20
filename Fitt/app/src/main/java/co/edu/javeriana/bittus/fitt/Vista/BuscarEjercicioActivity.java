@@ -1,5 +1,6 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +19,12 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
 public class BuscarEjercicioActivity extends AppCompatActivity {
 
@@ -27,6 +32,10 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
     private EjerciciosAdapter adapterEjercicios;
     private List<Ejercicio> listaEjercicios;
 
+
+    private EjercicioDistancia ejercicioDistancia;
+    private EjercicioDuracion ejercicioDuracion;
+    private EjercicioRepeticiones ejercicioRepeticion;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -64,24 +73,100 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicio", ejercicio);
 
+
         intent.putExtras(bundle);
 
-        startActivity(intent);
-        finish();
+        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DISTANCIA);
+
     }
     public void abrirPopUpCrearEjercicioDuracion(Ejercicio ejercicio){
 
-        startActivity(new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDuracion.class));
-        finish();
+        Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDuracion.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicio", ejercicio);
+
+        intent.putExtras(bundle);
+
+        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DURACION);
+
 
     }
     public void abrirPopUpCrearEjercicioRepeticion(Ejercicio ejercicio){
 
-        startActivity(new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionRepeticion.class));
-        finish();
+        Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionRepeticion.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicio", ejercicio);
+
+        intent.putExtras(bundle);
+
+        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_REPETICION);
+
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == Utils.REQUEST_CODE_EJERCICIO_DISTANCIA && resultCode == RESULT_OK) {
+
+            ejercicioDistancia = (EjercicioDistancia) data.getExtras().getSerializable("ejercicioDistancia");
+
+            Intent intent = new Intent();
+            if(ejercicioDistancia!=null){
+                intent.putExtra("ejercicioSesion",ejercicioDistancia);
+            }
+
+
+
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+
+
+        }
+        if (requestCode == Utils.REQUEST_CODE_EJERCICIO_DURACION && resultCode == RESULT_OK) {
+
+            ejercicioDuracion = (EjercicioDuracion) data.getExtras().getSerializable("ejercicioDuracion");
+
+            Intent intent = new Intent();
+            if(ejercicioDuracion!=null){
+                intent.putExtra("ejercicioSesion",ejercicioDuracion);
+            }
+
+
+
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+
+
+        }
+        if (requestCode == Utils.REQUEST_CODE_EJERCICIO_REPETICION && resultCode == RESULT_OK) {
+
+            ejercicioRepeticion = (EjercicioRepeticiones) data.getExtras().getSerializable("ejercicioRepeticion");
+
+            Intent intent = new Intent();
+            if(ejercicioRepeticion!=null){
+                intent.putExtra("ejercicioSesion",ejercicioRepeticion);
+            }
+
+
+
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+
+
+        }
+    }
 
     //El sistema descarga la lista de ejercicios de Firebase con la información correspondiente.
     private void descargarEjercicios (){

@@ -23,8 +23,12 @@ public class Utils {
 
     private static StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
 
-
-
+    public final static int REQUEST_CODE_CREAR_RUTINA_SESIONES = 0;
+    public final static int REQUEST_CODE_EJERCICIO_DISTANCIA = 1;
+    public final static int REQUEST_CODE_EJERCICIO_DURACION = 2;
+    public final static int REQUEST_CODE_EJERCICIO_REPETICION = 3;
+    public final static int REQUEST_CODE_BUSCAR_EJERCICIO = 4;
+    public final static int REQUEST_CODE_CREAR_SESION = 5;
 
 
     public static boolean isEmailValid(String email) {

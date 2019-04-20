@@ -46,7 +46,7 @@ public class SesionesAdapter extends ArrayAdapter<Sesion> {
         nombre.setText(sesion.getNombre());
 
         TextView duracion = view.findViewById(R.id.textDuracion);
-        duracion.setText(sesion.getDuracion()+ " segundos");
+        duracion.setText(sesion.getDuracion()+ " minutos");
 
         Button editarB = view.findViewById(R.id.buttonEditarSesion);
 

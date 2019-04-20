@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.Adapters.SesionesAdapter;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
 public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
@@ -42,7 +44,7 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
         //Datos de prueba
 
-        sesionList.add(new Sesion("Piernas", "20:00"));
+        sesionList.add(new Sesion("Piernas", 20));
 
         //Fin datos de prueba
 
@@ -65,19 +67,30 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         adicionarB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CrearRutinaSesionesActivity.this, CrearSesionActivity.class));
+                crearSesion();
             }
         });
 
     }
 
     private void finalizar() {
-        Intent intent=new Intent();
-        setResult(1,intent);
+        Intent intent=this.getIntent();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("sesiones", (Serializable) sesionList);
+        intent.putExtras(bundle);
+        setResult(Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES,intent);
+
+
         finish();
     }
 
+    public void crearSesion(){
 
+
+        startActivityForResult(new Intent(CrearRutinaSesionesActivity.this, CrearSesionActivity.class),Utils.REQUEST_CODE_CREAR_SESION);
+
+    }
     public void editarSesion(Sesion sesion) {
 
         startActivity(new Intent(CrearRutinaSesionesActivity.this, CrearSesionActivity.class));
@@ -89,4 +102,23 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         adapterSesion.notifyDataSetChanged();
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode== Utils.REQUEST_CODE_CREAR_SESION&&data!=null)
+        {
+            Sesion sesion = (Sesion) data.getExtras().getSerializable("sesion");
+
+            Intent intent = new Intent();
+            if(sesion!=null){
+                sesionList.add(sesion);
+                adapterSesion.notifyDataSetChanged();
+            }
+
+        }
+    }
+
 }

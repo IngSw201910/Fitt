@@ -1,6 +1,8 @@
     package co.edu.javeriana.bittus.fitt.Modelo;
 
-    public abstract class EjercicioSesion {
+    import java.io.Serializable;
+
+    public abstract class EjercicioSesion implements Serializable {
 
 
 
