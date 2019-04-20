@@ -7,35 +7,38 @@
     tools:context=".Vista.CrearSesionActivity">
 
     <TextView
-        android:id="@+id/agregar sesión4"
+        android:id="@+id/agregarsesión4"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Guardar"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAceptarCrearRutina2"
-        tools:layout_editor_absoluteX="272dp" />
+        app:layout_constraintStart_toEndOf="@+id/agregarsesión3"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAceptarCrearSesion" />
 
     <TextView
-        android:id="@+id/agregar sesión3"
+        android:id="@+id/agregarsesión3"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Agregar descanso"
         android:textAlignment="center"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAgregarDescanso"
-        tools:layout_editor_absoluteX="168dp" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonAceptarCrearSesion"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAgregarDescanso" />
 
     <TextView
-        android:id="@+id/agregar sesión2"
+        android:id="@+id/agregarsesión2"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="Guardar"
         android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/agregarsesión3"
         app:layout_constraintTop_toBottomOf="@+id/buttonAdicionarEjercicio"
-        tools:layout_editor_absoluteX="64dp"
         tools:text="Agregar ejercicio" />
 
     <ImageView
-        android:id="@+id/buttonAceptarCrearRutina2"
+        android:id="@+id/buttonAceptarCrearSesion"
         android:layout_width="96dp"
         android:layout_height="74dp"
         android:layout_marginStart="8dp"

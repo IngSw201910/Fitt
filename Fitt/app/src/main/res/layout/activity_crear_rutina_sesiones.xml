@@ -7,7 +7,7 @@
     tools:context=".Vista.CrearRutinaSesionesActivity">
 
     <TextView
-        android:id="@+id/agregar sesión"
+        android:id="@+id/agregarsesión"
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:text="Guardar"
@@ -87,7 +87,7 @@
         app:srcCompat="@drawable/guardar" />
 
     <TextView
-        android:id="@+id/Agregar sesión"
+        android:id="@+id/Agregarsesión"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Agregar sesión"
