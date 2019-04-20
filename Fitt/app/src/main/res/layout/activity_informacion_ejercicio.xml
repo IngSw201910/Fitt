@@ -27,7 +27,7 @@
         android:layout_marginTop="28dp"
         android:text="NombreEjercicio"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gifBuscarEjercicio" />
+        app:layout_constraintTop_toBottomOf="@+id/gifEjercicio" />
 
     <TextView
         android:id="@+id/textMusculosEjercicio"
@@ -60,7 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicio" />
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifBuscarEjercicio"
+        android:id="@+id/gifEjercicio"
         android:layout_width="204dp"
         android:layout_height="205dp"
 

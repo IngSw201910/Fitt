@@ -8,7 +8,7 @@
 
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifBuscarEjercicio"
+        android:id="@+id/gifEjercicio"
         android:layout_width="125dp"
         android:layout_height="108dp"
 
@@ -19,41 +19,41 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textNombreEjercicioPopUpAgregarEjercicio"
+        android:id="@+id/textNombreEjercicio"
         android:layout_width="190dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="NombreEjercicio"
-        app:layout_constraintStart_toEndOf="@+id/gifBuscarEjercicio"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textMusculosEjercicioPopUpAgregarEjercicio"
+        android:id="@+id/textMusculosEjercicio"
         android:layout_width="190dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:text="Músculos"
-        app:layout_constraintStart_toEndOf="@+id/gifBuscarEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioPopUpAgregarEjercicio" />
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicio" />
 
     <TextView
-        android:id="@+id/textTipoEjercicioPopUpAgregarEjercicio"
+        android:id="@+id/textTipoEjercicio"
         android:layout_width="100dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:text="Tipo"
-        app:layout_constraintStart_toEndOf="@+id/gifBuscarEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicioPopUpAgregarEjercicio" />
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
+        app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicio" />
 
     <TextView
-        android:id="@+id/textDificultadEjercicioPopUpAgregarEjercicio"
+        android:id="@+id/textDificultadEjercicio"
         android:layout_width="100dp"
         android:layout_height="24dp"
         android:layout_marginStart="8dp"
         android:text="Dificultad"
-        app:layout_constraintStart_toEndOf="@+id/gifBuscarEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/textTipoEjercicioPopUpAgregarEjercicio" />
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
+        app:layout_constraintTop_toBottomOf="@+id/textTipoEjercicio" />
 
     <Button
         android:id="@+id/buttonInformacionEjercicio"
@@ -81,7 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicioPopUpAgregarEjercicio" />
+        app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicio" />
 
     <EditText
         android:id="@+id/editText4"

@@ -1,6 +1,8 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
-public class Ejercicio {
+import java.io.Serializable;
+
+public class Ejercicio implements Serializable {
 
     private String nombre;
     private String musculos;

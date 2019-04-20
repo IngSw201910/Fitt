@@ -17,7 +17,7 @@
         android:text="Tipo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/gifBuscarEjercicio"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicioBuscar" />
 
     <TextView
@@ -30,11 +30,11 @@
         android:text="Dificultad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/gifBuscarEjercicio"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/textTipoEjercicio" />
 
     <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifBuscarEjercicio"
+        android:id="@+id/gifEjercicio"
         android:layout_width="125dp"
         android:layout_height="108dp"
 
@@ -54,7 +54,7 @@
         android:text="Nombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/gifBuscarEjercicio"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -67,6 +67,6 @@
         android:text="Músculos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/gifBuscarEjercicio"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioBuscar" />
 </android.support.constraint.ConstraintLayout>

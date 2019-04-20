@@ -58,18 +58,24 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
     }
 
-    public void abrirPopUpCrearEjercicioDistancia(){
+    public void abrirPopUpCrearEjercicioDistancia(Ejercicio ejercicio){
+        Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDistancia.class);
 
-        startActivity(new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDistancia.class));
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicio", ejercicio);
+
+        intent.putExtras(bundle);
+
+        startActivity(intent);
         finish();
     }
-    public void abrirPopUpCrearEjercicioDuracion(){
+    public void abrirPopUpCrearEjercicioDuracion(Ejercicio ejercicio){
 
         startActivity(new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDuracion.class));
         finish();
 
     }
-    public void abrirPopUpCrearEjercicioRepeticion(){
+    public void abrirPopUpCrearEjercicioRepeticion(Ejercicio ejercicio){
 
         startActivity(new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionRepeticion.class));
         finish();

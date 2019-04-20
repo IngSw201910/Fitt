@@ -1,7 +1,6 @@
 package co.edu.javeriana.bittus.fitt.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.BuscarEjercicioActivity;
-import co.edu.javeriana.bittus.fitt.Vista.PopCrearEjercicioSesionDistancia;
 import pl.droidsonroids.gif.GifImageView;
 
 public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
@@ -24,6 +22,7 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
     protected List<Ejercicio> listEjercicios;
     protected Context context;
     private int resource;
+    private Ejercicio ejercicioSeleccionado;
 
 
     public EjerciciosAdapter(@NonNull Context context, int resource, List<Ejercicio> objects) {
@@ -40,7 +39,8 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
         if(view == null){
             view = LayoutInflater.from(context).inflate(resource, null);
         }
-        final Ejercicio ejercicio = listEjercicios.get(position);
+        ejercicioSeleccionado = listEjercicios.get(position);
+        Ejercicio ejercicio = ejercicioSeleccionado;
 
         TextView nombre = view.findViewById(R.id.textNombreEjercicioBuscar);
         nombre.setText(ejercicio.getNombre());
@@ -56,25 +56,14 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
 
         /*GifImageView gifImageView = view.findViewById(R.id.gifBuscarEjercicio);
         gifImageView.setImageResource(ejercicio.getGif());*/
-        GifImageView gifImageView = view.findViewById(R.id.gifBuscarEjercicio);
+        GifImageView gifImageView = view.findViewById(R.id.gifEjercicio);
         Utils.descargarYMostrarGIF(ejercicio.getRutaGIF(), gifImageView);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(ejercicio.getTipo().equals("Distancia")){
-                    BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
-                    b.abrirPopUpCrearEjercicioDistancia();
-                }
-                if(ejercicio.getTipo().equals("Duración")){
-                    BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
-                    b.abrirPopUpCrearEjercicioDuracion();
-                }
-                if(ejercicio.getTipo().equals("Repetición")){
-                    BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
-                    b.abrirPopUpCrearEjercicioRepeticion();
-                }
+
 
 
             }
@@ -84,5 +73,20 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
         return  view;
     }
 
+    public void abrirPopUp(){
+        if(ejercicioSeleccionado.getTipo().equals("Distancia")){
+            BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
+            b.abrirPopUpCrearEjercicioDistancia(ejercicioSeleccionado);
+        }
+        if(ejercicioSeleccionado.getTipo().equals("Duración")){
+            BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
+            b.abrirPopUpCrearEjercicioDuracion(ejercicioSeleccionado);
+        }
+        if(ejercicioSeleccionado.getTipo().equals("Repetición")){
+            BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
+            b.abrirPopUpCrearEjercicioRepeticion(ejercicioSeleccionado);
+        }
+
+    }
 
 }
