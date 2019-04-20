@@ -1,18 +1,33 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
-import android.widget.Button;
 
-public class Sesion {
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Sesion implements Serializable {
 
     private String nombre;
-    private String duracion;
+    private int duracion;
 
 
-    public Sesion(String nombre, String duracion) {
+
+    private List<EjercicioSesion> ejercicioSesionList;
+
+    public Sesion(String nombre, int duracion) {
         this.nombre = nombre;
         this.duracion = duracion;
+        ejercicioSesionList = new ArrayList<EjercicioSesion>();
     }
 
+    public List<EjercicioSesion> getEjercicioSesionList() {
+        return ejercicioSesionList;
+    }
+
+    public void setEjercicioSesionList(List<EjercicioSesion> ejercicioSesionList) {
+        this.ejercicioSesionList = ejercicioSesionList;
+    }
     public String getNombre() {
         return nombre;
     }
@@ -21,11 +36,11 @@ public class Sesion {
         this.nombre = nombre;
     }
 
-    public String getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(String duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 

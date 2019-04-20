@@ -6,14 +6,19 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import pl.droidsonroids.gif.GifImageView;
 
 public class PopCrearEjercicioSesionDescanso extends Activity {
 
 
     private Button aceptarButton;
     private Button cancelarButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +27,7 @@ public class PopCrearEjercicioSesionDescanso extends Activity {
 
         aceptarButton = findViewById(R.id.buttonAceptar);
         cancelarButton = findViewById(R.id.buttonCancelar);
+
 
 
 

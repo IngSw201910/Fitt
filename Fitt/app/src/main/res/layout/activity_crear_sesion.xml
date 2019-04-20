@@ -31,13 +31,13 @@
         android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="Guardar"
+        android:text="Agregar ejercicio"
         android:textAlignment="center"
         app:layout_constraintEnd_toStartOf="@+id/agregarsesión3"
         app:layout_constraintTop_toBottomOf="@+id/buttonAdicionarEjercicio"
         tools:text="Agregar ejercicio" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/buttonAceptarCrearSesion"
         android:layout_width="96dp"
         android:layout_height="74dp"
@@ -45,40 +45,46 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="56dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/guardar"
         android:tint="@color/verdeFitt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/buttonAgregarDescanso"
         app:layout_constraintTop_toBottomOf="@+id/listEjercicios"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/guardar" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/buttonAdicionarEjercicio"
         android:layout_width="96dp"
         android:layout_height="74dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="40dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/crear_rutina"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listEjercicios"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/crear_rutina" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/buttonAgregarDescanso"
         android:layout_width="96dp"
         android:layout_height="74dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="40dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/crear_rutina"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonAdicionarEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/listEjercicios"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/crear_rutina" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView2"

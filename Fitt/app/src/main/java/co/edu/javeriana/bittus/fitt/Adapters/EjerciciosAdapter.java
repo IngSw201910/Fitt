@@ -63,7 +63,7 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
             @Override
             public void onClick(View v) {
 
-
+                abrirPopUp();
 
 
             }

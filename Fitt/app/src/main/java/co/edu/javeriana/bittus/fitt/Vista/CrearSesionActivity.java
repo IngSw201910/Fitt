@@ -1,10 +1,13 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -16,16 +19,22 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioSesion;
+import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
 public class CrearSesionActivity extends AppCompatActivity {
 
     private ListView listaEjerciciosV;
     private List<EjercicioSesion> ejerciciosList;
-    private Button aceptarCrearSesionB;
-    private Button agregarEjercicioB;
-    private Button agregarDescansoB;
+    private ImageButton aceptarCrearSesionB;
+    private ImageButton agregarEjercicioB;
+    private ImageButton agregarDescansoB;
     private EjerciciosSesionAdapter ejerciciosSesionAdapter;
+
+    private EditText nombreT;
+    private EditText duracionT;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,17 +42,18 @@ public class CrearSesionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crear_sesion);
 
 
-
+        nombreT = findViewById(R.id.editText);
+        duracionT = findViewById(R.id.editText2);
 
         listaEjerciciosV = findViewById(R.id.listEjercicios);
-        aceptarCrearSesionB = findViewById(R.id.buttonAceptarCrearSesion);
-        agregarEjercicioB = findViewById(R.id.buttonAdicionarEjercicio);
-        agregarDescansoB = findViewById(R.id.buttonAgregarDescanso);
+        aceptarCrearSesionB = (ImageButton)findViewById(R.id.buttonAceptarCrearSesion);
+        agregarEjercicioB = (ImageButton)findViewById(R.id.buttonAdicionarEjercicio);
+        agregarDescansoB = (ImageButton)findViewById(R.id.buttonAgregarDescanso);
 
         ejerciciosList = new ArrayList<EjercicioSesion>();
 
         //Datos de prueba
-
+        /*
         Ejercicio ejercicio = new Ejercicio("Trotar","Piernas", "Distancia","Baja", 0,"Trotar por la calle");
         Ejercicio ejercicio2 = new Ejercicio("Flexion Pared","Piernas, Abdomen", "Duracion","Media", 0,"Aguantar con una flexion en la pared");
         Ejercicio ejercicio3 = new Ejercicio("Abdominales","Abdomen", "Repeticion","Media", 0,"Realizar una abdominal");
@@ -51,7 +61,7 @@ public class CrearSesionActivity extends AppCompatActivity {
         ejerciciosList.add(new EjercicioDistancia(ejercicio, 100));
         ejerciciosList.add(new EjercicioDuracion(ejercicio2, 20));
         ejerciciosList.add(new EjercicioRepeticiones(ejercicio3,30,5,30));
-
+        */
         //Fin de datos de prueba
 
         ejerciciosSesionAdapter = new EjerciciosSesionAdapter(CrearSesionActivity.this,ejerciciosList);
@@ -62,14 +72,14 @@ public class CrearSesionActivity extends AppCompatActivity {
         agregarEjercicioB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CrearSesionActivity.this, BuscarEjercicioActivity.class));
+                buscarEjercicio();
             }
         });
 
         aceptarCrearSesionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                crearSesion();
             }
         });
 
@@ -85,6 +95,43 @@ public class CrearSesionActivity extends AppCompatActivity {
 
 
     }
+
+    private void crearSesion() {
+
+        String sNombre = nombreT.getText().toString();
+        String sDuracion = duracionT.getText().toString();
+
+
+        int duracion = Integer.parseInt(sDuracion);
+
+
+        Sesion sesion = new Sesion(sNombre, duracion);
+
+        sesion.setEjercicioSesionList(ejerciciosList);
+
+        Intent intent = this.getIntent();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("sesion", sesion);
+        intent.putExtras(bundle);
+
+
+        if (getParent() == null) {
+            setResult(Activity.RESULT_OK, intent);
+        } else {
+            getParent().setResult(Activity.RESULT_OK, intent);
+        }
+        finish();
+    }
+
+    private void buscarEjercicio(){
+        Intent intent = new Intent(new Intent(CrearSesionActivity.this, BuscarEjercicioActivity.class));
+
+        startActivityForResult(intent, Utils.REQUEST_CODE_BUSCAR_EJERCICIO);
+
+
+
+    }
+
 
     public void abrirPopUpCrearEjercicioDistancia(){
 
@@ -109,5 +156,23 @@ public class CrearSesionActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(data!=null){
+            switch(requestCode) {
+                case (Utils.REQUEST_CODE_BUSCAR_EJERCICIO) : {
+                    adicionarEjercicio((EjercicioSesion) data.getExtras().getSerializable("ejercicioSesion"));
+                }
+            }
+        }
 
+    }
+
+    private void adicionarEjercicio(EjercicioSesion ejercicioSesion) {
+
+        ejerciciosList.add(ejercicioSesion);
+        ejerciciosSesionAdapter.notifyDataSetChanged();
+
+    }
 }
