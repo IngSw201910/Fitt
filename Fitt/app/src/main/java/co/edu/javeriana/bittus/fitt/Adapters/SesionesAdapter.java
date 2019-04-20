@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class SesionesAdapter extends ArrayAdapter<Sesion> {
         TextView duracion = view.findViewById(R.id.textDuracion);
         duracion.setText(sesion.getDuracion()+ " minutos");
 
-        Button editarB = view.findViewById(R.id.buttonEditarSesion);
+        ImageButton editarB = view.findViewById(R.id.buttonEditarSesion);
 
         editarB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +59,7 @@ public class SesionesAdapter extends ArrayAdapter<Sesion> {
             }
         });
 
-        Button eliminarB = view.findViewById(R.id.buttonDelete);
+        ImageButton eliminarB = view.findViewById(R.id.buttonDelete);
 
         eliminarB.setOnClickListener(new View.OnClickListener() {
             @Override

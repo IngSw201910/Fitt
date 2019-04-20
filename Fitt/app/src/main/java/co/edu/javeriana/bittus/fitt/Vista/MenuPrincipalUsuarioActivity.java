@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -14,9 +15,9 @@ import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 public class MenuPrincipalUsuarioActivity extends AppCompatActivity {
 
 
-    private Button salirB;
+    private ImageButton salirB;
     private FirebaseAuth mAuth;
-    private Button crearRutinaB;
+    private ImageButton crearRutinaB;
 
 
 
@@ -26,8 +27,8 @@ public class MenuPrincipalUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_principal_usuario);
 
 
-        salirB = (Button) findViewById(R.id.logout);
-        crearRutinaB = (Button) findViewById(R.id.crearRutina);
+        salirB = (ImageButton) findViewById(R.id.logout);
+        crearRutinaB = (ImageButton) findViewById(R.id.btnCrearRutina);
 
 
         mAuth = FirebaseAuth.getInstance();

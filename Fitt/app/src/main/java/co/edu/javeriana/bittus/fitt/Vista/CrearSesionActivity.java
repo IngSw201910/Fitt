@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -26,9 +27,9 @@ public class CrearSesionActivity extends AppCompatActivity {
 
     private ListView listaEjerciciosV;
     private List<EjercicioSesion> ejerciciosList;
-    private Button aceptarCrearSesionB;
-    private Button agregarEjercicioB;
-    private Button agregarDescansoB;
+    private ImageButton aceptarCrearSesionB;
+    private ImageButton agregarEjercicioB;
+    private ImageButton agregarDescansoB;
     private EjerciciosSesionAdapter ejerciciosSesionAdapter;
 
     private EditText nombreT;
@@ -45,9 +46,9 @@ public class CrearSesionActivity extends AppCompatActivity {
         duracionT = findViewById(R.id.editText2);
 
         listaEjerciciosV = findViewById(R.id.listEjercicios);
-        aceptarCrearSesionB = findViewById(R.id.buttonAceptarCrearSesion);
-        agregarEjercicioB = findViewById(R.id.buttonAdicionarEjercicio);
-        agregarDescansoB = findViewById(R.id.buttonAgregarDescanso);
+        aceptarCrearSesionB = (ImageButton)findViewById(R.id.buttonAceptarCrearSesion);
+        agregarEjercicioB = (ImageButton)findViewById(R.id.buttonAdicionarEjercicio);
+        agregarDescansoB = (ImageButton)findViewById(R.id.buttonAgregarDescanso);
 
         ejerciciosList = new ArrayList<EjercicioSesion>();
 

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.io.Serializable;
@@ -19,8 +20,8 @@ import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
 
-    private Button aceptarB;
-    private Button adicionarB;
+    private ImageButton aceptarB;
+    private ImageButton adicionarB;
     private ListView listViewL;
     private SesionesAdapter adapterSesion;
     private List<Sesion> sesionList;
@@ -36,9 +37,9 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
 
 
-        aceptarB = (Button) findViewById(R.id.buttonAceptarCrearRutina);
+        aceptarB = (ImageButton) findViewById(R.id.buttonAceptarCrearRutina);
         listViewL = (ListView) findViewById(R.id.listSesiones);
-        adicionarB = (Button)findViewById(R.id.buttonAdicionarSesion);
+        adicionarB = (ImageButton)findViewById(R.id.buttonAdicionarSesion);
 
         sesionList = new ArrayList<Sesion>();
 

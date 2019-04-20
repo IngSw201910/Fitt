@@ -7,9 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,11 +22,12 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Modelo.Rutina;
 import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
 public class CrearRutinaActivity extends AppCompatActivity {
 
-    private Button siguienteB;
+    private ImageButton siguienteB;
     private Spinner dificultadSpin;
     private Spinner descansoSpin;
 
@@ -32,12 +37,15 @@ public class CrearRutinaActivity extends AppCompatActivity {
 
     private RadioButton publicaRB;
 
+    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private static FirebaseUser user = mAuth.getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_rutina);
 
-        siguienteB = (Button) findViewById(R.id.buttonSiguienteCrearRutina);
+        siguienteB = (ImageButton) findViewById(R.id.buttonSiguienteCrearRutina);
         dificultadSpin = findViewById(R.id.spinner2);
         descansoSpin = findViewById(R.id.spinner3);
         nombreRutinaT = findViewById(R.id.nombreRutina);
@@ -98,7 +106,7 @@ public class CrearRutinaActivity extends AppCompatActivity {
             rutina.setSesionList(sesionList);
 
 
-            //está es la rutina que toca subir a firebase
+            Utils.almacenarInformacionConKey(RutasBaseDeDatos.getRutaRutinas()+user.getUid()+"/", rutina);
 
             Log.i("Rutina", nombreRutina + " "+ frecuencia+ " "+descripcion);
 

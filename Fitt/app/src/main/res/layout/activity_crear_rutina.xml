@@ -175,7 +175,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="64dp"
-        android:background="@color/common_google_signin_btn_tint"
+        android:background="@android:color/transparent"
         android:tint="@color/verdeBotones"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -183,12 +183,13 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+        android:layout_width="57dp"
         android:layout_height="44dp"
+        android:layout_marginEnd="44dp"
         android:text="Agregar \nsesiones"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSiguienteCrearRutina"
-        tools:layout_editor_absoluteX="309dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSiguienteCrearRutina" />
 
 </android.support.constraint.ConstraintLayout>

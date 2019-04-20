@@ -8,6 +8,9 @@ import android.util.Log;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -22,6 +25,12 @@ public class Utils {
 
 
     private static StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
+    private static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private static DatabaseReference myRef;
+    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private static FirebaseUser user = mAuth.getCurrentUser();
+
+
 
     public final static int REQUEST_CODE_CREAR_RUTINA_SESIONES = 0;
     public final static int REQUEST_CODE_EJERCICIO_DISTANCIA = 1;
@@ -77,6 +86,14 @@ public class Utils {
             }
         });
     }
+
+    public static void almacenarInformacionConKey (String ruta, Object objeto){
+        myRef=database.getReference(ruta);
+        String key = myRef.push().getKey();
+        myRef=database.getReference(ruta+key);
+        myRef.setValue(objeto);
+    }
+
 }
 
 
