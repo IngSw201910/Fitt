@@ -7,14 +7,26 @@
     tools:context=".Vista.CrearRutinaSesionesActivity">
 
     <TextView
+        android:id="@+id/agregar sesión"
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAceptarCrearRutina"
+        tools:layout_editor_absoluteX="255dp" />
+
+    <TextView
         android:id="@+id/textview"
-        android:layout_width="127dp"
-        android:layout_height="19dp"
+        android:layout_width="258dp"
+        android:layout_height="33dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:text="CREACIÓN RUTINA"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,25 +38,15 @@
         android:layout_width="140dp"
         android:layout_height="22dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="AGREGAR SESIONES"
+        android:text="Agregar sesiones"
+        android:textSize="18sp"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview" />
-
-    <Button
-        android:id="@+id/buttonAceptarCrearRutina"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="36dp"
-        android:text="ACEPTAR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listSesiones"
-        app:layout_constraintVertical_bias="0.825" />
 
     <ListView
         android:id="@+id/listSesiones"
@@ -57,16 +59,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview2" />
 
-    <Button
+    <ImageView
         android:id="@+id/buttonAdicionarSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="36dp"
-        android:text="Adicionar"
+        android:layout_width="96dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listSesiones"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/crear_rutina" />
+
+    <ImageView
+        android:id="@+id/buttonAceptarCrearRutina"
+        android:layout_width="96dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="8dp"
+        android:tint="@color/verdeFitt"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listSesiones"
+        app:layout_constraintVertical_bias="0.095"
+        app:srcCompat="@drawable/guardar" />
+
+    <TextView
+        android:id="@+id/Agregar sesión"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar sesión"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAdicionarSesion"
+        tools:layout_editor_absoluteX="60dp" />
+
 </android.support.constraint.ConstraintLayout>
