@@ -6,27 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonEditarSesion"
-        android:layout_width="85dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="24dp"
-        android:text="Editar"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/verdeFitt"
         app:layout_constraintStart_toEndOf="@+id/textNombreSesion"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/editar" />
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonDelete"
-        android:layout_width="85dp"
-        android:layout_height="38dp"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="Borrar"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/verdeFitt"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toEndOf="@+id/buttonEditarSesion"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/quitardelalista" />
 
     <TextView
         android:id="@+id/textNombreSesion"
