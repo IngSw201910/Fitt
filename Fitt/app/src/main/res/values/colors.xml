@@ -3,4 +3,11 @@
     <color name="colorPrimary">#DCDCDC</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <color name="verdeFitt">#4BC6AA</color>
+    <color name="verdeBotones">#009688</color>
+    <color name="negro">#000000</color>
+    <color name="gris">#efefed</color>
+
 </resources>
