@@ -1,55 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/buttonEdit"
-        android:layout_width="85dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="24dp"
-        android:text="Editar"
+    <ImageButton
+        android:id="@+id/buttonEdit2"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:layout_marginStart="12dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/verdeFitt"
         app:layout_constraintStart_toEndOf="@+id/textNombreEjercicioDuracion"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:srcCompat="@drawable/editar"
+        tools:layout_editor_absoluteY="16dp" />
 
-    <Button
-        android:id="@+id/buttonDelete"
-        android:layout_width="85dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:text="Borrar"
+    <ImageButton
+        android:id="@+id/buttonDelete2"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/verdeFitt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
-        app:layout_constraintStart_toEndOf="@+id/buttonEdit"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/buttonEdit2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/quitardelalista" />
+
+    <TextView
+        android:id="@+id/textViewDuracionEjercicio"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Duración:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreEjercicioDistancia2" />
 
     <TextView
         android:id="@+id/textNombreEjercicioDuracion"
-        android:layout_width="140dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="12dp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Nombre"
+        app:layout_constraintStart_toEndOf="@+id/textViewNombreEjercicioDistancia2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewNombreEjercicioDistancia2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Nombre ejercicio:"
+        android:textColor="#4BC6AA"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textEjercicioDuracion"
-        android:layout_width="140dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:text="Distancia"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/textDuracionEjercicioDuracion"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="8dp"
+        android:text="Duracion"
+        app:layout_constraintStart_toEndOf="@+id/textViewDuracionEjercicio"
         app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioDuracion" />
-
 </android.support.constraint.ConstraintLayout>
