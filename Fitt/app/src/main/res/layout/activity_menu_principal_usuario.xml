@@ -105,7 +105,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="352dp"
+        android:layout_width="340dp"
         android:layout_height="81dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -123,7 +123,7 @@
         <ImageButton
             android:id="@+id/btnMiProgreso"
             android:layout_width="74dp"
-            android:layout_height="80dp"
+            android:layout_height="74dp"
             android:layout_marginRight="15dp"
             android:layout_weight="0.3"
             android:background="#00FFFFFF"
@@ -133,7 +133,7 @@
         <ImageButton
             android:id="@+id/btnMisLogros"
             android:layout_width="74dp"
-            android:layout_height="80dp"
+            android:layout_height="74dp"
             android:layout_marginRight="15dp"
             android:layout_weight="0.3"
             android:background="#00FFFFFF"
@@ -143,7 +143,7 @@
         <ImageButton
             android:id="@+id/btnMisRutinas"
             android:layout_width="74dp"
-            android:layout_height="80dp"
+            android:layout_height="74dp"
             android:layout_weight="0.3"
             android:background="#00FFFFFF"
             android:scaleType="fitXY"
@@ -153,7 +153,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="352dp"
+        android:layout_width="340dp"
         android:layout_height="81dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -169,7 +169,7 @@
         <ImageButton
             android:id="@+id/btnRealizarSesion"
             android:layout_width="74dp"
-            android:layout_height="80dp"
+            android:layout_height="74dp"
             android:layout_marginRight="15dp"
             android:layout_weight="0.3"
             android:background="#00FFFFFF"
@@ -179,7 +179,7 @@
         <ImageButton
             android:id="@+id/btnCalendario"
             android:layout_width="74dp"
-            android:layout_height="80dp"
+            android:layout_height="74dp"
             android:layout_marginRight="15dp"
             android:layout_weight="0.3"
             android:background="#00FFFFFF"
@@ -189,7 +189,7 @@
         <ImageButton
             android:id="@+id/btnEntrenador"
             android:layout_width="74dp"
-            android:layout_height="80dp"
+            android:layout_height="74dp"
             android:layout_weight="0.3"
             android:background="#00FFFFFF"
             android:scaleType="fitXY"
@@ -202,18 +202,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Cerrar sesión"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logout" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout6"
-        android:layout_width="237dp"
+        android:layout_width="225dp"
         android:layout_height="81dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -229,7 +229,7 @@
         <ImageButton
             android:id="@+id/btnIniciarRecorrido"
             android:layout_width="74dp"
-            android:layout_height="80dp"
+            android:layout_height="74dp"
             android:layout_marginRight="15dp"
             android:layout_weight="0.5"
             android:background="#00FFFFFF"
@@ -239,7 +239,7 @@
         <ImageButton
             android:id="@+id/btnCrearRutina"
             android:layout_width="74dp"
-            android:layout_height="80dp"
+            android:layout_height="74dp"
             android:layout_marginRight="15dp"
             android:layout_weight="0.5"
             android:background="#00FFFFFF"
@@ -251,19 +251,17 @@
     <ImageButton
         android:id="@+id/logout"
         android:layout_width="74dp"
-        android:layout_height="80dp"
+        android:layout_height="74dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textCerrarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
         app:srcCompat="@drawable/cerrar_sesion" />
 
     <LinearLayout

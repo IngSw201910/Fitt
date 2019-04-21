@@ -10,7 +10,6 @@
         android:id="@+id/buttonEditarSesion"
         android:layout_width="63dp"
         android:layout_height="63dp"
-        android:layout_marginStart="124dp"
         android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
@@ -25,20 +24,17 @@
         android:layout_height="63dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:tint="@color/verdeFitt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toEndOf="@+id/buttonEditarSesion"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/quitardelalista" />
 
     <TextView
         android:id="@+id/textNombreSesion"
-        android:layout_width="57dp"
-        android:layout_height="24dp"
+        android:layout_width="137dp"
+        android:layout_height="21dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:text="Nombre"
@@ -47,8 +43,8 @@
 
     <TextView
         android:id="@+id/textDuracion"
-        android:layout_width="57dp"
-        android:layout_height="24dp"
+        android:layout_width="87dp"
+        android:layout_height="21dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:text="Duración"

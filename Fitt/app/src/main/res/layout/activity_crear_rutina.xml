@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="526dp"
+        android:layout_width="305dp"
+        android:layout_height="507dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -19,40 +19,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/silueta" />
+        app:srcCompat="@drawable/silueta"
+        tools:tint="@color/verdeFitt" />
 
     <TextView
         android:id="@+id/dificultad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="136dp"
+        android:layout_height="53dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:text="Dias de descanso"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/spinner3"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.873"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <Spinner
         android:id="@+id/spinner3"
-        android:layout_width="150dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="120dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.014" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="150dp"
         android:layout_height="38dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="68dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/duracionRutina" />
 
@@ -136,7 +134,7 @@
         android:layout_width="229dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -162,34 +160,37 @@
         android:id="@+id/Dificultad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
         android:text="Dificultad"
         android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinner2"
+        app:layout_constraintHorizontal_bias="0.617"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/duracionRutina" />
 
     <ImageButton
         android:id="@+id/buttonSiguienteCrearRutina"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="64dp"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginEnd="68dp"
         android:background="@android:color/transparent"
         android:tint="@color/verdeBotones"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/siguiente" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="57dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="44dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="20dp"
         android:text="Agregar \nsesiones"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSiguienteCrearRutina" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
