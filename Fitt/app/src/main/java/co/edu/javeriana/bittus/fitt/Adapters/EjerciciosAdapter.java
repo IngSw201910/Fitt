@@ -59,34 +59,12 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
         GifImageView gifImageView = view.findViewById(R.id.gifEjercicio);
         Utils.descargarYMostrarGIF(ejercicio.getRutaGIF(), gifImageView);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                abrirPopUp();
-
-
-            }
-        });
 
 
         return  view;
     }
 
-    public void abrirPopUp(){
-        if(ejercicioSeleccionado.getTipo().equals("Distancia")){
-            BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
-            b.abrirPopUpCrearEjercicioDistancia(ejercicioSeleccionado);
-        }
-        if(ejercicioSeleccionado.getTipo().equals("Duración")){
-            BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
-            b.abrirPopUpCrearEjercicioDuracion(ejercicioSeleccionado);
-        }
-        if(ejercicioSeleccionado.getTipo().equals("Repetición")){
-            BuscarEjercicioActivity b = (BuscarEjercicioActivity)context;
-            b.abrirPopUpCrearEjercicioRepeticion(ejercicioSeleccionado);
-        }
 
-    }
 
 }

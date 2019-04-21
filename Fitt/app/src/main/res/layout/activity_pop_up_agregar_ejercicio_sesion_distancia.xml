@@ -7,103 +7,67 @@
     android:background="#00DCDCDC">
 
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00DCDCDC"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+    <ImageButton
+        android:id="@+id/buttonAceptar2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="52dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAceptar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/aceptar" />
 
+    <ImageButton
+        android:id="@+id/buttonInformacionEjercicio"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/textTipoEjercicio"
+        app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicio"
+        app:srcCompat="@drawable/informacion" />
 
-        <TextView
-            android:id="@+id/textViewCancelar2"
-            android:layout_width="69dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="288dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Cancelar"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonCancelar"
-            app:layout_constraintVertical_bias="0.0" />
+    <TextView
+        android:id="@+id/textViewCancelar2"
+        android:layout_width="69dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Cancelar"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageButton
-            android:id="@+id/buttonCancelar2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="56dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.141"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/cancelar" />
+    <TextView
+        android:id="@+id/textViewAceptar2"
+        android:layout_width="69dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Aceptar"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <ImageButton
-            android:id="@+id/buttonAceptar2"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="56dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.861"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/aceptar" />
-
-        <TextView
-            android:id="@+id/textViewAceptar2"
-            android:layout_width="69dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Aceptar"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.858"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAceptar"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageButton
-            android:id="@+id/buttonInformacionEjercicio"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.785"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.066"
-            app:srcCompat="@drawable/informacion" />
-
-    </android.support.constraint.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/buttonCancelar2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="52dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCancelar2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/cancelar" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifEjercicio"
@@ -158,11 +122,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
+        android:hint="Distancia"
         android:inputType="number"
-        android:text="Distancia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicio" />

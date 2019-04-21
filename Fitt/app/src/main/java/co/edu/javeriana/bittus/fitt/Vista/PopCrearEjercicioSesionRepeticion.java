@@ -67,7 +67,7 @@ public class PopCrearEjercicioSesionRepeticion extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width/1.1), (int) (height/1.8));
+        getWindow().setLayout((int) (width/1.1), (int) (height/1.5));
 
         informacionEjercicioB.setOnClickListener(new View.OnClickListener() {
             @Override

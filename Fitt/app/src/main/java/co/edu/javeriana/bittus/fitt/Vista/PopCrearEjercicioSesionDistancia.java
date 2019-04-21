@@ -64,7 +64,7 @@ public class PopCrearEjercicioSesionDistancia extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width/1.1), (int) height/2);
+        getWindow().setLayout((int) (width/1.1), (int) (height/1.5));
 
 
         informacionEjercicioB.setOnClickListener(new View.OnClickListener() {

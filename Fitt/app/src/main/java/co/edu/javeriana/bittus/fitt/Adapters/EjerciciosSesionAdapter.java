@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -64,19 +65,19 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
 
         TextView repeticiones = view.findViewById(R.id.textEjercicioRepeticiones);
         String repeticionS = Integer.toString(ejercicio.getRepeticiones());
-        repeticiones.setText("Repeticiones: "+repeticionS);
+        repeticiones.setText(repeticionS);
 
 
         TextView series = view.findViewById(R.id.textEjercicioSeries);
         String serieS = Integer.toString(ejercicio.getSeries());
-        series.setText("Series: "+serieS);
+        series.setText(serieS);
 
         TextView descanso = view.findViewById(R.id.textEjercicioDescanso);
         String descansoS = Integer.toString(ejercicio.getDescanso());
-        descanso.setText("Descanso: "+descansoS+"s");
+        descanso.setText(descansoS+"s");
 
 
-        Button editarB = view.findViewById(R.id.buttonEdit);
+        ImageButton editarB = view.findViewById(R.id.buttonEdit3);
 
         editarB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +87,7 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
             }
         });
 
-        Button eliminarB = view.findViewById(R.id.buttonDelete);
+        ImageButton eliminarB = view.findViewById(R.id.buttonDelete3);
 
         eliminarB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,10 +113,10 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
 
         TextView duracion = view.findViewById(R.id.textDuracionEjercicioDuracion);
         String duracionS = Integer.toString(ejercicio.getDuracion());
-        duracion.setText("Duración: "+duracionS + "s");
+        duracion.setText(duracionS + "s");
 
 
-        Button editarB = view.findViewById(R.id.buttonEdit);
+        ImageButton editarB = (ImageButton) view.findViewById(R.id.buttonEdit2);
 
         editarB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,7 +126,7 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
             }
         });
 
-        Button eliminarB = view.findViewById(R.id.buttonDelete);
+        ImageButton eliminarB = (ImageButton) view.findViewById(R.id.buttonDelete2);
 
         eliminarB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,9 +151,9 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
 
         TextView distancia = view.findViewById(R.id.textDistanciaEjercicioDistancia);
         String distanciaS = Integer.toString(ejercicio.getDistancia());
-        distancia.setText("Distancia: "+distanciaS + "mts");
+        distancia.setText(distanciaS + "mts");
 
-        Button editarB = view.findViewById(R.id.buttonEdit);
+        ImageButton editarB = view.findViewById(R.id.buttonEdit);
 
         editarB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +164,7 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         });
 
 
-        Button eliminarB = view.findViewById(R.id.buttonDelete);
+        ImageButton eliminarB = view.findViewById(R.id.buttonDelete);
 
         eliminarB.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -59,7 +59,7 @@ public class SesionesAdapter extends ArrayAdapter<Sesion> {
             }
         });
 
-        ImageButton eliminarB = view.findViewById(R.id.buttonDelete);
+        ImageButton eliminarB = view.findViewById(R.id.buttonDelete4);
 
         eliminarB.setOnClickListener(new View.OnClickListener() {
             @Override

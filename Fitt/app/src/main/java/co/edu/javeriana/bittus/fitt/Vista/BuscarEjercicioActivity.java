@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +34,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
     private EjerciciosAdapter adapterEjercicios;
     private List<Ejercicio> listaEjercicios;
 
-
+    private Ejercicio ejercicioSeleccionado;
     private EjercicioDistancia ejercicioDistancia;
     private EjercicioDuracion ejercicioDuracion;
     private EjercicioRepeticiones ejercicioRepeticion;
@@ -58,7 +60,16 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
         adapterEjercicios = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.item_ejercicio_row,listaEjercicios);
 
+
         listViewL.setAdapter(adapterEjercicios);
+        listViewL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ejercicioSeleccionado = listaEjercicios.get(position);
+                abrirPopUp();
+            }
+        });
+
         database = FirebaseDatabase.getInstance();
 
         descargarEjercicios();
@@ -66,12 +77,27 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
 
     }
+    public void abrirPopUp(){
+        if(ejercicioSeleccionado.getTipo().equals("Distancia")){
 
-    public void abrirPopUpCrearEjercicioDistancia(Ejercicio ejercicio){
+            abrirPopUpCrearEjercicioDistancia();
+        }
+        if(ejercicioSeleccionado.getTipo().equals("Duración")){
+
+           abrirPopUpCrearEjercicioDuracion();
+        }
+        if(ejercicioSeleccionado.getTipo().equals("Repetición")){
+
+            abrirPopUpCrearEjercicioRepeticion();
+        }
+
+    }
+
+    public void abrirPopUpCrearEjercicioDistancia(){
         Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDistancia.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio", ejercicio);
+        bundle.putSerializable("ejercicio", ejercicioSeleccionado);
 
 
         intent.putExtras(bundle);
@@ -79,12 +105,12 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
         startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DISTANCIA);
 
     }
-    public void abrirPopUpCrearEjercicioDuracion(Ejercicio ejercicio){
+    public void abrirPopUpCrearEjercicioDuracion(){
 
         Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDuracion.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio", ejercicio);
+        bundle.putSerializable("ejercicio", ejercicioSeleccionado);
 
         intent.putExtras(bundle);
 
@@ -92,12 +118,12 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
 
     }
-    public void abrirPopUpCrearEjercicioRepeticion(Ejercicio ejercicio){
+    public void abrirPopUpCrearEjercicioRepeticion(){
 
         Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionRepeticion.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio", ejercicio);
+        bundle.putSerializable("ejercicio", ejercicioSeleccionado);
 
         intent.putExtras(bundle);
 

@@ -39,7 +39,7 @@ public class PopCrearEjercicioSesionDescanso extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width/1.1), (int) (height/2.5));
+        getWindow().setLayout((int) (width/1.1), (int) (height/2.4));
 
         aceptarButton.setOnClickListener(new View.OnClickListener() {
             @Override
