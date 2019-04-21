@@ -8,19 +8,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="352dp"
+        android:layout_width="wrap_content"
         android:layout_height="43dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <TextView
             android:id="@+id/text"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginRight="15dp"
@@ -28,11 +26,11 @@
             android:text="Realizar sesión"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="15sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/text1"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginRight="15dp"
@@ -40,36 +38,35 @@
             android:text="Calendario"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt2"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_weight="0.3"
             android:text="Entrenador"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="352dp"
+        android:layout_width="wrap_content"
         android:layout_height="43dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
 
         <TextView
             android:id="@+id/textView11"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginRight="15dp"
@@ -77,11 +74,11 @@
             android:text="Mi progreso"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textView9"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginRight="15dp"
@@ -89,41 +86,39 @@
             android:text="Mis logros"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_weight="0.3"
             android:text="Mis rutinas"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="340dp"
+        android:layout_width="wrap_content"
         android:layout_height="81dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:clipToPadding="true"
         android:orientation="horizontal"
         android:showDividers="middle|none"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.194">
+        app:layout_constraintTop_toBottomOf="@+id/Titulo">
 
         <ImageButton
             android:id="@+id/btnMiProgreso"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_marginRight="15dp"
             android:layout_weight="0.3"
             android:background="#00FFFFFF"
@@ -153,18 +148,18 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="340dp"
+        android:layout_width="wrap_content"
         android:layout_height="81dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="360dp"
         android:clipToPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.455">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.444">
 
         <ImageButton
             android:id="@+id/btnRealizarSesion"
@@ -213,18 +208,16 @@
 
     <LinearLayout
         android:id="@+id/linearLayout6"
-        android:layout_width="225dp"
+        android:layout_width="wrap_content"
         android:layout_height="81dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="8dp"
         android:clipToPadding="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintHorizontal_bias="0.331"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.711">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <ImageButton
             android:id="@+id/btnIniciarRecorrido"
@@ -264,31 +257,30 @@
 
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="237dp"
+        android:layout_width="wrap_content"
         android:layout_height="43dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintHorizontal_bias="0.348"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
         <TextView
             android:id="@+id/text3"
-            android:layout_width="120dp"
-            android:layout_height="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginRight="15dp"
             android:layout_weight="0.3"
             android:text="Iniciar recorrido"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/text4"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="26dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_marginRight="15dp"
@@ -296,7 +288,7 @@
             android:text="Crear rutina"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
@@ -305,17 +297,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-medium"
         android:text="Inicio"
         android:textColor="#4BC6AA"
         android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.228" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
