@@ -70,7 +70,7 @@ public class PopCrearEjercicioSesionDistancia extends Activity {
         informacionEjercicioB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PopCrearEjercicioSesionDistancia.this, InformacionEjercicioActivity.class));
+                verInfo();
             }
         });
 
@@ -88,7 +88,15 @@ public class PopCrearEjercicioSesionDistancia extends Activity {
             }
         });
     }
+    private void verInfo() {
+        Intent inten = new Intent(PopCrearEjercicioSesionDistancia.this, InformacionEjercicioActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicio",ejercicio);
+        inten.putExtras(bundle);
 
+        startActivity(inten);
+
+    }
     private void crearEjercicioSesion() {
         String sDistancia = distanciaT.getText().toString();
         int distancia = Integer.parseInt(sDistancia);

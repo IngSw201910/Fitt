@@ -70,7 +70,7 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
         informacionEjercicioB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PopCrearEjercicioSesionDuracion.this, InformacionEjercicioActivity.class));
+                verInfo();
             }
         });
 
@@ -87,6 +87,15 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
                 finish();
             }
         });
+
+    }
+    private void verInfo() {
+        Intent inten = new Intent(PopCrearEjercicioSesionDuracion.this, InformacionEjercicioActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicio",ejercicio);
+        inten.putExtras(bundle);
+
+        startActivity(inten);
 
     }
 

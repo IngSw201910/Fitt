@@ -9,20 +9,20 @@ public class Ejercicio implements Serializable {
     private String tipo;
     private String dificultad;
     private int gif;
-    private String descripcion;
+    private String descripción;
     private String rutaGIF;
 
     public Ejercicio(){
         super();
     };
 
-    public Ejercicio(String nombre, String musculos, String tipo, String dificultad, int gif, String descripcion) {
+    public Ejercicio(String nombre, String musculos, String tipo, String dificultad, int gif, String descripción) {
         this.nombre = nombre;
         this.musculos = musculos;
         this.tipo = tipo;
         this.dificultad = dificultad;
         this.gif = gif;
-        this.descripcion = descripcion;
+        this.descripción = descripción;
     }
 
     public String getNombre() {
@@ -65,12 +65,12 @@ public class Ejercicio implements Serializable {
         this.gif = gif;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescripción() {
+        return descripción;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescripción(String descripción) {
+        this.descripción = descripción;
     }
 
     public String getRutaGIF() {

@@ -72,7 +72,7 @@ public class PopCrearEjercicioSesionRepeticion extends Activity {
         informacionEjercicioB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PopCrearEjercicioSesionRepeticion.this, InformacionEjercicioActivity.class));
+                verInfo();
             }
         });
 
@@ -91,6 +91,17 @@ public class PopCrearEjercicioSesionRepeticion extends Activity {
         });
         
     }
+
+    private void verInfo() {
+        Intent inten = new Intent(PopCrearEjercicioSesionRepeticion.this, InformacionEjercicioActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicio",ejercicio);
+        inten.putExtras(bundle);
+
+        startActivity(inten);
+
+    }
+
     private void crearEjercicioSesion() {
         String sRepeticiones = repeticionesT.getText().toString();
         String sSeries = seriesT.getText().toString();
