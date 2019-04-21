@@ -6,4 +6,221 @@
     android:layout_height="match_parent"
     tools:context=".Vista.Comunidad">
 
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="352dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/textViewMapaUsuarios"
+            android:layout_width="120dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.3"
+            android:text="Mapa usuarios"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textViewBuscarUsuario"
+            android:layout_width="120dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.3"
+            android:text="Buscar usuario"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewEjercicios"
+            android:layout_width="120dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="0.3"
+            android:text="Ejercicios"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="340dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:clipToPadding="true"
+        android:orientation="horizontal"
+        android:showDividers="middle|none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.194">
+
+        <ImageButton
+            android:id="@+id/buttonParques"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.3"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/parques" />
+
+        <ImageButton
+            android:id="@+id/buttonChats"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.3"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/chats" />
+
+        <ImageButton
+            android:id="@+id/buttonBuscarRutinas"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_weight="0.3"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/buscar_rutinas" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="340dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:clipToPadding="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.455">
+
+        <ImageButton
+            android:id="@+id/buttonMapaUsuarios"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.3"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/mapa_usuarios" />
+
+        <ImageButton
+            android:id="@+id/buttonBuscarUsuario"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.3"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/buscar_usuarios" />
+
+        <ImageButton
+            android:id="@+id/buttonEjercicios"
+            android:layout_width="74dp"
+            android:layout_height="74dp"
+            android:layout_weight="0.3"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ejercicios" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="352dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+        <TextView
+            android:id="@+id/textViewParques"
+            android:layout_width="120dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.3"
+            android:text="Parques"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewChats"
+            android:layout_width="120dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginRight="15dp"
+            android:layout_weight="0.3"
+            android:text="Chats"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewBuscarRutinas"
+            android:layout_width="120dp"
+            android:layout_height="26dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="0.3"
+            android:text="Buscar rutinas"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tituloComunidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Comunidad"
+        android:textColor="#4BC6AA"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.228" />
+
+    <ListView
+        android:layout_width="378dp"
+        android:layout_height="221dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
 </android.support.constraint.ConstraintLayout>
