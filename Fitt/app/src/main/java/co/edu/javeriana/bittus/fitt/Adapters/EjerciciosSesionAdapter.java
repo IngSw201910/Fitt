@@ -14,7 +14,6 @@ import android.widget.TextView;
 import java.util.List;
 
 
-import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
@@ -111,7 +110,7 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         TextView nombre = view.findViewById(R.id.textNombreEjercicioDuracion);
         nombre.setText(ejercicio.getEjercicio().getNombre());
 
-        TextView duracion = view.findViewById(R.id.textEjercicioDuracion);
+        TextView duracion = view.findViewById(R.id.textDuracionEjercicioDuracion);
         String duracionS = Integer.toString(ejercicio.getDuracion());
         duracion.setText("Duración: "+duracionS + "s");
 
@@ -149,7 +148,7 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         TextView nombre = view.findViewById(R.id.textNombreEjercicioDistancia);
         nombre.setText(ejercicio.getEjercicio().getNombre());
 
-        TextView distancia = view.findViewById(R.id.textEjercicioDistancia);
+        TextView distancia = view.findViewById(R.id.textDistanciaEjercicioDistancia);
         String distanciaS = Integer.toString(ejercicio.getDistancia());
         distancia.setText("Distancia: "+distanciaS + "mts");
 
