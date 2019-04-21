@@ -42,10 +42,10 @@ public class CrearSesionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crear_sesion);
 
 
-        nombreT = findViewById(R.id.editText);
-        duracionT = findViewById(R.id.editText2);
+        nombreT = (EditText)findViewById(R.id.editText);
+        duracionT = (EditText)findViewById(R.id.editText2);
 
-        listaEjerciciosV = findViewById(R.id.listEjercicios);
+        listaEjerciciosV = (ListView)findViewById(R.id.listEjercicios);
         aceptarCrearSesionB = (ImageButton)findViewById(R.id.buttonAceptarCrearSesion);
         agregarEjercicioB = (ImageButton)findViewById(R.id.buttonAdicionarEjercicio);
         agregarDescansoB = (ImageButton)findViewById(R.id.buttonAgregarDescanso);

@@ -37,16 +37,16 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_duracion);
 
-        aceptarButton = findViewById(R.id.buttonAceptar3);
-        cancelarButton = findViewById(R.id.buttonCancelar3);
-        informacionEjercicioB = findViewById(R.id.buttonInformacionEjercicio2);
-        duracionT = findViewById(R.id.editTextDuracion2);
+        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar3);
+        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar3);
+        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio2);
+        duracionT = (EditText)findViewById(R.id.editTextDuracion2);
 
-        nombreEjercicioT = findViewById(R.id.textNombreEjercicio2);
-        musculosEjercicioT = findViewById(R.id.textMusculosEjercicio2);
-        tipoEjercicioT = findViewById(R.id.textTipoEjercicio2);
-        dificultadEjercicioT = findViewById(R.id.textDificultadEjercicio2);
-        gifImageView = findViewById(R.id.gifEjercicio2);
+        nombreEjercicioT = (TextView)findViewById(R.id.textNombreEjercicio2);
+        musculosEjercicioT = (TextView)findViewById(R.id.textMusculosEjercicio2);
+        tipoEjercicioT = (TextView)findViewById(R.id.textTipoEjercicio2);
+        dificultadEjercicioT = (TextView)findViewById(R.id.textDificultadEjercicio2);
+        gifImageView = (GifImageView) findViewById(R.id.gifEjercicio2);
 
         Bundle bundle = this.getIntent().getExtras();
 

@@ -38,12 +38,12 @@ public class PopCrearEjercicioSesionRepeticion extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_repeticion);
 
-        aceptarButton = findViewById(R.id.buttonAceptar4);
-        cancelarButton = findViewById(R.id.buttonCancelar4);
-        informacionEjercicioB = findViewById(R.id.buttonInformacionEjercicio3);
-        repeticionesT = findViewById(R.id.editTextRepeticiones);
-        seriesT = findViewById(R.id.editTextSeries);
-        descansoT = findViewById(R.id.editTextDescansos);
+        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar4);
+        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar4);
+        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio3);
+        repeticionesT = (EditText)findViewById(R.id.editTextRepeticiones);
+        seriesT = (EditText)findViewById(R.id.editTextSeries);
+        descansoT = (EditText)findViewById(R.id.editTextDescansos);
 
         nombreEjercicioT = findViewById(R.id.textNombreEjercicio3);
         musculosEjercicioT = findViewById(R.id.textMusculosEjercicio3);

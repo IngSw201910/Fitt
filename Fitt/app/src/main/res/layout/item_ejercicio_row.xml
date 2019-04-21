@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/textTipoEjercicio"
-        android:layout_width="116dp"
-        android:layout_height="17dp"
+        android:layout_width="201dp"
+        android:layout_height="21dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Tipo"
@@ -19,8 +19,8 @@
 
     <TextView
         android:id="@+id/textDificultadEjercicio"
-        android:layout_width="117dp"
-        android:layout_height="19dp"
+        android:layout_width="114dp"
+        android:layout_height="18dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Dificultad"
@@ -40,8 +40,8 @@
 
     <TextView
         android:id="@+id/textNombreEjercicioBuscar"
-        android:layout_width="180dp"
-        android:layout_height="38dp"
+        android:layout_width="193dp"
+        android:layout_height="37dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Nombre"
@@ -50,8 +50,8 @@
 
     <TextView
         android:id="@+id/textMusculosEjercicioBuscar"
-        android:layout_width="160dp"
-        android:layout_height="18dp"
+        android:layout_width="233dp"
+        android:layout_height="21dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:text="Músculos"

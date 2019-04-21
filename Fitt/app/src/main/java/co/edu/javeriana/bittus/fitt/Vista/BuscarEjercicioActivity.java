@@ -47,7 +47,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_ejercicio);
 
-        listViewL = findViewById(R.id.listEjerciciosBuscar);
+        listViewL = (ListView)findViewById(R.id.listEjerciciosBuscar);
         listaEjercicios = new ArrayList<Ejercicio>();
 
 
