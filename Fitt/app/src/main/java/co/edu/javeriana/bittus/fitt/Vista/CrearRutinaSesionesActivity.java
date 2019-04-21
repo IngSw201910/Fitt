@@ -45,7 +45,7 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
         //Datos de prueba
 
-        sesionList.add(new Sesion("Piernas", 20));
+        //sesionList.add(new Sesion("Piernas", 20));
 
         //Fin datos de prueba
 

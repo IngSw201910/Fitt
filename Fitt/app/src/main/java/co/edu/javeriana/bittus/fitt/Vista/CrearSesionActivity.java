@@ -87,13 +87,21 @@ public class CrearSesionActivity extends AppCompatActivity {
         agregarDescansoB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDescanso.class));
+                agregarDescanso();
             }
         });
 
 
 
 
+    }
+
+    private void agregarDescanso() {
+        Intent intent = new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDescanso.class);
+
+
+
+        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DESCANSO);
     }
 
     private void crearSesion() {
@@ -163,6 +171,11 @@ public class CrearSesionActivity extends AppCompatActivity {
             switch(requestCode) {
                 case (Utils.REQUEST_CODE_BUSCAR_EJERCICIO) : {
                     adicionarEjercicio((EjercicioSesion) data.getExtras().getSerializable("ejercicioSesion"));
+                    break;
+                }
+                case (Utils.REQUEST_CODE_EJERCICIO_DESCANSO):{
+                    adicionarEjercicio((EjercicioSesion) data.getExtras().getSerializable("ejercicioSesion"));
+                    break;
                 }
             }
         }
