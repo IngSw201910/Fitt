@@ -6,49 +6,74 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textViewDuracionSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Nombre sesión:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreSesion" />
+
+    <TextView
+        android:id="@+id/textViewNombreSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Nombre sesión:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageButton
         android:id="@+id/buttonEditarSesion"
         android:layout_width="63dp"
         android:layout_height="63dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:tint="@color/verdeFitt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDelete4"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toEndOf="@+id/textNombreSesion"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/editar" />
 
     <ImageButton
-        android:id="@+id/buttonDelete"
+        android:id="@+id/buttonDelete4"
         android:layout_width="63dp"
         android:layout_height="63dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:tint="@color/verdeFitt"
-        app:layout_constraintStart_toEndOf="@+id/buttonEditarSesion"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/quitardelalista" />
 
     <TextView
         android:id="@+id/textNombreSesion"
-        android:layout_width="137dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="12dp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Nombre"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewNombreSesion"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textDuracion"
-        android:layout_width="87dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Duración"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewDuracionSesion"
         app:layout_constraintTop_toBottomOf="@+id/textNombreSesion" />
 
 
