@@ -2,14 +2,13 @@ package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosSesionAdapter;
@@ -27,7 +26,7 @@ import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionDistanc
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionDuracion;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionRepeticion;
 
-public class CrearSesionActivity extends AppCompatActivity {
+public class EditarSesionActivity extends AppCompatActivity {
 
     private ListView listaEjerciciosV;
     private List<EjercicioSesion> ejerciciosList;
@@ -40,6 +39,7 @@ public class CrearSesionActivity extends AppCompatActivity {
     private EditText duracionT;
     private int posicionEditar;
 
+    private Sesion sesion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,21 +55,18 @@ public class CrearSesionActivity extends AppCompatActivity {
         agregarEjercicioB = (ImageButton)findViewById(R.id.buttonAdicionarEjercicio);
         agregarDescansoB = (ImageButton)findViewById(R.id.buttonAgregarDescanso);
 
-        ejerciciosList = new ArrayList<EjercicioSesion>();
 
-        //Datos de prueba
-        /*
-        Ejercicio ejercicio = new Ejercicio("Trotar","Piernas", "Distancia","Baja", 0,"Trotar por la calle");
-        Ejercicio ejercicio2 = new Ejercicio("Flexion Pared","Piernas, Abdomen", "Duracion","Media", 0,"Aguantar con una flexion en la pared");
-        Ejercicio ejercicio3 = new Ejercicio("Abdominales","Abdomen", "Repeticion","Media", 0,"Realizar una abdominal");
+        Bundle bundle = getIntent().getExtras();
 
-        ejerciciosList.add(new EjercicioDistancia(ejercicio, 100));
-        ejerciciosList.add(new EjercicioDuracion(ejercicio2, 20));
-        ejerciciosList.add(new EjercicioRepeticiones(ejercicio3,30,5,30));
-        */
-        //Fin de datos de prueba
+        sesion = (Sesion)bundle.getSerializable("sesion");
 
-        ejerciciosSesionAdapter = new EjerciciosSesionAdapter(CrearSesionActivity.this, ejerciciosList, new BtnClickListenerRow() {
+
+        ejerciciosList = sesion.getEjercicioSesionList();
+
+        nombreT.setText(sesion.getNombre());
+        duracionT.setText(Integer.toString(sesion.getDuracion()));
+
+        ejerciciosSesionAdapter = new EjerciciosSesionAdapter(EditarSesionActivity.this, ejerciciosList, new BtnClickListenerRow() {
             @Override
             public void onBtnClickEdit(int position) {
                 if (ejerciciosList.get(position).getEjercicio().getTipo().equals("Distancia")) {
@@ -86,7 +83,6 @@ public class CrearSesionActivity extends AppCompatActivity {
                 eliminarEjercicio(ejerciciosList.get(position));
             }
         });
-
 
         listaEjerciciosV.setAdapter(ejerciciosSesionAdapter);
 
@@ -119,7 +115,7 @@ public class CrearSesionActivity extends AppCompatActivity {
     }
 
     private void agregarDescanso() {
-        Intent intent = new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDescanso.class);
+        Intent intent = new Intent(EditarSesionActivity.this, PopCrearEjercicioSesionDescanso.class);
 
 
 
@@ -135,8 +131,9 @@ public class CrearSesionActivity extends AppCompatActivity {
         int duracion = Integer.parseInt(sDuracion);
 
 
-        Sesion sesion = new Sesion(sNombre, duracion);
 
+        sesion.setDuracion(duracion);
+        sesion.setNombre(sNombre);
         sesion.setEjercicioSesionList(ejerciciosList);
 
         Intent intent = this.getIntent();
@@ -154,7 +151,7 @@ public class CrearSesionActivity extends AppCompatActivity {
     }
 
     private void buscarEjercicio(){
-        Intent intent = new Intent(new Intent(CrearSesionActivity.this, BuscarEjercicioActivity.class));
+        Intent intent = new Intent(new Intent(EditarSesionActivity.this, BuscarEjercicioActivity.class));
 
         startActivityForResult(intent, Utils.REQUEST_CODE_BUSCAR_EJERCICIO);
 
@@ -167,7 +164,7 @@ public class CrearSesionActivity extends AppCompatActivity {
 
         posicionEditar = posicion;
 
-        Intent intent = new Intent(CrearSesionActivity.this, PopEditarEjercicioSesionDistancia.class);
+        Intent intent = new Intent(EditarSesionActivity.this, PopEditarEjercicioSesionDistancia.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicioSesion",(EjercicioDistancia)ejercicioSesion);
         intent.putExtras(bundle);
@@ -180,10 +177,10 @@ public class CrearSesionActivity extends AppCompatActivity {
         Intent intent;
 
         if(!ejercicioSesion.getEjercicio().getNombre().equals("Descanso")){
-            intent = new Intent(CrearSesionActivity.this, PopEditarEjercicioSesionDuracion.class);
+            intent = new Intent(EditarSesionActivity.this, PopEditarEjercicioSesionDuracion.class);
         }
         else{
-            intent = new Intent(CrearSesionActivity.this, PopEditarEjercicioSesionDescanso.class);
+            intent = new Intent(EditarSesionActivity.this, PopEditarEjercicioSesionDescanso.class);
         }
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicioSesion",(EjercicioDuracion)ejercicioSesion);
@@ -194,7 +191,7 @@ public class CrearSesionActivity extends AppCompatActivity {
     public void abrirPopUpCrearEjercicioRepeticion(EjercicioSesion ejercicioSesion, int posicion){
 
         posicionEditar = posicion;
-        Intent intent = new Intent(CrearSesionActivity.this, PopEditarEjercicioSesionRepeticion.class);
+        Intent intent = new Intent(EditarSesionActivity.this, PopEditarEjercicioSesionRepeticion.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicioSesion",(EjercicioRepeticiones)ejercicioSesion);
         intent.putExtras(bundle);

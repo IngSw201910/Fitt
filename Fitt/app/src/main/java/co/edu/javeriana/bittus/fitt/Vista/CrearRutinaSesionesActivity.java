@@ -15,6 +15,7 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.Adapters.SesionesAdapter;
+import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
 public class CrearRutinaSesionesActivity extends AppCompatActivity {
@@ -25,7 +26,7 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
     private ListView listViewL;
     private SesionesAdapter adapterSesion;
     private List<Sesion> sesionList;
-
+    private int positionEditar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,17 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         //Fin datos de prueba
 
 
-        adapterSesion = new SesionesAdapter(CrearRutinaSesionesActivity.this, R.layout.item_sesiones_nuevas_row, sesionList);
+        adapterSesion = new SesionesAdapter(CrearRutinaSesionesActivity.this, R.layout.item_sesiones_nuevas_row, sesionList, new BtnClickListenerRow() {
+            @Override
+            public void onBtnClickEdit(int position) {
+                editarSesion(sesionList.get(position), position);
+            }
+
+            @Override
+            public void onBtnClickDelete(int position) {
+                eliminarSesion(sesionList.get(position));
+            }
+        });
 
 
         listViewL.setAdapter(adapterSesion);
@@ -92,9 +103,16 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         startActivityForResult(new Intent(CrearRutinaSesionesActivity.this, CrearSesionActivity.class),Utils.REQUEST_CODE_CREAR_SESION);
 
     }
-    public void editarSesion(Sesion sesion) {
+    public void editarSesion(Sesion sesion, int position) {
 
-        startActivity(new Intent(CrearRutinaSesionesActivity.this, CrearSesionActivity.class));
+        positionEditar = position;
+
+        Intent intent = new Intent(CrearRutinaSesionesActivity.this, EditarSesionActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("sesion",sesion);
+        intent.putExtras(bundle);
+
+        startActivityForResult(intent, Utils.REQUEST_CODE_EDITAR_SESION);
     }
 
     public void eliminarSesion(Sesion sesion) {
@@ -118,6 +136,14 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
                 sesionList.add(sesion);
                 adapterSesion.notifyDataSetChanged();
             }
+
+        }
+        if(requestCode== Utils.REQUEST_CODE_EDITAR_SESION&&data!=null)
+        {
+            Sesion sesion = (Sesion) data.getExtras().getSerializable("sesion");
+
+            sesionList.set(positionEditar, sesion);
+            adapterSesion.notifyDataSetChanged();
 
         }
     }

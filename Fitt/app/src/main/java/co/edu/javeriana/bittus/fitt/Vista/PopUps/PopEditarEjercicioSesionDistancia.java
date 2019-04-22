@@ -9,13 +9,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.InformacionEjercicioActivity;
 import pl.droidsonroids.gif.GifImageView;
 
-public class PopCrearEjercicioSesionDuracionEditar extends Activity {
+public class PopEditarEjercicioSesionDistancia extends Activity {
 
     private ImageButton informacionEjercicioB;
     private ImageButton aceptarButton;
@@ -26,36 +26,36 @@ public class PopCrearEjercicioSesionDuracionEditar extends Activity {
     private TextView tipoEjercicioT;
     private TextView dificultadEjercicioT;
     private GifImageView gifImageView;
+    private EjercicioDistancia ejercicio;
 
-    private EjercicioDuracion ejercicio;
-
-    private EditText duracionT;
+    private EditText distanciaT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_duracion);
+        setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_distancia);
 
-        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar3);
-        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar3);
-        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio2);
-        duracionT = (EditText)findViewById(R.id.editTextDuracion2);
+        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio);
 
-        nombreEjercicioT = (TextView)findViewById(R.id.textNombreEjercicio2);
-        musculosEjercicioT = (TextView)findViewById(R.id.textMusculosEjercicio2);
-        tipoEjercicioT = (TextView)findViewById(R.id.textTipoEjercicio2);
-        dificultadEjercicioT = (TextView)findViewById(R.id.textDificultadEjercicio2);
-        gifImageView = (GifImageView) findViewById(R.id.gifEjercicio2);
+        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar2);
+        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar2);
+        distanciaT = (EditText)findViewById(R.id.editText5Distanciasd);
+
+        nombreEjercicioT = (TextView) findViewById(R.id.textNombreEjercicio);
+        musculosEjercicioT = (TextView) findViewById(R.id.textMusculosEjercicio);
+        tipoEjercicioT =(TextView)  findViewById(R.id.textTipoEjercicio);
+        dificultadEjercicioT = (TextView) findViewById(R.id.textDificultadEjercicio);
+        gifImageView = (GifImageView) findViewById(R.id.gifEjercicio);
 
         Bundle bundle = this.getIntent().getExtras();
 
-        ejercicio = (EjercicioDuracion) bundle.getSerializable("ejercicioSesion");
+        ejercicio = (EjercicioDistancia) bundle.getSerializable("ejercicioSesion");
 
         nombreEjercicioT.setText(ejercicio.getEjercicio().getNombre());
         musculosEjercicioT.setText(ejercicio.getEjercicio().getMusculos());
         tipoEjercicioT.setText(ejercicio.getEjercicio().getTipo());
         dificultadEjercicioT.setText(ejercicio.getEjercicio().getDificultad());
-        duracionT.setText(Integer.toString(ejercicio.getDuracion()));
+        distanciaT.setText(Integer.toString(ejercicio.getDistancia()));
         Utils.descargarYMostrarGIF(ejercicio.getEjercicio().getRutaGIF(),gifImageView);
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -87,10 +87,9 @@ public class PopCrearEjercicioSesionDuracionEditar extends Activity {
                 finish();
             }
         });
-
     }
     private void verInfo() {
-        Intent inten = new Intent(PopCrearEjercicioSesionDuracionEditar.this, InformacionEjercicioActivity.class);
+        Intent inten = new Intent(PopEditarEjercicioSesionDistancia.this, InformacionEjercicioActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicio",ejercicio);
         inten.putExtras(bundle);
@@ -98,12 +97,14 @@ public class PopCrearEjercicioSesionDuracionEditar extends Activity {
         startActivity(inten);
 
     }
+    private void editarEjercicioSesion() {
+        String sDistancia = distanciaT.getText().toString();
+        int distancia = Integer.parseInt(sDistancia);
 
-        private void editarEjercicioSesion() {
-        String sDuracion = duracionT.getText().toString();
-        int duracion = Integer.parseInt(sDuracion);
 
-        ejercicio.setDuracion(duracion);
+
+
+        ejercicio.setDistancia(distancia);
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
@@ -119,4 +120,10 @@ public class PopCrearEjercicioSesionDuracionEditar extends Activity {
         finish();
 
     }
+
+
+
+
+
+
 }

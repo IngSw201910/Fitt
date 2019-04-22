@@ -13,7 +13,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
-public class PopCrearEjercicioSesionDescansoEditar extends Activity {
+public class PopEditarEjercicioSesionDescanso extends Activity {
 
 
     private ImageButton aceptarButton;

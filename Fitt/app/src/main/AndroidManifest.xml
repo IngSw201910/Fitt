@@ -16,6 +16,7 @@
         <activity android:name=".Vista.CrearSesionActivity" />
         <activity android:name=".Vista.CrearRutinaSesionesActivity" />
         <activity android:name=".Vista.CrearRutinaActivity" />
+        <activity android:name=".Vista.EditarSesionActivity" />
         <activity android:name=".Vista.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,16 +38,16 @@
             android:name=".Vista.PopUps.PopCrearEjercicioSesionDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionRepeticionEditar"
+            android:name=".Vista.PopUps.PopEditarEjercicioSesionRepeticion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionDuracionEditar"
+            android:name=".Vista.PopUps.PopEditarEjercicioSesionDuracion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionDistanciaEditar"
+            android:name=".Vista.PopUps.PopEditarEjercicioSesionDistancia"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionDescansoEditar"
+            android:name=".Vista.PopUps.PopEditarEjercicioSesionDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <meta-data
             android:name="preloaded_fonts"
