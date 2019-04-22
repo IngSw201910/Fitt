@@ -40,6 +40,7 @@ public class Utils {
     public final static int REQUEST_CODE_BUSCAR_EJERCICIO = 4;
     public final static int REQUEST_CODE_CREAR_SESION = 5;
     public final static int REQUEST_CODE_EJERCICIO_DESCANSO=6;
+    public final static int REQUEST_CODE_EJERCICIO_REPETICION_EDITAR = 7;
     public final static Ejercicio EJERCICIO_DESCANSO = new Ejercicio("Descanso","Ninguno","Duración","Baja",0,"Descanso entre ejercicios");
 
 

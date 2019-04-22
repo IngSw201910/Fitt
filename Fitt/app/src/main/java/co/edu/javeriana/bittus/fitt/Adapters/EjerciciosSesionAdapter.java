@@ -82,8 +82,7 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         editarB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
-                crearSesionActivity.abrirPopUpCrearEjercicioRepeticion();
+                editarEjercicioRepeticion();
             }
         });
 
@@ -98,6 +97,11 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
 
         return view;
 
+    }
+
+    private void editarEjercicioRepeticion() {
+        CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
+        crearSesionActivity.abrirPopUpCrearEjercicioRepeticion(ejercicioSesion, getPosition(ejercicioSesion));
     }
 
     private View getViewEjercicioDuracion(int position, View view, ViewGroup parent) {

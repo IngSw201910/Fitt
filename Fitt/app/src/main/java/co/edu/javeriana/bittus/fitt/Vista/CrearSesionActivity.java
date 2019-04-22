@@ -34,6 +34,7 @@ public class CrearSesionActivity extends AppCompatActivity {
 
     private EditText nombreT;
     private EditText duracionT;
+    private int posicionEditar;
 
 
     @Override
@@ -151,9 +152,14 @@ public class CrearSesionActivity extends AppCompatActivity {
         startActivity(new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDuracion.class));
 
     }
-    public void abrirPopUpCrearEjercicioRepeticion(){
+    public void abrirPopUpCrearEjercicioRepeticion(EjercicioSesion ejercicioSesion, int posicion){
 
-        startActivity(new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionRepeticion.class));
+        posicionEditar = posicion;
+        Intent intent = new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionRepeticionEditar.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicioSesion",(EjercicioRepeticiones)ejercicioSesion);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_REPETICION_EDITAR);
 
     }
     public void eliminarEjercicio(EjercicioSesion ejercicioSesion) {
@@ -177,8 +183,20 @@ public class CrearSesionActivity extends AppCompatActivity {
                     adicionarEjercicio((EjercicioSesion) data.getExtras().getSerializable("ejercicioSesion"));
                     break;
                 }
+                case (Utils.REQUEST_CODE_EJERCICIO_REPETICION_EDITAR):{
+                    editarEjercicio((EjercicioSesion) data.getExtras().getSerializable("ejercicioSesion"));
+                    ejerciciosSesionAdapter.notifyDataSetChanged();
+                    break;
+                }
             }
         }
+
+    }
+
+    private void editarEjercicio(EjercicioSesion ejercicioSesion) {
+
+        ejerciciosList.set(posicionEditar, ejercicioSesion);
+        ejerciciosSesionAdapter.notifyDataSetChanged();
 
     }
 

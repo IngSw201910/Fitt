@@ -36,6 +36,9 @@
         <activity
             android:name=".Vista.PopCrearEjercicioSesionDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
+        <activity
+            android:name=".Vista.PopCrearEjercicioSesionRepeticionEditar"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
 
         <meta-data
             android:name="preloaded_fonts"

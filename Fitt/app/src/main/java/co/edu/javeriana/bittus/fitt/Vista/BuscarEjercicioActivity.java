@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosAdapter;
@@ -33,6 +38,11 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
     private ListView listViewL;
     private EjerciciosAdapter adapterEjercicios;
     private List<Ejercicio> listaEjercicios;
+    private ImageButton buscarEjercicioB;
+    private EditText nombreEjercicioBuscar;
+    private Spinner dificultadSpin;
+    private Spinner tipoSpin;
+
 
     private Ejercicio ejercicioSeleccionado;
     private EjercicioDistancia ejercicioDistancia;
@@ -49,7 +59,10 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
         listViewL = (ListView)findViewById(R.id.listEjerciciosBuscar);
         listaEjercicios = new ArrayList<Ejercicio>();
-
+        buscarEjercicioB = (ImageButton) findViewById(R.id.imageButtonBuscarEjercicio);
+        nombreEjercicioBuscar = (EditText) findViewById(R.id.editText3);
+        dificultadSpin = (Spinner) findViewById(R.id.spinner);
+        tipoSpin = (Spinner) findViewById(R.id.spinner4);
 
         //Datos de prueba
 
@@ -57,6 +70,22 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
         //listaEjercicios.add(ejercicio);
 
         //Fin datos de prueba
+
+        List<String> stringDificultadList = new ArrayList<>();
+        String[] strDificultad = new String[] {"Baja", "Media", "Alta"};
+        Collections.addAll(stringDificultadList, strDificultad);
+        ArrayAdapter<String> comboAdapterDificultad = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDificultadList);
+        dificultadSpin.setAdapter(comboAdapterDificultad);
+
+
+        List<String> stringTipoList = new ArrayList<>();
+        String[] strTipo = new String[] {"Repetición", "Distancia", "Duración"};
+        Collections.addAll(stringTipoList, strTipo);
+        ArrayAdapter<String> comboAdapterTipo = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringTipoList);
+        tipoSpin.setAdapter(comboAdapterTipo);
+
+
+
 
         adapterEjercicios = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.item_ejercicio_row,listaEjercicios);
 
@@ -74,9 +103,31 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
         descargarEjercicios();
 
+        buscarEjercicioB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buscarEjercicio();
+            }
+        });
 
 
     }
+
+    private void buscarEjercicio() {
+
+        String nombreABuscar = nombreEjercicioBuscar.getText().toString();
+        String filtroTipo = (String)tipoSpin.getSelectedItem();
+        String filtroDificultad = (String)dificultadSpin.getSelectedItem();
+
+        //En este lugar se hacen las búsquedas
+
+
+
+
+
+
+    }
+
     public void abrirPopUp(){
         if(ejercicioSeleccionado.getTipo().equals("Distancia")){
 
