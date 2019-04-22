@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Filtros.FiltrosEjercicios;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
@@ -23,6 +25,7 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
     protected Context context;
     private int resource;
     private Ejercicio ejercicioSeleccionado;
+    private FiltrosEjercicios filtrosEjercicios;
 
 
     public EjerciciosAdapter(@NonNull Context context, int resource, List<Ejercicio> objects) {
@@ -30,6 +33,7 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
         this.listEjercicios = objects;
         this.context = context;
         this.resource = resource;
+
     }
 
     @Override
@@ -63,6 +67,18 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
 
 
         return  view;
+    }
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        if(filtrosEjercicios==null){
+            filtrosEjercicios = new FiltrosEjercicios(listEjercicios, this);
+        }
+
+
+        return filtrosEjercicios;
+
+
     }
 
 

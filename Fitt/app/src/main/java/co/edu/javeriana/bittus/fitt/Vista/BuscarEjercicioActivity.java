@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,7 +38,7 @@ import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDistanci
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDuracion;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionRepeticion;
 
-public class BuscarEjercicioActivity extends AppCompatActivity {
+public class BuscarEjercicioActivity extends AppCompatActivity implements TextWatcher {
 
     private ListView listViewL;
     private EjerciciosAdapter adapterEjercicios;
@@ -66,6 +68,9 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
         nombreEjercicioBuscar = (EditText) findViewById(R.id.editText3);
         dificultadSpin = (Spinner) findViewById(R.id.spinner);
         tipoSpin = (Spinner) findViewById(R.id.spinner4);
+
+        nombreEjercicioBuscar.addTextChangedListener(this);
+
 
         //Datos de prueba
 
@@ -109,27 +114,14 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
         buscarEjercicioB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscarEjercicio();
+
             }
         });
 
 
     }
 
-    private void buscarEjercicio() {
 
-        String nombreABuscar = nombreEjercicioBuscar.getText().toString();
-        String filtroTipo = (String)tipoSpin.getSelectedItem();
-        String filtroDificultad = (String)dificultadSpin.getSelectedItem();
-
-        //En este lugar se hacen las búsquedas
-
-
-
-
-
-
-    }
 
     public void abrirPopUp(){
         if(ejercicioSeleccionado.getTipo().equals("Distancia")){
@@ -269,6 +261,23 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        this.adapterEjercicios.getFilter().filter(s);
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
 }
