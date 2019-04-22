@@ -125,8 +125,8 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         editarB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
-                crearSesionActivity.abrirPopUpCrearEjercicioDuracion();
+                editarEjercicioDuracion();
+
             }
         });
 
@@ -140,6 +140,11 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         });
 
         return view;
+    }
+
+    private void editarEjercicioDuracion() {
+        CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
+        crearSesionActivity.abrirPopUpCrearEjercicioDuracion(ejercicioSesion, getPosition(ejercicioSesion));
     }
 
     private View getViewEjercicioDistancia(int position, View view, ViewGroup parent) {
@@ -162,8 +167,8 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         editarB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
-                crearSesionActivity.abrirPopUpCrearEjercicioDistancia();
+                editarEjercicioDistancia();
+
             }
         });
 
@@ -180,6 +185,11 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         });
 
         return view;
+    }
+
+    private void editarEjercicioDistancia() {
+        CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
+        crearSesionActivity.abrirPopUpCrearEjercicioDistancia(ejercicioSesion, getPosition(ejercicioSesion));
     }
 
     private void eliminarEjercicio() {

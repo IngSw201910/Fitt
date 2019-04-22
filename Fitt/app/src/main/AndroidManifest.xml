@@ -25,21 +25,26 @@
         </activity>
         <activity android:name=".Vista.MenuPrincipalUsuarioActivity" />
         <activity
-            android:name=".Vista.PopCrearEjercicioSesionDistancia"
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionDistancia"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopCrearEjercicioSesionDuracion"
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionDuracion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopCrearEjercicioSesionRepeticion"
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionRepeticion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopCrearEjercicioSesionDescanso"
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopCrearEjercicioSesionRepeticionEditar"
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionRepeticionEditar"
             android:theme="@style/AppTheme.CustomThemePopUp" />
-
+        <activity
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionDuracionEditar"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
+        <activity
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionDistanciaEditar"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

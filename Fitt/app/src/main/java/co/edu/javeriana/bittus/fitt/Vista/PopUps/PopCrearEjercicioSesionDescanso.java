@@ -1,4 +1,4 @@
-package co.edu.javeriana.bittus.fitt.Vista;
+package co.edu.javeriana.bittus.fitt.Vista.PopUps;
 
 import android.app.Activity;
 import android.content.Intent;

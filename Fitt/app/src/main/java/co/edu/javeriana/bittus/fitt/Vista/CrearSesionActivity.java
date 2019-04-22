@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosSesionAdapter;
-import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
@@ -22,6 +20,10 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioSesion;
 import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDescanso;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDistanciaEditar;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDuracionEditar;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionRepeticionEditar;
 
 public class CrearSesionActivity extends AppCompatActivity {
 
@@ -142,14 +144,24 @@ public class CrearSesionActivity extends AppCompatActivity {
     }
 
 
-    public void abrirPopUpCrearEjercicioDistancia(){
+    public void abrirPopUpCrearEjercicioDistancia(EjercicioSesion ejercicioSesion, int posicion){
 
-        startActivity(new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDistancia.class));
+        posicionEditar = posicion;
+        Intent intent = new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDistanciaEditar.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicioSesion",(EjercicioDistancia)ejercicioSesion);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DISTANCIA_EDITAR);
 
     }
-    public void abrirPopUpCrearEjercicioDuracion(){
+    public void abrirPopUpCrearEjercicioDuracion(EjercicioSesion ejercicioSesion, int posicion){
 
-        startActivity(new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDuracion.class));
+        posicionEditar = posicion;
+        Intent intent = new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDuracionEditar.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicioSesion",(EjercicioDuracion)ejercicioSesion);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DURACION_EDITAR);
 
     }
     public void abrirPopUpCrearEjercicioRepeticion(EjercicioSesion ejercicioSesion, int posicion){
@@ -184,6 +196,16 @@ public class CrearSesionActivity extends AppCompatActivity {
                     break;
                 }
                 case (Utils.REQUEST_CODE_EJERCICIO_REPETICION_EDITAR):{
+                    editarEjercicio((EjercicioSesion) data.getExtras().getSerializable("ejercicioSesion"));
+                    ejerciciosSesionAdapter.notifyDataSetChanged();
+                    break;
+                }
+                case (Utils.REQUEST_CODE_EJERCICIO_DURACION_EDITAR):{
+                    editarEjercicio((EjercicioSesion) data.getExtras().getSerializable("ejercicioSesion"));
+                    ejerciciosSesionAdapter.notifyDataSetChanged();
+                    break;
+                }
+                case (Utils.REQUEST_CODE_EJERCICIO_DISTANCIA_EDITAR):{
                     editarEjercicio((EjercicioSesion) data.getExtras().getSerializable("ejercicioSesion"));
                     ejerciciosSesionAdapter.notifyDataSetChanged();
                     break;

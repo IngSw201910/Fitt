@@ -32,6 +32,9 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDistancia;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDuracion;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionRepeticion;
 
 public class BuscarEjercicioActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package co.edu.javeriana.bittus.fitt.Vista;
+package co.edu.javeriana.bittus.fitt.Vista.PopUps;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,13 +9,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Vista.InformacionEjercicioActivity;
 import pl.droidsonroids.gif.GifImageView;
 
-public class PopCrearEjercicioSesionRepeticionEditar extends Activity {
+public class PopCrearEjercicioSesionDistanciaEditar extends Activity {
 
     private ImageButton informacionEjercicioB;
     private ImageButton aceptarButton;
@@ -26,46 +26,37 @@ public class PopCrearEjercicioSesionRepeticionEditar extends Activity {
     private TextView tipoEjercicioT;
     private TextView dificultadEjercicioT;
     private GifImageView gifImageView;
+    private EjercicioDistancia ejercicio;
 
-    private  EjercicioRepeticiones ejercicio;
-
-    private EditText repeticionesT;
-    private EditText seriesT;
-    private EditText descansoT;
+    private EditText distanciaT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_repeticion);
+        setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_distancia);
 
-        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar4);
-        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar4);
-        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio3);
-        repeticionesT = (EditText)findViewById(R.id.editTextRepeticiones);
-        seriesT = (EditText)findViewById(R.id.editTextSeries);
-        descansoT = (EditText)findViewById(R.id.editTextDescansos);
+        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio);
 
-        nombreEjercicioT = findViewById(R.id.textNombreEjercicio3);
-        musculosEjercicioT = findViewById(R.id.textMusculosEjercicio3);
-        tipoEjercicioT = findViewById(R.id.textTipoEjercicio3);
-        dificultadEjercicioT = findViewById(R.id.textDificultadEjercicio3);
-        gifImageView = findViewById(R.id.gifEjercicio3);
+        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar2);
+        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar2);
+        distanciaT = (EditText)findViewById(R.id.editText5Distanciasd);
+
+        nombreEjercicioT = (TextView) findViewById(R.id.textNombreEjercicio);
+        musculosEjercicioT = (TextView) findViewById(R.id.textMusculosEjercicio);
+        tipoEjercicioT =(TextView)  findViewById(R.id.textTipoEjercicio);
+        dificultadEjercicioT = (TextView) findViewById(R.id.textDificultadEjercicio);
+        gifImageView = (GifImageView) findViewById(R.id.gifEjercicio);
 
         Bundle bundle = this.getIntent().getExtras();
 
-        ejercicio = (EjercicioRepeticiones) bundle.getSerializable("ejercicioSesion");
-
-
-        repeticionesT.setText(Integer.toString(ejercicio.getRepeticiones()));
-        seriesT.setText(Integer.toString(ejercicio.getSeries()));
-        descansoT.setText(Integer.toString(ejercicio.getDescanso()));
+        ejercicio = (EjercicioDistancia) bundle.getSerializable("ejercicioSesion");
 
         nombreEjercicioT.setText(ejercicio.getEjercicio().getNombre());
         musculosEjercicioT.setText(ejercicio.getEjercicio().getMusculos());
         tipoEjercicioT.setText(ejercicio.getEjercicio().getTipo());
         dificultadEjercicioT.setText(ejercicio.getEjercicio().getDificultad());
+        distanciaT.setText(Integer.toString(ejercicio.getDistancia()));
         Utils.descargarYMostrarGIF(ejercicio.getEjercicio().getRutaGIF(),gifImageView);
-
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -74,6 +65,7 @@ public class PopCrearEjercicioSesionRepeticionEditar extends Activity {
         int height = dm.heightPixels;
 
         getWindow().setLayout((int) (width/1.1), (int) (height/1.5));
+
 
         informacionEjercicioB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +77,7 @@ public class PopCrearEjercicioSesionRepeticionEditar extends Activity {
         aceptarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                crearEjercicioSesion();
+                editarEjercicioSesion();
             }
         });
 
@@ -95,37 +87,30 @@ public class PopCrearEjercicioSesionRepeticionEditar extends Activity {
                 finish();
             }
         });
-        
     }
-
     private void verInfo() {
-        Intent inten = new Intent(PopCrearEjercicioSesionRepeticionEditar.this, InformacionEjercicioActivity.class);
+        Intent inten = new Intent(PopCrearEjercicioSesionDistanciaEditar.this, InformacionEjercicioActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio",ejercicio.getEjercicio());
+        bundle.putSerializable("ejercicio",ejercicio);
         inten.putExtras(bundle);
 
         startActivity(inten);
 
     }
-
-    private void crearEjercicioSesion() {
-        String sRepeticiones = repeticionesT.getText().toString();
-        String sSeries = seriesT.getText().toString();
-        String sDescansos = descansoT.getText().toString();
-
-        int repeticiones = Integer.parseInt(sRepeticiones);
-        int series = Integer.parseInt(sSeries);
-        int descansos = Integer.parseInt(sDescansos);
+    private void editarEjercicioSesion() {
+        String sDistancia = distanciaT.getText().toString();
+        int distancia = Integer.parseInt(sDistancia);
 
 
-        ejercicio.setDescanso(descansos);
-        ejercicio.setRepeticiones(repeticiones);
-        ejercicio.setSeries(series);
+
+
+        ejercicio.setDistancia(distancia);
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getExtras();
         bundle.putSerializable("ejercicioSesion",ejercicio);
         intent.putExtras(bundle);
+
 
         if (getParent() == null) {
             setResult(Activity.RESULT_OK, intent);
@@ -133,5 +118,12 @@ public class PopCrearEjercicioSesionRepeticionEditar extends Activity {
             getParent().setResult(Activity.RESULT_OK, intent);
         }
         finish();
+
     }
+
+
+
+
+
+
 }
