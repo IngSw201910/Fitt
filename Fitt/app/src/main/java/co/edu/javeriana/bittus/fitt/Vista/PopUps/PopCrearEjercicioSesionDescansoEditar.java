@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
@@ -19,7 +20,7 @@ public class PopCrearEjercicioSesionDescansoEditar extends Activity {
     private ImageButton cancelarButton;
 
     private EditText duracionT;
-
+    private EjercicioDuracion ejercicio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,10 @@ public class PopCrearEjercicioSesionDescansoEditar extends Activity {
         duracionT = (EditText)findViewById(R.id.editTextDuracion);
 
 
+        Bundle bundle = this.getIntent().getExtras();
 
+        ejercicio = (EjercicioDuracion) bundle.getSerializable("ejercicioSesion");
+        duracionT.setText(Integer.toString(ejercicio.getDuracion()));
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -44,7 +48,7 @@ public class PopCrearEjercicioSesionDescansoEditar extends Activity {
         aceptarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                crearEjercicioSesion();
+                editarEjercicioSesion();
             }
         });
 
@@ -58,15 +62,15 @@ public class PopCrearEjercicioSesionDescansoEditar extends Activity {
 
 
     }
-    private void crearEjercicioSesion() {
+    private void editarEjercicioSesion() {
         String sDuracion = duracionT.getText().toString();
         int duracion = Integer.parseInt(sDuracion);
 
-        EjercicioDuracion ejercicioDuracion = new EjercicioDuracion(Utils.EJERCICIO_DESCANSO,duracion);
+        ejercicio.setDuracion(duracion);
 
         Intent intent = this.getIntent();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicioSesion",ejercicioDuracion);
+        Bundle bundle = intent.getExtras();
+        bundle.putSerializable("ejercicioSesion",ejercicio);
         intent.putExtras(bundle);
 
 
@@ -76,6 +80,5 @@ public class PopCrearEjercicioSesionDescansoEditar extends Activity {
             getParent().setResult(Activity.RESULT_OK, intent);
         }
         finish();
-
     }
 }

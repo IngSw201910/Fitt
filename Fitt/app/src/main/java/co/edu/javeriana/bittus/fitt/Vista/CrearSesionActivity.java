@@ -21,6 +21,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDescanso;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDescansoEditar;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDistanciaEditar;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDuracionEditar;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionRepeticionEditar;
@@ -147,6 +148,7 @@ public class CrearSesionActivity extends AppCompatActivity {
     public void abrirPopUpCrearEjercicioDistancia(EjercicioSesion ejercicioSesion, int posicion){
 
         posicionEditar = posicion;
+
         Intent intent = new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDistanciaEditar.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicioSesion",(EjercicioDistancia)ejercicioSesion);
@@ -157,7 +159,14 @@ public class CrearSesionActivity extends AppCompatActivity {
     public void abrirPopUpCrearEjercicioDuracion(EjercicioSesion ejercicioSesion, int posicion){
 
         posicionEditar = posicion;
-        Intent intent = new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDuracionEditar.class);
+        Intent intent;
+
+        if(!ejercicioSesion.getEjercicio().getNombre().equals("Descanso")){
+            intent = new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDuracionEditar.class);
+        }
+        else{
+            intent = new Intent(CrearSesionActivity.this, PopCrearEjercicioSesionDescansoEditar.class);
+        }
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicioSesion",(EjercicioDuracion)ejercicioSesion);
         intent.putExtras(bundle);
