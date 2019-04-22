@@ -58,12 +58,9 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
         TextView dificultad = view.findViewById(R.id.textDificultadEjercicio);
         dificultad.setText(ejercicio.getDificultad());
 
-        /*GifImageView gifImageView = view.findViewById(R.id.gifBuscarEjercicio);
-        gifImageView.setImageResource(ejercicio.getGif());*/
-        GifImageView gifImageView = view.findViewById(R.id.gifEjercicio);
+
+        GifImageView gifImageView = view.findViewById(R.id.gifEjercicio4);
         Utils.descargarYMostrarGIF(ejercicio.getRutaGIF(), gifImageView);
-
-
 
 
         return  view;

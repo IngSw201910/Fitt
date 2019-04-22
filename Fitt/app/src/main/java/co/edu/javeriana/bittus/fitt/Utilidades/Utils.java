@@ -81,6 +81,7 @@ public class Utils {
                         Bitmap bitmap = BitmapFactory.decodeFile(filePath);
                         try {
                             GifDrawable gif = new GifDrawable(finalLocalFile);
+                            gifImageView.setImageDrawable(gif);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
