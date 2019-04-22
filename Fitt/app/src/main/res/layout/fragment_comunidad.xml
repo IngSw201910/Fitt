@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vista.Comunidad">
+    tools:context=".Vista.ComunidadFragment">
 
     <LinearLayout
         android:id="@+id/linearLayoutMenuTexto"
@@ -15,43 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.561"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutMenu">
-
-        <TextView
-            android:id="@+id/textViewInicio"
-            android:layout_width="21dp"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="60dp"
-            android:layout_weight="0.3"
-            android:text="Inicio"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/textViewComunidad"
-            android:layout_width="21dp"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="60dp"
-            android:layout_weight="0.3"
-            android:text="Comunidad"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/textViewMiPerfil"
-            android:layout_width="21dp"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_weight="0.3"
-            android:text="Mi perfil"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="12sp" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutMenu"/>
 
     <LinearLayout
         android:id="@+id/linearLayoutMenu"
@@ -63,38 +27,7 @@
         android:clipToPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageButton
-            android:id="@+id/buttonInicio"
-            android:layout_width="6dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="60dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/inicio" />
-
-        <ImageButton
-            android:id="@+id/buttonComunidad"
-            android:layout_width="6dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="60dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/comunidad" />
-
-        <ImageButton
-            android:id="@+id/buttonMiPerfil"
-            android:layout_width="6dp"
-            android:layout_height="40dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/mi_perfil" />
-
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <LinearLayout
         android:id="@+id/linearLayout4"
