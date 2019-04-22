@@ -8,72 +8,23 @@
 
 
     <TextView
-        android:id="@+id/textViewDificultad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="Dificultad:"
-        android:textColor="#4BC6AA"
-        app:layout_constraintStart_toEndOf="@+id/gifEjercicio4"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTipo" />
-
-    <TextView
-        android:id="@+id/textViewTipo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="Tipo:"
-        android:textColor="#4BC6AA"
-        app:layout_constraintStart_toEndOf="@+id/gifEjercicio4"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMusculos" />
-
-    <TextView
-        android:id="@+id/textViewMusculos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:text="Músculos:"
-        android:textColor="#4BC6AA"
-        app:layout_constraintStart_toEndOf="@+id/gifEjercicio4"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombreEjercicio" />
-
-    <TextView
-        android:id="@+id/textViewNombreEjercicio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:text="Nombre ejercicio:"
-        android:textColor="#4BC6AA"
-        android:textSize="13dp"
-        app:layout_constraintStart_toEndOf="@+id/gifEjercicio4"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textTipoEjercicio"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="201dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Tipo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewTipo"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio4"
         app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicioBuscar" />
 
     <TextView
         android:id="@+id/textDificultadEjercicio"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="114dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Dificultad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewDificultad"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio4"
         app:layout_constraintTop_toBottomOf="@+id/textTipoEjercicio" />
 
     <pl.droidsonroids.gif.GifImageView
@@ -89,25 +40,21 @@
 
     <TextView
         android:id="@+id/textNombreEjercicioBuscar"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="193dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
         android:text="Nombre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewNombreEjercicio"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textMusculosEjercicioBuscar"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="233dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
         android:text="Músculos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewMusculos"
+        app:layout_constraintStart_toEndOf="@+id/gifEjercicio4"
         app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioBuscar" />
 </android.support.constraint.ConstraintLayout>

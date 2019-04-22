@@ -1,11 +1,10 @@
-package co.edu.javeriana.bittus.fitt.Vista;
+package co.edu.javeriana.bittus.fitt.Vista.PopUps;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -14,6 +13,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Vista.InformacionEjercicioActivity;
 import pl.droidsonroids.gif.GifImageView;
 
 public class PopCrearEjercicioSesionDuracion extends Activity {
@@ -37,16 +37,16 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_duracion);
 
-        aceptarButton = findViewById(R.id.buttonAceptar3);
-        cancelarButton = findViewById(R.id.buttonCancelar3);
-        informacionEjercicioB = findViewById(R.id.buttonInformacionEjercicio2);
-        duracionT = findViewById(R.id.editTextDuracion2);
+        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar3);
+        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar3);
+        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio2);
+        duracionT = (EditText)findViewById(R.id.editTextDuracion2);
 
-        nombreEjercicioT = findViewById(R.id.textNombreEjercicio2);
-        musculosEjercicioT = findViewById(R.id.textMusculosEjercicio2);
-        tipoEjercicioT = findViewById(R.id.textTipoEjercicio2);
-        dificultadEjercicioT = findViewById(R.id.textDificultadEjercicio2);
-        gifImageView = findViewById(R.id.gifEjercicio2);
+        nombreEjercicioT = (TextView)findViewById(R.id.textNombreEjercicio2);
+        musculosEjercicioT = (TextView)findViewById(R.id.textMusculosEjercicio2);
+        tipoEjercicioT = (TextView)findViewById(R.id.textTipoEjercicio2);
+        dificultadEjercicioT = (TextView)findViewById(R.id.textDificultadEjercicio2);
+        gifImageView = (GifImageView) findViewById(R.id.gifEjercicio2);
 
         Bundle bundle = this.getIntent().getExtras();
 
@@ -64,13 +64,13 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width/1.1), (int) height/2);
+        getWindow().setLayout((int) (width/1.1), (int) (height/1.5));
 
 
         informacionEjercicioB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(PopCrearEjercicioSesionDuracion.this, InformacionEjercicioActivity.class));
+                verInfo();
             }
         });
 
@@ -87,6 +87,15 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
                 finish();
             }
         });
+
+    }
+    private void verInfo() {
+        Intent inten = new Intent(PopCrearEjercicioSesionDuracion.this, InformacionEjercicioActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ejercicio",ejercicio);
+        inten.putExtras(bundle);
+
+        startActivity(inten);
 
     }
 

@@ -16,6 +16,7 @@
         <activity android:name=".Vista.CrearSesionActivity" />
         <activity android:name=".Vista.CrearRutinaSesionesActivity" />
         <activity android:name=".Vista.CrearRutinaActivity" />
+        <activity android:name=".Vista.EditarSesionActivity" />
         <activity android:name=".Vista.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,18 +26,29 @@
         </activity>
         <activity android:name=".Vista.MenuPrincipalUsuarioActivity" />
         <activity
-            android:name=".Vista.PopCrearEjercicioSesionDistancia"
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionDistancia"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopCrearEjercicioSesionDuracion"
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionDuracion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopCrearEjercicioSesionRepeticion"
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionRepeticion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopCrearEjercicioSesionDescanso"
+            android:name=".Vista.PopUps.PopCrearEjercicioSesionDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
-
+        <activity
+            android:name=".Vista.PopUps.PopEditarEjercicioSesionRepeticion"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
+        <activity
+            android:name=".Vista.PopUps.PopEditarEjercicioSesionDuracion"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
+        <activity
+            android:name=".Vista.PopUps.PopEditarEjercicioSesionDistancia"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
+        <activity
+            android:name=".Vista.PopUps.PopEditarEjercicioSesionDescanso"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

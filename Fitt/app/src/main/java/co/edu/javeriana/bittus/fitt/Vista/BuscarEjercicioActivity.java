@@ -5,8 +5,16 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosAdapter;
@@ -25,14 +34,22 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDistancia;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDuracion;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionRepeticion;
 
-public class BuscarEjercicioActivity extends AppCompatActivity {
+public class BuscarEjercicioActivity extends AppCompatActivity implements TextWatcher {
 
     private ListView listViewL;
     private EjerciciosAdapter adapterEjercicios;
     private List<Ejercicio> listaEjercicios;
+    private ImageButton buscarEjercicioB;
+    private EditText nombreEjercicioBuscar;
+    private Spinner dificultadSpin;
+    private Spinner tipoSpin;
 
 
+    private Ejercicio ejercicioSeleccionado;
     private EjercicioDistancia ejercicioDistancia;
     private EjercicioDuracion ejercicioDuracion;
     private EjercicioRepeticiones ejercicioRepeticion;
@@ -45,8 +62,14 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_ejercicio);
 
-        listViewL = findViewById(R.id.listEjerciciosBuscar);
+        listViewL = (ListView)findViewById(R.id.listEjerciciosBuscar);
         listaEjercicios = new ArrayList<Ejercicio>();
+        buscarEjercicioB = (ImageButton) findViewById(R.id.imageButtonBuscarEjercicio);
+        nombreEjercicioBuscar = (EditText) findViewById(R.id.editText3);
+        dificultadSpin = (Spinner) findViewById(R.id.spinner);
+        tipoSpin = (Spinner) findViewById(R.id.spinner4);
+
+        nombreEjercicioBuscar.addTextChangedListener(this);
 
 
         //Datos de prueba
@@ -56,22 +79,71 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
         //Fin datos de prueba
 
+        List<String> stringDificultadList = new ArrayList<>();
+        String[] strDificultad = new String[] {"Baja", "Media", "Alta"};
+        Collections.addAll(stringDificultadList, strDificultad);
+        ArrayAdapter<String> comboAdapterDificultad = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDificultadList);
+        dificultadSpin.setAdapter(comboAdapterDificultad);
+
+
+        List<String> stringTipoList = new ArrayList<>();
+        String[] strTipo = new String[] {"Repetición", "Distancia", "Duración"};
+        Collections.addAll(stringTipoList, strTipo);
+        ArrayAdapter<String> comboAdapterTipo = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringTipoList);
+        tipoSpin.setAdapter(comboAdapterTipo);
+
+
+
+
         adapterEjercicios = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.item_ejercicio_row,listaEjercicios);
 
+
         listViewL.setAdapter(adapterEjercicios);
+        listViewL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ejercicioSeleccionado = listaEjercicios.get(position);
+                abrirPopUp();
+            }
+        });
+
         database = FirebaseDatabase.getInstance();
 
         descargarEjercicios();
 
+        buscarEjercicioB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
     }
 
-    public void abrirPopUpCrearEjercicioDistancia(Ejercicio ejercicio){
+
+
+    public void abrirPopUp(){
+        if(ejercicioSeleccionado.getTipo().equals("Distancia")){
+
+            abrirPopUpCrearEjercicioDistancia();
+        }
+        if(ejercicioSeleccionado.getTipo().equals("Duración")){
+
+           abrirPopUpCrearEjercicioDuracion();
+        }
+        if(ejercicioSeleccionado.getTipo().equals("Repetición")){
+
+            abrirPopUpCrearEjercicioRepeticion();
+        }
+
+    }
+
+    public void abrirPopUpCrearEjercicioDistancia(){
         Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDistancia.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio", ejercicio);
+        bundle.putSerializable("ejercicio", ejercicioSeleccionado);
 
 
         intent.putExtras(bundle);
@@ -79,12 +151,12 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
         startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DISTANCIA);
 
     }
-    public void abrirPopUpCrearEjercicioDuracion(Ejercicio ejercicio){
+    public void abrirPopUpCrearEjercicioDuracion(){
 
         Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDuracion.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio", ejercicio);
+        bundle.putSerializable("ejercicio", ejercicioSeleccionado);
 
         intent.putExtras(bundle);
 
@@ -92,12 +164,12 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
 
 
     }
-    public void abrirPopUpCrearEjercicioRepeticion(Ejercicio ejercicio){
+    public void abrirPopUpCrearEjercicioRepeticion(){
 
         Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionRepeticion.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio", ejercicio);
+        bundle.putSerializable("ejercicio", ejercicioSeleccionado);
 
         intent.putExtras(bundle);
 
@@ -189,6 +261,23 @@ public class BuscarEjercicioActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        this.adapterEjercicios.getFilter().filter(s);
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
 }

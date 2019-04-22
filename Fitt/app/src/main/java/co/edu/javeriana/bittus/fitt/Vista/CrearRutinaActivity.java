@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -31,9 +31,9 @@ public class CrearRutinaActivity extends AppCompatActivity {
     private Spinner dificultadSpin;
     private Spinner descansoSpin;
 
-    private TextView nombreRutinaT;
-    private TextView descripcionRutinaT;
-    private TextView frecuenciaT;
+    private EditText nombreRutinaT;
+    private EditText descripcionRutinaT;
+    private EditText frecuenciaT;
 
     private RadioButton publicaRB;
 
@@ -46,12 +46,12 @@ public class CrearRutinaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_crear_rutina);
 
         siguienteB = (ImageButton) findViewById(R.id.buttonSiguienteCrearRutina);
-        dificultadSpin = findViewById(R.id.spinner2);
-        descansoSpin = findViewById(R.id.spinner3);
-        nombreRutinaT = findViewById(R.id.nombreRutina);
-        descripcionRutinaT = findViewById(R.id.descripcionRutina);
-        frecuenciaT = findViewById(R.id.duracionRutina);
-        publicaRB = findViewById(R.id.radioButton2);
+        dificultadSpin = (Spinner)findViewById(R.id.spinner2);
+        descansoSpin = (Spinner)findViewById(R.id.spinner3);
+        nombreRutinaT = (EditText) findViewById(R.id.nombreRutina);
+        descripcionRutinaT = (EditText)findViewById(R.id.descripcionRutina);
+        frecuenciaT = (EditText)findViewById(R.id.duracionRutina);
+        publicaRB = (RadioButton) findViewById(R.id.radioButton2);
 
         List<String> stringDificultadList = new ArrayList<>();
         String[] strDificultad = new String[] {"Baja", "Media", "Alta"};

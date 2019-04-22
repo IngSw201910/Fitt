@@ -10,18 +10,9 @@
 
 
 
-    ]]>
 
-    <TextView
-        android:id="@+id/textViewNombreEjercicioDistancia2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:text="Nombre ejercicio:"
-        android:textColor="#4BC6AA"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+    ]]>
 
     <TextView
         android:id="@+id/textNombreEjercicioDistancia"
@@ -30,14 +21,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:text="Nombre"
-        app:layout_constraintStart_toEndOf="@+id/textViewNombreEjercicioDistancia2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textDistanciaEjercicioDistancia"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
+        android:layout_width="61dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Distancia"
         app:layout_constraintStart_toEndOf="@+id/textViewDistanciaEjercicio"
@@ -47,15 +38,11 @@
         android:id="@+id/buttonEdit"
         android:layout_width="63dp"
         android:layout_height="63dp"
-        android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:tint="@color/verdeFitt"
         app:layout_constraintEnd_toStartOf="@+id/buttonDelete"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textNombreEjercicioDistancia"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/editar" />
 
@@ -81,6 +68,6 @@
         android:text="Distancia:"
         android:textColor="#4BC6AA"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombreEjercicioDistancia2" />
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioDistancia" />
 
 </android.support.constraint.ConstraintLayout>

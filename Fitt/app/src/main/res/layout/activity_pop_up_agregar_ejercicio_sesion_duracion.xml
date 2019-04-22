@@ -6,16 +6,81 @@
     android:layout_height="match_parent"
     android:background="#00DCDCDC">
 
+    <TextView
+        android:id="@+id/txtCancelar"
+        android:layout_width="69dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginBottom="28dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Cancelar"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/buttonInformacionEjercicio2"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/textTipoEjercicio2"
+        app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicio2"
+        app:srcCompat="@drawable/informacion" />
+
+    <TextView
+        android:id="@+id/textViewAceptar3"
+        android:layout_width="69dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="28dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Aceptar"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/buttonAceptar3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="52dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAceptar3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/aceptar" />
+
+    <ImageButton
+        android:id="@+id/buttonCancelar3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="52dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/txtCancelar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/cancelar" />
+
     <EditText
         android:id="@+id/editTextDuracion2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
+        android:hint="Duración"
         android:inputType="number"
-        android:text="Duración"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,103 +133,5 @@
         android:src="@drawable/gif_prueba"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00DCDCDC"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="150dp">
-
-
-        <TextView
-            android:id="@+id/txtCancelar"
-            android:layout_width="69dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="288dp"
-            android:layout_marginBottom="28dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Cancelar"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonCancelar"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageButton
-            android:id="@+id/buttonCancelar3"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="56dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.141"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/cancelar" />
-
-        <ImageButton
-            android:id="@+id/buttonAceptar3"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="56dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.861"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/aceptar" />
-
-        <TextView
-            android:id="@+id/textViewAceptar3"
-            android:layout_width="69dp"
-            android:layout_height="22dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="28dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="Aceptar"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.858"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAceptar"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageButton
-            android:id="@+id/buttonInformacionEjercicio2"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="24dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.785"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.057"
-            app:srcCompat="@drawable/informacion" />
-
-    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
