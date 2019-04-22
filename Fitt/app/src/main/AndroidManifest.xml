@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Vista.BuscarRutinas"></activity>
+        <activity android:name=".Vista.BuscarRutinas" />
         <activity android:name=".Vista.Comunidad" />
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
@@ -49,6 +49,7 @@
         <activity
             android:name=".Vista.PopUps.PopEditarEjercicioSesionDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

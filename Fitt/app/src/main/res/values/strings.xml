@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Fitt</string>
     <string name="auth_failed">Contraseña</string>
+    <string name="title_activity_menu_pricipal_usuario_navegacion">
+        MenuPricipalUsuarioNavegacionActivity
+    </string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
