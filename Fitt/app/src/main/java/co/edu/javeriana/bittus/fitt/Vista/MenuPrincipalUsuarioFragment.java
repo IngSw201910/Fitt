@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseUser;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
-public class MenuPrincipalUsuarioActivity extends AppCompatActivity
+public class MenuPrincipalUsuarioFragment extends AppCompatActivity
 implements BottomNavigationView.OnNavigationItemSelectedListener{
 
 

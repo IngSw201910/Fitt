@@ -79,7 +79,25 @@ public class CrearRutinaActivity extends AppCompatActivity {
     }
 
     private void siguientePantalla(){
-        startActivityForResult(new Intent(CrearRutinaActivity.this, CrearRutinaSesionesActivity.class),Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES);
+
+        boolean completo = true;
+        if(nombreRutinaT.getText().toString().isEmpty()){
+            nombreRutinaT.setError("Campo obligatorio");
+            completo = false;
+        }
+        if(descripcionRutinaT.getText().toString().isEmpty()){
+            descripcionRutinaT.setError("Campo obligatorio");
+            completo = false;
+        }
+        if(frecuenciaT.getText().toString().isEmpty()){
+            frecuenciaT.setError("Campo obligatorio");
+            completo = false;
+        }
+
+        if(completo){
+            startActivityForResult(new Intent(CrearRutinaActivity.this, CrearRutinaSesionesActivity.class),Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES);
+        }
+
     }
 
 
@@ -91,6 +109,10 @@ public class CrearRutinaActivity extends AppCompatActivity {
         if(requestCode== Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES&&data!=null)
         {
             List<Sesion> sesionList = (List<Sesion>) data.getExtras().getSerializable("sesiones");
+
+
+
+
 
             String nombreRutina = nombreRutinaT.getText().toString();
             String descripcion = descripcionRutinaT.getText().toString();

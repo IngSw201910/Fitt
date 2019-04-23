@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Vista.MenuPrincipalUsuarioActivity"></activity>
+
+        <activity android:name=".Vista.MenuPrincipalUsuarioFragment"></activity>
         <activity android:name=".Vista.BuscarRutinas" />
-        <activity android:name=".Vista.ComunidadFragment" />
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
         <activity android:name=".Vista.CrearSesionActivity" />
