@@ -53,7 +53,7 @@ public class InicioUsuarioFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Utils.cerrarSesion();
-                //finish();
+                getActivity().finish();
             }
         });
 

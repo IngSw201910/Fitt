@@ -100,8 +100,13 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
             intent.putExtras(bundle);
             setResult(Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES,intent);
 
+            int duracion = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(getApplicationContext(), "Se ha creado la rutina exítosamente",duracion);
+            toast.show();
 
             finish();
+
+
         }
 
     }
