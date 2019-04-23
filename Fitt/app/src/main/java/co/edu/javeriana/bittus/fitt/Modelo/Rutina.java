@@ -24,6 +24,7 @@ public class Rutina {
         this.frecuencia = frecuencia;
         sesionList = new ArrayList<Sesion>();
     }
+    public Rutina() {super();}
 
     public List<Sesion> getSesionList() {
         return sesionList;

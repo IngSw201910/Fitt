@@ -12,6 +12,8 @@ public class EjercicioDistancia extends EjercicioSesion implements Serializable 
     }
 
 
+
+
     public int getDistancia() {
         return distancia;
     }

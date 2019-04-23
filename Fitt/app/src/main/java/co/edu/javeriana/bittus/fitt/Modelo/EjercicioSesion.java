@@ -2,15 +2,19 @@
 
     import java.io.Serializable;
 
-    public abstract class EjercicioSesion implements Serializable {
-
+    public class EjercicioSesion implements Serializable {
 
 
         protected Ejercicio ejercicio;
 
 
+
         public EjercicioSesion(Ejercicio ejercicio) {
             this.ejercicio = ejercicio;
+        }
+
+        public EjercicioSesion() {
+            super();
         }
 
         public Ejercicio getEjercicio() {

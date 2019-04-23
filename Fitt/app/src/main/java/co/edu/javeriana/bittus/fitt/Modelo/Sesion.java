@@ -20,6 +20,7 @@ public class Sesion implements Serializable {
         this.duracion = duracion;
         ejercicioSesionList = new ArrayList<EjercicioSesion>();
     }
+    public Sesion() {super();};
 
     public List<EjercicioSesion> getEjercicioSesionList() {
         return ejercicioSesionList;
