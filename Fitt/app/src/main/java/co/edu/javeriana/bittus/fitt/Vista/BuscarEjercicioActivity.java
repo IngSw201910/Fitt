@@ -80,7 +80,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
         //Fin datos de prueba
 
         List<String> stringDificultadList = new ArrayList<>();
-        String[] strDificultad = new String[] {"Baja", "Media", "Alta"};
+        String[] strDificultad = new String[] {"Fácil", "Media", "Difícil"};
         Collections.addAll(stringDificultadList, strDificultad);
         ArrayAdapter<String> comboAdapterDificultad = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDificultadList);
         dificultadSpin.setAdapter(comboAdapterDificultad);

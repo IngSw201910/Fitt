@@ -12,11 +12,10 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import co.edu.javeriana.bittus.fitt.Filtros.FiltrosEjercicios;
+import co.edu.javeriana.bittus.fitt.Filtros.EjerciciosFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
-import co.edu.javeriana.bittus.fitt.Vista.BuscarEjercicioActivity;
 import pl.droidsonroids.gif.GifImageView;
 
 public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
@@ -25,7 +24,7 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
     protected Context context;
     private int resource;
     private Ejercicio ejercicioSeleccionado;
-    private FiltrosEjercicios filtrosEjercicios;
+    private EjerciciosFiltro ejerciciosFiltro;
 
 
     public EjerciciosAdapter(@NonNull Context context, int resource, List<Ejercicio> objects) {
@@ -68,12 +67,12 @@ public class EjerciciosAdapter extends ArrayAdapter<Ejercicio> {
     @NonNull
     @Override
     public Filter getFilter() {
-        if(filtrosEjercicios==null){
-            filtrosEjercicios = new FiltrosEjercicios(listEjercicios, this);
+        if(ejerciciosFiltro ==null){
+            ejerciciosFiltro = new EjerciciosFiltro(listEjercicios, this);
         }
 
 
-        return filtrosEjercicios;
+        return ejerciciosFiltro;
 
 
     }

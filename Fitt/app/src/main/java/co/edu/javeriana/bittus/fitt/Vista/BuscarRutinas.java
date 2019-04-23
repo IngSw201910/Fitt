@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -14,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Adapters.RutinasAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.Modelo.Rutina;
 import co.edu.javeriana.bittus.fitt.R;
@@ -24,11 +26,20 @@ public class BuscarRutinas extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef;
     private List<Rutina> listaRutinasPublicas = new ArrayList<>();
+    private ListView listViewL;
+    private RutinasAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_buscar_rutinas);
+        listViewL = (ListView)findViewById(R.id.listViewRutinas);
+
+        adapter = new RutinasAdapter(this,R.layout.item_rutina_row,listaRutinasPublicas);
+
+        listViewL.setAdapter(adapter);
+
 
         database = FirebaseDatabase.getInstance();
         descargarRutinasPublicas();

@@ -54,7 +54,7 @@ public class CrearRutinaActivity extends AppCompatActivity {
         publicaRB = (RadioButton) findViewById(R.id.radioButton2);
 
         List<String> stringDificultadList = new ArrayList<>();
-        String[] strDificultad = new String[] {"Baja", "Media", "Alta"};
+        String[] strDificultad = new String[] {"Fácil", "Media", "Difícil"};
         Collections.addAll(stringDificultadList, strDificultad);
         ArrayAdapter<String> comboAdapterDificultad = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDificultadList);
         dificultadSpin.setAdapter(comboAdapterDificultad);

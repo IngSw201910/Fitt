@@ -174,23 +174,15 @@
         android:id="@+id/buttonSiguienteCrearRutina"
         android:layout_width="74dp"
         android:layout_height="74dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="68dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
         android:tint="@color/verdeBotones"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/siguiente" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="20dp"
-        android:text="Agregar \nsesiones"
-        android:textAlignment="center"
-        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner3"
+        app:layout_constraintVertical_bias="0.865"
+        app:srcCompat="@drawable/siguiente" />
 
 </android.support.constraint.ConstraintLayout>

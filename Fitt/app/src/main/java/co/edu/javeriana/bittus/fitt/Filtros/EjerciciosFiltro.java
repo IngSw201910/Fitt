@@ -8,14 +8,14 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 
-public class FiltrosEjercicios extends Filter {
+public class EjerciciosFiltro extends Filter {
 
 
 
     private List<Ejercicio> listEjercicios;
     private EjerciciosAdapter adapter;
 
-    public FiltrosEjercicios(List<Ejercicio> listEjercicios, EjerciciosAdapter adapter) {
+    public EjerciciosFiltro(List<Ejercicio> listEjercicios, EjerciciosAdapter adapter) {
         this.listEjercicios = listEjercicios;
         this.adapter = adapter;
     }
