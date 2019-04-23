@@ -6,288 +6,269 @@
     android:layout_height="match_parent"
     tools:context=".Vista.InicioUsuarioFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
+    <TextView
+        android:id="@+id/text5"
+        android:layout_width="74dp"
+        android:layout_height="34dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="0.3"
+        android:text="Cerrar sesión"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/logout" />
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Realizar sesión"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/text1"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Calendario"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/txt2"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_weight="0.3"
-            android:text="Entrenador"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
+    <ImageButton
+        android:id="@+id/btnEntrenador"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:srcCompat="@drawable/entrenador" />
 
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Mi progreso"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Mis logros"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_weight="0.3"
-            android:text="Mis rutinas"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="81dp"
+    <ImageButton
+        android:id="@+id/btnCalendario"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:clipToPadding="true"
-        android:orientation="horizontal"
-        android:showDividers="middle|none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/btnEntrenador"
+        app:layout_constraintStart_toEndOf="@+id/btnRealizarSesion"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:srcCompat="@drawable/calendario" />
+
+    <ImageButton
+        android:id="@+id/btnRealizarSesion"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Titulo">
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:srcCompat="@drawable/realizar_sesion" />
 
-        <ImageButton
-            android:id="@+id/btnMiProgreso"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/mi_progreso" />
+    <ImageButton
+        android:id="@+id/btnMiProgreso"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Titulo"
+        app:srcCompat="@drawable/mi_progreso" />
 
-        <ImageButton
-            android:id="@+id/btnMisLogros"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/mis_logros" />
+    <ImageButton
+        android:id="@+id/btnMisRutinas"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Titulo"
+        app:srcCompat="@drawable/mis_rutinas" />
 
-        <ImageButton
-            android:id="@+id/btnMisRutinas"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/mis_rutinas" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="wrap_content"
-        android:layout_height="81dp"
+    <ImageButton
+        android:id="@+id/btnMisLogros"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:clipToPadding="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <ImageButton
-            android:id="@+id/btnRealizarSesion"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/realizar_sesion" />
-
-        <ImageButton
-            android:id="@+id/btnCalendario"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/calendario" />
-
-        <ImageButton
-            android:id="@+id/btnEntrenador"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/entrenador" />
-
-    </LinearLayout>
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/btnMisRutinas"
+        app:layout_constraintStart_toEndOf="@+id/btnMiProgreso"
+        app:layout_constraintTop_toBottomOf="@+id/Titulo"
+        app:srcCompat="@drawable/mis_logros" />
 
     <TextView
-        android:id="@+id/textCerrarSesion"
+        android:id="@+id/textView11"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.3"
+        android:text="Mi progreso"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMiProgreso" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="0.3"
+        android:text="Mis logros"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/btnMisLogros" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="75dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="0.3"
+        android:text="Mis rutinas"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMisRutinas" />
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="73dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="0.3"
+        android:text="Entrenador"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrenador" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.3"
+        android:text="Realizar sesión"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRealizarSesion" />
+
+    <TextView
+        android:id="@+id/txt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="140dp"
-        android:text="Cerrar sesión"
-        android:textColor="#000000"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.974"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_weight="0.3"
+        android:text="Calendario"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/text1"
+        app:layout_constraintStart_toEndOf="@+id/text"
+        app:layout_constraintTop_toBottomOf="@+id/btnCalendario" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="wrap_content"
-        android:layout_height="81dp"
+    <ImageButton
+        android:id="@+id/btnIniciarRecorrido"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:clipToPadding="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.331"
+        android:layout_weight="0.5"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/logout"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toEndOf="@+id/btnCrearRutina"
+        app:layout_constraintTop_toBottomOf="@+id/txt2"
+        app:srcCompat="@drawable/iniciar_recorrido" />
+
+    <ImageButton
+        android:id="@+id/btnCrearRutina"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="23dp"
+        android:layout_weight="0.5"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-        <ImageButton
-            android:id="@+id/btnIniciarRecorrido"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.5"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/iniciar_recorrido" />
-
-        <ImageButton
-            android:id="@+id/btnCrearRutina"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.5"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/crear_rutina" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/text"
+        app:srcCompat="@drawable/crear_rutina" />
 
     <ImageButton
         android:id="@+id/logout"
-        android:layout_width="58dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="70dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/textCerrarSesion"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text1"
         app:srcCompat="@drawable/cerrar_sesion" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.334"
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="73dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="0.3"
+        android:text="Iniciar Recorrido"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/text5"
+        app:layout_constraintStart_toEndOf="@+id/text3"
+        app:layout_constraintTop_toBottomOf="@+id/btnIniciarRecorrido" />
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.3"
+        android:text="Crear Rutina"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
-        app:layout_constraintVertical_bias="0.0">
-
-        <TextView
-            android:id="@+id/text3"
-            android:layout_width="wrap_content"
-            android:layout_height="27dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Iniciar recorrido"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/text4"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Crear rutina"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp" />
-
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/btnCrearRutina" />
 
     <TextView
         android:id="@+id/Titulo"

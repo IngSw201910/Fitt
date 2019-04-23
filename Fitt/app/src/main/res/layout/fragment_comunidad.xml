@@ -6,211 +6,181 @@
     android:layout_height="match_parent"
     tools:context=".Vista.ComunidadFragment">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutMenuTexto"
-        android:layout_width="330dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
+    <TextView
+        android:id="@+id/textViewEjercicios"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="0.3"
+        android:text="Ejercicios"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.561"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutMenu"/>
+        app:layout_constraintTop_toBottomOf="@+id/buttonEjercicios" />
 
-    <LinearLayout
-        android:id="@+id/linearLayoutMenu"
-        android:layout_width="330dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:clipToPadding="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="wrap_content"
-        android:layout_height="43dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-        <TextView
-            android:id="@+id/textViewMapaUsuarios"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Mapa usuarios"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="11sp" />
-
-        <TextView
-            android:id="@+id/textViewBuscarUsuario"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Buscar usuario"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="11sp" />
-
-        <TextView
-            android:id="@+id/textViewEjercicios"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_weight="0.3"
-            android:text="Ejercicios"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="81dp"
+    <TextView
+        android:id="@+id/textViewBuscarUsuario"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:clipToPadding="true"
-        android:orientation="horizontal"
-        android:showDividers="middle|none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        android:layout_weight="0.3"
+        android:text="Buscar usuario"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewEjercicios"
+        app:layout_constraintStart_toEndOf="@+id/textViewMapaUsuarios"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuscarUsuario" />
+
+    <TextView
+        android:id="@+id/textViewMapaUsuarios"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.3"
+        android:text="Mapa usuarios"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloComunidad">
+        app:layout_constraintTop_toBottomOf="@+id/buttonMapaUsuarios" />
 
-        <ImageButton
-            android:id="@+id/buttonParques"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/parques" />
+    <ImageButton
+        android:id="@+id/buttonBuscarRutinas"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloComunidad"
+        app:srcCompat="@drawable/buscar_rutinas" />
 
-        <ImageButton
-            android:id="@+id/buttonChats"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/chats" />
+    <ImageButton
+        android:id="@+id/buttonParques"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloComunidad"
+        app:srcCompat="@drawable/parques" />
 
-        <ImageButton
-            android:id="@+id/buttonBuscarRutinas"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/buscar_rutinas" />
+    <ImageButton
+        android:id="@+id/buttonChats"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/buttonBuscarRutinas"
+        app:layout_constraintStart_toEndOf="@+id/buttonParques"
+        app:layout_constraintTop_toBottomOf="@+id/tituloComunidad"
+        app:srcCompat="@drawable/chats" />
 
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/buttonBuscarUsuario"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEjercicios"
+        app:layout_constraintStart_toEndOf="@+id/buttonMapaUsuarios"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChats"
+        app:srcCompat="@drawable/buscar_usuarios" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <ImageButton
+        android:id="@+id/buttonMapaUsuarios"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewParques"
+        app:srcCompat="@drawable/mapa_usuarios" />
+
+    <ImageButton
+        android:id="@+id/buttonEjercicios"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="0.3"
+        android:background="#00FFFFFF"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBuscarRutinas"
+        app:srcCompat="@drawable/ejercicios" />
+
+    <TextView
+        android:id="@+id/textViewBuscarRutinas"
+        android:layout_width="73dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="70dp"
+        android:layout_weight="0.3"
+        android:text="Buscar rutinas"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBuscarRutinas" />
+
+    <TextView
+        android:id="@+id/textViewParques"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="0.3"
+        android:text="Parques"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonParques" />
+
+    <TextView
+        android:id="@+id/textViewChats"
         android:layout_width="wrap_content"
-        android:layout_height="81dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:clipToPadding="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-        <ImageButton
-            android:id="@+id/buttonMapaUsuarios"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/mapa_usuarios" />
-
-        <ImageButton
-            android:id="@+id/buttonBuscarUsuario"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/buscar_usuarios" />
-
-        <ImageButton
-            android:id="@+id/buttonEjercicios"
-            android:layout_width="74dp"
-            android:layout_height="74dp"
-            android:layout_weight="0.3"
-            android:background="#00FFFFFF"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/ejercicios" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="263dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
-
-        <TextView
-            android:id="@+id/textViewParques"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Parques"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/textViewChats"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="15dp"
-            android:layout_weight="0.3"
-            android:text="Chats"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/textViewBuscarRutinas"
-            android:layout_width="wrap_content"
-            android:layout_height="26dp"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:layout_weight="0.3"
-            android:text="Buscar rutinas"
-            android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="12sp" />
-    </LinearLayout>
+        android:layout_weight="0.3"
+        android:text="Chats"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/textViewBuscarRutinas"
+        app:layout_constraintStart_toEndOf="@+id/textViewParques"
+        app:layout_constraintTop_toBottomOf="@+id/buttonChats" />
 
     <TextView
         android:id="@+id/tituloComunidad"
@@ -229,12 +199,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:layout_width="378dp"
-        android:layout_height="221dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="379dp"
+        android:layout_height="267dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewBuscarUsuario" />
 
 </android.support.constraint.ConstraintLayout>
