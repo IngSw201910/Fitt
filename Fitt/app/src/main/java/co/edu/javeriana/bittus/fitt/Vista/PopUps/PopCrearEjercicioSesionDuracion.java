@@ -101,22 +101,29 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
 
         private void crearEjercicioSesion() {
         String sDuracion = duracionT.getText().toString();
-        int duracion = Integer.parseInt(sDuracion);
 
-        EjercicioDuracion ejercicioDuracion = new EjercicioDuracion(ejercicio,duracion);
+        if(sDuracion.isEmpty()){
+                duracionT.setError("Campo obligatorio");
+        }else {
+            int duracion = Integer.parseInt(sDuracion);
 
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        bundle.putSerializable("ejercicioDuracion",ejercicioDuracion);
-        intent.putExtras(bundle);
+            EjercicioDuracion ejercicioDuracion = new EjercicioDuracion(ejercicio,duracion);
+
+            Intent intent = this.getIntent();
+            Bundle bundle = intent.getExtras();
+            bundle.putSerializable("ejercicioDuracion",ejercicioDuracion);
+            intent.putExtras(bundle);
 
 
-        if (getParent() == null) {
-            setResult(Activity.RESULT_OK, intent);
-        } else {
-            getParent().setResult(Activity.RESULT_OK, intent);
+            if (getParent() == null) {
+                setResult(Activity.RESULT_OK, intent);
+            } else {
+                getParent().setResult(Activity.RESULT_OK, intent);
+            }
+            finish();
         }
-        finish();
+
+
 
     }
 }

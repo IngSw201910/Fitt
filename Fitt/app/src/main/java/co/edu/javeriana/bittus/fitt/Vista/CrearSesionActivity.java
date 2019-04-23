@@ -129,11 +129,6 @@ public class CrearSesionActivity extends AppCompatActivity {
 
     private void crearSesion() {
 
-
-
-
-
-
         String sNombre = nombreT.getText().toString();
         String sDuracion = duracionT.getText().toString();
 
@@ -150,6 +145,7 @@ public class CrearSesionActivity extends AppCompatActivity {
             completo = false;
             int duracion = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(getApplicationContext(), "La lista de ejercicios no puede estar vacía",duracion);
+            toast.show();
         }
         if(completo){
             int duracion = Integer.parseInt(sDuracion);

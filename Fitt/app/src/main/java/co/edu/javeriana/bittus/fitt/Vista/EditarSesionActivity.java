@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -127,27 +128,44 @@ public class EditarSesionActivity extends AppCompatActivity {
         String sNombre = nombreT.getText().toString();
         String sDuracion = duracionT.getText().toString();
 
-
-        int duracion = Integer.parseInt(sDuracion);
-
-
-
-        sesion.setDuracion(duracion);
-        sesion.setNombre(sNombre);
-        sesion.setEjercicioSesionList(ejerciciosList);
-
-        Intent intent = this.getIntent();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("sesion", sesion);
-        intent.putExtras(bundle);
-
-
-        if (getParent() == null) {
-            setResult(Activity.RESULT_OK, intent);
-        } else {
-            getParent().setResult(Activity.RESULT_OK, intent);
+        boolean completo = true;
+        if(sNombre.isEmpty()){
+            nombreT.setError("Campo obligatorio");
+            completo = false;
         }
-        finish();
+        if(sDuracion.isEmpty()){
+            duracionT.setError("Campo obligatorio");
+            completo = false;
+        }
+        if(ejerciciosList.isEmpty()){
+            completo = false;
+            int duracion = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(getApplicationContext(), "La lista de ejercicios no puede estar vacía",duracion);
+            toast.show();
+        }
+        if(completo){
+            int duracion = Integer.parseInt(sDuracion);
+
+
+
+            sesion.setDuracion(duracion);
+            sesion.setNombre(sNombre);
+            sesion.setEjercicioSesionList(ejerciciosList);
+
+            Intent intent = this.getIntent();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("sesion", sesion);
+            intent.putExtras(bundle);
+
+
+            if (getParent() == null) {
+                setResult(Activity.RESULT_OK, intent);
+            } else {
+                getParent().setResult(Activity.RESULT_OK, intent);
+            }
+            finish();
+        }
+
     }
 
     private void buscarEjercicio(){

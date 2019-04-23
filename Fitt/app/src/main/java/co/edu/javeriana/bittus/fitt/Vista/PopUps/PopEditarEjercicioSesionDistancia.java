@@ -99,25 +99,28 @@ public class PopEditarEjercicioSesionDistancia extends Activity {
     }
     private void editarEjercicioSesion() {
         String sDistancia = distanciaT.getText().toString();
-        int distancia = Integer.parseInt(sDistancia);
+        if(sDistancia.isEmpty()){
+            distanciaT.setError("Campo obligatorio");
+
+        }else{
+            int distancia = Integer.parseInt(sDistancia);
+
+            ejercicio.setDistancia(distancia);
+
+            Intent intent = this.getIntent();
+            Bundle bundle = intent.getExtras();
+            bundle.putSerializable("ejercicioSesion",ejercicio);
+            intent.putExtras(bundle);
 
 
-
-
-        ejercicio.setDistancia(distancia);
-
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        bundle.putSerializable("ejercicioSesion",ejercicio);
-        intent.putExtras(bundle);
-
-
-        if (getParent() == null) {
-            setResult(Activity.RESULT_OK, intent);
-        } else {
-            getParent().setResult(Activity.RESULT_OK, intent);
+            if (getParent() == null) {
+                setResult(Activity.RESULT_OK, intent);
+            } else {
+                getParent().setResult(Activity.RESULT_OK, intent);
+            }
+            finish();
         }
-        finish();
+
 
     }
 

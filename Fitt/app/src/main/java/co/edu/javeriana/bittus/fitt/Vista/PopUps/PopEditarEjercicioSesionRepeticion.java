@@ -113,25 +113,43 @@ public class PopEditarEjercicioSesionRepeticion extends Activity {
         String sSeries = seriesT.getText().toString();
         String sDescansos = descansoT.getText().toString();
 
-        int repeticiones = Integer.parseInt(sRepeticiones);
-        int series = Integer.parseInt(sSeries);
-        int descansos = Integer.parseInt(sDescansos);
+        boolean completado = true;
 
-
-        ejercicio.setDescanso(descansos);
-        ejercicio.setRepeticiones(repeticiones);
-        ejercicio.setSeries(series);
-
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        bundle.putSerializable("ejercicioSesion",ejercicio);
-        intent.putExtras(bundle);
-
-        if (getParent() == null) {
-            setResult(Activity.RESULT_OK, intent);
-        } else {
-            getParent().setResult(Activity.RESULT_OK, intent);
+        if(sRepeticiones.isEmpty()){
+            repeticionesT.setError("Campo obligatorio");
+            completado = false;
         }
-        finish();
+        if(sSeries.isEmpty()){
+            seriesT.setError("Campo obligatorio");
+            completado = false;
+        }
+        if(sDescansos.isEmpty()){
+            descansoT.setError("Campo obligatorio");
+            completado = false;
+        }
+        if(completado){
+            int repeticiones = Integer.parseInt(sRepeticiones);
+            int series = Integer.parseInt(sSeries);
+            int descansos = Integer.parseInt(sDescansos);
+
+
+            ejercicio.setDescanso(descansos);
+            ejercicio.setRepeticiones(repeticiones);
+            ejercicio.setSeries(series);
+
+            Intent intent = this.getIntent();
+            Bundle bundle = intent.getExtras();
+            bundle.putSerializable("ejercicioSesion",ejercicio);
+            intent.putExtras(bundle);
+
+            if (getParent() == null) {
+                setResult(Activity.RESULT_OK, intent);
+            } else {
+                getParent().setResult(Activity.RESULT_OK, intent);
+            }
+            finish();
+        }
+
+
     }
 }

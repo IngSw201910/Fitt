@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -86,19 +87,26 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
     }
 
     private void finalizar() {
-        Intent intent=this.getIntent();
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("sesiones", (Serializable) sesionList);
-        intent.putExtras(bundle);
-        setResult(Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES,intent);
+        if(sesionList.isEmpty()){
+            int duracion = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(getApplicationContext(), "La lista de sesiones no puede estar vacía",duracion);
+            toast.show();
+        }else{
+            Intent intent=this.getIntent();
+
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("sesiones", (Serializable) sesionList);
+            intent.putExtras(bundle);
+            setResult(Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES,intent);
 
 
-        finish();
+            finish();
+        }
+
     }
 
     public void crearSesion(){
-
 
         startActivityForResult(new Intent(CrearRutinaSesionesActivity.this, CrearSesionActivity.class),Utils.REQUEST_CODE_CREAR_SESION);
 
