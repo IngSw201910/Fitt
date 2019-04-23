@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Filtros.RutinasFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Rutina;
 import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.R;
@@ -22,7 +24,7 @@ public class RutinasAdapter extends ArrayAdapter<Rutina> {
     private Context context;
     private int resource;
     private Rutina rutina;
-
+    private RutinasFiltro rutinasFiltro;
 
     public RutinasAdapter(@NonNull Context context, int resource, List<Rutina> objects) {
         super(context, resource, objects);
@@ -76,6 +78,17 @@ public class RutinasAdapter extends ArrayAdapter<Rutina> {
         duracion = duracion/60;
         return  duracion;
     }
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        if(rutinasFiltro ==null){
+            rutinasFiltro = new RutinasFiltro(listRutina, this);
+        }
 
+
+        return rutinasFiltro;
+
+
+    }
 
 }

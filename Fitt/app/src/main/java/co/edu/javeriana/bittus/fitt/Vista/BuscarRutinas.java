@@ -3,7 +3,10 @@ package co.edu.javeriana.bittus.fitt.Vista;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -21,13 +24,14 @@ import co.edu.javeriana.bittus.fitt.Modelo.Rutina;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
-public class BuscarRutinas extends AppCompatActivity {
+public class BuscarRutinas extends AppCompatActivity implements TextWatcher {
 
     FirebaseDatabase database;
     DatabaseReference myRef;
     private List<Rutina> listaRutinasPublicas = new ArrayList<>();
     private ListView listViewL;
     private RutinasAdapter adapter;
+    private EditText nombreEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,10 @@ public class BuscarRutinas extends AppCompatActivity {
 
         setContentView(R.layout.activity_buscar_rutinas);
         listViewL = (ListView)findViewById(R.id.listViewRutinas);
+        nombreEdit = (EditText)findViewById(R.id.editTextNombre);
+
+
+        nombreEdit.addTextChangedListener(this);
 
         adapter = new RutinasAdapter(this,R.layout.item_rutina_row,listaRutinasPublicas);
 
@@ -73,4 +81,18 @@ public class BuscarRutinas extends AppCompatActivity {
     }
 
 
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        this.adapter.getFilter().filter(s);
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+    }
 }

@@ -14,14 +14,19 @@ public class EjerciciosFiltro extends Filter {
 
     private List<Ejercicio> listEjercicios;
     private EjerciciosAdapter adapter;
+    private List<Ejercicio> listTemporal;
 
     public EjerciciosFiltro(List<Ejercicio> listEjercicios, EjerciciosAdapter adapter) {
         this.listEjercicios = listEjercicios;
+        listTemporal = new ArrayList<Ejercicio>();
         this.adapter = adapter;
+        listTemporal.addAll(listEjercicios);
     }
 
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
+        listEjercicios.clear();
+        listEjercicios.addAll(listTemporal);
 
         FilterResults results = new FilterResults();
         List<Ejercicio> filtrados = new ArrayList<Ejercicio>();
@@ -30,15 +35,12 @@ public class EjerciciosFiltro extends Filter {
         }
         else{
             String filterString = constraint.toString().toLowerCase().trim();
-
             for (Ejercicio ejercicio:listEjercicios) {
                 if(ejercicio.getNombre().toLowerCase().contains(filterString)){
                     filtrados.add(ejercicio);
                 }
             }
-
         }
-
         results.values =filtrados;
         results.count = filtrados.size();
 
