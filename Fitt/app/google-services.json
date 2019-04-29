@@ -23,14 +23,6 @@
           }
         },
         {
-          "client_id": "870199726309-hm8j2b1alvqbroq9mllt8dnd01v03bfb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "co.edu.javeriana.bittus.fitt",
-            "certificate_hash": "51bdfa400de1f7efe00c3e958578867b6a55a91e"
-          }
-        },
-        {
           "client_id": "870199726309-2rafcnf19q72nj3kolts9193qrguai86.apps.googleusercontent.com",
           "client_type": 3
         }

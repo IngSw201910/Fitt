@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,24 +16,24 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioSesion;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
-import co.edu.javeriana.bittus.fitt.Vista.CrearSesionActivity;
-import co.edu.javeriana.bittus.fitt.Vista.EditarSesionActivity;
+import co.edu.javeriana.bittus.fitt.Vista.CrearEntrenamientoActivity;
+import co.edu.javeriana.bittus.fitt.Vista.EditarEntrenamientoActivity;
 
 
-public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
+public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntrenamiento> {
 
 
-    protected List<EjercicioSesion> listEjercios;
+    protected List<EjercicioEntrenamiento> listEjercios;
     protected Context context;
-    private EjercicioSesion ejercicioSesion;
+    private EjercicioEntrenamiento ejercicioEntrenamiento;
     private BtnClickListenerRow mClickListenerEditar = null;
 
 
-    public EjerciciosSesionAdapter(@NonNull Context context, List<EjercicioSesion> objects, BtnClickListenerRow listenerEditar) {
+    public EjerciciosEntrenamientoAdapter(@NonNull Context context, List<EjercicioEntrenamiento> objects, BtnClickListenerRow listenerEditar) {
         super(context, R.layout.item_ejercicio_duracion_nuevo_row, objects);
         this.listEjercios = objects;
         this.context = context;
@@ -63,8 +62,8 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         if(view == null){
             view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_repeticion_nuevo_row, null);
         }
-        ejercicioSesion = listEjercios.get(position);
-        EjercicioRepeticiones ejercicio = (EjercicioRepeticiones) ejercicioSesion;
+        ejercicioEntrenamiento = listEjercios.get(position);
+        EjercicioRepeticiones ejercicio = (EjercicioRepeticiones) ejercicioEntrenamiento;
 
         TextView nombre = (TextView) view.findViewById(R.id.textNombreEjercicioRepeticion);
         nombre.setText(ejercicio.getEjercicio().getNombre());
@@ -112,24 +111,15 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
 
     }
 
-    private void editarEjercicioRepeticion() {
-        if(context instanceof CrearSesionActivity){
-            CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
-            crearSesionActivity.abrirPopUpCrearEjercicioRepeticion(ejercicioSesion, getPosition(ejercicioSesion));
-        }
-        else {
-            EditarSesionActivity editarSesionActivity = (EditarSesionActivity) context;
-            editarSesionActivity.abrirPopUpCrearEjercicioRepeticion(ejercicioSesion, getPosition(ejercicioSesion));
-        }
-    }
+
 
     private View getViewEjercicioDuracion(int position, View view, ViewGroup parent) {
 
         if(view == null){
             view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_duracion_nuevo_row, null);
         }
-        ejercicioSesion = listEjercios.get(position);
-        EjercicioDuracion ejercicio = (EjercicioDuracion) ejercicioSesion;
+        ejercicioEntrenamiento = listEjercios.get(position);
+        EjercicioDuracion ejercicio = (EjercicioDuracion) ejercicioEntrenamiento;
 
         TextView nombre = (TextView) view.findViewById(R.id.textNombreEjercicioDuracion);
         nombre.setText(ejercicio.getEjercicio().getNombre());
@@ -165,26 +155,15 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         return view;
     }
 
-    private void editarEjercicioDuracion() {
 
-        if(context instanceof CrearSesionActivity){
-            CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
-            crearSesionActivity.abrirPopUpCrearEjercicioDuracion(ejercicioSesion, getPosition(ejercicioSesion));
-        }
-        else {
-            EditarSesionActivity editarSesionActivity = (EditarSesionActivity) context;
-            editarSesionActivity.abrirPopUpCrearEjercicioDuracion(ejercicioSesion, getPosition(ejercicioSesion));
-        }
-
-    }
 
     private View getViewEjercicioDistancia(int position, View view, ViewGroup parent) {
 
         if(view == null){
             view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_distancia_nuevo_row, null);
         }
-        ejercicioSesion = listEjercios.get(position);
-        EjercicioDistancia ejercicio = (EjercicioDistancia) ejercicioSesion;
+        ejercicioEntrenamiento = listEjercios.get(position);
+        EjercicioDistancia ejercicio = (EjercicioDistancia) ejercicioEntrenamiento;
 
         TextView nombre = (TextView) view.findViewById(R.id.textNombreEjercicioDistancia);
         nombre.setText(ejercicio.getEjercicio().getNombre());
@@ -223,29 +202,7 @@ public class EjerciciosSesionAdapter extends ArrayAdapter<EjercicioSesion> {
         return view;
     }
 
-    private void editarEjercicioDistancia() {
-        if(context instanceof CrearSesionActivity){
-            CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
-            crearSesionActivity.abrirPopUpCrearEjercicioDistancia(ejercicioSesion, getPosition(ejercicioSesion));
-        }
-        else {
-            EditarSesionActivity editarSesionActivity = (EditarSesionActivity) context;
-            editarSesionActivity.abrirPopUpCrearEjercicioDistancia(ejercicioSesion, getPosition(ejercicioSesion));
-        }
-    }
 
-    private void eliminarEjercicio() {
-
-        if(context instanceof CrearSesionActivity){
-            CrearSesionActivity crearSesionActivity = (CrearSesionActivity) context;
-            crearSesionActivity.eliminarEjercicio(ejercicioSesion);
-        }
-        else {
-            EditarSesionActivity editarSesionActivity = (EditarSesionActivity) context;
-            editarSesionActivity.eliminarEjercicio(ejercicioSesion);
-        }
-
-    }
 
 
 }

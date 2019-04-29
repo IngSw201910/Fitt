@@ -14,7 +14,7 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Filtros.RutinasFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Rutina;
-import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 
 
@@ -52,11 +52,6 @@ public class RutinasAdapter extends ArrayAdapter<Rutina> {
         TextView dificultad = view.findViewById(R.id.textView14);
         dificultad.setText(rutina.getDificultad());
 
-        int duracionEnHoras = duracionEnHoras();
-
-        TextView duracionHoras = view.findViewById(R.id.textView15);
-        duracionHoras.setText(Integer.toString(duracionEnHoras));
-
 
         TextView reiteraciones = view.findViewById(R.id.textView8);
         reiteraciones.setText(Integer.toString(rutina.getFrecuencia()));
@@ -64,20 +59,6 @@ public class RutinasAdapter extends ArrayAdapter<Rutina> {
         return  view;
     }
 
-    private int duracionEnHoras() {
-
-        int duracion = 0;
-        List<Sesion> sesionList = rutina.getSesionList();
-
-        for (Sesion sesion: sesionList)
-        {
-            duracion += sesion.getDuracion();
-        }
-
-        duracion =  duracion*rutina.getFrecuencia();
-        duracion = duracion/60;
-        return  duracion;
-    }
     @NonNull
     @Override
     public Filter getFilter() {

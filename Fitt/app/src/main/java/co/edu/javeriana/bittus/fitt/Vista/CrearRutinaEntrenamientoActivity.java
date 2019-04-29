@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -13,26 +12,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
-import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
-import co.edu.javeriana.bittus.fitt.Adapters.SesionesAdapter;
+import co.edu.javeriana.bittus.fitt.Adapters.EntrenamientosAdapter;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
-public class CrearRutinaSesionesActivity extends AppCompatActivity {
+public class CrearRutinaEntrenamientoActivity extends AppCompatActivity {
 
 
     private ImageButton aceptarB;
     private ImageButton adicionarB;
     private ListView listViewL;
-    private SesionesAdapter adapterSesion;
-    private List<Sesion> sesionList;
+    private EntrenamientosAdapter adapterEntrenamiento;
+    private List<Entrenamiento> entrenamientoList;
     private int positionEditar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_rutina_sesiones);
+        setContentView(R.layout.activity_crear_rutina_entrenamiento);
 
 
 
@@ -43,29 +42,23 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         listViewL = (ListView) findViewById(R.id.listSesiones);
         adicionarB = (ImageButton)findViewById(R.id.buttonAdicionarSesion);
 
-        sesionList = new ArrayList<Sesion>();
-
-        //Datos de prueba
-
-        //sesionList.add(new Sesion("Piernas", 20));
-
-        //Fin datos de prueba
+        entrenamientoList = new ArrayList<Entrenamiento>();
 
 
-        adapterSesion = new SesionesAdapter(CrearRutinaSesionesActivity.this, R.layout.item_sesiones_nuevas_row, sesionList, new BtnClickListenerRow() {
+        adapterEntrenamiento = new EntrenamientosAdapter(CrearRutinaEntrenamientoActivity.this, R.layout.item_entrenamientos_nuevas_row, entrenamientoList, new BtnClickListenerRow() {
             @Override
             public void onBtnClickEdit(int position) {
-                editarSesion(sesionList.get(position), position);
+                editarEntrenamiento(entrenamientoList.get(position), position);
             }
 
             @Override
             public void onBtnClickDelete(int position) {
-                eliminarSesion(sesionList.get(position));
+                eliminarSesion(entrenamientoList.get(position));
             }
         });
 
 
-        listViewL.setAdapter(adapterSesion);
+        listViewL.setAdapter(adapterEntrenamiento);
 
         aceptarB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +73,7 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
         adicionarB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                crearSesion();
+                crearEntrenamiento();
             }
         });
 
@@ -88,15 +81,15 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
     private void finalizar() {
 
-        if(sesionList.isEmpty()){
+        if(entrenamientoList.isEmpty()){
             int duracion = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(getApplicationContext(), "La lista de sesiones no puede estar vacía",duracion);
+            Toast toast = Toast.makeText(getApplicationContext(), "La lista de entrenamientos no puede estar vacía",duracion);
             toast.show();
         }else{
             Intent intent=this.getIntent();
 
             Bundle bundle = new Bundle();
-            bundle.putSerializable("sesiones", (Serializable) sesionList);
+            bundle.putSerializable("entrenamientos", (Serializable) entrenamientoList);
             intent.putExtras(bundle);
             setResult(Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES,intent);
 
@@ -111,27 +104,27 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
     }
 
-    public void crearSesion(){
+    public void crearEntrenamiento(){
 
-        startActivityForResult(new Intent(CrearRutinaSesionesActivity.this, CrearSesionActivity.class),Utils.REQUEST_CODE_CREAR_SESION);
+        startActivityForResult(new Intent(CrearRutinaEntrenamientoActivity.this, CrearEntrenamientoActivity.class),Utils.REQUEST_CODE_CREAR_SESION);
 
     }
-    public void editarSesion(Sesion sesion, int position) {
+    public void editarEntrenamiento(Entrenamiento entrenamiento, int position) {
 
         positionEditar = position;
 
-        Intent intent = new Intent(CrearRutinaSesionesActivity.this, EditarSesionActivity.class);
+        Intent intent = new Intent(CrearRutinaEntrenamientoActivity.this, EditarEntrenamientoActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("sesion",sesion);
+        bundle.putSerializable("entrenamiento", entrenamiento);
         intent.putExtras(bundle);
 
         startActivityForResult(intent, Utils.REQUEST_CODE_EDITAR_SESION);
     }
 
-    public void eliminarSesion(Sesion sesion) {
+    public void eliminarSesion(Entrenamiento entrenamiento) {
 
-        sesionList.remove(sesion);
-        adapterSesion.notifyDataSetChanged();
+        entrenamientoList.remove(entrenamiento);
+        adapterEntrenamiento.notifyDataSetChanged();
 
     }
 
@@ -142,21 +135,21 @@ public class CrearRutinaSesionesActivity extends AppCompatActivity {
 
         if(requestCode== Utils.REQUEST_CODE_CREAR_SESION&&data!=null)
         {
-            Sesion sesion = (Sesion) data.getExtras().getSerializable("sesion");
+            Entrenamiento entrenamiento = (Entrenamiento) data.getExtras().getSerializable("entrenamiento");
 
             Intent intent = new Intent();
-            if(sesion!=null){
-                sesionList.add(sesion);
-                adapterSesion.notifyDataSetChanged();
+            if(entrenamiento !=null){
+                entrenamientoList.add(entrenamiento);
+                adapterEntrenamiento.notifyDataSetChanged();
             }
 
         }
         if(requestCode== Utils.REQUEST_CODE_EDITAR_SESION&&data!=null)
         {
-            Sesion sesion = (Sesion) data.getExtras().getSerializable("sesion");
+            Entrenamiento entrenamiento = (Entrenamiento) data.getExtras().getSerializable("entrenamiento");
 
-            sesionList.set(positionEditar, sesion);
-            adapterSesion.notifyDataSetChanged();
+            entrenamientoList.set(positionEditar, entrenamiento);
+            adapterEntrenamiento.notifyDataSetChanged();
 
         }
     }

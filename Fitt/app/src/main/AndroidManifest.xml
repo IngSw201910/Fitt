@@ -14,10 +14,10 @@
         <activity android:name=".Vista.BuscarRutinas" />
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
-        <activity android:name=".Vista.CrearSesionActivity" />
-        <activity android:name=".Vista.CrearRutinaSesionesActivity" />
+        <activity android:name=".Vista.CrearEntrenamientoActivity" />
+        <activity android:name=".Vista.CrearRutinaEntrenamientoActivity" />
         <activity android:name=".Vista.CrearRutinaActivity" />
-        <activity android:name=".Vista.EditarSesionActivity" />
+        <activity android:name=".Vista.EditarEntrenamientoActivity" />
         <activity android:name=".Vista.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

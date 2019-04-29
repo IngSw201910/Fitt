@@ -53,7 +53,7 @@ public class PopEditarEjercicioSesionRepeticion extends Activity {
 
         Bundle bundle = this.getIntent().getExtras();
 
-        ejercicio = (EjercicioRepeticiones) bundle.getSerializable("ejercicioSesion");
+        ejercicio = (EjercicioRepeticiones) bundle.getSerializable("ejercicioEntrenamiento");
 
 
         repeticionesT.setText(Integer.toString(ejercicio.getRepeticiones()));
@@ -139,7 +139,7 @@ public class PopEditarEjercicioSesionRepeticion extends Activity {
 
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            bundle.putSerializable("ejercicioSesion",ejercicio);
+            bundle.putSerializable("ejercicioEntrenamiento",ejercicio);
             intent.putExtras(bundle);
 
             if (getParent() == null) {
