@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import co.edu.javeriana.bittus.fitt.R;
 
-public class IniciarRecorridoActivity extends FragmentActivity implements OnMapReadyCallback {
+public class PruebaMapas extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
