@@ -9,8 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
-        <activity android:name=".Vista.MenuPrincipalUsuarioFragment"></activity>
+        <activity android:name=".Vista.RealizarEntrenamientoActivity"></activity>
+        <activity android:name=".Vista.EjerciciosActivity" />
+        <activity android:name=".Vista.BuscarUsuarioActivity" />
+        <activity android:name=".Vista.MapaUsuariosActivity" />
+        <activity android:name=".Vista.ChatsActivity" />
+        <activity android:name=".Vista.ParquesActivity" />
+        <activity android:name=".Vista.IniciarRecorridoActivity" />
+        <activity android:name=".Vista.EntrenadorActivity" />
+        <activity android:name=".Vista.CalendarioActivity" />
+        <activity android:name=".Vista.MisRutinasActivity" />
+        <activity android:name=".Vista.MiProgresoActivity" />
+        <activity android:name=".Vista.LogrosActivity" />
+        <activity android:name=".Vista.MenuPrincipalUsuarioFragment" />
         <activity android:name=".Vista.BuscarRutinas" />
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
