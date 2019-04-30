@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Rutina;
-import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
@@ -95,7 +94,7 @@ public class CrearRutinaActivity extends AppCompatActivity {
         }
 
         if(completo){
-            startActivityForResult(new Intent(CrearRutinaActivity.this, CrearRutinaSesionesActivity.class),Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES);
+            startActivityForResult(new Intent(CrearRutinaActivity.this, CrearRutinaEntrenamientoActivity.class),Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES);
         }
 
     }
@@ -108,7 +107,7 @@ public class CrearRutinaActivity extends AppCompatActivity {
 
         if(requestCode== Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES&&data!=null)
         {
-            List<Sesion> sesionList = (List<Sesion>) data.getExtras().getSerializable("sesiones");
+            List<Entrenamiento> entrenamientoList = (List<Entrenamiento>) data.getExtras().getSerializable("entrenamientos");
 
 
 
@@ -125,7 +124,7 @@ public class CrearRutinaActivity extends AppCompatActivity {
             int diasDescanso = Integer.parseInt(sDiasDescanso);
 
             Rutina rutina = new Rutina(0,diasDescanso,descripcion,dificultad,publica,nombreRutina,frecuencia);
-            rutina.setSesionList(sesionList);
+            rutina.setEntrenamientoList(entrenamientoList);
 
 
             Utils.almacenarInformacionConKey(RutasBaseDeDatos.getRutaRutinas()+user.getUid()+"/", rutina);

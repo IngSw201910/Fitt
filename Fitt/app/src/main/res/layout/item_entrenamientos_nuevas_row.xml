@@ -6,18 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewDuracionSesion"
-        android:layout_width="58dp"
-        android:layout_height="17dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Duración:"
-        android:textColor="#4BC6AA"
-        android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNombreSesion" />
-
     <ImageButton
         android:id="@+id/buttonEditarSesion"
         android:layout_width="63dp"
@@ -49,19 +37,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Nombre"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textDuracion"
-        android:layout_width="57dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Duración"
-        app:layout_constraintStart_toEndOf="@+id/textViewDuracionSesion"
-        app:layout_constraintTop_toBottomOf="@+id/textNombreSesion" />
 
 
 </android.support.constraint.ConstraintLayout>

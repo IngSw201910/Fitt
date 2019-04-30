@@ -45,8 +45,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
     private List<Ejercicio> listaEjercicios;
     private ImageButton buscarEjercicioB;
     private EditText nombreEjercicioBuscar;
-    private Spinner dificultadSpin;
-    private Spinner tipoSpin;
+
 
 
     private Ejercicio ejercicioSeleccionado;
@@ -66,32 +65,9 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
         listaEjercicios = new ArrayList<Ejercicio>();
         buscarEjercicioB = (ImageButton) findViewById(R.id.imageButtonBuscarEjercicio);
         nombreEjercicioBuscar = (EditText) findViewById(R.id.editText3);
-        dificultadSpin = (Spinner) findViewById(R.id.spinner);
-        tipoSpin = (Spinner) findViewById(R.id.spinner4);
+
 
         nombreEjercicioBuscar.addTextChangedListener(this);
-
-
-        //Datos de prueba
-
-        //Ejercicio ejercicio = new Ejercicio("Flexión con pies levantados", "Brazos", "Distancia","Media",R.drawable.gif_prueba,"Flexión con un apoyo en los pies");
-        //listaEjercicios.add(ejercicio);
-
-        //Fin datos de prueba
-
-        List<String> stringDificultadList = new ArrayList<>();
-        String[] strDificultad = new String[] {"Fácil", "Media", "Difícil"};
-        Collections.addAll(stringDificultadList, strDificultad);
-        ArrayAdapter<String> comboAdapterDificultad = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDificultadList);
-        dificultadSpin.setAdapter(comboAdapterDificultad);
-
-
-        List<String> stringTipoList = new ArrayList<>();
-        String[] strTipo = new String[] {"Repetición", "Distancia", "Duración"};
-        Collections.addAll(stringTipoList, strTipo);
-        ArrayAdapter<String> comboAdapterTipo = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringTipoList);
-        tipoSpin.setAdapter(comboAdapterTipo);
-
 
 
 
@@ -196,7 +172,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
             Intent intent = new Intent();
             if(ejercicioDistancia!=null){
-                intent.putExtra("ejercicioSesion",ejercicioDistancia);
+                intent.putExtra("ejercicioEntrenamiento",ejercicioDistancia);
             }
 
 
@@ -212,7 +188,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
             Intent intent = new Intent();
             if(ejercicioDuracion!=null){
-                intent.putExtra("ejercicioSesion",ejercicioDuracion);
+                intent.putExtra("ejercicioEntrenamiento",ejercicioDuracion);
             }
 
 
@@ -228,7 +204,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
             Intent intent = new Intent();
             if(ejercicioRepeticion!=null){
-                intent.putExtra("ejercicioSesion",ejercicioRepeticion);
+                intent.putExtra("ejercicioEntrenamiento",ejercicioRepeticion);
             }
 
 

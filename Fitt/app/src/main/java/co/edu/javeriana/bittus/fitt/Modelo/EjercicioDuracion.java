@@ -2,7 +2,7 @@ package co.edu.javeriana.bittus.fitt.Modelo;
 
 import java.io.Serializable;
 
-public class EjercicioDuracion extends EjercicioSesion implements Serializable {
+public class EjercicioDuracion extends EjercicioEntrenamiento implements Serializable {
 
     private int duracion;
 

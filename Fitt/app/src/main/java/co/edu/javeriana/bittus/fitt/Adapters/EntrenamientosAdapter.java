@@ -7,29 +7,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
 
-import co.edu.javeriana.bittus.fitt.Modelo.Sesion;
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
-import co.edu.javeriana.bittus.fitt.Vista.CrearRutinaSesionesActivity;
 
-public class SesionesAdapter extends ArrayAdapter<Sesion> {
+public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
 
 
-    private List<Sesion> listSesion;
+    private List<Entrenamiento> listEntrenamiento;
     private Context context;
     private int resource;
-    private Sesion sesion;
+    private Entrenamiento entrenamiento;
     private BtnClickListenerRow mClickListener = null;
 
-    public SesionesAdapter(@NonNull Context context, int resource, List<Sesion> objects, BtnClickListenerRow listenerRow) {
+    public EntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerRow listenerRow) {
         super(context, resource, objects);
-        this.listSesion = objects;
+        this.listEntrenamiento = objects;
         this.context = context;
         this.resource = resource;
         this.mClickListener = listenerRow;
@@ -45,13 +43,11 @@ public class SesionesAdapter extends ArrayAdapter<Sesion> {
             view = LayoutInflater.from(context).inflate(resource, null);
         }
 
-        sesion = listSesion.get(position);
+        entrenamiento = listEntrenamiento.get(position);
 
         TextView nombre = view.findViewById(R.id.textNombreSesion);
-        nombre.setText(sesion.getNombre());
+        nombre.setText(entrenamiento.getNombre());
 
-        TextView duracion = view.findViewById(R.id.textDuracion);
-        duracion.setText(sesion.getDuracion()+ " minutos");
 
         ImageButton editarB = view.findViewById(R.id.buttonEditarSesion);
 
@@ -83,10 +79,4 @@ public class SesionesAdapter extends ArrayAdapter<Sesion> {
         return  view;
     }
 
-    private void editarSesion() {
-
-        CrearRutinaSesionesActivity crearRutinaSesionesActivity = (CrearRutinaSesionesActivity) context;
-        crearRutinaSesionesActivity.editarSesion(sesion, getPosition(sesion));
-
-    }
 }

@@ -35,7 +35,7 @@ public class PopEditarEjercicioSesionDescanso extends Activity {
 
         Bundle bundle = this.getIntent().getExtras();
 
-        ejercicio = (EjercicioDuracion) bundle.getSerializable("ejercicioSesion");
+        ejercicio = (EjercicioDuracion) bundle.getSerializable("ejercicioEntrenamiento");
         duracionT.setText(Integer.toString(ejercicio.getDuracion()));
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -72,7 +72,7 @@ public class PopEditarEjercicioSesionDescanso extends Activity {
 
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            bundle.putSerializable("ejercicioSesion",ejercicio);
+            bundle.putSerializable("ejercicioEntrenamiento",ejercicio);
             intent.putExtras(bundle);
 
 

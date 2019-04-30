@@ -78,7 +78,7 @@ public class PopCrearEjercicioSesionDescanso extends Activity {
 
             Intent intent = this.getIntent();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("ejercicioSesion",ejercicioDuracion);
+            bundle.putSerializable("ejercicioEntrenamiento",ejercicioDuracion);
             intent.putExtras(bundle);
 
 

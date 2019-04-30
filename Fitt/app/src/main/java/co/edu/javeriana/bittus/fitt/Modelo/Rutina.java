@@ -12,7 +12,7 @@ public class Rutina {
     private boolean publica;
     private String nombre;
     private int frecuencia;
-    private List<Sesion> sesionList;
+    private List<Entrenamiento> entrenamientoList;
 
     public Rutina(int ID, int numDiasDescanso, String descripcion, String dificultad, boolean publica, String nombre, int frecuencia) {
         this.ID = ID;
@@ -22,16 +22,16 @@ public class Rutina {
         this.publica = publica;
         this.nombre = nombre;
         this.frecuencia = frecuencia;
-        sesionList = new ArrayList<Sesion>();
+        entrenamientoList = new ArrayList<Entrenamiento>();
     }
     public Rutina() {super();}
 
-    public List<Sesion> getSesionList() {
-        return sesionList;
+    public List<Entrenamiento> getEntrenamientoList() {
+        return entrenamientoList;
     }
 
-    public void setSesionList(List<Sesion> sesionList) {
-        this.sesionList = sesionList;
+    public void setEntrenamientoList(List<Entrenamiento> entrenamientoList) {
+        this.entrenamientoList = entrenamientoList;
     }
     public int getID() {
         return ID;
