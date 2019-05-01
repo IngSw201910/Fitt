@@ -1,8 +1,20 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -11,10 +23,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.Permisos;
 
 public class IniciarRecorridoActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+
+    private LocationRequest mLocationRequest;
+    private LocationCallback mLocationCallback;
+    private FusedLocationProviderClient mFusedLocationClient;
+
+    private static final int ID_PERMISSION_LOCATION = Permisos.getIdPermissionLocation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +43,26 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mLocationRequest = createLocationRequest();
+
+        Permisos.requestPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, "El permiso es necesario para acceder a la localización.", ID_PERMISSION_LOCATION);
+
+
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                Location location = locationResult.getLastLocation();
+
+                if (location != null) {
+                    Toast.makeText(getApplicationContext(),String.valueOf(location.getLatitude()) , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),String.valueOf(location.getLatitude()) , Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+
+        startLocationUpdates();
     }
 
 
@@ -45,4 +84,39 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
+
+
+    private void startLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mFusedLocationClient.requestLocationUpdates(mLocationRequest,
+                    mLocationCallback, null);
+        }
+    }
+
+    protected LocationRequest createLocationRequest() {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(10000); //tasa de refresco en milisegundos
+        mLocationRequest.setFastestInterval(5000); //máxima tasa de refresco
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        return mLocationRequest;
+    }
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == ID_PERMISSION_LOCATION ){
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "Ya hay permiso para acceder a la localización", Toast.LENGTH_LONG).show();
+                    startLocationUpdates();
+                } else {
+                    Toast.makeText(this, "No hay Permiso", Toast.LENGTH_LONG).show();
+                }
+                return;
+        }
+    }
+
 }
