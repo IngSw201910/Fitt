@@ -6,4 +6,67 @@
     android:layout_height="match_parent"
     tools:context=".Vista.EntrenadorActivity">
 
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Entrenador"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="47dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        style="@style/Widget.AppCompat.ImageButton"
+        android:layout_width="100"
+        android:layout_height="100"
+        android:background="FFFFFF"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/mientrenador_icon"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="199dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="100"
+        android:layout_height="100"
+        android:background="FFFFFF"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/buscar_entrenador_icon"
+        tools:layout_editor_absoluteX="239dp"
+        tools:layout_editor_absoluteY="387dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="100"
+        android:layout_height="100"
+        android:background="ffffff"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/chat_entrenador_icon"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="387dp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mi entrenador"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="308dp" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chat entrenador"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="497dp" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Buscar entrenador"
+        tools:layout_editor_absoluteX="231dp"
+        tools:layout_editor_absoluteY="497dp" />
 </android.support.constraint.ConstraintLayout>
