@@ -101,8 +101,8 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
                         inicioColocado = true;
                     }
                     actualizarUbicacion (location);
-                    Toast.makeText(getApplicationContext(),String.valueOf(location.getLatitude()) , Toast.LENGTH_LONG).show();
-                    Toast.makeText(getApplicationContext(),String.valueOf(location.getLatitude()) , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),String.valueOf(location.getLatitude()) , Toast.LENGTH_SHORT).show();
+
                 }
             }
         };
@@ -141,6 +141,8 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setZoomGesturesEnabled(true);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
 
         // Add a marker in Sydney and move the camera
 
@@ -183,7 +185,7 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         LatLng inicio = new LatLng(location.getLatitude(), location.getLongitude());
         mMap.addMarker(new MarkerOptions().position(inicio).title("Inicio"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(inicio));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(10));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(18));
         latitudUltimaUbicacion = inicio.latitude;
         longitudUltimaUbicacion = inicio.longitude;
     }
@@ -200,12 +202,20 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         options.add(new LatLng(latitudUltimaUbicacion, longitudUltimaUbicacion));
         options.add(new LatLng(location.getLatitude(), location.getLongitude()));
         mMap.addPolyline(options);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(18));
     }
 
     private void calcularCampos (Location location){
         //DISTANCIA
         distanciaRecorridoN += UtilsJhonny.distance (location.getLatitude(), location.getLongitude(), latitudUltimaUbicacion, longitudUltimaUbicacion);
         distanciaRecorrido.setText("Distancia: "+distanciaRecorridoN+" km");
+
+        //VELOCIDAD PROMEDIO
+        int elapsedSeg = (int) (SystemClock.elapsedRealtime() - chrono.getBase())/1000;
+        Toast.makeText(getApplicationContext(), "tiempo: "+elapsedSeg , Toast.LENGTH_SHORT).show();
+        velocidadPromedioRecorridoN = (distanciaRecorridoN /elapsedSeg)    * 1000;
+        velocidadPromedioRecorrido.setText("Velocidad promedio: "+velocidadPromedioRecorridoN+" m/s");
     }
 
 
