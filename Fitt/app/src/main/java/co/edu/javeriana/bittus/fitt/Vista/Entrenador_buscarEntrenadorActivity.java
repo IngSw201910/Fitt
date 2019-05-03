@@ -5,13 +5,11 @@ import android.os.Bundle;
 
 import co.edu.javeriana.bittus.fitt.R;
 
-public class EntrenadorActivity extends AppCompatActivity {
+public class Entrenador_buscarEntrenadorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_entrenador);
+        setContentView(R.layout.activity_entrenador_buscar_entrenador);
     }
-
-    //Prueba Commit
 }
