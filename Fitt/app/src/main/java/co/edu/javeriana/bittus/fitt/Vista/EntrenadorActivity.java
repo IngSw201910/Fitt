@@ -5,15 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+
+
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenador;
 
-class entrenadorP{
-    private int id;
-    private String nombre;
 
-}
 
 public class EntrenadorActivity extends AppCompatActivity {
+
+    Entrenador coach = new Entrenador("Camilo Perez");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,9 @@ public class EntrenadorActivity extends AppCompatActivity {
 
     public void goToMiEntrenador(View view){
         Intent nextActivity = new Intent(this, Entrenador_miEntrenadorActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("entrenador", coach);
+        nextActivity.putExtra("bundle", bundle);
         startActivity(nextActivity);
     }
 
