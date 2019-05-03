@@ -61,7 +61,9 @@
         <activity android:name=".Vista.CrearRutinaEntrenamientoActivity" />
         <activity android:name=".Vista.CrearRutinaActivity" />
         <activity android:name=".Vista.EditarEntrenamientoActivity" />
+        <activity android:name=".Vista.RegistroUsuarioActivity"/>
         <activity android:name=".Vista.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
