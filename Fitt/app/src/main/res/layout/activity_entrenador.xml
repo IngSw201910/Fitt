@@ -14,13 +14,13 @@
         android:layout_marginBottom="106dp"
         android:text="@string/entrenador_activity_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintBottom_toTopOf="@+id/btnMiEntrenador"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnMiEntrenador"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="100dp"
         android:layout_height="0dp"
@@ -73,8 +73,8 @@
         android:layout_marginBottom="60dp"
         android:text="@string/entrenador_activity_button_mientrenador"
         app:layout_constraintBottom_toTopOf="@+id/imageButton4"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        app:layout_constraintEnd_toEndOf="@+id/btnMiEntrenador"
+        app:layout_constraintTop_toBottomOf="@+id/btnMiEntrenador" />
 
     <TextView
         android:id="@+id/textView18"
