@@ -1,11 +1,19 @@
 <resources>
     <string name="app_name">Fitt</string>
     <string name="auth_failed">Contraseña</string>
-    <string name="title_activity_menu_pricipal_usuario_navegacion">
-        MenuPricipalUsuarioNavegacionActivity
-    </string>
+    <string name="title_activity_menu_pricipal_usuario_navegacion">MenuPricipalUsuarioNavegacionActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_prueba_mapas">Map</string>
+
+    <!--Strings activity_entrenador.xml-->
+    <string name="entrenador_activity_name">Entrenador</string>
+    <string name="entrenador_activity_button_mientrenador">Mi entrenador</string>
+    <string name="entrenador_activity_button_buscarentrenador">Buscar entrenador</string>
+    <string name="entrenador_activity_button_chatentrenador">Chat entrenador</string>
+    <string name="entrenador_activity_imagebtn_mientrenador">carnet_logo</string>
+    <string name="entrenador_activity_imagebtn_buscarentrenador">buscar_logo</string>
+    <string name="entrenador_activity_imagebtn_chatentrenador">mensaje_logo</string>
+    <!--Your comment-->
 </resources>

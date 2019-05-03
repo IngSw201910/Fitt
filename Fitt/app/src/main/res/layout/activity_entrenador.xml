@@ -10,63 +10,92 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrenador"
+        android:layout_marginTop="47dp"
+        android:layout_marginBottom="106dp"
+        android:text="@string/entrenador_activity_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="47dp" />
+        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButton2"
         style="@style/Widget.AppCompat.ImageButton"
-        android:layout_width="100"
-        android:layout_height="100"
-        android:background="FFFFFF"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="9dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/entrenador_activity_imagebtn_mientrenador"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/mientrenador_icon"
-        tools:layout_editor_absoluteX="155dp"
-        tools:layout_editor_absoluteY="199dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView17"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16"
+        app:srcCompat="@drawable/mientrenador_icon" />
 
     <ImageButton
         android:id="@+id/imageButton3"
-        android:layout_width="100"
-        android:layout_height="100"
-        android:background="FFFFFF"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="72dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/entrenador_activity_imagebtn_buscarentrenador"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/buscar_entrenador_icon"
-        tools:layout_editor_absoluteX="239dp"
-        tools:layout_editor_absoluteY="387dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton4"
+        app:layout_constraintTop_toTopOf="@+id/imageButton4"
+        app:srcCompat="@drawable/buscar_entrenador_icon" />
 
     <ImageButton
         android:id="@+id/imageButton4"
-        android:layout_width="100"
-        android:layout_height="100"
-        android:background="ffffff"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="69dp"
+        android:layout_marginBottom="10dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="@string/entrenador_activity_imagebtn_chatentrenador"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/chat_entrenador_icon"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="387dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView19"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        app:srcCompat="@drawable/chat_entrenador_icon" />
 
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mi entrenador"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="308dp" />
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="60dp"
+        android:text="@string/entrenador_activity_button_mientrenador"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton4"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
 
     <TextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chat entrenador"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="497dp" />
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/entrenador_activity_button_chatentrenador"
+        app:layout_constraintEnd_toStartOf="@+id/textView19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4" />
 
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Buscar entrenador"
-        tools:layout_editor_absoluteX="231dp"
-        tools:layout_editor_absoluteY="497dp" />
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="215dp"
+        android:text="@string/entrenador_activity_button_buscarentrenador"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton4" />
 </android.support.constraint.ConstraintLayout>
