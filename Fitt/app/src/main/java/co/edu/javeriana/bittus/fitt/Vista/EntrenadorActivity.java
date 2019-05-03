@@ -7,6 +7,12 @@ import android.view.View;
 
 import co.edu.javeriana.bittus.fitt.R;
 
+class entrenadorP{
+    private int id;
+    private String nombre;
+
+}
+
 public class EntrenadorActivity extends AppCompatActivity {
 
     @Override
@@ -20,5 +26,13 @@ public class EntrenadorActivity extends AppCompatActivity {
         startActivity(nextActivity);
     }
 
-    //Prueba Commit
+    public void goToChatEntrenador(View view){
+        Intent nextActivity = new Intent(this, ChatsActivity.class);
+        startActivity(nextActivity);
+    }
+
+    public void goToBuscarEntrenador(View view){
+        Intent nextActivity = new Intent(this, Entrenador_buscarEntrenadorActivity.class);
+        startActivity(nextActivity);
+    }
 }

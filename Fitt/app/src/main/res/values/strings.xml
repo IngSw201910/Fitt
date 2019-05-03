@@ -15,5 +15,15 @@
     <string name="entrenador_activity_imagebtn_mientrenador">carnet_logo</string>
     <string name="entrenador_activity_imagebtn_buscarentrenador">buscar_logo</string>
     <string name="entrenador_activity_imagebtn_chatentrenador">mensaje_logo</string>
+
+
+    <!--Strings activity_chats.xml-->
+    <string name="chats_activity_name">Chat</string>
+
+    <!--Strings activity_entrenador_buscar_entrenador.xml-->
+    <string name="entrenador_buscarEntrenador_activity_name">Buscar entrenador</string>
+
+    <!--Strings activity_entrenador_miEntrenador.xml-->
+    <string name="entrenador_miEntrenador_activity_name">Datos de mi entrenador</string>
     <!--Your comment-->
 </resources>
