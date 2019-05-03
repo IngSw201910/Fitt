@@ -48,12 +48,17 @@
         <activity android:name=".Vista.ChatsActivity" />
         <activity android:name=".Vista.ParquesActivity" />
         <activity android:name=".Vista.IniciarRecorridoActivity" />
-        <activity android:name=".Vista.EntrenadorActivity" />
+        <activity android:name=".Vista.EntrenadorActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Vista.CalendarioActivity" />
         <activity android:name=".Vista.MisRutinasActivity" />
         <activity android:name=".Vista.MiProgresoActivity" />
         <activity android:name=".Vista.LogrosActivity" />
-        <activity android:name=".Vista.MenuPrincipalUsuarioFragment" />
+        <activity android:name=".Vista.MenuPrincipalUsuarioFragment"/>
         <activity android:name=".Vista.BuscarRutinas" />
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
