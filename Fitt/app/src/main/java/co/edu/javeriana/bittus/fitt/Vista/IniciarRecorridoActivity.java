@@ -26,6 +26,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -57,12 +58,17 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
     private TextView tiempoRecorrido;
 
     private Chronometer chrono;
+    private long timeWhenStopped = 0;
+
+    private TextView tituloRecorrido;
 
 
 
 
     private double latitudUltimaUbicacion;
     private double longitudUltimaUbicacion;
+
+    private Location ultimaUbiacion;
 
     private boolean inicioColocado = false;
 
@@ -86,6 +92,8 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         caloriasRecorrido = findViewById(R.id.caloriasRecorrido);
         tiempoRecorrido = findViewById(R.id.tiempoRecorrido);
 
+        tituloRecorrido = findViewById(R.id.tituloRecorridoL);
+
 
 
 
@@ -97,12 +105,10 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
 
                 if (location != null) {
                     if (!inicioColocado){
-                        colocarMarcadorInicio (location);
+                        colocarMarcador (location, "Inicio recorrido", BitmapDescriptorFactory.HUE_GREEN);
                         inicioColocado = true;
                     }
                     actualizarUbicacion (location);
-                    Toast.makeText(getApplicationContext(),String.valueOf(location.getLatitude()) , Toast.LENGTH_SHORT).show();
-
                 }
             }
         };
@@ -113,6 +119,7 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
 
     private void inicializarCronometro(){
         chrono  = (Chronometer) findViewById(R.id.tiempoRecorrido);
+        chrono.stop();
         chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
             @Override
             public void onChronometerTick(Chronometer chronometer) {
@@ -157,11 +164,41 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
             public void onClick(View v) {
                 Permisos.requestPermission((Activity) v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION, "El permiso es necesario para acceder a la localización.", ID_PERMISSION_LOCATION);
                 startLocationUpdates();
+
+                chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
                 chrono.start();
+
+                iniciarRecorrido.setColorFilter(getResources().getColor(R.color.gris));
+                iniciarRecorrido.setClickable(false);
+                finalizarRecorrido.setColorFilter(getResources().getColor(R.color.verdeFitt));
+                finalizarRecorrido.setClickable(true);
+
             }
         });
 
+        finalizarRecorrido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalizarRecorrido();
+            }
+        });
+        finalizarRecorrido.setClickable(false);
 
+
+    }
+
+    private void finalizarRecorrido (){
+        chrono.stop();
+        stopLocationUpdates();
+        tituloRecorrido.setText("RESUMEN RECORRIDO");
+        colocarMarcador(ultimaUbiacion, "Final recorrido", BitmapDescriptorFactory.HUE_RED);
+
+        //se deben almacenar las estadisticas en la información del usuario
+        Toast.makeText(getApplicationContext(), "Información del recorrido almacenada!" , Toast.LENGTH_SHORT).show();
+
+        finalizarRecorrido.setColorFilter(getResources().getColor(R.color.gris));
+        finalizarRecorrido.setClickable(false);
+        
     }
 
 
@@ -181,13 +218,17 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         return mLocationRequest;
     }
 
-    private void colocarMarcadorInicio (Location location){
+    private void colocarMarcador (Location location, String titulo, float color){
         LatLng inicio = new LatLng(location.getLatitude(), location.getLongitude());
-        mMap.addMarker(new MarkerOptions().position(inicio).title("Inicio"));
+        mMap.addMarker(new MarkerOptions().position(inicio).title(titulo)
+                .icon(BitmapDescriptorFactory.defaultMarker(color)));
+
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(inicio));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(18));
         latitudUltimaUbicacion = inicio.latitude;
         longitudUltimaUbicacion = inicio.longitude;
+        ultimaUbiacion = location;
     }
 
     private void actualizarUbicacion (Location location){
@@ -195,6 +236,7 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         calcularCampos (location);
         latitudUltimaUbicacion = location.getLatitude();
         longitudUltimaUbicacion = location.getLongitude();
+        ultimaUbiacion = location;
     }
 
     private void dibujarRuta (Location location){
@@ -209,13 +251,41 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
     private void calcularCampos (Location location){
         //DISTANCIA
         distanciaRecorridoN += UtilsJhonny.distance (location.getLatitude(), location.getLongitude(), latitudUltimaUbicacion, longitudUltimaUbicacion);
-        distanciaRecorrido.setText("Distancia: "+distanciaRecorridoN+" km");
+        distanciaRecorrido.setText("Distancia:\n"+String.format("%.3f", distanciaRecorridoN)+" km");
 
         //VELOCIDAD PROMEDIO
         int elapsedSeg = (int) (SystemClock.elapsedRealtime() - chrono.getBase())/1000;
-        Toast.makeText(getApplicationContext(), "tiempo: "+elapsedSeg , Toast.LENGTH_SHORT).show();
-        velocidadPromedioRecorridoN = (distanciaRecorridoN /elapsedSeg)    * 1000;
-        velocidadPromedioRecorrido.setText("Velocidad promedio: "+velocidadPromedioRecorridoN+" m/s");
+        if (elapsedSeg!=0) {
+            Toast.makeText(getApplicationContext(), "tiempo: " + elapsedSeg, Toast.LENGTH_SHORT).show();
+            velocidadPromedioRecorridoN = (distanciaRecorridoN / elapsedSeg) * 3600;
+            velocidadPromedioRecorrido.setText("Velocidad promedio:\n" + String.format("%.1f", velocidadPromedioRecorridoN) + " km/h");
+        }
+
+        //PASOS RECORRIDOS
+
+        //MOCK datos usuario para calcular los pasos
+        double distanciaPaso;
+        double altura = 1.71;
+        String sexo = "m";
+        if (sexo.equals ("m"))
+            distanciaPaso = 0.415 * altura;
+        else //si es mujer
+            distanciaPaso = 0.413 * altura;
+
+        //FIN MOCK
+
+        pasosRecorridosN = (int) (distanciaRecorridoN / (distanciaPaso*0.001));
+        pasosRecorridos.setText("Pasos:\n"+pasosRecorridosN);
+
+        //CALORIAS
+
+
+
+
+
+
+
+
     }
 
 
@@ -235,6 +305,17 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
                 }
                 return;
         }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    private void stopLocationUpdates(){
+        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
     }
 
 }
