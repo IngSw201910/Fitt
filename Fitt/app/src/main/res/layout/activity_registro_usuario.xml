@@ -97,7 +97,7 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreoElectronico" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
 
     <EditText
         android:id="@+id/editTextNombre"
@@ -114,7 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextContraseña" />
 
     <EditText
-        android:id="@+id/editTextCorreoElectronico"
+        android:id="@+id/editTextCorreo"
         android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
