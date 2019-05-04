@@ -188,6 +188,10 @@
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombre"
+        android:focusable="false"
+        android:clickable="true"
+        android:maxLines="1" />
+
 
 </android.support.constraint.ConstraintLayout>
