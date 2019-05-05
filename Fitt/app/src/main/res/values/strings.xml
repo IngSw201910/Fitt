@@ -15,5 +15,8 @@
     <string name="entrenador_activity_imagebtn_mientrenador">carnet_logo</string>
     <string name="entrenador_activity_imagebtn_buscarentrenador">buscar_logo</string>
     <string name="entrenador_activity_imagebtn_chatentrenador">mensaje_logo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--Your comment-->
 </resources>
