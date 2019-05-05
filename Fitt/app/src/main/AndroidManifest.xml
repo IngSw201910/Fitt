@@ -55,12 +55,12 @@
         <activity android:name=".Vista.MiProgresoActivity" />
         <activity android:name=".Vista.LogrosActivity" />
         <activity android:name=".Vista.MenuPrincipalUsuarioFragment" />
-        <activity android:name=".Vista.BuscarRutinas" />
+        <activity android:name=".Vista.BuscarEntrenamiento" />
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
-        <activity android:name=".Vista.CrearEntrenamientoActivity" />
+        <activity android:name=".Vista.paraBorrar" />
         <activity android:name=".Vista.CrearRutinaEntrenamientoActivity" />
-        <activity android:name=".Vista.CrearRutinaActivity" />
+        <activity android:name=".Vista.CrearEntrenamientoActivity" />
         <activity android:name=".Vista.EditarEntrenamientoActivity" />
         <activity android:name=".Vista.RegistroUsuarioActivity"/>
         <activity android:name=".Vista.MainActivity">

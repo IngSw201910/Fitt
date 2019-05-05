@@ -14,13 +14,12 @@ import android.widget.TextView;
 import java.util.List;
 
 
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
-import co.edu.javeriana.bittus.fitt.Vista.CrearEntrenamientoActivity;
 import co.edu.javeriana.bittus.fitt.Vista.EditarEntrenamientoActivity;
 
 
@@ -119,7 +118,7 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
             view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_duracion_nuevo_row, null);
         }
         ejercicioEntrenamiento = listEjercios.get(position);
-        EjercicioDuracion ejercicio = (EjercicioDuracion) ejercicioEntrenamiento;
+        EjercicioDescanso ejercicio = (EjercicioDescanso) ejercicioEntrenamiento;
 
         TextView nombre = (TextView) view.findViewById(R.id.textNombreEjercicioDuracion);
         nombre.setText(ejercicio.getEjercicio().getNombre());

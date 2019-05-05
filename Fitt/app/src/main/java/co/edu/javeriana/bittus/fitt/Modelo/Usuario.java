@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Usuario {
 
-    private List<Rutina> rutinaList;
+    private List<Entrenamiento> entrenamientoList;
     private String nombre;
     private String correo;
     private String contraseña;
@@ -27,7 +27,7 @@ public class Usuario {
         this.sexo = sexo;
         this.altura = altura;
         this.peso = peso;
-        rutinaList = new ArrayList<Rutina>();
+        entrenamientoList = new ArrayList<Entrenamiento>();
     }
 
     public String getNombre() {
@@ -94,11 +94,11 @@ public class Usuario {
         this.peso = peso;
     }
 
-    public List<Rutina> getRutinaList() {
-        return rutinaList;
+    public List<Entrenamiento> getEntrenamientoList() {
+        return entrenamientoList;
     }
 
-    public void setRutinaList(List<Rutina> rutinaList) {
-        this.rutinaList = rutinaList;
+    public void setEntrenamientoList(List<Entrenamiento> entrenamientoList) {
+        this.entrenamientoList = entrenamientoList;
     }
 }

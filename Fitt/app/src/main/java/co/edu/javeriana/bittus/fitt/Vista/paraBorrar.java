@@ -2,21 +2,22 @@ package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosEntrenamientoAdapter;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
@@ -27,7 +28,7 @@ import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionDistanc
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionDuracion;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionRepeticion;
 
-public class EditarEntrenamientoActivity extends AppCompatActivity {
+public class paraBorrar extends AppCompatActivity {
 
     private ListView listaEjerciciosV;
     private List<EjercicioEntrenamiento> ejerciciosList;
@@ -40,7 +41,6 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
 
     private int posicionEditar;
 
-    private Entrenamiento entrenamiento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,18 +56,11 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
         agregarEjercicioB = (ImageButton)findViewById(R.id.buttonAdicionarEjercicio);
         agregarDescansoB = (ImageButton)findViewById(R.id.buttonAgregarDescanso);
 
-
-        Bundle bundle = getIntent().getExtras();
-
-        entrenamiento = (Entrenamiento)bundle.getSerializable("entrenamiento");
+        ejerciciosList = new ArrayList<EjercicioEntrenamiento>();
 
 
-        ejerciciosList = entrenamiento.getEjercicioEntrenamientoList();
 
-        nombreT.setText(entrenamiento.getNombre());
-
-
-        ejerciciosEntrenamientoAdapter = new EjerciciosEntrenamientoAdapter(EditarEntrenamientoActivity.this, ejerciciosList, new BtnClickListenerRow() {
+        ejerciciosEntrenamientoAdapter = new EjerciciosEntrenamientoAdapter(paraBorrar.this, ejerciciosList, new BtnClickListenerRow() {
             @Override
             public void onBtnClickEdit(int position) {
                 if (ejerciciosList.get(position).getEjercicio().getTipo().equals("Distancia")) {
@@ -84,6 +77,7 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
                 eliminarEjercicio(ejerciciosList.get(position));
             }
         });
+
 
         listaEjerciciosV.setAdapter(ejerciciosEntrenamientoAdapter);
 
@@ -116,7 +110,7 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
     }
 
     private void agregarDescanso() {
-        Intent intent = new Intent(EditarEntrenamientoActivity.this, PopCrearEjercicioSesionDescanso.class);
+        Intent intent = new Intent(paraBorrar.this, PopCrearEjercicioSesionDescanso.class);
 
 
 
@@ -133,6 +127,7 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
             nombreT.setError("Campo obligatorio");
             completo = false;
         }
+
         if(ejerciciosList.isEmpty()){
             completo = false;
             int duracion = Toast.LENGTH_SHORT;
@@ -141,7 +136,10 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
         }
         if(completo){
 
-            entrenamiento.setNombre(sNombre);
+
+
+            Entrenamiento entrenamiento = new Entrenamiento(sNombre);
+
             entrenamiento.setEjercicioEntrenamientoList(ejerciciosList);
 
             Intent intent = this.getIntent();
@@ -158,10 +156,11 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
             finish();
         }
 
+
     }
 
     private void buscarEjercicio(){
-        Intent intent = new Intent(new Intent(EditarEntrenamientoActivity.this, BuscarEjercicioActivity.class));
+        Intent intent = new Intent(new Intent(paraBorrar.this, BuscarEjercicioActivity.class));
 
         startActivityForResult(intent, Utils.REQUEST_CODE_BUSCAR_EJERCICIO);
 
@@ -174,7 +173,7 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
 
         posicionEditar = posicion;
 
-        Intent intent = new Intent(EditarEntrenamientoActivity.this, PopEditarEjercicioSesionDistancia.class);
+        Intent intent = new Intent(paraBorrar.this, PopEditarEjercicioSesionDistancia.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicioEntrenamiento",(EjercicioDistancia) ejercicioEntrenamiento);
         intent.putExtras(bundle);
@@ -187,13 +186,13 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
         Intent intent;
 
         if(!ejercicioEntrenamiento.getEjercicio().getNombre().equals("Descanso")){
-            intent = new Intent(EditarEntrenamientoActivity.this, PopEditarEjercicioSesionDuracion.class);
+            intent = new Intent(paraBorrar.this, PopEditarEjercicioSesionDuracion.class);
         }
         else{
-            intent = new Intent(EditarEntrenamientoActivity.this, PopEditarEjercicioSesionDescanso.class);
+            intent = new Intent(paraBorrar.this, PopEditarEjercicioSesionDescanso.class);
         }
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicioEntrenamiento",(EjercicioDuracion) ejercicioEntrenamiento);
+        bundle.putSerializable("ejercicioEntrenamiento",(EjercicioDescanso) ejercicioEntrenamiento);
         intent.putExtras(bundle);
         startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DURACION_EDITAR);
 
@@ -201,7 +200,7 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
     public void abrirPopUpCrearEjercicioRepeticion(EjercicioEntrenamiento ejercicioEntrenamiento, int posicion){
 
         posicionEditar = posicion;
-        Intent intent = new Intent(EditarEntrenamientoActivity.this, PopEditarEjercicioSesionRepeticion.class);
+        Intent intent = new Intent(paraBorrar.this, PopEditarEjercicioSesionRepeticion.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicioEntrenamiento",(EjercicioRepeticiones) ejercicioEntrenamiento);
         intent.putExtras(bundle);

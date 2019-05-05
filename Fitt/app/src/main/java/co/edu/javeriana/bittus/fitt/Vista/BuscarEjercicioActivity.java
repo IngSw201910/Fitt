@@ -10,11 +10,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,13 +21,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
@@ -50,7 +47,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
     private Ejercicio ejercicioSeleccionado;
     private EjercicioDistancia ejercicioDistancia;
-    private EjercicioDuracion ejercicioDuracion;
+    private EjercicioDescanso ejercicioDescanso;
     private EjercicioRepeticiones ejercicioRepeticion;
 
     FirebaseDatabase database;
@@ -184,11 +181,11 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
         }
         if (requestCode == Utils.REQUEST_CODE_EJERCICIO_DURACION && resultCode == RESULT_OK) {
 
-            ejercicioDuracion = (EjercicioDuracion) data.getExtras().getSerializable("ejercicioDuracion");
+            ejercicioDescanso = (EjercicioDescanso) data.getExtras().getSerializable("ejercicioDescanso");
 
             Intent intent = new Intent();
-            if(ejercicioDuracion!=null){
-                intent.putExtra("ejercicioEntrenamiento",ejercicioDuracion);
+            if(ejercicioDescanso !=null){
+                intent.putExtra("ejercicioEntrenamiento", ejercicioDescanso);
             }
 
 

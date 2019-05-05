@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.InformacionEjercicioActivity;
@@ -107,11 +107,11 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
         }else {
             int duracion = Integer.parseInt(sDuracion);
 
-            EjercicioDuracion ejercicioDuracion = new EjercicioDuracion(ejercicio,duracion);
+            EjercicioDescanso ejercicioDescanso = new EjercicioDescanso(ejercicio,duracion);
 
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            bundle.putSerializable("ejercicioDuracion",ejercicioDuracion);
+            bundle.putSerializable("ejercicioDescanso", ejercicioDescanso);
             intent.putExtras(bundle);
 
 

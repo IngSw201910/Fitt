@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.InformacionEjercicioActivity;
@@ -27,7 +27,7 @@ public class PopEditarEjercicioSesionDuracion extends Activity {
     private TextView dificultadEjercicioT;
     private GifImageView gifImageView;
 
-    private EjercicioDuracion ejercicio;
+    private EjercicioDescanso ejercicio;
 
     private EditText duracionT;
 
@@ -49,7 +49,7 @@ public class PopEditarEjercicioSesionDuracion extends Activity {
 
         Bundle bundle = this.getIntent().getExtras();
 
-        ejercicio = (EjercicioDuracion) bundle.getSerializable("ejercicioEntrenamiento");
+        ejercicio = (EjercicioDescanso) bundle.getSerializable("ejercicioEntrenamiento");
 
         nombreEjercicioT.setText(ejercicio.getEjercicio().getNombre());
         musculosEjercicioT.setText(ejercicio.getEjercicio().getMusculos());

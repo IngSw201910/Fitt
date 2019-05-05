@@ -84,7 +84,7 @@ public class InicioUsuarioFragment extends Fragment {
         crearRutinaB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CrearRutinaActivity.class));
+                startActivity(new Intent(getActivity(), CrearEntrenamientoActivity.class));
             }
         });
 

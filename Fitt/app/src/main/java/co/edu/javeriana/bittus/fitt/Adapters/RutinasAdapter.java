@@ -13,22 +13,21 @@ import android.widget.TextView;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Filtros.RutinasFiltro;
-import co.edu.javeriana.bittus.fitt.Modelo.Rutina;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 
 
-public class RutinasAdapter extends ArrayAdapter<Rutina> {
+public class RutinasAdapter extends ArrayAdapter<Entrenamiento> {
 
-    private List<Rutina> listRutina;
+    private List<Entrenamiento> listEntrenamiento;
     private Context context;
     private int resource;
-    private Rutina rutina;
+    private Entrenamiento entrenamiento;
     private RutinasFiltro rutinasFiltro;
 
-    public RutinasAdapter(@NonNull Context context, int resource, List<Rutina> objects) {
+    public RutinasAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects) {
         super(context, resource, objects);
-        this.listRutina = objects;
+        this.listEntrenamiento = objects;
         this.context = context;
         this.resource = resource;
 
@@ -44,17 +43,17 @@ public class RutinasAdapter extends ArrayAdapter<Rutina> {
             view = LayoutInflater.from(context).inflate(resource, null);
         }
 
-        rutina = listRutina.get(position);
+        entrenamiento = listEntrenamiento.get(position);
 
         TextView nombre = view.findViewById(R.id.textView6);
-        nombre.setText(rutina.getNombre());
+        nombre.setText(entrenamiento.getNombre());
 
         TextView dificultad = view.findViewById(R.id.textView14);
-        dificultad.setText(rutina.getDificultad());
+        dificultad.setText(entrenamiento.getDificultad());
 
 
         TextView reiteraciones = view.findViewById(R.id.textView8);
-        reiteraciones.setText(Integer.toString(rutina.getFrecuencia()));
+        reiteraciones.setText(Integer.toString(entrenamiento.getFrecuencia()));
 
         return  view;
     }
@@ -63,7 +62,7 @@ public class RutinasAdapter extends ArrayAdapter<Rutina> {
     @Override
     public Filter getFilter() {
         if(rutinasFiltro ==null){
-            rutinasFiltro = new RutinasFiltro(listRutina, this);
+            rutinasFiltro = new RutinasFiltro(listEntrenamiento, this);
         }
 
 

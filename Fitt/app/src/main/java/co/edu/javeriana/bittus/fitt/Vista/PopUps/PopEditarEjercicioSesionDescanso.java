@@ -8,10 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.R;
-import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
 public class PopEditarEjercicioSesionDescanso extends Activity {
 
@@ -20,7 +18,7 @@ public class PopEditarEjercicioSesionDescanso extends Activity {
     private ImageButton cancelarButton;
 
     private EditText duracionT;
-    private EjercicioDuracion ejercicio;
+    private EjercicioDescanso ejercicio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +33,7 @@ public class PopEditarEjercicioSesionDescanso extends Activity {
 
         Bundle bundle = this.getIntent().getExtras();
 
-        ejercicio = (EjercicioDuracion) bundle.getSerializable("ejercicioEntrenamiento");
+        ejercicio = (EjercicioDescanso) bundle.getSerializable("ejercicioEntrenamiento");
         duracionT.setText(Integer.toString(ejercicio.getDuracion()));
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

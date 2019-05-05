@@ -19,16 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.RutinasAdapter;
-import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
-import co.edu.javeriana.bittus.fitt.Modelo.Rutina;
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
-public class BuscarRutinas extends AppCompatActivity implements TextWatcher {
+public class BuscarEntrenamiento extends AppCompatActivity implements TextWatcher {
 
     FirebaseDatabase database;
     DatabaseReference myRef;
-    private List<Rutina> listaRutinasPublicas = new ArrayList<>();
+    private List<Entrenamiento> listaRutinasPublicas = new ArrayList<>();
     private ListView listViewL;
     private RutinasAdapter adapter;
     private EditText nombreEdit;
@@ -63,10 +62,10 @@ public class BuscarRutinas extends AppCompatActivity implements TextWatcher {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){ //PARA CADA USUARIO
                     for (DataSnapshot singleSnapshot2: singleSnapshot.getChildren()) { //PARA CADA UNA DE LAS RUTINAS DE LOS USUARIOS
-                        Rutina rutina = singleSnapshot2.getValue(Rutina.class);
-                        Log.i("PRUEBARUTINA:", rutina.getDescripcion());
-                        if (rutina.isPublica()) {
-                            listaRutinasPublicas.add(rutina);
+                        Entrenamiento entrenamiento = singleSnapshot2.getValue(Entrenamiento.class);
+                        Log.i("PRUEBARUTINA:", entrenamiento.getDescripcion());
+                        if (entrenamiento.isPublica()) {
+                            listaRutinasPublicas.add(entrenamiento);
                         }
                     }
 

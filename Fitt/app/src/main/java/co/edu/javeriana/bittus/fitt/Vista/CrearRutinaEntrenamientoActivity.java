@@ -106,7 +106,7 @@ public class CrearRutinaEntrenamientoActivity extends AppCompatActivity {
 
     public void crearEntrenamiento(){
 
-        startActivityForResult(new Intent(CrearRutinaEntrenamientoActivity.this, CrearEntrenamientoActivity.class),Utils.REQUEST_CODE_CREAR_SESION);
+        startActivityForResult(new Intent(CrearRutinaEntrenamientoActivity.this, paraBorrar.class),Utils.REQUEST_CODE_CREAR_SESION);
 
     }
     public void editarEntrenamiento(Entrenamiento entrenamiento, int position) {
