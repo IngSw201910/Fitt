@@ -24,7 +24,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Vista.Entrenador_buscarEntrenadorActivity"></activity>
+        <activity android:name=".Vista.RealizarEntrenamientoActivity"></activity>
+        <activity android:name=".Vista.Entrenador_buscarEntrenadorActivity" />
         <activity android:name=".Vista.Entrenador_miEntrenadorActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -41,7 +42,7 @@
         <activity
             android:name=".Vista.PruebaMapas"
             android:label="@string/title_activity_prueba_mapas" />
-        <activity android:name=".Vista.RealizarEntrenamientoActivity" />
+        <activity android:name=".Vista.RealizarEntrenamiento_EntrenamientosHoyActivity" />
         <activity android:name=".Vista.EjerciciosActivity" />
         <activity android:name=".Vista.BuscarUsuarioActivity" />
         <activity android:name=".Vista.MapaUsuariosActivity" />
