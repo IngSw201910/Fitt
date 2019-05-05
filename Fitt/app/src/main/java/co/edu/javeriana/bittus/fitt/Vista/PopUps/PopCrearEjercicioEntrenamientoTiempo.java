@@ -12,6 +12,7 @@ import android.widget.TextView;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.InformacionEjercicioActivity;
 import pl.droidsonroids.gif.GifImageView;
@@ -50,7 +51,7 @@ public class PopCrearEjercicioEntrenamientoTiempo extends Activity {
 
         Bundle bundle = this.getIntent().getExtras();
 
-        ejercicio = (Ejercicio) bundle.getSerializable("ejercicio");
+        ejercicio = (Ejercicio) bundle.getSerializable(StringsMiguel.LLAVE_EJERCICIO);
 
         nombreEjercicioT.setText(ejercicio.getNombre());
         musculosEjercicioT.setText(ejercicio.getMusculos());
@@ -92,7 +93,7 @@ public class PopCrearEjercicioEntrenamientoTiempo extends Activity {
     private void verInfo() {
         Intent inten = new Intent(PopCrearEjercicioEntrenamientoTiempo.this, InformacionEjercicioActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio",ejercicio);
+        bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO,ejercicio);
         inten.putExtras(bundle);
 
         startActivity(inten);
@@ -103,7 +104,7 @@ public class PopCrearEjercicioEntrenamientoTiempo extends Activity {
         String sDuracion = duracionT.getText().toString();
 
         if(sDuracion.isEmpty()){
-                duracionT.setError("Campo obligatorio");
+                duracionT.setError(StringsMiguel.CAMPO_OBLIGATORIO);
         }else {
             int duracion = Integer.parseInt(sDuracion);
 
@@ -111,7 +112,7 @@ public class PopCrearEjercicioEntrenamientoTiempo extends Activity {
 
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            bundle.putSerializable("ejercicioDescanso", ejercicioDescanso);
+            bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO_TIEMPO, ejercicioDescanso);
             intent.putExtras(bundle);
 
 

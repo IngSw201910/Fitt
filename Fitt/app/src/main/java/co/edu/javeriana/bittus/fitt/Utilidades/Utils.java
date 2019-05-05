@@ -35,7 +35,7 @@ public class Utils {
 
     public final static int REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS = 0;
     public final static int REQUEST_CODE_EJERCICIO_DISTANCIA = 1;
-    public final static int REQUEST_CODE_EJERCICIO_DURACION = 2;
+    public final static int REQUEST_CODE_EJERCICIO_TIEMPO = 2;
     public final static int REQUEST_CODE_EJERCICIO_REPETICION = 3;
     public final static int REQUEST_CODE_BUSCAR_EJERCICIO = 4;
     public final static int REQUEST_CODE_EJERCICIO_DESCANSO_EDITAR = 5;

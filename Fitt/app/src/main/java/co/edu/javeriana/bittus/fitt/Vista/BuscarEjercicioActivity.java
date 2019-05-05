@@ -30,6 +30,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoDistancia;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoTiempo;
@@ -37,11 +38,11 @@ import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoR
 
 public class BuscarEjercicioActivity extends AppCompatActivity implements TextWatcher {
 
-    private ListView listViewL;
+    private ListView listViewEjercicios;
     private EjerciciosAdapter adapterEjercicios;
-    private List<Ejercicio> listaEjercicios;
-    private ImageButton buscarEjercicioB;
-    private EditText nombreEjercicioBuscar;
+    private List<Ejercicio> listEjercicios;
+    private ImageButton ImageButtonBuscarEjercicio;
+    private EditText EditTextNombreEjercicioABuscar;
 
 
 
@@ -58,24 +59,24 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_ejercicio);
 
-        listViewL = (ListView)findViewById(R.id.listEjerciciosBuscar);
-        listaEjercicios = new ArrayList<Ejercicio>();
-        buscarEjercicioB = (ImageButton) findViewById(R.id.imageButtonBuscarEjercicio);
-        nombreEjercicioBuscar = (EditText) findViewById(R.id.editText3);
+        listViewEjercicios = (ListView)findViewById(R.id.listEjerciciosBuscar);
+        listEjercicios = new ArrayList<Ejercicio>();
+        ImageButtonBuscarEjercicio = (ImageButton) findViewById(R.id.imageButtonBuscarEjercicio);
+        EditTextNombreEjercicioABuscar = (EditText) findViewById(R.id.editText3);
 
 
-        nombreEjercicioBuscar.addTextChangedListener(this);
+        EditTextNombreEjercicioABuscar.addTextChangedListener(this);
 
 
 
-        adapterEjercicios = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.item_ejercicio_row,listaEjercicios);
+        adapterEjercicios = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.item_ejercicio_row,listEjercicios);
 
 
-        listViewL.setAdapter(adapterEjercicios);
-        listViewL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewEjercicios.setAdapter(adapterEjercicios);
+        listViewEjercicios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ejercicioSeleccionado = listaEjercicios.get(position);
+                ejercicioSeleccionado = listEjercicios.get(position);
                 abrirPopUp();
             }
         });
@@ -84,7 +85,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
         descargarEjercicios();
 
-        buscarEjercicioB.setOnClickListener(new View.OnClickListener() {
+        ImageButtonBuscarEjercicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -97,15 +98,15 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
 
     public void abrirPopUp(){
-        if(ejercicioSeleccionado.getTipo().equals("Distancia")){
+        if(ejercicioSeleccionado.getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DISTANCIA)){
 
             abrirPopUpCrearEjercicioDistancia();
         }
-        if(ejercicioSeleccionado.getTipo().equals("Duración")){
+        if(ejercicioSeleccionado.getTipo().equals(StringsMiguel.EJERCICIO_TIPO_TIEMPO)){
 
-           abrirPopUpCrearEjercicioDuracion();
+           abrirPopUpCrearEjercicioTiempo();
         }
-        if(ejercicioSeleccionado.getTipo().equals("Repetición")){
+        if(ejercicioSeleccionado.getTipo().equals(StringsMiguel.EJERCICIO_TIPO_REPETICIÓN)){
 
             abrirPopUpCrearEjercicioRepeticion();
         }
@@ -116,7 +117,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
         Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioEntrenamientoDistancia.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio", ejercicioSeleccionado);
+        bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO, ejercicioSeleccionado);
 
 
         intent.putExtras(bundle);
@@ -124,16 +125,16 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
         startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DISTANCIA);
 
     }
-    public void abrirPopUpCrearEjercicioDuracion(){
+    public void abrirPopUpCrearEjercicioTiempo(){
 
         Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioEntrenamientoTiempo.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio", ejercicioSeleccionado);
+        bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO, ejercicioSeleccionado);
 
         intent.putExtras(bundle);
 
-        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DURACION);
+        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_TIEMPO);
 
 
     }
@@ -142,7 +143,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
         Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioEntrenamientoRepeticion.class);
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio", ejercicioSeleccionado);
+        bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO, ejercicioSeleccionado);
 
         intent.putExtras(bundle);
 
@@ -165,11 +166,11 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
         if (requestCode == Utils.REQUEST_CODE_EJERCICIO_DISTANCIA && resultCode == RESULT_OK) {
 
-            ejercicioDistancia = (EjercicioDistancia) data.getExtras().getSerializable("ejercicioDistancia");
+            ejercicioDistancia = (EjercicioDistancia) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO_DISTANCIA);
 
             Intent intent = new Intent();
             if(ejercicioDistancia!=null){
-                intent.putExtra("ejercicioEntrenamiento",ejercicioDistancia);
+                intent.putExtra(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO ,ejercicioDistancia);
             }
 
 
@@ -179,13 +180,13 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
 
         }
-        if (requestCode == Utils.REQUEST_CODE_EJERCICIO_DURACION && resultCode == RESULT_OK) {
+        if (requestCode == Utils.REQUEST_CODE_EJERCICIO_TIEMPO && resultCode == RESULT_OK) {
 
-            ejercicioDescanso = (EjercicioDescanso) data.getExtras().getSerializable("ejercicioDescanso");
+            ejercicioDescanso = (EjercicioDescanso) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO_TIEMPO);
 
             Intent intent = new Intent();
             if(ejercicioDescanso !=null){
-                intent.putExtra("ejercicioEntrenamiento", ejercicioDescanso);
+                intent.putExtra(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO  , ejercicioDescanso);
             }
 
 
@@ -197,11 +198,11 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
         }
         if (requestCode == Utils.REQUEST_CODE_EJERCICIO_REPETICION && resultCode == RESULT_OK) {
 
-            ejercicioRepeticion = (EjercicioRepeticiones) data.getExtras().getSerializable("ejercicioRepeticion");
+            ejercicioRepeticion = (EjercicioRepeticiones) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO_REPETICION);
 
             Intent intent = new Intent();
             if(ejercicioRepeticion!=null){
-                intent.putExtra("ejercicioEntrenamiento",ejercicioRepeticion);
+                intent.putExtra(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO ,ejercicioRepeticion);
             }
 
 
@@ -221,7 +222,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    listaEjercicios.add(singleSnapshot.getValue(Ejercicio.class));
+                    listEjercicios.add(singleSnapshot.getValue(Ejercicio.class));
                     Log.i("Prueba", singleSnapshot.getValue(Ejercicio.class).getRutaGIF());
                 }
                 adapterEjercicios.notifyDataSetChanged();

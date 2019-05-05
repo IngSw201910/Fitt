@@ -5,7 +5,13 @@ public class StringsMiguel {
 
     public final static String LLAVE_EJERCICIOS_ENTRENAMIENTO = "ejerciciosEntrenamiento";
     public final static String LLAVE_ENTRENAMIENTO = "entrenamiento";
+    public final static String LLAVE_EJERCICIO = "ejercicio";
     public final static String LLAVE_EJERCICIO_ENTRENAMIENTO = "ejercicioEntrenamiento";
+    public final static String LLAVE_EJERCICIO_ENTRENAMIENTO_DISTANCIA= "ejercicioDistancia";
+    public final static String LLAVE_EJERCICIO_ENTRENAMIENTO_TIEMPO= "ejercicioTiempo";
+    public final static String LLAVE_EJERCICIO_ENTRENAMIENTO_REPETICION= "ejercicioRepeticion";
+
+
     public final static String CAMPO_OBLIGATORIO = "Campo obligatorio";
     public final static String[] DIFICULTADES_ENTRENAMIENTOS = new String[] {"Fácil", "Media", "Difícil"};
     public final static String[] ENTRENAMIENTOS_DESCANSOS_STRING = new String[] {"1", "2", "3", "4","5","6"};
