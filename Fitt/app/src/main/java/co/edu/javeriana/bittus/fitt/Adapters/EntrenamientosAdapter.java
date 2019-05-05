@@ -52,9 +52,6 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         dificultad.setText(entrenamiento.getDificultad());
 
 
-        TextView reiteraciones = view.findViewById(R.id.textView8);
-        reiteraciones.setText(Integer.toString(entrenamiento.getFrecuencia()));
-
         return  view;
     }
 

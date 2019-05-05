@@ -55,10 +55,9 @@
         <activity android:name=".Vista.MiProgresoActivity" />
         <activity android:name=".Vista.LogrosActivity" />
         <activity android:name=".Vista.MenuPrincipalUsuarioFragment" />
-        <activity android:name=".Vista.BuscarEntrenamiento" />
+        <activity android:name=".Vista.BuscarEntrenamientosActivity" />
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
-        <activity android:name=".Vista.paraBorrar" />
         <activity android:name=".Vista.CrearEntrenamientoEjerciciosActivity" />
         <activity android:name=".Vista.CrearEntrenamientoActivity" />
         <activity android:name=".Vista.EditarEntrenamientoActivity" />

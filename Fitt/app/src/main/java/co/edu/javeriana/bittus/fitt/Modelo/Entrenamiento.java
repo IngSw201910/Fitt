@@ -11,17 +11,16 @@ public class Entrenamiento {
     private String dificultad;
     private boolean publica;
     private String nombre;
-    private int frecuencia;
     private List<EjercicioEntrenamiento> ejercicioEntrenamientoList;
 
-    public Entrenamiento(int ID, int numDiasDescanso, String descripcion, String dificultad, boolean publica, String nombre, int frecuencia) {
+    public Entrenamiento(int ID, int numDiasDescanso, String descripcion, String dificultad, boolean publica, String nombre) {
         this.ID = ID;
         this.numDiasDescanso = numDiasDescanso;
         this.descripcion = descripcion;
         this.dificultad = dificultad;
         this.publica = publica;
         this.nombre = nombre;
-        this.frecuencia = frecuencia;
+
         ejercicioEntrenamientoList = new ArrayList<EjercicioEntrenamiento>();
     }
     public Entrenamiento() {super();}
@@ -81,11 +80,5 @@ public class Entrenamiento {
         this.nombre = nombre;
     }
 
-    public int getFrecuencia() {
-        return frecuencia;
-    }
 
-    public void setFrecuencia(int frecuencia) {
-        this.frecuencia = frecuencia;
-    }
 }

@@ -51,7 +51,7 @@ public class ComunidadFragment extends Fragment {
         buscarRutinasB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), BuscarEntrenamiento.class));
+                startActivity(new Intent(getActivity(), BuscarEntrenamientosActivity.class));
             }
         });
 

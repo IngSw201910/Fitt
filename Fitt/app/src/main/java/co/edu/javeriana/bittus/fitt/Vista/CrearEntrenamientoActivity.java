@@ -33,7 +33,6 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
 
     private EditText editTextNombreEntrenamiento;
     private EditText editTextDescripcion;
-    private EditText editTextReIteraciones;
 
     private RadioButton radioButtonPublica;
 
@@ -50,7 +49,6 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
         spinnerDescanso = (Spinner)findViewById(R.id.spinnerDiasDescanso);
         editTextNombreEntrenamiento = (EditText) findViewById(R.id.editTextNombreEntrenamiento);
         editTextDescripcion = (EditText)findViewById(R.id.editTextDescripcionEntrenamiento);
-        editTextReIteraciones = (EditText)findViewById(R.id.editTextReiteraciones);
         radioButtonPublica = (RadioButton) findViewById(R.id.radioButtonPublica);
 
         List<String> stringDificultadList = new ArrayList<>();
@@ -87,10 +85,7 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
             editTextDescripcion.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
-        if(editTextReIteraciones.getText().toString().isEmpty()){
-            editTextReIteraciones.setError(StringsMiguel.CAMPO_OBLIGATORIO);
-            completo = false;
-        }
+
 
         if(completo){
             startActivityForResult(new Intent(CrearEntrenamientoActivity.this, CrearEntrenamientoEjerciciosActivity.class),Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS);
@@ -109,21 +104,20 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
 
             String nombreRutina = editTextNombreEntrenamiento.getText().toString();
             String descripcion = editTextDescripcion.getText().toString();
-            String sFrecuencua = editTextReIteraciones.getText().toString();
             String dificultad = (String) spinnerDificultad.getSelectedItem();
             boolean publica = radioButtonPublica.isChecked();
             String sDiasDescanso = (String) spinnerDescanso.getSelectedItem();
 
-            int frecuencia = Integer.parseInt(sFrecuencua);
+
             int diasDescanso = Integer.parseInt(sDiasDescanso);
 
-            Entrenamiento entrenamiento = new Entrenamiento(0,diasDescanso,descripcion,dificultad,publica,nombreRutina,frecuencia);
+            Entrenamiento entrenamiento = new Entrenamiento(0,diasDescanso,descripcion,dificultad,publica,nombreRutina);
             entrenamiento.setEjercicioEntrenamientoList(entrenamientoList);
 
 
             Utils.almacenarInformacionConKey(RutasBaseDeDatos.getRutaRutinas()+user.getUid()+"/", entrenamiento);
 
-            Log.i("Entrenamiento", nombreRutina + " "+ frecuencia+ " "+descripcion);
+            Log.i("Entrenamiento", nombreRutina +descripcion);
 
 
             finish();

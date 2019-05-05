@@ -23,7 +23,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
-public class BuscarEntrenamiento extends AppCompatActivity implements TextWatcher {
+public class BuscarEntrenamientosActivity extends AppCompatActivity implements TextWatcher {
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -36,14 +36,14 @@ public class BuscarEntrenamiento extends AppCompatActivity implements TextWatche
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_buscar_rutinas);
+        setContentView(R.layout.activity_buscar_entrenamientos);
         listViewL = (ListView)findViewById(R.id.listViewRutinas);
         nombreEdit = (EditText)findViewById(R.id.editTextNombre);
 
 
         nombreEdit.addTextChangedListener(this);
 
-        adapter = new EntrenamientosAdapter(this,R.layout.item_rutina_row,listaRutinasPublicas);
+        adapter = new EntrenamientosAdapter(this,R.layout.item_entrenamiento_row,listaRutinasPublicas);
 
         listViewL.setAdapter(adapter);
 
