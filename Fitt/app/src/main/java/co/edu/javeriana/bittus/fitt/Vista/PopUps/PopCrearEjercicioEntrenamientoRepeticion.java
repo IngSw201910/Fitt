@@ -10,13 +10,13 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.InformacionEjercicioActivity;
 import pl.droidsonroids.gif.GifImageView;
 
-public class PopCrearEjercicioSesionDuracion extends Activity {
+public class PopCrearEjercicioEntrenamientoRepeticion extends Activity {
 
     private ImageButton informacionEjercicioB;
     private ImageButton aceptarButton;
@@ -28,25 +28,29 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
     private TextView dificultadEjercicioT;
     private GifImageView gifImageView;
 
-    private Ejercicio ejercicio;
+    private  Ejercicio ejercicio;
 
-    private EditText duracionT;
+    private EditText repeticionesT;
+    private EditText seriesT;
+    private EditText descansoT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_duracion);
+        setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_repeticion);
 
-        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar3);
-        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar3);
-        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio2);
-        duracionT = (EditText)findViewById(R.id.editTextDuracion2);
+        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar4);
+        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar4);
+        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio3);
+        repeticionesT = (EditText)findViewById(R.id.editTextRepeticiones);
+        seriesT = (EditText)findViewById(R.id.editTextSeries);
+        descansoT = (EditText)findViewById(R.id.editTextDescansos);
 
-        nombreEjercicioT = (TextView)findViewById(R.id.textNombreEjercicio2);
-        musculosEjercicioT = (TextView)findViewById(R.id.textMusculosEjercicio2);
-        tipoEjercicioT = (TextView)findViewById(R.id.textTipoEjercicio2);
-        dificultadEjercicioT = (TextView)findViewById(R.id.textDificultadEjercicio2);
-        gifImageView = (GifImageView) findViewById(R.id.gifEjercicio2);
+        nombreEjercicioT = findViewById(R.id.textNombreEjercicio3);
+        musculosEjercicioT = findViewById(R.id.textMusculosEjercicio3);
+        tipoEjercicioT = findViewById(R.id.textTipoEjercicio3);
+        dificultadEjercicioT = findViewById(R.id.textDificultadEjercicio3);
+        gifImageView = findViewById(R.id.gifEjercicio3);
 
         Bundle bundle = this.getIntent().getExtras();
 
@@ -65,7 +69,6 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
         int height = dm.heightPixels;
 
         getWindow().setLayout((int) (width/1.1), (int) (height/1.5));
-
 
         informacionEjercicioB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,10 +90,11 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
                 finish();
             }
         });
-
+        
     }
+
     private void verInfo() {
-        Intent inten = new Intent(PopCrearEjercicioSesionDuracion.this, InformacionEjercicioActivity.class);
+        Intent inten = new Intent(PopCrearEjercicioEntrenamientoRepeticion.this, InformacionEjercicioActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicio",ejercicio);
         inten.putExtras(bundle);
@@ -99,19 +103,35 @@ public class PopCrearEjercicioSesionDuracion extends Activity {
 
     }
 
-        private void crearEjercicioSesion() {
-        String sDuracion = duracionT.getText().toString();
+    private void crearEjercicioSesion() {
+        String sRepeticiones = repeticionesT.getText().toString();
+        String sSeries = seriesT.getText().toString();
+        String sDescansos = descansoT.getText().toString();
 
-        if(sDuracion.isEmpty()){
-                duracionT.setError("Campo obligatorio");
-        }else {
-            int duracion = Integer.parseInt(sDuracion);
+        boolean completado = true;
 
-            EjercicioDescanso ejercicioDescanso = new EjercicioDescanso(ejercicio,duracion);
+        if(sRepeticiones.isEmpty()){
+            repeticionesT.setError("Campo obligatorio");
+            completado = false;
+        }
+        if(sSeries.isEmpty()){
+            seriesT.setError("Campo obligatorio");
+            completado = false;
+        }
+        if(sDescansos.isEmpty()){
+            descansoT.setError("Campo obligatorio");
+            completado = false;
+        }
+        if(completado){
+            int repeticiones = Integer.parseInt(sRepeticiones);
+            int series = Integer.parseInt(sSeries);
+            int descansos = Integer.parseInt(sDescansos);
+
+            EjercicioRepeticiones ejercicioRepeticiones = new EjercicioRepeticiones(ejercicio, repeticiones, series,descansos);
 
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            bundle.putSerializable("ejercicioDescanso", ejercicioDescanso);
+            bundle.putSerializable("ejercicioRepeticion", ejercicioRepeticiones);
             intent.putExtras(bundle);
 
 

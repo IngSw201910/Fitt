@@ -33,17 +33,16 @@ public class Utils {
 
 
 
-    public final static int REQUEST_CODE_CREAR_RUTINA_SESIONES = 0;
+    public final static int REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS = 0;
     public final static int REQUEST_CODE_EJERCICIO_DISTANCIA = 1;
     public final static int REQUEST_CODE_EJERCICIO_DURACION = 2;
     public final static int REQUEST_CODE_EJERCICIO_REPETICION = 3;
     public final static int REQUEST_CODE_BUSCAR_EJERCICIO = 4;
-    public final static int REQUEST_CODE_CREAR_SESION = 5;
+    public final static int REQUEST_CODE_EJERCICIO_DESCANSO_EDITAR = 5;
     public final static int REQUEST_CODE_EJERCICIO_DESCANSO=6;
     public final static int REQUEST_CODE_EJERCICIO_REPETICION_EDITAR = 7;
-    public final static int REQUEST_CODE_EJERCICIO_DURACION_EDITAR = 8;
+    public final static int REQUEST_CODE_EJERCICIO_TIEMPO_EDITAR = 8;
     public final static int REQUEST_CODE_EJERCICIO_DISTANCIA_EDITAR = 9;
-    public final static int REQUEST_CODE_EDITAR_SESION = 10;
     public final static Ejercicio EJERCICIO_DESCANSO = new Ejercicio("Descanso","Ninguno","Duración","Baja",0,"Descanso entre ejercicios");
 
 

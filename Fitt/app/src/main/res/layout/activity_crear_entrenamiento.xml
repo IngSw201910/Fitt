@@ -23,7 +23,7 @@
         tools:tint="@color/verdeFitt" />
 
     <TextView
-        android:id="@+id/dificultad"
+        android:id="@+id/textViewDiasDescanso"
         android:layout_width="136dp"
         android:layout_height="53dp"
         android:layout_marginStart="8dp"
@@ -31,31 +31,31 @@
         android:layout_marginEnd="8dp"
         android:text="Dias de descanso"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/spinner3"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerDiasDescanso"
         app:layout_constraintHorizontal_bias="0.873"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupPrivacidad" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/spinnerDiasDescanso"
         android:layout_width="120dp"
         android:layout_height="36dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupPrivacidad" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinnerDificultad"
         android:layout_width="150dp"
         android:layout_height="38dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/duracionRutina" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextReiteraciones" />
 
     <EditText
-        android:id="@+id/duracionRutina"
+        android:id="@+id/editTextReiteraciones"
         android:layout_width="279dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
@@ -67,16 +67,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descripcionRutina" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescripcionEntrenamiento" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:text="CREACIÓN RUTINA"
+        android:text="CREACIÓN ENTRENAMIENTO"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,21 +85,21 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewInformacionTitulo"
         android:layout_width="wrap_content"
         android:layout_height="23dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:text="Información de la entrenamiento"
+        android:text="Información del entrenamiento"
         android:textSize="18sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo" />
 
     <EditText
-        android:id="@+id/nombreRutina"
+        android:id="@+id/editTextNombreEntrenamiento"
         android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -111,10 +111,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewInformacionTitulo" />
 
     <EditText
-        android:id="@+id/descripcionRutina"
+        android:id="@+id/editTextDescripcionEntrenamiento"
         android:layout_width="277dp"
         android:layout_height="82dp"
         android:layout_marginStart="8dp"
@@ -126,11 +126,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreRutina"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombreEntrenamiento"
         tools:textAlignment="textStart" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/radioGroupPrivacidad"
         android:layout_width="229dp"
         android:layout_height="42dp"
         android:layout_marginStart="8dp"
@@ -139,10 +139,10 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2">
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDificultad">
 
         <RadioButton
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioButtonPublica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -150,7 +150,7 @@
             android:text="Pública" />
 
         <RadioButton
-            android:id="@+id/radioButton"
+            android:id="@+id/radioButtonPrivada"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -158,7 +158,7 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/Dificultad"
+        android:id="@+id/TextViewDificultad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -166,13 +166,13 @@
         android:layout_marginEnd="8dp"
         android:text="Dificultad"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/spinner2"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerDificultad"
         app:layout_constraintHorizontal_bias="0.617"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/duracionRutina" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextReiteraciones" />
 
     <ImageButton
-        android:id="@+id/buttonSiguienteCrearRutina"
+        android:id="@+id/ImageButtonSiguienteCrearRutina"
         android:layout_width="74dp"
         android:layout_height="74dp"
         android:layout_marginTop="8dp"
@@ -182,7 +182,7 @@
         android:tint="@color/verdeBotones"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDiasDescanso"
         app:layout_constraintVertical_bias="0.9"
         app:srcCompat="@drawable/siguiente" />
 

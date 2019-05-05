@@ -59,7 +59,7 @@
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
         <activity android:name=".Vista.paraBorrar" />
-        <activity android:name=".Vista.CrearRutinaEntrenamientoActivity" />
+        <activity android:name=".Vista.CrearEntrenamientoEjerciciosActivity" />
         <activity android:name=".Vista.CrearEntrenamientoActivity" />
         <activity android:name=".Vista.EditarEntrenamientoActivity" />
         <activity android:name=".Vista.RegistroUsuarioActivity"/>
@@ -72,28 +72,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionDistancia"
+            android:name=".Vista.PopUps.PopCrearEjercicioEntrenamientoDistancia"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionDuracion"
+            android:name=".Vista.PopUps.PopCrearEjercicioEntrenamientoTiempo"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionRepeticion"
+            android:name=".Vista.PopUps.PopCrearEjercicioEntrenamientoRepeticion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionDescanso"
+            android:name=".Vista.PopUps.PopCrearEjercicioEntrenamientoDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopEditarEjercicioSesionRepeticion"
+            android:name=".Vista.PopUps.PopEditarEjercicioEntrenamientoRepeticion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopEditarEjercicioSesionDuracion"
+            android:name=".Vista.PopUps.PopEditarEjercicioEntrenamientoTiempo"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopEditarEjercicioSesionDistancia"
+            android:name=".Vista.PopUps.PopEditarEjercicioEntrenamientoDistancia"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopEditarEjercicioSesionDescanso"
+            android:name=".Vista.PopUps.PopEditarEjercicioEntrenamientoDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
 
         <meta-data

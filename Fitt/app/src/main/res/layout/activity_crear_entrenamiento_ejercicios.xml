@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vista.CrearRutinaEntrenamientoActivity">
+    tools:context=".Vista.CrearEntrenamientoEjerciciosActivity">
 
     <TextView
         android:id="@+id/agregarsesión"
@@ -16,17 +16,17 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAceptarCrearRutina"
+        app:layout_constraintTop_toBottomOf="@+id/ImageButtonGuardarEntrenamiento"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textview"
+        android:id="@+id/textViewTitulo"
         android:layout_width="258dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:text="CREACIÓN RUTINA"
+        android:text="CREACIÓN ENTRENAMIENTO"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -35,23 +35,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview2"
+        android:id="@+id/textViewTituloAgregarEjercicios"
         android:layout_width="207dp"
         android:layout_height="35dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Agregar entrenamientos"
+        android:text="Agregar ejercicios"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitulo" />
 
     <ListView
-        android:id="@+id/listSesiones"
+        android:id="@+id/ListViewEjerciciosEntrenamiento"
         android:layout_width="321dp"
         android:layout_height="360dp"
         android:layout_marginStart="8dp"
@@ -59,10 +59,10 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview2" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTituloAgregarEjercicios" />
 
     <ImageButton
-        android:id="@+id/buttonAdicionarSesion"
+        android:id="@+id/ImageButtonAdicionarEjercicioEntrenamiento"
         android:layout_width="74dp"
         android:layout_height="74dp"
         android:layout_marginStart="52dp"
@@ -71,10 +71,10 @@
         android:scaleType="fitXY"
         android:src="@drawable/crear_rutina"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listSesiones" />
+        app:layout_constraintTop_toBottomOf="@+id/ListViewEjerciciosEntrenamiento" />
 
     <ImageButton
-        android:id="@+id/buttonAceptarCrearRutina"
+        android:id="@+id/ImageButtonGuardarEntrenamiento"
         android:layout_width="74dp"
         android:layout_height="74dp"
         android:layout_marginTop="8dp"
@@ -84,7 +84,7 @@
         android:src="@drawable/guardar"
         android:tint="@color/verdeFitt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listSesiones" />
+        app:layout_constraintTop_toBottomOf="@+id/ListViewEjerciciosEntrenamiento" />
 
     <TextView
         android:id="@+id/Agregarsesión"
@@ -92,11 +92,11 @@
         android:layout_height="43dp"
         android:layout_marginStart="44dp"
         android:layout_marginBottom="20dp"
-        android:text="Agregar entrenamiento"
+        android:text="Agregar Ejercicio"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAdicionarSesion"
+        app:layout_constraintTop_toBottomOf="@+id/ImageButtonAdicionarEjercicioEntrenamiento"
         app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

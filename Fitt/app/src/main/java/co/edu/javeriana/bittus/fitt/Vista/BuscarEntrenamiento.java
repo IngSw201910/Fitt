@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.edu.javeriana.bittus.fitt.Adapters.RutinasAdapter;
+import co.edu.javeriana.bittus.fitt.Adapters.EntrenamientosAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
@@ -29,7 +29,7 @@ public class BuscarEntrenamiento extends AppCompatActivity implements TextWatche
     DatabaseReference myRef;
     private List<Entrenamiento> listaRutinasPublicas = new ArrayList<>();
     private ListView listViewL;
-    private RutinasAdapter adapter;
+    private EntrenamientosAdapter adapter;
     private EditText nombreEdit;
 
     @Override
@@ -43,7 +43,7 @@ public class BuscarEntrenamiento extends AppCompatActivity implements TextWatche
 
         nombreEdit.addTextChangedListener(this);
 
-        adapter = new RutinasAdapter(this,R.layout.item_rutina_row,listaRutinasPublicas);
+        adapter = new EntrenamientosAdapter(this,R.layout.item_rutina_row,listaRutinasPublicas);
 
         listViewL.setAdapter(adapter);
 

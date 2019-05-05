@@ -137,13 +137,13 @@
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="75dp"
+        android:layout_width="107dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="52dp"
         android:layout_weight="0.3"
-        android:text="Mis rutinas"
+        android:text="Entrenamientos"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="14sp"
@@ -257,13 +257,13 @@
 
     <TextView
         android:id="@+id/text3"
-        android:layout_width="78dp"
+        android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
         android:layout_weight="0.3"
-        android:text="Crear Rutina"
+        android:text="+Entrenamiento"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="14sp"

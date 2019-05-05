@@ -20,7 +20,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
-import co.edu.javeriana.bittus.fitt.Vista.EditarEntrenamientoActivity;
+
 
 
 public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntrenamiento> {

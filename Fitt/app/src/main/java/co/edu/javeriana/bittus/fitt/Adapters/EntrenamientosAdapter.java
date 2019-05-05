@@ -7,30 +7,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Filtros.RutinasFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
-import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
+
 
 public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
-
 
     private List<Entrenamiento> listEntrenamiento;
     private Context context;
     private int resource;
     private Entrenamiento entrenamiento;
-    private BtnClickListenerRow mClickListener = null;
+    private RutinasFiltro rutinasFiltro;
 
-    public EntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerRow listenerRow) {
+    public EntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects) {
         super(context, resource, objects);
         this.listEntrenamiento = objects;
         this.context = context;
         this.resource = resource;
-        this.mClickListener = listenerRow;
+
     }
 
 
@@ -45,38 +45,30 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
 
         entrenamiento = listEntrenamiento.get(position);
 
-        TextView nombre = view.findViewById(R.id.textNombreSesion);
+        TextView nombre = view.findViewById(R.id.textView6);
         nombre.setText(entrenamiento.getNombre());
 
+        TextView dificultad = view.findViewById(R.id.textView14);
+        dificultad.setText(entrenamiento.getDificultad());
 
-        ImageButton editarB = view.findViewById(R.id.buttonEditarSesion);
 
-        editarB.setTag(position);
-
-        editarB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mClickListener!=null){
-                    mClickListener.onBtnClickEdit((Integer) v.getTag());
-                }
-
-            }
-        });
-
-        ImageButton eliminarB = view.findViewById(R.id.buttonDelete4);
-        eliminarB.setTag(position);
-
-        eliminarB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mClickListener!=null){
-                    mClickListener.onBtnClickDelete((Integer) v.getTag());
-                }
-            }
-        });
-
+        TextView reiteraciones = view.findViewById(R.id.textView8);
+        reiteraciones.setText(Integer.toString(entrenamiento.getFrecuencia()));
 
         return  view;
+    }
+
+    @NonNull
+    @Override
+    public Filter getFilter() {
+        if(rutinasFiltro ==null){
+            rutinasFiltro = new RutinasFiltro(listEntrenamiento, this);
+        }
+
+
+        return rutinasFiltro;
+
+
     }
 
 }

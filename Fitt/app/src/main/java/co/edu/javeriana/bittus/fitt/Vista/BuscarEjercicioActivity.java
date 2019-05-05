@@ -31,9 +31,9 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDistancia;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDuracion;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionRepeticion;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoDistancia;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoTiempo;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoRepeticion;
 
 public class BuscarEjercicioActivity extends AppCompatActivity implements TextWatcher {
 
@@ -113,7 +113,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
     }
 
     public void abrirPopUpCrearEjercicioDistancia(){
-        Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDistancia.class);
+        Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioEntrenamientoDistancia.class);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicio", ejercicioSeleccionado);
@@ -126,7 +126,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
     }
     public void abrirPopUpCrearEjercicioDuracion(){
 
-        Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionDuracion.class);
+        Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioEntrenamientoTiempo.class);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicio", ejercicioSeleccionado);
@@ -139,7 +139,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
     }
     public void abrirPopUpCrearEjercicioRepeticion(){
 
-        Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioSesionRepeticion.class);
+        Intent intent = new Intent(BuscarEjercicioActivity.this, PopCrearEjercicioEntrenamientoRepeticion.class);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable("ejercicio", ejercicioSeleccionado);

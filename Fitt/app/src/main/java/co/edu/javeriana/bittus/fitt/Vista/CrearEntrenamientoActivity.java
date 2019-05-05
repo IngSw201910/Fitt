@@ -18,22 +18,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
 public class CrearEntrenamientoActivity extends AppCompatActivity {
 
-    private ImageButton siguienteB;
-    private Spinner dificultadSpin;
-    private Spinner descansoSpin;
+    private ImageButton ImageButtonSiguiente;
+    private Spinner spinnerDificultad;
+    private Spinner spinnerDescanso;
 
-    private EditText nombreRutinaT;
-    private EditText descripcionRutinaT;
-    private EditText frecuenciaT;
+    private EditText editTextNombreEntrenamiento;
+    private EditText editTextDescripcion;
+    private EditText editTextReIteraciones;
 
-    private RadioButton publicaRB;
+    private RadioButton radioButtonPublica;
 
     private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private static FirebaseUser user = mAuth.getCurrentUser();
@@ -41,33 +43,31 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_rutina);
+        setContentView(R.layout.activity_crear_entrenamiento);
 
-        siguienteB = (ImageButton) findViewById(R.id.buttonSiguienteCrearRutina);
-        dificultadSpin = (Spinner)findViewById(R.id.spinner2);
-        descansoSpin = (Spinner)findViewById(R.id.spinner3);
-        nombreRutinaT = (EditText) findViewById(R.id.nombreRutina);
-        descripcionRutinaT = (EditText)findViewById(R.id.descripcionRutina);
-        frecuenciaT = (EditText)findViewById(R.id.duracionRutina);
-        publicaRB = (RadioButton) findViewById(R.id.radioButton2);
+        ImageButtonSiguiente = (ImageButton) findViewById(R.id.ImageButtonSiguienteCrearRutina);
+        spinnerDificultad = (Spinner)findViewById(R.id.spinnerDificultad);
+        spinnerDescanso = (Spinner)findViewById(R.id.spinnerDiasDescanso);
+        editTextNombreEntrenamiento = (EditText) findViewById(R.id.editTextNombreEntrenamiento);
+        editTextDescripcion = (EditText)findViewById(R.id.editTextDescripcionEntrenamiento);
+        editTextReIteraciones = (EditText)findViewById(R.id.editTextReiteraciones);
+        radioButtonPublica = (RadioButton) findViewById(R.id.radioButtonPublica);
 
         List<String> stringDificultadList = new ArrayList<>();
-        String[] strDificultad = new String[] {"Fácil", "Media", "Difícil"};
-        Collections.addAll(stringDificultadList, strDificultad);
+        Collections.addAll(stringDificultadList, StringsMiguel.DIFICULTADES_ENTRENAMIENTOS);
         ArrayAdapter<String> comboAdapterDificultad = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDificultadList);
-        dificultadSpin.setAdapter(comboAdapterDificultad);
+        spinnerDificultad.setAdapter(comboAdapterDificultad);
 
 
         List<String> stringDescansoList = new ArrayList<>();
-        String[] strDescanso = new String[] {"1", "2", "3", "4","5","6"};
-        Collections.addAll(stringDescansoList, strDescanso);
+        Collections.addAll(stringDescansoList, StringsMiguel.ENTRENAMIENTOS_DESCANSOS_STRING);
         ArrayAdapter<String> comboAdapterDescanso = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDescansoList);
-        descansoSpin.setAdapter(comboAdapterDescanso);
+        spinnerDescanso.setAdapter(comboAdapterDescanso);
 
 
 
 
-        siguienteB.setOnClickListener(new View.OnClickListener() {
+        ImageButtonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 siguientePantalla();
@@ -79,21 +79,21 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
     private void siguientePantalla(){
 
         boolean completo = true;
-        if(nombreRutinaT.getText().toString().isEmpty()){
-            nombreRutinaT.setError("Campo obligatorio");
+        if(editTextNombreEntrenamiento.getText().toString().isEmpty()){
+            editTextNombreEntrenamiento.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
-        if(descripcionRutinaT.getText().toString().isEmpty()){
-            descripcionRutinaT.setError("Campo obligatorio");
+        if(editTextDescripcion.getText().toString().isEmpty()){
+            editTextDescripcion.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
-        if(frecuenciaT.getText().toString().isEmpty()){
-            frecuenciaT.setError("Campo obligatorio");
+        if(editTextReIteraciones.getText().toString().isEmpty()){
+            editTextReIteraciones.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
 
         if(completo){
-            startActivityForResult(new Intent(CrearEntrenamientoActivity.this, CrearRutinaEntrenamientoActivity.class),Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES);
+            startActivityForResult(new Intent(CrearEntrenamientoActivity.this, CrearEntrenamientoEjerciciosActivity.class),Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS);
         }
 
     }
@@ -103,21 +103,16 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode== Utils.REQUEST_CODE_CREAR_RUTINA_SESIONES&&data!=null)
+        if(requestCode== Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS &&data!=null)
         {
-            List<Entrenamiento> entrenamientoList = (List<Entrenamiento>) data.getExtras().getSerializable("entrenamientos");
+            List<EjercicioEntrenamiento> entrenamientoList = (List<EjercicioEntrenamiento>) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIOS_ENTRENAMIENTO);
 
-
-
-
-
-            String nombreRutina = nombreRutinaT.getText().toString();
-            String descripcion = descripcionRutinaT.getText().toString();
-            String sFrecuencua = frecuenciaT.getText().toString();
-            String dificultad = (String) dificultadSpin.getSelectedItem();
-            boolean publica = publicaRB.isChecked();
-            String sDiasDescanso = (String) descansoSpin.getSelectedItem();
+            String nombreRutina = editTextNombreEntrenamiento.getText().toString();
+            String descripcion = editTextDescripcion.getText().toString();
+            String sFrecuencua = editTextReIteraciones.getText().toString();
+            String dificultad = (String) spinnerDificultad.getSelectedItem();
+            boolean publica = radioButtonPublica.isChecked();
+            String sDiasDescanso = (String) spinnerDescanso.getSelectedItem();
 
             int frecuencia = Integer.parseInt(sFrecuencua);
             int diasDescanso = Integer.parseInt(sDiasDescanso);

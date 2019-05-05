@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import co.edu.javeriana.bittus.fitt.Adapters.RutinasAdapter;
+import co.edu.javeriana.bittus.fitt.Adapters.EntrenamientosAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 
 public class RutinasFiltro extends Filter {
@@ -14,12 +14,12 @@ public class RutinasFiltro extends Filter {
 
 
     private List<Entrenamiento> listEntrenamientos;
-    private RutinasAdapter adapter;
+    private EntrenamientosAdapter adapter;
     private List<Entrenamiento> listTemporal;
 
 
 
-    public RutinasFiltro(List<Entrenamiento> listEntrenamientos, RutinasAdapter adapter) {
+    public RutinasFiltro(List<Entrenamiento> listEntrenamientos, EntrenamientosAdapter adapter) {
         this.listEntrenamientos = listEntrenamientos;
         this.adapter = adapter;
         listTemporal = new ArrayList<Entrenamiento>();

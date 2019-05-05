@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.R;
 
-public class PopEditarEjercicioSesionDescanso extends Activity {
+public class PopEditarEjercicioEntrenamientoDescanso extends Activity {
 
 
     private ImageButton aceptarButton;
