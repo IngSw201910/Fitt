@@ -12,7 +12,7 @@
         android:layout_width="167dp"
         android:layout_height="54dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/verdeFitt"
@@ -24,13 +24,13 @@
         app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPeso"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/editTextAltura"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
         android:ems="10"
         android:hint="Altura"
@@ -43,7 +43,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Peso"
         android:inputType="number"
@@ -53,9 +53,9 @@
     <RadioGroup
         android:id="@+id/radioGroupSex"
         android:layout_width="229dp"
-        android:layout_height="42dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,21 +90,21 @@
         android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreoElectronico" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
 
     <EditText
         android:id="@+id/editTextNombre"
         android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
         android:ems="10"
         android:hint="Nombre"
@@ -114,11 +114,11 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextContraseña" />
 
     <EditText
-        android:id="@+id/editTextCorreoElectronico"
+        android:id="@+id/editTextCorreo"
         android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
         android:ems="10"
         android:hint="Correo electrónico"
@@ -131,7 +131,7 @@
         android:id="@+id/imageButtonTomarFoto"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="88dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
@@ -143,7 +143,7 @@
         android:id="@+id/imageButtonCargarFoto"
         android:layout_width="54dp"
         android:layout_height="54dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="88dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
@@ -168,10 +168,10 @@
 
     <ImageView
         android:id="@+id/imageViewPerfil"
-        android:layout_width="169dp"
-        android:layout_height="152dp"
+        android:layout_width="147dp"
+        android:layout_height="119dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTituloRegistro"
         tools:srcCompat="@tools:sample/avatars" />
@@ -179,15 +179,19 @@
     <EditText
         android:id="@+id/editTextFechaDeNacimiento"
         android:layout_width="277dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
         android:ems="10"
         android:hint="Fecha de nacimiento"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombre"
+        android:focusable="false"
+        android:clickable="true"
+        android:maxLines="1" />
+
 
 </android.support.constraint.ConstraintLayout>
