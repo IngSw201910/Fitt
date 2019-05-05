@@ -9,16 +9,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private Button iniciarSesionB;
+    private TextView registrarUsuarioB;
     private EditText correoET;
     private EditText passET;
 
@@ -36,14 +40,17 @@ public class MainActivity extends AppCompatActivity {
     //prueba comentario
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         correoET = (EditText) findViewById(R.id.correo);
         passET = (EditText) findViewById(R.id.pass);
 
-        iniciarSesionB = (Button) findViewById(R.id.buttonIniciarSesion);
 
+        iniciarSesionB = (Button) findViewById(R.id.buttonIniciarSesion);
+        registrarUsuarioB = (TextView) findViewById(R.id.textViewRegistrarseUsuario);
+        FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -60,6 +67,17 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        registrarUsuarioB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                registrarUsuario();
+            }
+
+
+        });
+
+
         iniciarSesionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +87,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void registrarUsuario() {
+        Intent intent = new Intent(MainActivity.this, RegistroUsuarioActivity.class);
 
+
+        startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_REGISTRAR_USUARIO);
+
+
+
+    }
     protected void signInUser(){
         if(validateForm()){
             String email = correoET.getText().toString();

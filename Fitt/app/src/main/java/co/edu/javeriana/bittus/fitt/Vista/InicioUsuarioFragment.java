@@ -3,11 +3,9 @@ package co.edu.javeriana.bittus.fitt.Vista;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -23,6 +21,18 @@ public class InicioUsuarioFragment extends Fragment {
     private ImageButton salirB;
     private FirebaseAuth mAuth;
     private ImageButton crearRutinaB;
+
+
+
+    private ImageButton logrosB;
+    private ImageButton miProgresoB;
+    private ImageButton misRutinasB;
+    private ImageButton realizarEntrenamientoB;
+    private ImageButton calendarioB;
+    private ImageButton entrenadorB;
+    private ImageButton iniciarRecorridoB;
+
+
 
 
 
@@ -45,6 +55,20 @@ public class InicioUsuarioFragment extends Fragment {
         salirB = (ImageButton) v.findViewById(R.id.logout);
         crearRutinaB = (ImageButton) v.findViewById(R.id.btnCrearRutina);
 
+        logrosB = (ImageButton) v.findViewById(R.id.btnMisLogros);
+
+
+        miProgresoB = (ImageButton) v.findViewById(R.id.btnMiProgreso);
+        misRutinasB = (ImageButton) v.findViewById(R.id.btnMisRutinas);
+        realizarEntrenamientoB = (ImageButton) v.findViewById(R.id.btnRealizarEntrenamiento);
+        calendarioB = (ImageButton) v.findViewById(R.id.btnCalendario);
+        entrenadorB = (ImageButton) v.findViewById(R.id.btnEntrenador);
+        iniciarRecorridoB = (ImageButton) v.findViewById(R.id.btnIniciarRecorrido);
+
+
+
+
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -64,9 +88,54 @@ public class InicioUsuarioFragment extends Fragment {
             }
         });
 
+        miProgresoB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MiProgresoActivity.class));
+            }
+        });
+
+        logrosB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LogrosActivity.class));
+            }
+        });
+
+        misRutinasB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MisRutinasActivity.class));
+            }
+        });
+
+        realizarEntrenamientoB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), RealizarEntrenamiento_EntrenamientosHoyActivity.class));
+            }
+        });
+
+        calendarioB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CalendarioActivity.class));
+            }
+        });
+
+        entrenadorB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), EntrenadorActivity.class));
+            }
+        });
+
+        iniciarRecorridoB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), IniciarRecorridoActivity.class));
+            }
+        });
+
     }
-
-
-
-
 }

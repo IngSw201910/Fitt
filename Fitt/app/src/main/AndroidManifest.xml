@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="co.edu.javeriana.bittus.fitt">
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <permission
+        android:name="com.example.barcodelibrary.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.example.barcodelibrary.permission.MAPS_RECEIVE" />
 
     <application
         android:allowBackup="true"
@@ -9,8 +24,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Vista.RealizarEntrenamientoActivity"></activity>
+        <activity android:name=".Vista.Entrenador_buscarEntrenadorActivity" />
+        <activity android:name=".Vista.Entrenador_miEntrenadorActivity" />
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
-        <activity android:name=".Vista.MenuPrincipalUsuarioFragment"></activity>
+        <activity
+            android:name=".Vista.PruebaMapas"
+            android:label="@string/title_activity_prueba_mapas" />
+        <activity android:name=".Vista.RealizarEntrenamiento_EntrenamientosHoyActivity" />
+        <activity android:name=".Vista.EjerciciosActivity" />
+        <activity android:name=".Vista.BuscarUsuarioActivity" />
+        <activity android:name=".Vista.MapaUsuariosActivity" />
+        <activity android:name=".Vista.ChatsActivity" />
+        <activity android:name=".Vista.ParquesActivity" />
+        <activity android:name=".Vista.IniciarRecorridoActivity" />
+        <activity android:name=".Vista.EntrenadorActivity" />
+        <activity android:name=".Vista.CalendarioActivity" />
+        <activity android:name=".Vista.MisRutinasActivity" />
+        <activity android:name=".Vista.MiProgresoActivity" />
+        <activity android:name=".Vista.LogrosActivity" />
+        <activity android:name=".Vista.MenuPrincipalUsuarioFragment" />
         <activity android:name=".Vista.BuscarRutinas" />
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
@@ -18,7 +62,9 @@
         <activity android:name=".Vista.CrearRutinaEntrenamientoActivity" />
         <activity android:name=".Vista.CrearRutinaActivity" />
         <activity android:name=".Vista.EditarEntrenamientoActivity" />
+        <activity android:name=".Vista.RegistroUsuarioActivity"/>
         <activity android:name=".Vista.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
