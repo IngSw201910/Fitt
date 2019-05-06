@@ -8,6 +8,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
@@ -24,6 +25,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,8 +41,9 @@ import java.io.IOException;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.GetNearbyPlaces;
 
-public class ParquesActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class ParquesActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     public static final String TAG = "LOCATION_APP";
     public static final int ID_PERMISSION_LOCATION = 1;
@@ -49,6 +53,7 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
     private GoogleMap mMap;
     private ImageView imagGPS;
     private EditText buscador;
+    private LatLng miPosicion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,11 +116,9 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
                     LatLng position = new LatLng(addressResult.getLatitude(), addressResult.getLongitude());
                     Toast.makeText(ParquesActivity.this, addressResult.getFeatureName(), Toast.LENGTH_SHORT).show();
                     if (mMap != null) {
-                        mMap.addMarker(new MarkerOptions().position(position)
-                                .title(addressResult.getFeatureName())
-                                .snippet(addressResult.getAddressLine(0)) //Texto de información
-                                .alpha(0.5f)); //Transparencia
                         moveCamera(position, DEFAULT_ZOOM);
+                        miPosicion = position;
+                        findParks();
                     }
                 } else {Toast.makeText(ParquesActivity.this, "Dirección no encontrada", Toast.LENGTH_SHORT).show();}
             } catch (IOException e) {
@@ -135,10 +138,13 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
                 public void onSuccess(Location location) {
                     Log.i(TAG, "localizaciÃ³n obtenida!");
                     if (location != null) {
-                        Log.i(TAG, "longitud: " + location.getLongitude());
+                        /*Log.i(TAG, "longitud: " + location.getLongitude());
                         Log.i(TAG, "latitud: " + location.getLatitude());
-                        Toast.makeText(getBaseContext(), "longitud: " + location.getLongitude() + "latitud: " + location.getLatitude(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "longitud: " + location.getLongitude() + "latitud: " + location.getLatitude(), Toast.LENGTH_SHORT).show();*/
                         moveCamera(new LatLng(location.getLatitude(), location.getLongitude()), DEFAULT_ZOOM);
+                        miPosicion = new LatLng(location.getLatitude(), location.getLongitude());
+                        findParks();
+                        Log.i(TAG, "llega");
                     }
                 }
             });
@@ -186,5 +192,41 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    public void findParks(){
+
+        StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        stringBuilder.append("location="+miPosicion.latitude+","+miPosicion.longitude);
+        stringBuilder.append("&radius="+1000);
+        stringBuilder.append("&keyword="+"park");
+        stringBuilder.append("&key="+getResources().getString(R.string.google_places_key));
+
+        String url = stringBuilder.toString();
+        Log.d(TAG, "url"+url );
+        Toast.makeText(this, url, Toast.LENGTH_LONG).show();
+
+        Object dataTransfer[] = new Object[2];
+        dataTransfer[0] = mMap;
+        dataTransfer[1] = url;
+
+        GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces(this);
+        getNearbyPlaces.execute(dataTransfer);
+
+
+    }
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

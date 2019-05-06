@@ -16,4 +16,7 @@
     <string name="entrenador_activity_imagebtn_buscarentrenador">buscar_logo</string>
     <string name="entrenador_activity_imagebtn_chatentrenador">mensaje_logo</string>
     <!--Your comment-->
+
+
+    <string name="google_places_key">AIzaSyCfgUbdpuSBiocdZjspf77fcGavcnDVv4g</string>
 </resources>
