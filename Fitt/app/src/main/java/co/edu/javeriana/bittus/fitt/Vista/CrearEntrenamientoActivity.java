@@ -44,7 +44,7 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_entrenamiento);
 
-        ImageButtonSiguiente = (ImageButton) findViewById(R.id.ImageButtonSiguienteCrearRutina);
+        ImageButtonSiguiente = (ImageButton) findViewById(R.id.imageButtonSiguienteCrearRutina);
         spinnerDificultad = (Spinner)findViewById(R.id.spinnerDificultad);
         spinnerDescanso = (Spinner)findViewById(R.id.spinnerDiasDescanso);
         editTextNombreEntrenamiento = (EditText) findViewById(R.id.editTextNombreEntrenamiento);
@@ -117,7 +117,7 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
 
             Utils.almacenarInformacionConKey(RutasBaseDeDatos.getRutaRutinas()+user.getUid()+"/", entrenamiento);
 
-            Log.i("Entrenamiento", nombreRutina +descripcion);
+
 
 
             finish();

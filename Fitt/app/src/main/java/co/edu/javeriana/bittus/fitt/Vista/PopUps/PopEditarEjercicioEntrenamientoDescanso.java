@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 
 public class PopEditarEjercicioEntrenamientoDescanso extends Activity {
 
@@ -33,7 +34,7 @@ public class PopEditarEjercicioEntrenamientoDescanso extends Activity {
 
         Bundle bundle = this.getIntent().getExtras();
 
-        ejercicio = (EjercicioDescanso) bundle.getSerializable("ejercicioEntrenamiento");
+        ejercicio = (EjercicioDescanso) bundle.getSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO);
         duracionT.setText(Integer.toString(ejercicio.getDuracion()));
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -64,13 +65,13 @@ public class PopEditarEjercicioEntrenamientoDescanso extends Activity {
         String sDuracion = duracionT.getText().toString();
         int duracion = Integer.parseInt(sDuracion);
         if(sDuracion.isEmpty()){
-            duracionT.setError("Campo obligatorio");
+            duracionT.setError(StringsMiguel.CAMPO_OBLIGATORIO);
         }else {
             ejercicio.setDuracion(duracion);
 
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            bundle.putSerializable("ejercicioEntrenamiento",ejercicio);
+            bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO,ejercicio);
             intent.putExtras(bundle);
 
 

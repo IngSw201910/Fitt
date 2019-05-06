@@ -43,7 +43,7 @@ public class Utils {
     public final static int REQUEST_CODE_EJERCICIO_REPETICION_EDITAR = 7;
     public final static int REQUEST_CODE_EJERCICIO_TIEMPO_EDITAR = 8;
     public final static int REQUEST_CODE_EJERCICIO_DISTANCIA_EDITAR = 9;
-    public final static Ejercicio EJERCICIO_DESCANSO = new Ejercicio("Descanso","Ninguno","Duración","Baja",0,"Descanso entre ejercicios");
+    public final static Ejercicio EJERCICIO_DESCANSO = new Ejercicio("Descanso","Ninguno","Descanso","Baja",0,"Descanso entre ejercicios");
 
 
     public static boolean isEmailValid(String email) {

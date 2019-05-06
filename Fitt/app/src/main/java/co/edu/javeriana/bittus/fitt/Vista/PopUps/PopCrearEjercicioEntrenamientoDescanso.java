@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
 public class PopCrearEjercicioEntrenamientoDescanso extends Activity {
@@ -44,7 +46,7 @@ public class PopCrearEjercicioEntrenamientoDescanso extends Activity {
         aceptarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                crearEjercicioSesion();
+                crearEjercicioDescanso();
             }
         });
 
@@ -57,15 +59,16 @@ public class PopCrearEjercicioEntrenamientoDescanso extends Activity {
 
 
 
+
     }
-    private void crearEjercicioSesion() {
+    private void crearEjercicioDescanso() {
 
 
         String sDuracion = duracionT.getText().toString();
 
 
         if(sDuracion.isEmpty()){
-            duracionT.setError("Campo obligatorio");
+            duracionT.setError(StringsMiguel.CAMPO_OBLIGATORIO);
         }
         else{
             int duracion = Integer.parseInt(sDuracion);
@@ -74,7 +77,7 @@ public class PopCrearEjercicioEntrenamientoDescanso extends Activity {
 
             Intent intent = this.getIntent();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("ejercicioEntrenamiento", ejercicioDescanso);
+            bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO, ejercicioDescanso);
             intent.putExtras(bundle);
 
 
