@@ -89,7 +89,7 @@ public class GetNearbyPlaces extends AsyncTask<Object,String,String> {
                     JSONObject nameObject = resultArray.getJSONObject(i);
                     String name_park = nameObject.getString("name");
                     String vicininty = nameObject.getString("vicinity");
- 
+
                     LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
                     mMap.addMarker(new MarkerOptions().position(latLng)
