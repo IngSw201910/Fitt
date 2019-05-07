@@ -6,4 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Vista.Entrenador_buscarEntrenadorActivity">
 
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/entrenador_buscarEntrenador_activity_name"
+        android:textColor="@color/verdeFitt"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
