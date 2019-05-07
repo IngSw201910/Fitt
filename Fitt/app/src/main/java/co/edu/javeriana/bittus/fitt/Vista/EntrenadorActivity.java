@@ -24,12 +24,9 @@ public class EntrenadorActivity extends AppCompatActivity {
 
     public void goToMiEntrenador(View view){
         Intent nextActivity = new Intent(this, Entrenador_miEntrenadorActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("entrenador", coach);
-        nextActivity.putExtra("bundle", bundle);
+        nextActivity.putExtra("entrenador", coach);
         startActivity(nextActivity);
     }
-
     public void goToChatEntrenador(View view){
         Intent nextActivity = new Intent(this, ChatsActivity.class);
         startActivity(nextActivity);

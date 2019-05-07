@@ -13,14 +13,12 @@ public class Entrenador_miEntrenadorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entrenador_mi_entrenador);
-        TextView nombre;
-        nombre = (TextView) findViewById(R.id.txt_nameEntrenador);
+        TextView nombre = (TextView) findViewById(R.id.txt_nameEntrenador);
 
-        Bundle objetoEnviado = getIntent().getExtras();
-        Entrenador coach = null;
+        Bundle extras = getIntent().getExtras();
+        Entrenador coach = extras.getParcelable("entrenador");
 
-        if(objetoEnviado != null){
-            coach = (Entrenador) objetoEnviado.getSerializable("entrenador");
+        if(coach != null){
             nombre.setText(coach.getNombre());
         }
     }
