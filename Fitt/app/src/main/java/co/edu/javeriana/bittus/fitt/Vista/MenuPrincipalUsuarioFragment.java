@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PerfilFragment;
 
 public class MenuPrincipalUsuarioFragment extends AppCompatActivity
 implements BottomNavigationView.OnNavigationItemSelectedListener{
@@ -63,6 +64,9 @@ implements BottomNavigationView.OnNavigationItemSelectedListener{
                 break;
             case R.id.action_inicio:
                 fragment = new InicioUsuarioFragment();
+                break;
+            case R.id.action_perfil:
+                fragment = new PerfilFragment();
                 break;
         }
 
