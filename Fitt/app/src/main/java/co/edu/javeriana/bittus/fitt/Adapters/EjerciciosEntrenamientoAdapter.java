@@ -20,7 +20,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
-
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 
 
 public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntrenamiento> {
@@ -44,16 +44,63 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
-        if(listEjercios.get(position).getEjercicio().getTipo().equals("Distancia")){
+        if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DISTANCIA)){
             return getViewEjercicioDistancia(position,view, parent);
         }
-        if(listEjercios.get(position).getEjercicio().getTipo().equals("Duración")){
+        if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_TIEMPO)){
             return getViewEjercicioDuracion(position,view, parent);
         }
-        if(listEjercios.get(position).getEjercicio().getTipo().equals("Repetición")){
+        if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DESCANSO)){
+            return getViewEjercicioDescanso(position,view, parent);
+        }
+        if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_REPETICIÓN)){
             return getViewEjercicioRepeticiones(position,view, parent);
         }
         return  view;
+    }
+
+    private View getViewEjercicioDescanso(int position, View view, ViewGroup parent) {
+
+        if(view == null){
+            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_duracion_nuevo_row, null);
+        }
+        ejercicioEntrenamiento = listEjercios.get(position);
+        EjercicioDescanso ejercicio = (EjercicioDescanso) ejercicioEntrenamiento;
+
+        TextView nombre = (TextView) view.findViewById(R.id.textNombreEjercicioDuracion);
+        nombre.setText(ejercicio.getEjercicio().getNombre());
+
+        TextView duracion = (TextView) view.findViewById(R.id.textDuracionEjercicioDuracion);
+        String duracionS = Integer.toString(ejercicio.getDuracion());
+        duracion.setText(duracionS + "s");
+
+
+        ImageButton editarB = (ImageButton) view.findViewById(R.id.buttonEdit2);
+
+        editarB.setTag(position);
+
+        editarB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickListenerEditar != null)
+                    mClickListenerEditar.onBtnClickEdit((Integer) v.getTag());
+            }
+        });
+
+        ImageButton eliminarB = (ImageButton) view.findViewById(R.id.buttonDelete2);
+        eliminarB.setTag(position);
+
+        eliminarB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickListenerEditar != null)
+                    mClickListenerEditar.onBtnClickDelete((Integer) v.getTag());
+            }
+        });
+
+        return view;
+
+
     }
 
     private View getViewEjercicioRepeticiones(int position, View view, ViewGroup parent) {

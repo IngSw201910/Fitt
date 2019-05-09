@@ -3,6 +3,7 @@ package co.edu.javeriana.bittus.fitt.Vista;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -22,6 +23,7 @@ import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoDescanso;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioEntrenamientoDescanso;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioEntrenamientoDistancia;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioEntrenamientoRepeticion;
@@ -32,6 +34,7 @@ public class CrearEntrenamientoEjerciciosActivity extends AppCompatActivity {
 
     private ImageButton imageButtonGuardar;
     private ImageButton imageButtonAdicionarEjercicio;
+    private ImageButton imageButtonAdicionarDescanso;
     private ListView listViewEjercicios;
     private EjerciciosEntrenamientoAdapter adapterEjercicios;
     private List<EjercicioEntrenamiento> listEjercicios;
@@ -47,9 +50,11 @@ public class CrearEntrenamientoEjerciciosActivity extends AppCompatActivity {
 
 
 
-        imageButtonGuardar = (ImageButton) findViewById(R.id.ImageButtonGuardarEntrenamiento);
-        listViewEjercicios = (ListView) findViewById(R.id.ListViewEjerciciosEntrenamiento);
-        imageButtonAdicionarEjercicio = (ImageButton)findViewById(R.id.ImageButtonAdicionarEjercicioEntrenamiento);
+        imageButtonGuardar = (ImageButton) findViewById(R.id.imageButtonGuardarEntrenamiento);
+        listViewEjercicios = (ListView) findViewById(R.id.listViewEjerciciosEntrenamiento);
+        imageButtonAdicionarEjercicio = (ImageButton)findViewById(R.id.imageButtonAdicionarEjercicioEntrenamiento);
+        imageButtonAdicionarDescanso = (ImageButton)findViewById(R.id.imageButtonAdicionarDescanso);
+
 
         listEjercicios = new ArrayList<EjercicioEntrenamiento>();
 
@@ -66,6 +71,9 @@ public class CrearEntrenamientoEjerciciosActivity extends AppCompatActivity {
                 eliminarEjercicioEntrenamiento(listEjercicios.get(position));
             }
         });
+
+
+
 
 
         listViewEjercicios.setAdapter(adapterEjercicios);
@@ -86,6 +94,19 @@ public class CrearEntrenamientoEjerciciosActivity extends AppCompatActivity {
                 buscarEjercicio();
             }
         });
+
+        imageButtonAdicionarDescanso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adicionarEjercicioDescanso();
+            }
+        });
+    }
+
+    private void adicionarEjercicioDescanso() {
+        Intent intent = new Intent(new Intent(CrearEntrenamientoEjerciciosActivity.this, PopCrearEjercicioEntrenamientoDescanso.class));
+
+        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DESCANSO);
 
     }
 
@@ -122,6 +143,7 @@ public class CrearEntrenamientoEjerciciosActivity extends AppCompatActivity {
 
     }
     public void editarEjercicioEntrenamiento(EjercicioEntrenamiento ejercicioEntrenamiento) {
+
         if (ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DISTANCIA)) {
             abrirPopUpEditarEjercicioDistancia(ejercicioEntrenamiento);
         } else if (ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_REPETICIÓN)) {
@@ -142,6 +164,8 @@ public class CrearEntrenamientoEjerciciosActivity extends AppCompatActivity {
     }
 
     public void abrirPopUpEditarEjercicioDescanso(EjercicioEntrenamiento ejercicioEntrenamiento){
+
+
         Intent intent = new Intent(CrearEntrenamientoEjerciciosActivity.this, PopEditarEjercicioEntrenamientoDescanso.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO,(EjercicioDescanso) ejercicioEntrenamiento);
@@ -185,6 +209,7 @@ public class CrearEntrenamientoEjerciciosActivity extends AppCompatActivity {
                     break;
                 }
                 case (Utils.REQUEST_CODE_EJERCICIO_DESCANSO):{
+
                     adicionarEjercicio((EjercicioEntrenamiento) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO));
                     break;
                 }
@@ -194,6 +219,11 @@ public class CrearEntrenamientoEjerciciosActivity extends AppCompatActivity {
                     break;
                 }
                 case (Utils.REQUEST_CODE_EJERCICIO_TIEMPO_EDITAR):{
+                    editarEjercicio((EjercicioEntrenamiento) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO));
+                    adapterEjercicios.notifyDataSetChanged();
+                    break;
+                }
+                case (Utils.REQUEST_CODE_EJERCICIO_DESCANSO_EDITAR):{
                     editarEjercicio((EjercicioEntrenamiento) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO));
                     adapterEjercicios.notifyDataSetChanged();
                     break;
