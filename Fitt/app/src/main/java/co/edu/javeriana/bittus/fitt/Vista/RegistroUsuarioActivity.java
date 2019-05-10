@@ -22,6 +22,7 @@ import java.util.Date;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.DatePickerFragment;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
 public class RegistroUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
@@ -122,27 +123,27 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
         String sexo = "Hombre";
 
         if(nombre.isEmpty()){
-            editTextNombre.setError("Campo obligatorio");
+            editTextNombre.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
         if(correo.isEmpty()){
-            editTextCorreo.setError("Campo obligatorio");
+            editTextCorreo.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
         if(contraseña.isEmpty()){
-            editTextContraseña.setError("Campo obligatorio");
+            editTextContraseña.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
         if(sPeso.isEmpty()){
-            editTextPeso.setError("Campo obligatorio");
+            editTextPeso.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
         if(sAltura.isEmpty()){
-            editTextAltura.setError("Campo obligatorio");
+            editTextAltura.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
         if(editTextFechaNacimiento.getText().toString().isEmpty()){
-            editTextFechaNacimiento.setError("Campo obligatorio");
+            editTextFechaNacimiento.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
 
@@ -154,12 +155,17 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             }
             Usuario usuarioNuevo = new Usuario(nombre,correo,contraseña,"prueba",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
 
+            Intent intent = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(StringsMiguel.LLAVE_USUARIO,usuarioNuevo);
+            intent.putExtras(bundle);
+            startActivity(intent);
 
             //Aquí va el llamdo para registrarlo en firebase
-
+            //recordar incluir que debe iniciar sesión inmediatamente
 
             int duracion = Toast.LENGTH_LONG;
-            Toast toast = Toast.makeText(getApplicationContext(), "Se ha registrado correctamente "+nombre,duracion);
+            Toast toast = Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO+nombre,duracion);
             toast.show();
 
         }

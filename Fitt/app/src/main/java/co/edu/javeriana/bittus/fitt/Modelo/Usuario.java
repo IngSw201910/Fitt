@@ -1,10 +1,11 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Serializable {
 
     private List<Entrenamiento> entrenamientoList;
     private String nombre;
