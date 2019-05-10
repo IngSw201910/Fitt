@@ -6,43 +6,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import co.edu.javeriana.bittus.fitt.Adapters.RutinasAdapter;
-import co.edu.javeriana.bittus.fitt.Modelo.Rutina;
+import co.edu.javeriana.bittus.fitt.Adapters.EntrenamientosAdapter;
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 
 public class RutinasFiltro extends Filter {
 
 
 
-    private List<Rutina> listRutinas;
-    private RutinasAdapter adapter;
-    private List<Rutina> listTemporal;
+    private List<Entrenamiento> listEntrenamientos;
+    private EntrenamientosAdapter adapter;
+    private List<Entrenamiento> listTemporal;
 
 
 
-    public RutinasFiltro(List<Rutina> listRutinas, RutinasAdapter adapter) {
-        this.listRutinas = listRutinas;
+    public RutinasFiltro(List<Entrenamiento> listEntrenamientos, EntrenamientosAdapter adapter) {
+        this.listEntrenamientos = listEntrenamientos;
         this.adapter = adapter;
-        listTemporal = new ArrayList<Rutina>();
-        this.listTemporal.addAll(listRutinas);
+        listTemporal = new ArrayList<Entrenamiento>();
+        this.listTemporal.addAll(listEntrenamientos);
     }
 
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
 
-        listRutinas.clear();
-        listRutinas.addAll(listTemporal);
+        listEntrenamientos.clear();
+        listEntrenamientos.addAll(listTemporal);
 
         FilterResults results = new FilterResults();
-        List<Rutina> filtrados = new ArrayList<Rutina>();
+        List<Entrenamiento> filtrados = new ArrayList<Entrenamiento>();
         if(constraint==null || constraint.length()==0) {
-            filtrados.addAll(listRutinas);
+            filtrados.addAll(listEntrenamientos);
         }
         else{
             String filterString = constraint.toString().toLowerCase().trim();
 
-            for (Rutina rutina:listRutinas) {
-                if(rutina.getNombre().toLowerCase().contains(filterString)){
-                    filtrados.add(rutina);
+            for (Entrenamiento entrenamiento : listEntrenamientos) {
+                if(entrenamiento.getNombre().toLowerCase().contains(filterString)){
+                    filtrados.add(entrenamiento);
                 }
             }
 
@@ -64,6 +64,6 @@ public class RutinasFiltro extends Filter {
 
     @Override
     public CharSequence convertResultToString(Object resultValue) {
-        return ((Rutina)resultValue).getNombre();
+        return ((Entrenamiento)resultValue).getNombre();
     }
 }

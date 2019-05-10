@@ -14,20 +14,22 @@
         android:layout_marginBottom="106dp"
         android:text="@string/entrenador_activity_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton2"
+        app:layout_constraintBottom_toTopOf="@+id/btnMiEntrenador"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnMiEntrenador"
         style="@style/Widget.AppCompat.ImageButton"
         android:layout_width="100dp"
         android:layout_height="0dp"
         android:layout_marginBottom="9dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/entrenador_activity_imagebtn_mientrenador"
+        android:onClick="goToMiEntrenador"
         android:scaleType="fitCenter"
+        android:tint="@color/verdeFitt"
         app:layout_constraintBottom_toTopOf="@+id/textView17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -42,7 +44,9 @@
         android:layout_marginEnd="72dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/entrenador_activity_imagebtn_buscarentrenador"
+        android:onClick="goToBuscarEntrenador"
         android:scaleType="fitCenter"
+        android:tint="@color/verdeFitt"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton4"
@@ -58,7 +62,9 @@
         android:layout_marginBottom="10dp"
         android:background="#00FFFFFF"
         android:contentDescription="@string/entrenador_activity_imagebtn_chatentrenador"
+        android:onClick="goToChatEntrenador"
         android:scaleType="fitCenter"
+        android:tint="@color/verdeFitt"
         app:layout_constraintBottom_toTopOf="@+id/textView19"
         app:layout_constraintEnd_toStartOf="@+id/imageButton3"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,8 +79,8 @@
         android:layout_marginBottom="60dp"
         android:text="@string/entrenador_activity_button_mientrenador"
         app:layout_constraintBottom_toTopOf="@+id/imageButton4"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
+        app:layout_constraintEnd_toEndOf="@+id/btnMiEntrenador"
+        app:layout_constraintTop_toBottomOf="@+id/btnMiEntrenador" />
 
     <TextView
         android:id="@+id/textView18"

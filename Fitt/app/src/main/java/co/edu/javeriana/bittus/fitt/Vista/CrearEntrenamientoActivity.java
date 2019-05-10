@@ -1,264 +1,129 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.RadioButton;
+import android.widget.Spinner;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import co.edu.javeriana.bittus.fitt.Adapters.EjerciciosEntrenamientoAdapter;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDuracion;
-import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
-import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioSesionDescanso;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionDescanso;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionDistancia;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionDuracion;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioSesionRepeticion;
 
 public class CrearEntrenamientoActivity extends AppCompatActivity {
 
-    private ListView listaEjerciciosV;
-    private List<EjercicioEntrenamiento> ejerciciosList;
-    private ImageButton aceptarCrearEntrenamientoB;
-    private ImageButton agregarEjercicioB;
-    private ImageButton agregarDescansoB;
-    private EjerciciosEntrenamientoAdapter ejerciciosEntrenamientoAdapter;
+    private ImageButton ImageButtonSiguiente;
+    private Spinner spinnerDificultad;
+    private Spinner spinnerDescanso;
 
-    private EditText nombreT;
+    private EditText editTextNombreEntrenamiento;
+    private EditText editTextDescripcion;
 
-    private int posicionEditar;
+    private RadioButton radioButtonPublica;
 
+    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private static FirebaseUser user = mAuth.getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_entrenamiento);
 
+        ImageButtonSiguiente = (ImageButton) findViewById(R.id.imageButtonSiguienteCrearRutina);
+        spinnerDificultad = (Spinner)findViewById(R.id.spinnerDificultad);
+        spinnerDescanso = (Spinner)findViewById(R.id.spinnerDiasDescanso);
+        editTextNombreEntrenamiento = (EditText) findViewById(R.id.editTextNombreEntrenamiento);
+        editTextDescripcion = (EditText)findViewById(R.id.editTextDescripcionEntrenamiento);
+        radioButtonPublica = (RadioButton) findViewById(R.id.radioButtonPublica);
 
-        nombreT = (EditText)findViewById(R.id.editText);
-
-
-        listaEjerciciosV = (ListView)findViewById(R.id.listEjercicios);
-        aceptarCrearEntrenamientoB = (ImageButton)findViewById(R.id.buttonAceptarCrearSesion);
-        agregarEjercicioB = (ImageButton)findViewById(R.id.buttonAdicionarEjercicio);
-        agregarDescansoB = (ImageButton)findViewById(R.id.buttonAgregarDescanso);
-
-        ejerciciosList = new ArrayList<EjercicioEntrenamiento>();
-
-
-
-        ejerciciosEntrenamientoAdapter = new EjerciciosEntrenamientoAdapter(CrearEntrenamientoActivity.this, ejerciciosList, new BtnClickListenerRow() {
-            @Override
-            public void onBtnClickEdit(int position) {
-                if (ejerciciosList.get(position).getEjercicio().getTipo().equals("Distancia")) {
-                    abrirPopUpCrearEjercicioDistancia(ejerciciosList.get(position), position);
-                } else if (ejerciciosList.get(position).getEjercicio().getTipo().equals("Repetición")) {
-                    abrirPopUpCrearEjercicioRepeticion(ejerciciosList.get(position), position);
-                } else if (ejerciciosList.get(position).getEjercicio().getTipo().equals("Duración")) {
-                    abrirPopUpCrearEjercicioDuracion(ejerciciosList.get(position), position);
-                }
-            }
-
-            @Override
-            public void onBtnClickDelete(int position) {
-                eliminarEjercicio(ejerciciosList.get(position));
-            }
-        });
+        List<String> stringDificultadList = new ArrayList<>();
+        Collections.addAll(stringDificultadList, StringsMiguel.DIFICULTADES_ENTRENAMIENTOS);
+        ArrayAdapter<String> comboAdapterDificultad = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDificultadList);
+        spinnerDificultad.setAdapter(comboAdapterDificultad);
 
 
-        listaEjerciciosV.setAdapter(ejerciciosEntrenamientoAdapter);
+        List<String> stringDescansoList = new ArrayList<>();
+        Collections.addAll(stringDescansoList, StringsMiguel.ENTRENAMIENTOS_DESCANSOS_STRING);
+        ArrayAdapter<String> comboAdapterDescanso = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDescansoList);
+        spinnerDescanso.setAdapter(comboAdapterDescanso);
 
 
-        agregarEjercicioB.setOnClickListener(new View.OnClickListener() {
+
+
+        ImageButtonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscarEjercicio();
+                siguientePantalla();
             }
         });
-
-        aceptarCrearEntrenamientoB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                crearEntrenamiento();
-            }
-        });
-
-
-        agregarDescansoB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                agregarDescanso();
-            }
-        });
-
-
-
 
     }
 
-    private void agregarDescanso() {
-        Intent intent = new Intent(CrearEntrenamientoActivity.this, PopCrearEjercicioSesionDescanso.class);
-
-
-
-        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DESCANSO);
-    }
-
-    private void crearEntrenamiento() {
-
-        String sNombre = nombreT.getText().toString();
-
+    private void siguientePantalla(){
 
         boolean completo = true;
-        if(sNombre.isEmpty()){
-            nombreT.setError("Campo obligatorio");
+        if(editTextNombreEntrenamiento.getText().toString().isEmpty()){
+            editTextNombreEntrenamiento.setError(StringsMiguel.CAMPO_OBLIGATORIO);
+            completo = false;
+        }
+        if(editTextDescripcion.getText().toString().isEmpty()){
+            editTextDescripcion.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
 
-        if(ejerciciosList.isEmpty()){
-            completo = false;
-            int duracion = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(getApplicationContext(), "La lista de ejercicios no puede estar vacía",duracion);
-            toast.show();
-        }
+
         if(completo){
-
-
-
-            Entrenamiento entrenamiento = new Entrenamiento(sNombre);
-
-            entrenamiento.setEjercicioEntrenamientoList(ejerciciosList);
-
-            Intent intent = this.getIntent();
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("entrenamiento", entrenamiento);
-            intent.putExtras(bundle);
-
-
-            if (getParent() == null) {
-                setResult(Activity.RESULT_OK, intent);
-            } else {
-                getParent().setResult(Activity.RESULT_OK, intent);
-            }
-            finish();
+            startActivityForResult(new Intent(CrearEntrenamientoActivity.this, CrearEntrenamientoEjerciciosActivity.class),Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS);
         }
-
-
-    }
-
-    private void buscarEjercicio(){
-        Intent intent = new Intent(new Intent(CrearEntrenamientoActivity.this, BuscarEjercicioActivity.class));
-
-        startActivityForResult(intent, Utils.REQUEST_CODE_BUSCAR_EJERCICIO);
-
-
-
-    }
-
-
-    public void abrirPopUpCrearEjercicioDistancia(EjercicioEntrenamiento ejercicioEntrenamiento, int posicion){
-
-        posicionEditar = posicion;
-
-        Intent intent = new Intent(CrearEntrenamientoActivity.this, PopEditarEjercicioSesionDistancia.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicioEntrenamiento",(EjercicioDistancia) ejercicioEntrenamiento);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DISTANCIA_EDITAR);
-
-    }
-    public void abrirPopUpCrearEjercicioDuracion(EjercicioEntrenamiento ejercicioEntrenamiento, int posicion){
-
-        posicionEditar = posicion;
-        Intent intent;
-
-        if(!ejercicioEntrenamiento.getEjercicio().getNombre().equals("Descanso")){
-            intent = new Intent(CrearEntrenamientoActivity.this, PopEditarEjercicioSesionDuracion.class);
-        }
-        else{
-            intent = new Intent(CrearEntrenamientoActivity.this, PopEditarEjercicioSesionDescanso.class);
-        }
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicioEntrenamiento",(EjercicioDuracion) ejercicioEntrenamiento);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_DURACION_EDITAR);
-
-    }
-    public void abrirPopUpCrearEjercicioRepeticion(EjercicioEntrenamiento ejercicioEntrenamiento, int posicion){
-
-        posicionEditar = posicion;
-        Intent intent = new Intent(CrearEntrenamientoActivity.this, PopEditarEjercicioSesionRepeticion.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicioEntrenamiento",(EjercicioRepeticiones) ejercicioEntrenamiento);
-        intent.putExtras(bundle);
-        startActivityForResult(intent, Utils.REQUEST_CODE_EJERCICIO_REPETICION_EDITAR);
-
-    }
-    public void eliminarEjercicio(EjercicioEntrenamiento ejercicioEntrenamiento) {
-
-        ejerciciosList.remove(ejercicioEntrenamiento);
-        ejerciciosEntrenamientoAdapter.notifyDataSetChanged();
 
     }
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
-        if(data!=null){
-            switch(requestCode) {
-                case (Utils.REQUEST_CODE_BUSCAR_EJERCICIO) : {
-                    adicionarEjercicio((EjercicioEntrenamiento) data.getExtras().getSerializable("ejercicioEntrenamiento"));
-                    break;
-                }
-                case (Utils.REQUEST_CODE_EJERCICIO_DESCANSO):{
-                    adicionarEjercicio((EjercicioEntrenamiento) data.getExtras().getSerializable("ejercicioEntrenamiento"));
-                    break;
-                }
-                case (Utils.REQUEST_CODE_EJERCICIO_REPETICION_EDITAR):{
-                    editarEjercicio((EjercicioEntrenamiento) data.getExtras().getSerializable("ejercicioEntrenamiento"));
-                    ejerciciosEntrenamientoAdapter.notifyDataSetChanged();
-                    break;
-                }
-                case (Utils.REQUEST_CODE_EJERCICIO_DURACION_EDITAR):{
-                    editarEjercicio((EjercicioEntrenamiento) data.getExtras().getSerializable("ejercicioEntrenamiento"));
-                    ejerciciosEntrenamientoAdapter.notifyDataSetChanged();
-                    break;
-                }
-                case (Utils.REQUEST_CODE_EJERCICIO_DISTANCIA_EDITAR):{
-                    editarEjercicio((EjercicioEntrenamiento) data.getExtras().getSerializable("ejercicioEntrenamiento"));
-                    ejerciciosEntrenamientoAdapter.notifyDataSetChanged();
-                    break;
-                }
-            }
+        if(requestCode== Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS &&data!=null)
+        {
+            List<EjercicioEntrenamiento> entrenamientoList = (List<EjercicioEntrenamiento>) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIOS_ENTRENAMIENTO);
+
+            String nombreRutina = editTextNombreEntrenamiento.getText().toString();
+            String descripcion = editTextDescripcion.getText().toString();
+            String dificultad = (String) spinnerDificultad.getSelectedItem();
+            boolean publica = radioButtonPublica.isChecked();
+            String sDiasDescanso = (String) spinnerDescanso.getSelectedItem();
+
+
+            int diasDescanso = Integer.parseInt(sDiasDescanso);
+
+            Entrenamiento entrenamiento = new Entrenamiento(0,diasDescanso,descripcion,dificultad,publica,nombreRutina);
+            entrenamiento.setEjercicioEntrenamientoList(entrenamientoList);
+
+
+            Utils.almacenarInformacionConKey(RutasBaseDeDatos.getRutaRutinas()+user.getUid()+"/", entrenamiento);
+
+
+
+
+            finish();
         }
-
     }
 
-    private void editarEjercicio(EjercicioEntrenamiento ejercicioEntrenamiento) {
-
-        ejerciciosList.set(posicionEditar, ejercicioEntrenamiento);
-        ejerciciosEntrenamientoAdapter.notifyDataSetChanged();
-
-    }
-
-    private void adicionarEjercicio(EjercicioEntrenamiento ejercicioEntrenamiento) {
-
-        ejerciciosList.add(ejercicioEntrenamiento);
-        ejerciciosEntrenamientoAdapter.notifyDataSetChanged();
-
-    }
 }
+
+

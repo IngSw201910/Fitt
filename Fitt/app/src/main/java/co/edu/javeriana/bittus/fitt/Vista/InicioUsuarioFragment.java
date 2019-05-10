@@ -3,11 +3,9 @@ package co.edu.javeriana.bittus.fitt.Vista;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -86,7 +84,7 @@ public class InicioUsuarioFragment extends Fragment {
         crearRutinaB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CrearRutinaActivity.class));
+                startActivity(new Intent(getActivity(), CrearEntrenamientoActivity.class));
             }
         });
 
@@ -114,7 +112,7 @@ public class InicioUsuarioFragment extends Fragment {
         realizarEntrenamientoB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), RealizarEntrenamientoActivity.class));
+                startActivity(new Intent(getActivity(), RealizarEntrenamiento_EntrenamientosHoyActivity.class));
             }
         });
 

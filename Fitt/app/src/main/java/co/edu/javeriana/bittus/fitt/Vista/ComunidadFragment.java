@@ -1,7 +1,6 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
@@ -52,7 +51,7 @@ public class ComunidadFragment extends Fragment {
         buscarRutinasB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), BuscarRutinas.class));
+                startActivity(new Intent(getActivity(), BuscarEntrenamientosActivity.class));
             }
         });
 

@@ -24,7 +24,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Vista.Entrenador_buscarEntrenadorActivity"></activity>
+        <activity android:name=".Vista.RealizarEntrenamientoActivity"></activity>
+        <activity android:name=".Vista.Entrenador_buscarEntrenadorActivity" />
         <activity android:name=".Vista.Entrenador_miEntrenadorActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -41,7 +42,7 @@
         <activity
             android:name=".Vista.PruebaMapas"
             android:label="@string/title_activity_prueba_mapas" />
-        <activity android:name=".Vista.RealizarEntrenamientoActivity" />
+        <activity android:name=".Vista.RealizarEntrenamiento_EntrenamientosHoyActivity" />
         <activity android:name=".Vista.EjerciciosActivity" />
         <activity android:name=".Vista.BuscarUsuarioActivity" />
         <activity android:name=".Vista.MapaUsuariosActivity" />
@@ -54,14 +55,15 @@
         <activity android:name=".Vista.MiProgresoActivity" />
         <activity android:name=".Vista.LogrosActivity" />
         <activity android:name=".Vista.MenuPrincipalUsuarioFragment" />
-        <activity android:name=".Vista.BuscarRutinas" />
+        <activity android:name=".Vista.BuscarEntrenamientosActivity" />
         <activity android:name=".Vista.InformacionEjercicioActivity" />
         <activity android:name=".Vista.BuscarEjercicioActivity" />
+        <activity android:name=".Vista.CrearEntrenamientoEjerciciosActivity" />
         <activity android:name=".Vista.CrearEntrenamientoActivity" />
-        <activity android:name=".Vista.CrearRutinaEntrenamientoActivity" />
-        <activity android:name=".Vista.CrearRutinaActivity" />
         <activity android:name=".Vista.EditarEntrenamientoActivity" />
+        <activity android:name=".Vista.RegistroUsuarioActivity"/>
         <activity android:name=".Vista.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -69,33 +71,36 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionDistancia"
+            android:name=".Vista.PopUps.PopCrearEjercicioEntrenamientoDistancia"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionDuracion"
+            android:name=".Vista.PopUps.PopCrearEjercicioEntrenamientoTiempo"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionRepeticion"
+            android:name=".Vista.PopUps.PopCrearEjercicioEntrenamientoRepeticion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopCrearEjercicioSesionDescanso"
+            android:name=".Vista.PopUps.PopCrearEjercicioEntrenamientoDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopEditarEjercicioSesionRepeticion"
+            android:name=".Vista.PopUps.PopEditarEjercicioEntrenamientoRepeticion"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopEditarEjercicioSesionDuracion"
+            android:name=".Vista.PopUps.PopEditarEjercicioEntrenamientoTiempo"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopEditarEjercicioSesionDistancia"
+            android:name=".Vista.PopUps.PopEditarEjercicioEntrenamientoDistancia"
             android:theme="@style/AppTheme.CustomThemePopUp" />
         <activity
-            android:name=".Vista.PopUps.PopEditarEjercicioSesionDescanso"
+            android:name=".Vista.PopUps.PopEditarEjercicioEntrenamientoDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
     </application>
 
 </manifest>
