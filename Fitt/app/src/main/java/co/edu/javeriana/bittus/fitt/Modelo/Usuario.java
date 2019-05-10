@@ -101,4 +101,6 @@ public class Usuario {
     public void setEntrenamientoList(List<Entrenamiento> entrenamientoList) {
         this.entrenamientoList = entrenamientoList;
     }
+
+    //usuario cambiado
 }

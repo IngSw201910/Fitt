@@ -1,4 +1,4 @@
-package co.edu.javeriana.bittus.fitt.Vista.PopUps;
+package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import co.edu.javeriana.bittus.fitt.R;
-import co.edu.javeriana.bittus.fitt.Vista.BuscarRutinas;
 import co.edu.javeriana.bittus.fitt.Vista.BuscarUsuarioActivity;
 import co.edu.javeriana.bittus.fitt.Vista.ChatsActivity;
 import co.edu.javeriana.bittus.fitt.Vista.EjerciciosActivity;
