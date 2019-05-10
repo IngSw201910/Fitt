@@ -1,6 +1,10 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +13,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -17,6 +22,7 @@ import java.util.Date;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.DatePickerFragment;
+import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
 public class RegistroUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -35,6 +41,8 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
     private ImageButton imageButtonCargarFoto;
 
     private Button buttonRegistrarse;
+
+    private ImageView imageViewFotoPerfil;
 
     private Date fechaNacimiento;
 
@@ -60,6 +68,8 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
         imageButtonTomarFoto = (ImageButton) findViewById(R.id.imageButtonTomarFoto);
         imageButtonCargarFoto = (ImageButton) findViewById(R.id.imageButtonCargarFoto);
 
+        imageViewFotoPerfil = (ImageView) findViewById(R.id.imageViewPerfil);
+
         buttonRegistrarse = (Button) findViewById(R.id.buttonRegistrarse);
 
         buttonRegistrarse.setOnClickListener(new View.OnClickListener() {
@@ -68,10 +78,38 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
                 registrarUsuario();
             }
         });
-
+        imageButtonTomarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tomarFoto();
+            }
+        });
 
     }
 
+    private void tomarFoto() {
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_TAKE_PHOTO);
+
+
+        }
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+
+        if(requestCode== UtilsMiguel.REQUEST_CODE_TAKE_PHOTO){
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageViewFotoPerfil.setImageBitmap(imageBitmap);
+        }
+
+    }
     private void registrarUsuario() {
 
         boolean completo = true;
