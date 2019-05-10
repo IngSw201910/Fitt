@@ -1,4 +1,4 @@
-package co.edu.javeriana.bittus.fitt.Vista.PopUps;
+package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,12 +20,7 @@ import co.edu.javeriana.bittus.fitt.Vista.ParquesActivity;
 
 public class PerfilFragment extends Fragment {
 
-    ImageButton buscarRutinasB;
-    ImageButton parquesB;
-    ImageButton chatsB;
-    ImageButton mapaUsuariosB;
-    ImageButton buscarUsuarioB;
-    ImageButton ejerciciosB;
+
 
     @Nullable
     @Override

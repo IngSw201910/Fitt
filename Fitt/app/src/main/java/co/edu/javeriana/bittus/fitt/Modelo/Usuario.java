@@ -4,6 +4,9 @@ import java.util.List;
 
 public class Usuario {
 
+    private int ID;
+    private String nombre;
+
     private List<Rutina> rutinaList;
 
 
