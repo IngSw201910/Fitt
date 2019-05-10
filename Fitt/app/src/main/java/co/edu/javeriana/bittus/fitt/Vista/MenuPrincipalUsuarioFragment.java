@@ -1,19 +1,25 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 
 public class MenuPrincipalUsuarioFragment extends AppCompatActivity
 implements BottomNavigationView.OnNavigationItemSelectedListener{
 
 
     private BottomNavigationView opcionesNavegacion;
+
+
 
 
     //prueba comentario
@@ -26,6 +32,14 @@ implements BottomNavigationView.OnNavigationItemSelectedListener{
         opcionesNavegacion.setOnNavigationItemSelectedListener(this);
 
         loadFragment(new InicioUsuarioFragment());
+
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null){
+            Usuario usuario = (Usuario) bundle.getSerializable(StringsMiguel.LLAVE_USUARIO);
+
+            Log.i("usuario", usuario.getNombre());
+        }
 
 
     }
