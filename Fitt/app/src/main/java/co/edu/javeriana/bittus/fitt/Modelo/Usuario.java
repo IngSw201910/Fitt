@@ -21,4 +21,6 @@ public class Usuario {
     public void setRutinaList(List<Rutina> rutinaList) {
         this.rutinaList = rutinaList;
     }
+
+    //usuario cambiado
 }

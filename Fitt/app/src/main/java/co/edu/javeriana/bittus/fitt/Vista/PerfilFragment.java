@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import co.edu.javeriana.bittus.fitt.R;
-import co.edu.javeriana.bittus.fitt.Vista.BuscarRutinas;
 import co.edu.javeriana.bittus.fitt.Vista.BuscarUsuarioActivity;
 import co.edu.javeriana.bittus.fitt.Vista.ChatsActivity;
 import co.edu.javeriana.bittus.fitt.Vista.EjerciciosActivity;
