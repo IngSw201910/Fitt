@@ -38,6 +38,8 @@ public class EjercicioTiempoFragment extends Fragment {
     private ProgressBar seriesPB;
     private ProgressBar segundosPB;
 
+    private Thread manejadorEjercicio;
+
 
     private EjercicioTiempo ejercicioTiempo;
     private int serie;
@@ -48,21 +50,29 @@ public class EjercicioTiempoFragment extends Fragment {
 
 
 
-    private int estado;
 
-    private static final int CORRIENDO = 0;
-    private static final int PAUSADO = 1;
+
+    private int estado = COMENZANDO;
+
+    private static final int COMENZANDO = 0;
+    private static final int CORRIENDO = 1;
+    private static final int PAUSADO = 2;
 
     private boolean ejercicioTerminado = false;
 
-    Thread manejadorEjercicio;
+
 
     Activity realizarEntrenaActivity;
 
     public interface FragmentEjercicioRepeticionesListener {
         void mostrarSiguienteEjercicio();
-
+        boolean estaDandoInstrucciones();
         void darInstrucciones(String texto);
+
+        void iniciarMusicaEjercicioRepeticionOTiempo();
+        void detenerMusica();
+
+
 
     }
 
@@ -110,9 +120,36 @@ public class EjercicioTiempoFragment extends Fragment {
     }
 
     private void iniciarEjercicio() {
-        chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-        chrono.start();
 
+        manejadorEjercicio = new Thread() {
+            public void run() {
+                if (estado == COMENZANDO){
+                    while (listener.estaDandoInstrucciones());
+                    String instruccionInicial = "";
+                    instruccionInicial += ejercicioTiempo.getEjercicio().getNombre();
+
+
+                    if (serie == 1){
+                        instruccionInicial += ". "+ ejercicioTiempo.getEjercicio().getDescripción();
+
+                    }
+                    instruccionInicial += ". "+ "Serie "+ serie +"," + ejercicioTiempo.getTiempo() + "segundos";
+                    listener.darInstrucciones(instruccionInicial);
+                    while (listener.estaDandoInstrucciones());
+                    estado = CORRIENDO;
+
+                }
+                listener.iniciarMusicaEjercicioRepeticionOTiempo();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+                        chrono.start();
+                    }
+                });
+            }
+        };
+        manejadorEjercicio.start();
     }
 
     private void inicializarCronometro(View v){
@@ -131,12 +168,18 @@ public class EjercicioTiempoFragment extends Fragment {
 
 
 
-                if (segundos%5 == 0 ){
+
+                if (segundos!=0 && (ejercicioTiempo.getTiempo()/2 == segundos || ((ejercicioTiempo.getTiempo()/4)*3) == segundos)){
                     listener.darInstrucciones("Quedan "+(ejercicioTiempo.getTiempo() - segundo) + "segundos");
                 }
 
                 if (segundos >= ejercicioTiempo.getTiempo()){
+                    chrono.stop();
+                    listener.detenerMusica();
+                    listener.darInstrucciones("Fin de serie");
+                    while (listener.estaDandoInstrucciones());
                     listener.mostrarSiguienteEjercicio();
+
                 }
 
             }
@@ -158,6 +201,9 @@ public class EjercicioTiempoFragment extends Fragment {
 
     @Override
     public void onDetach() {
+        listener.detenerMusica();
+        if (chrono != null)
+            chrono.stop();
         listener = null;
         super.onDetach();
     }
