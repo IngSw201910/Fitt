@@ -18,6 +18,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioTiempo;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerRow;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
@@ -33,7 +34,7 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
 
 
     public EjerciciosEntrenamientoAdapter(@NonNull Context context, List<EjercicioEntrenamiento> objects, BtnClickListenerRow listenerEditar) {
-        super(context, R.layout.item_ejercicio_duracion_nuevo_row, objects);
+        super(context, R.layout.item_ejercicio_descanso_nuevo_row, objects);
         this.listEjercios = objects;
         this.context = context;
         this.mClickListenerEditar = listenerEditar;
@@ -48,7 +49,7 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
             return getViewEjercicioDistancia(position,view, parent);
         }
         if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_TIEMPO)){
-            return getViewEjercicioDuracion(position,view, parent);
+            return getViewEjercicioTiempo(position,view, parent);
         }
         if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DESCANSO)){
             return getViewEjercicioDescanso(position,view, parent);
@@ -62,7 +63,7 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
     private View getViewEjercicioDescanso(int position, View view, ViewGroup parent) {
 
         if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_duracion_nuevo_row, null);
+            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_descanso_nuevo_row, null);
         }
         ejercicioEntrenamiento = listEjercios.get(position);
         EjercicioDescanso ejercicio = (EjercicioDescanso) ejercicioEntrenamiento;
@@ -159,23 +160,33 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
 
 
 
-    private View getViewEjercicioDuracion(int position, View view, ViewGroup parent) {
+    private View getViewEjercicioTiempo(int position, View view, ViewGroup parent) {
 
         if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_duracion_nuevo_row, null);
+            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_tiempo_nuevo_row, null);
         }
         ejercicioEntrenamiento = listEjercios.get(position);
-        EjercicioDescanso ejercicio = (EjercicioDescanso) ejercicioEntrenamiento;
+        EjercicioTiempo ejercicio = (EjercicioTiempo) ejercicioEntrenamiento;
 
-        TextView nombre = (TextView) view.findViewById(R.id.textNombreEjercicioDuracion);
+        TextView nombre = (TextView) view.findViewById(R.id.textNombreEjercicioTiempo);
         nombre.setText(ejercicio.getEjercicio().getNombre());
 
-        TextView duracion = (TextView) view.findViewById(R.id.textDuracionEjercicioDuracion);
-        String duracionS = Integer.toString(ejercicio.getDuracion());
+        TextView duracion = (TextView) view.findViewById(R.id.textEjercicioTiempo);
+        String duracionS = Integer.toString(ejercicio.getTiempo());
         duracion.setText(duracionS + "s");
 
 
-        ImageButton editarB = (ImageButton) view.findViewById(R.id.buttonEdit2);
+        TextView series = (TextView)view.findViewById(R.id.textEjercicioSeries);
+        String serieS = Integer.toString(ejercicio.getSeries());
+        series.setText(serieS);
+
+        TextView descanso = (TextView)view.findViewById(R.id.textEjercicioDescanso);
+        String descansoS = Integer.toString(ejercicio.getDescanso());
+        descanso.setText(descansoS+"s");
+
+
+
+        ImageButton editarB = (ImageButton) view.findViewById(R.id.buttonEdit3);
 
         editarB.setTag(position);
 
@@ -187,7 +198,7 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
             }
         });
 
-        ImageButton eliminarB = (ImageButton) view.findViewById(R.id.buttonDelete2);
+        ImageButton eliminarB = (ImageButton) view.findViewById(R.id.buttonDelete3);
         eliminarB.setTag(position);
 
         eliminarB.setOnClickListener(new View.OnClickListener() {
