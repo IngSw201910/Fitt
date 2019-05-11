@@ -109,6 +109,8 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
         });
     }
 
+
+
     private void cargarFoto() {
         Permisos.requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE,"Es necesario para carga una foto", UtilsMiguel.REQUEST_CODE_PERMISSION);
 
@@ -204,20 +206,29 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             Usuario usuarioNuevo = new Usuario(nombre,correo,contraseña,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
 
 
+            if(esEntrenador){
+                Intent intent = new Intent(RegistroUsuarioActivity.this, RegistroEntrenadorActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, usuarioNuevo);
 
+                startActivity(intent);
 
-            Intent intent = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(StringsMiguel.LLAVE_USUARIO,usuarioNuevo);
-            intent.putExtras(bundle);
-            startActivity(intent);
+            }
+            else{
+                Intent intent = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(StringsMiguel.LLAVE_USUARIO,usuarioNuevo);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
-            //Aquí va el llamdo para registrarlo en firebase
-            //el bitmap tiene la foto
-            //recordar incluir que debe iniciar sesión inmediatamente
-            int duracion = Toast.LENGTH_LONG;
-            Toast toast = Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO+nombre,duracion);
-            toast.show();
+                //Aquí va el llamdo para registrarlo en firebase
+                //el bitmap tiene la foto
+                //recordar incluir que debe iniciar sesión inmediatamente
+                int duracion = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO+nombre,duracion);
+                toast.show();
+            }
+
 
 
         }
