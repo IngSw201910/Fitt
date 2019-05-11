@@ -47,11 +47,19 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
 
     private Date fechaNacimiento;
 
+    private boolean esEntrenador = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
+
+        Intent intent = getIntent();
+        if(intent.getExtras()!=null){
+            esEntrenador = true;
+
+        }
+
 
         editTextFechaNacimiento = (EditText) findViewById(R.id.editTextFechaDeNacimiento);
         editTextFechaNacimiento.setOnClickListener(this);
