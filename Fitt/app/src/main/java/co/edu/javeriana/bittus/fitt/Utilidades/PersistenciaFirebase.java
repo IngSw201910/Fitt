@@ -69,13 +69,17 @@ public class PersistenciaFirebase {
         });
     }
 
-    public static void almacenarInformacionConKey (String ruta, Object objeto){
+
+    //Guarda la información en la ruta+/+key (la key se genera automaticamente)
+    public static String almacenarInformacionConKey (String ruta, Object objeto){
         myRef=database.getReference(ruta);
         String key = myRef.push().getKey();
         myRef=database.getReference(ruta+key);
         myRef.setValue(objeto);
+        return key;
     }
 
+    //Guarda la información en la ruta
     public static void almacenarInformacionConRuta(String ruta, Object objeto){
         myRef=database.getReference(ruta);
         myRef.setValue(objeto);
