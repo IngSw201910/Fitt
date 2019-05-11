@@ -1,58 +1,47 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
-import android.os.Parcel;
-import android.os.Parcelable;
 
+import java.io.Serializable;
+import java.util.Date;
 
-public class Entrenador implements Parcelable {
-    private int id;
-    private String nombre;
-    private int cantidadClientes;
-    private boolean titulo;
-    private int aniosEx;
-    private String acercaDe;
+public class Entrenador extends Usuario implements Serializable {
+    private String descripccion;
+    private String nombreTitulo;
+    private String fotoTitulo;
+    private String porqueElegirme;
 
-    public Entrenador(String nombre){
-        this.nombre = nombre;
+    public Entrenador(String nombre, String correo, String contraseña, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
+        super(nombre, correo, contraseña, direccionFoto, fechaNacimiento, sexo, altura, peso);
     }
 
-    public String getNombre(){
-        return nombre;
+    public String getDescripccion() {
+        return descripccion;
     }
 
-    protected Entrenador(Parcel in) {
-        id = in.readInt();
-        nombre = in.readString();
-        cantidadClientes = in.readInt();
-        titulo = in.readByte() != 0x00;
-        aniosEx = in.readInt();
-        acercaDe = in.readString();
+    public void setDescripccion(String descripccion) {
+        this.descripccion = descripccion;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getNombreTitulo() {
+        return nombreTitulo;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(nombre);
-        dest.writeInt(cantidadClientes);
-        dest.writeByte((byte) (titulo ? 0x01 : 0x00));
-        dest.writeInt(aniosEx);
-        dest.writeString(acercaDe);
+    public void setNombreTitulo(String nombreTitulo) {
+        this.nombreTitulo = nombreTitulo;
     }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Entrenador> CREATOR = new Parcelable.Creator<Entrenador>() {
-        @Override
-        public Entrenador createFromParcel(Parcel in) {
-            return new Entrenador(in);
-        }
+    public String getFotoTitulo() {
+        return fotoTitulo;
+    }
 
-        @Override
-        public Entrenador[] newArray(int size) {
-            return new Entrenador[size];
-        }
-    };
+    public void setFotoTitulo(String fotoTitulo) {
+        this.fotoTitulo = fotoTitulo;
+    }
+
+    public String getPorqueElegirme() {
+        return porqueElegirme;
+    }
+
+    public void setPorqueElegirme(String porqueElegirme) {
+        this.porqueElegirme = porqueElegirme;
+    }
 }
