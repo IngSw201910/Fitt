@@ -17,16 +17,15 @@ import android.widget.Chronometer;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import android.util.Log;
-
 import java.util.concurrent.TimeUnit;
 
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioTiempo;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
 
-public class EjercicioTiempoFragment extends Fragment {
+public class EjercicioDescansoFragment extends Fragment {
     private FragmentEjercicioRepeticionesListener listener;
 
     private TextView descripcion;
@@ -35,12 +34,10 @@ public class EjercicioTiempoFragment extends Fragment {
     private Chronometer chrono;
 
 
-    private ProgressBar seriesPB;
-    private ProgressBar segundosPB;
+    private ProgressBar segundosDescansoPB;
 
 
-    private EjercicioTiempo ejercicioTiempo;
-    private int serie;
+    private EjercicioDescanso ejercicioDescanso;
     private int segundo = 0;
 
     private long timeWhenStopped = 0;
@@ -53,9 +50,9 @@ public class EjercicioTiempoFragment extends Fragment {
     private static final int CORRIENDO = 0;
     private static final int PAUSADO = 1;
 
-    private boolean ejercicioTerminado = false;
 
-    Thread manejadorEjercicio;
+
+
 
     Activity realizarEntrenaActivity;
 
@@ -70,9 +67,8 @@ public class EjercicioTiempoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ejercicioTiempo = (EjercicioTiempo) getArguments().getSerializable("ejercicioTiempo");
-        serie = getArguments().getInt("serie");
-        return inflater.inflate(R.layout.fragment_ejercicio_tiempo, null, false);
+        ejercicioDescanso = (EjercicioDescanso) getArguments().getSerializable("ejercicioDescanso");
+        return inflater.inflate(R.layout.fragment_ejercicio_descanso, null, false);
     }
 
 
@@ -81,29 +77,24 @@ public class EjercicioTiempoFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         View v = getView();
-        TextView descripcion = (TextView) v.findViewById(R.id.descripcionEjercicioTiempo);
-        descripcion.setMovementMethod(new ScrollingMovementMethod());
-
-        series = v.findViewById(R.id.tvSerieTiempo);
-        chrono = v.findViewById(R.id.tiempoSerie);
 
 
 
 
-        seriesPB = v.findViewById(R.id.pbSeriesTiempo);
-        segundosPB = v.findViewById(R.id.pbTiempo);
 
 
 
-        seriesPB.setMax(ejercicioTiempo.getSeries());
-        seriesPB.setProgress(serie);
-        series.setText(serie + "/" + ejercicioTiempo.getSeries());
 
 
-        segundosPB.setMax(ejercicioTiempo.getTiempo());
-        segundosPB.setProgress(0);
+        segundosDescansoPB = v.findViewById(R.id.pbSegundosDescanso);
+
+
+        segundosDescansoPB.setMax(ejercicioDescanso.getDuracion());
+        segundosDescansoPB.setProgress(0);
 
         inicializarCronometro(v);
+
+
         iniciarEjercicio();
 
 
@@ -116,7 +107,7 @@ public class EjercicioTiempoFragment extends Fragment {
     }
 
     private void inicializarCronometro(View v){
-        chrono  = (Chronometer) v.findViewById(R.id.tiempoSerie);
+        chrono  = (Chronometer) v.findViewById(R.id.duracionDescanso);
         chrono.stop();
         chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
             @Override
@@ -127,15 +118,14 @@ public class EjercicioTiempoFragment extends Fragment {
                 segundo = (int) segundos;
                 chronometer.setText(t);
 
-                segundosPB.setProgress(segundo);
-
+                segundosDescansoPB.setProgress(segundo);
 
 
                 if (segundos%5 == 0 ){
-                    listener.darInstrucciones("Quedan "+(ejercicioTiempo.getTiempo() - segundo) + "segundos");
+                    listener.darInstrucciones("Quedan "+ (ejercicioDescanso.getDuracion() - segundo) + "segundos de descanso");
                 }
 
-                if (segundos >= ejercicioTiempo.getTiempo()){
+                if (segundos >= ejercicioDescanso.getDuracion()){
                     listener.mostrarSiguienteEjercicio();
                 }
 
@@ -152,7 +142,6 @@ public class EjercicioTiempoFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof FragmentEjercicioRepeticionesListener) {
             listener = (FragmentEjercicioRepeticionesListener) context;
-            Log.i("Si inicio el listener", "síiii");
         }
     }
 
