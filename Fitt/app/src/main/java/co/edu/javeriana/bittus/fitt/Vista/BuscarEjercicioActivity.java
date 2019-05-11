@@ -28,6 +28,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioTiempo;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
@@ -48,7 +49,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
     private Ejercicio ejercicioSeleccionado;
     private EjercicioDistancia ejercicioDistancia;
-    private EjercicioDescanso ejercicioDescanso;
+    private EjercicioTiempo ejercicioTiempo;
     private EjercicioRepeticiones ejercicioRepeticion;
 
     FirebaseDatabase database;
@@ -182,11 +183,13 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
         }
         if (requestCode == Utils.REQUEST_CODE_EJERCICIO_TIEMPO && resultCode == RESULT_OK) {
 
-            ejercicioDescanso = (EjercicioDescanso) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO_TIEMPO);
+            ejercicioTiempo = (EjercicioTiempo) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO_TIEMPO);
+
+
 
             Intent intent = new Intent();
-            if(ejercicioDescanso !=null){
-                intent.putExtra(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO  , ejercicioDescanso);
+            if(ejercicioTiempo !=null){
+                intent.putExtra(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO  , ejercicioTiempo);
             }
 
 

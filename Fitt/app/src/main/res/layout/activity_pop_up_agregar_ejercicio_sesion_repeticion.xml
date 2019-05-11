@@ -133,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicio3" />
 
     <EditText
-        android:id="@+id/editTextSeries"
+        android:id="@+id/editTextDescanso"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
         android:layout_marginStart="8dp"
