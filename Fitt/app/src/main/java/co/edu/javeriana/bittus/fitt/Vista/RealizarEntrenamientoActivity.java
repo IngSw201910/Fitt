@@ -1,11 +1,11 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.media.MediaPlayer;
 import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
@@ -25,7 +25,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 
-public class RealizarEntrenamientoActivity extends AppCompatActivity implements EjercicioRepeticionesFragment.FragmentEjercicioRepeticionesListener, EjercicioTiempoFragment.FragmentEjercicioRepeticionesListener, EjercicioDescansoFragment.FragmentEjercicioRepeticionesListener {
+public class RealizarEntrenamientoActivity extends AppCompatActivity implements EjercicioRepeticionesFragment.FragmentEjercicioRepeticionesListener, EjercicioTiempoFragment.FragmentEjercicioRepeticionesListener, EjercicioDescansoFragment.FragmentEjercicioRepeticionesListener, EntrenamientoTerminadoFragment.FragmentEjercicioRepeticionesListener {
 
     private Chronometer chrono;
 
@@ -43,9 +43,16 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
     private static final int CORRIENDO = 1;
     private static final int PAUSADO = 2;
 
+
+    private int estadoSonidoAyuda = ACTIVADO;
+    private int estadoSonidoMusica = ACTIVADO;
+    private static final int ACTIVADO = 0;
+    private static final int DESACTIVADO = 1;
+
     private long timeWhenStopped = 0;
 
     private TextToSpeech textToSpeech;
+    private MediaPlayer reproductor;
 
     private Entrenamiento entrenamiento;
     private EjercicioEntrenamiento siguienteEjercicio;
@@ -72,24 +79,45 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
 
         //EJERCICIO 1:
         Ejercicio ejercicioGrande = new Ejercicio();
+        ejercicioGrande.setNombre ("Flexiones de pecho");
         ejercicioGrande.setDescripción("Coloque las dos manos junto al suelo y flexione los codos");
         ejercicioGrande.setRutaGIF("/imagenes/ejercicios/prueba.gif");
         ejercicioGrande.setTipo("Repetición");
 
 
-        //EjercicioRepeticiones ejercicioRepeticiones = new EjercicioRepeticiones(ejercicioGrande, 30, 4, 2);
+        EjercicioRepeticiones ejercicioRepeticiones = new EjercicioRepeticiones(ejercicioGrande, 15, 2, 10);
 
 
         /*ejerciciosEntrenamiento.add(ejercicioRepeticiones);
         ejerciciosEntrenamiento.add(ejercicioRepeticiones);
         ejerciciosEntrenamiento.add(ejercicioRepeticiones);*/
 
-        EjercicioTiempo ejercicioTiempo = new EjercicioTiempo(20, 5, 10);
+        EjercicioTiempo ejercicioTiempo = new EjercicioTiempo(ejercicioGrande, 20, 2, 20);
+
+
+        ejerciciosEntrenamiento.add(ejercicioRepeticiones);
         ejerciciosEntrenamiento.add(ejercicioTiempo);
+
+
+
 
         entrenamiento.setEjercicioEntrenamientoList(ejerciciosEntrenamiento);
         //FIN MOCK ENTRENAMIENTO
 
+
+
+
+        iniciaroReaundarPausarB = findViewById(R.id.btnIniciarPausarReanudar);
+        iniciaroReaundarPausarB.setFocusableInTouchMode(false);
+
+
+        iniciarPausarReaundarTV = findViewById(R.id.iniciarPausarReaunarTV);
+
+        siguienteEjercicioB = findViewById(R.id.btnSiguienteEjercicio);
+        finalizarB = findViewById(R.id.btnFinalizarEntrenamiento);
+
+        sonidoAyudaB = findViewById(R.id.btnSonidoNarrador);
+        sonidoMusicaB = findViewById(R.id.btnSonidoMusica);
 
         textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
@@ -106,29 +134,21 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
                             || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Toast.makeText(RealizarEntrenamientoActivity.this, "Lenguaje no soportado en su celular.", Toast.LENGTH_LONG).show();
                     }
+                    else {
 
-                    textToSpeech.setPitch(0.6f);
-                    textToSpeech.setSpeechRate(1.0f);
+                        textToSpeech.setPitch(0.6f);
+                        textToSpeech.setSpeechRate(1.0f);
 
-                    darInstrucciones("Hello! Welcome to your daily training");
+                        darInstrucciones("Hola, ¿preparado para entrenar?");
+                        while (estaDandoInstrucciones()) ;
+                    }
+                    iniciaroReaundarPausarB.setFocusableInTouchMode(true);
                 }
             }
         });
 
 
-        iniciarPausarReaundarTV = findViewById(R.id.iniciarPausarReaunarTV);
-        iniciaroReaundarPausarB = findViewById(R.id.btnIniciarPausarReanudar);
-        siguienteEjercicioB = findViewById(R.id.btnSiguienteEjercicio);
-        finalizarB = findViewById(R.id.btnFinalizarEntrenamiento);
 
-        sonidoAyudaB = findViewById(R.id.btnSonidoNarrador);
-        sonidoMusicaB = findViewById(R.id.btnSonidoMusica);
-
-
-        /*Fragment fragment = new EjercicioTiempoFragment();
-
-        fragment = new EjercicioRepeticionesFragment();
-        loadFragment(fragment);*/
 
         estado = NOINICIADO;
 
@@ -151,6 +171,49 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
                         reanudarEntrenamiento();
                         break;
                 }
+            }
+        });
+
+
+        sonidoAyudaB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (estadoSonidoAyuda){
+                    case ACTIVADO:
+                        estadoSonidoAyuda = DESACTIVADO;
+                        textToSpeech.stop();
+                        cambiarBotonSonidoAyuda();
+                        break;
+                    case DESACTIVADO:
+                        estadoSonidoAyuda = ACTIVADO;
+                        cambiarBotonSonidoAyuda();
+                        break;
+                }
+            }
+        });
+
+        sonidoMusicaB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (estadoSonidoMusica){
+                    case ACTIVADO:
+                        estadoSonidoMusica = DESACTIVADO;
+                        reproductor.setVolume(0.0f, 0.0f);
+                        cambiarBotonSonidoMusica();
+                        break;
+                    case DESACTIVADO:
+                        estadoSonidoMusica = ACTIVADO;
+                        reproductor.setVolume(1.0f, 1.0f);
+                        cambiarBotonSonidoMusica();
+                        break;
+                }
+            }
+        });
+
+        siguienteEjercicioB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarSiguienteEjercicio();
             }
         });
 
@@ -226,7 +289,9 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
     }
 
     public void darInstrucciones(String texto) {
-        textToSpeech.speak(texto, TextToSpeech.QUEUE_FLUSH, null, null);
+        if (estadoSonidoAyuda == ACTIVADO) {
+            textToSpeech.speak(texto, TextToSpeech.QUEUE_FLUSH, null, null);
+        }
     }
 
     @Override
@@ -236,79 +301,138 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
             textToSpeech.stop();
             textToSpeech.shutdown();
         }
+        if (reproductor != null){
+            reproductor.stop();
+        }
     }
 
 
     @Override
     public void mostrarSiguienteEjercicio() {
-
-
-        siguienteEjercicio = entrenamiento.getEjercicioEntrenamientoList().get(numSiguienteEjercicio);
-
         Fragment fragment = null;
         Bundle args = new Bundle();
 
+        if (numSiguienteEjercicio < entrenamiento.getEjercicioEntrenamientoList().size()) {
+            siguienteEjercicio = entrenamiento.getEjercicioEntrenamientoList().get(numSiguienteEjercicio);
 
-        if (siguienteEjercicio instanceof EjercicioRepeticiones) {
-            if (sigueDescanso) {
-                fragment = new EjercicioDescansoFragment();
-                args.putSerializable("ejercicioDescanso", (EjercicioDescanso) new EjercicioDescanso(null, ((EjercicioRepeticiones) siguienteEjercicio).getDescanso()));
-                sigueDescanso = false;
-            } else {
-                if (serieEjercicio <= ((EjercicioRepeticiones) siguienteEjercicio).getSeries()) {
-                    fragment = new EjercicioRepeticionesFragment();
-                    args.putSerializable("ejercicioRepeticiones", (EjercicioRepeticiones) siguienteEjercicio);
-                    args.putInt("serie", serieEjercicio);
-                    serieEjercicio++;
-                }
-                //si ya acabo las series
-                else {
-                    serieEjercicio = 1;
-                    numSiguienteEjercicio++;
-                }
-                sigueDescanso = true;
-            }
-        } else {
-            if (siguienteEjercicio instanceof EjercicioTiempo) {
+
+
+
+            if (siguienteEjercicio instanceof EjercicioRepeticiones) {
                 if (sigueDescanso) {
                     fragment = new EjercicioDescansoFragment();
-                    args.putSerializable("ejercicioDescanso", (EjercicioDescanso) new EjercicioDescanso(null, ((EjercicioTiempo) siguienteEjercicio).getDescanso()));
+                    args.putSerializable("ejercicioDescanso", (EjercicioDescanso) new EjercicioDescanso(null, ((EjercicioRepeticiones) siguienteEjercicio).getDescanso()));
                     sigueDescanso = false;
-                }
-                else {
-
-                    if (serieEjercicio <= ((EjercicioTiempo) siguienteEjercicio).getSeries()) {
-                        fragment = new EjercicioTiempoFragment();
-                        args.putSerializable("ejercicioTiempo", (EjercicioTiempo) siguienteEjercicio);
+                    if (serieEjercicio > ((EjercicioRepeticiones) siguienteEjercicio).getSeries()) {
+                        numSiguienteEjercicio++;
+                        serieEjercicio = 1;
+                    }
+                } else {
+                    if (serieEjercicio <= ((EjercicioRepeticiones) siguienteEjercicio).getSeries()) {
+                        fragment = new EjercicioRepeticionesFragment();
+                        args.putSerializable("ejercicioRepeticiones", (EjercicioRepeticiones) siguienteEjercicio);
                         args.putInt("serie", serieEjercicio);
                         serieEjercicio++;
+                        sigueDescanso = true;
+                    }
+                }
+            } else {
+                if (siguienteEjercicio instanceof EjercicioTiempo) {
+                    if (sigueDescanso) {
+                        fragment = new EjercicioDescansoFragment();
+                        args.putSerializable("ejercicioDescanso", (EjercicioDescanso) new EjercicioDescanso(null, ((EjercicioTiempo) siguienteEjercicio).getDescanso()));
+                        sigueDescanso = false;
+                        if (serieEjercicio > ((EjercicioTiempo) siguienteEjercicio).getSeries()) {
+                            numSiguienteEjercicio++;
+                            serieEjercicio = 1;
+                        }
                     } else {
-                        serieEjercicio = 1;
+
+                        if (serieEjercicio <= ((EjercicioTiempo) siguienteEjercicio).getSeries()) {
+                            fragment = new EjercicioTiempoFragment();
+                            args.putSerializable("ejercicioTiempo", (EjercicioTiempo) siguienteEjercicio);
+                            args.putInt("serie", serieEjercicio);
+                            serieEjercicio++;
+                            sigueDescanso = true;
+                        }
+
+                    }
+
+                } else {
+                    if (siguienteEjercicio instanceof EjercicioDescanso) {
+                        fragment = new EjercicioDescansoFragment();
+                        args.putSerializable("ejercicioDescanso", (EjercicioDescanso) siguienteEjercicio);
                         numSiguienteEjercicio++;
                     }
-                    sigueDescanso = true;
                 }
 
-            }
-            else{
-                if (siguienteEjercicio instanceof EjercicioDescanso){
-                    fragment = new EjercicioDescansoFragment();
-                    args.putSerializable("ejercicioDescanso", (EjercicioDescanso) siguienteEjercicio);
-                }
+
             }
 
 
+            if (fragment != null) {
+                fragment.setArguments(args);
+                loadFragment(fragment);
+            }
 
         }
-
-
-        if (fragment != null) {
-            fragment.setArguments(args);
-            loadFragment(fragment);
-        } else {
-            Toast.makeText(RealizarEntrenamientoActivity.this, "Entrenamiento terminado!", Toast.LENGTH_LONG).show();
+        else {
+            finalizarEntrenamiento();
         }
 
     }
 
+    public void cambiarBotonSonidoAyuda (){
+        if (estadoSonidoAyuda == ACTIVADO) {
+            sonidoAyudaB.setImageResource(R.drawable.sonido_activado);
+            sonidoAyudaB.setColorFilter(getResources().getColor(R.color.verdeFitt));
+        }
+        if (estadoSonidoAyuda == DESACTIVADO) {
+            sonidoAyudaB.setImageResource(R.drawable.sonido_desactivado);
+            sonidoAyudaB.setColorFilter(getResources().getColor(R.color.verdeFitt));
+        }
+
+    }
+
+    public void cambiarBotonSonidoMusica(){
+        if (estadoSonidoMusica == ACTIVADO) {
+            sonidoMusicaB.setImageResource(R.drawable.sonido_activado);
+            sonidoMusicaB.setColorFilter(getResources().getColor(R.color.verdeFitt));
+        }
+        if (estadoSonidoMusica == DESACTIVADO) {
+            sonidoMusicaB.setImageResource(R.drawable.sonido_desactivado);
+            sonidoMusicaB.setColorFilter(getResources().getColor(R.color.verdeFitt));
+        }
+    }
+
+    public void finalizarEntrenamiento(){
+
+        chrono.stop();
+        Toast.makeText(RealizarEntrenamientoActivity.this, "Entrenamiento terminado!", Toast.LENGTH_LONG).show();
+        Toast.makeText(RealizarEntrenamientoActivity.this, "Los datos de este entrenamiento serán almacenados", Toast.LENGTH_LONG).show();
+        Fragment fragment = new EntrenamientoTerminadoFragment();
+        loadFragment(fragment);
+    }
+
+    public boolean estaDandoInstrucciones (){
+        if (textToSpeech.isSpeaking())
+            return true;
+        return false;
+    }
+
+    public void iniciarMusicaEjercicioRepeticionOTiempo(){
+        reproductor = MediaPlayer.create(this, R.raw.training_music);
+        reproductor.setLooping(true);
+        reproductor.start();
+    }
+    public void iniciarMusicaEjercicioDescanso(){
+        reproductor = MediaPlayer.create(this, R.raw.sonido_descanso);
+        reproductor.setLooping(true);
+        reproductor.start();
+    }
+    public void detenerMusica(){
+        if (reproductor != null)
+            reproductor.stop();
+
+    }
 }

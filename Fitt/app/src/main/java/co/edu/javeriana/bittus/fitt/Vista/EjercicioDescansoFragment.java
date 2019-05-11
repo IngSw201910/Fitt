@@ -42,24 +42,25 @@ public class EjercicioDescansoFragment extends Fragment {
 
     private long timeWhenStopped = 0;
 
-
+    Thread manejadorEjercicio;
 
 
     private int estado;
 
-    private static final int CORRIENDO = 0;
-    private static final int PAUSADO = 1;
-
-
-
+    private static final int COMENZANDO = 0;
+    private static final int CORRIENDO = 1;
+    private static final int PAUSADO = 2;
 
 
     Activity realizarEntrenaActivity;
 
     public interface FragmentEjercicioRepeticionesListener {
         void mostrarSiguienteEjercicio();
-
+        boolean estaDandoInstrucciones();
         void darInstrucciones(String texto);
+
+        void iniciarMusicaEjercicioDescanso();
+        void detenerMusica();
 
     }
 
@@ -79,13 +80,6 @@ public class EjercicioDescansoFragment extends Fragment {
         View v = getView();
 
 
-
-
-
-
-
-
-
         segundosDescansoPB = v.findViewById(R.id.pbSegundosDescanso);
 
 
@@ -101,19 +95,39 @@ public class EjercicioDescansoFragment extends Fragment {
     }
 
     private void iniciarEjercicio() {
-        chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-        chrono.start();
+
+        manejadorEjercicio = new Thread() {
+            public void run() {
+                if (estado == COMENZANDO){
+                    while (listener.estaDandoInstrucciones());
+
+                    listener.darInstrucciones("Descanso.   "+ ejercicioDescanso.getDuracion() +"segundos");
+                    while (listener.estaDandoInstrucciones());
+                    estado = CORRIENDO;
+
+                }
+                listener.iniciarMusicaEjercicioDescanso();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+                        chrono.start();
+                    }
+                });
+            }
+        };
+        manejadorEjercicio.start();
 
     }
 
-    private void inicializarCronometro(View v){
-        chrono  = (Chronometer) v.findViewById(R.id.duracionDescanso);
+    private void inicializarCronometro(View v) {
+        chrono = (Chronometer) v.findViewById(R.id.duracionDescanso);
         chrono.stop();
-        chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
+        chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
                 long time = SystemClock.elapsedRealtime() - chronometer.getBase();
-                long segundos = time/1000;
+                long segundos = time / 1000;
                 String t = segundos + " s";
                 segundo = (int) segundos;
                 chronometer.setText(t);
@@ -121,11 +135,15 @@ public class EjercicioDescansoFragment extends Fragment {
                 segundosDescansoPB.setProgress(segundo);
 
 
-                if (segundos%5 == 0 ){
-                    listener.darInstrucciones("Quedan "+ (ejercicioDescanso.getDuracion() - segundo) + "segundos de descanso");
+                if (segundos != 0 && (ejercicioDescanso.getDuracion()/2 == segundos || ((ejercicioDescanso.getDuracion()/4)*3) == segundos)) {
+                    listener.darInstrucciones("Quedan " + (ejercicioDescanso.getDuracion() - segundo) + "segundos de descanso");
                 }
 
-                if (segundos >= ejercicioDescanso.getDuracion()){
+                if (segundos >= ejercicioDescanso.getDuracion()) {
+                    chrono.stop();
+                    listener.detenerMusica();
+                    listener.darInstrucciones("Fin del descanso");
+                    while (listener.estaDandoInstrucciones());
                     listener.mostrarSiguienteEjercicio();
                 }
 
@@ -147,7 +165,10 @@ public class EjercicioDescansoFragment extends Fragment {
 
     @Override
     public void onDetach() {
+        listener.detenerMusica();
         listener = null;
+        if (chrono != null)
+            chrono.stop();
         super.onDetach();
     }
 
