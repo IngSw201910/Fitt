@@ -14,7 +14,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Entrenador;
 
 public class EntrenadorActivity extends AppCompatActivity {
 
-    Entrenador coach = new Entrenador("Camilo Perez");
+    //Entrenador coach = new Entrenador("Camilo Perez");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +24,8 @@ public class EntrenadorActivity extends AppCompatActivity {
 
     public void goToMiEntrenador(View view){
         Intent nextActivity = new Intent(this, Entrenador_miEntrenadorActivity.class);
-        nextActivity.putExtra("entrenador", coach);
-        startActivity(nextActivity);
+        //nextActivity.putExtra("entrenador", coach);
+        //startActivity(nextActivity);
     }
     public void goToChatEntrenador(View view){
         Intent nextActivity = new Intent(this, ChatsActivity.class);
