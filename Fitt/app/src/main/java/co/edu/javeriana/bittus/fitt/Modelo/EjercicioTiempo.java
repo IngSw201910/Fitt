@@ -4,12 +4,13 @@ import java.io.Serializable;
 
 public class EjercicioTiempo extends EjercicioEntrenamiento implements Serializable {
 
+
     private int tiempo;
     private int series;
     private int descanso;
 
-
-    public EjercicioTiempo(int tiempo, int series, int descanso) {
+    public EjercicioTiempo(Ejercicio ejercicio, int tiempo, int series, int descanso) {
+        super(ejercicio);
         this.tiempo = tiempo;
         this.series = series;
         this.descanso = descanso;

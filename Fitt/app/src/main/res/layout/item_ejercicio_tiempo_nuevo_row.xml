@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewDescansoEjercicioTiempo"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Descanso:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSeriesEjercicioTiempo" />
+
+    <TextView
+        android:id="@+id/textViewTiempoEjercicioRepeticion"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Tiempo:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioTiempo" />
+
+    <TextView
+        android:id="@+id/textViewSeriesEjercicioTiempo"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Series:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTiempoEjercicioRepeticion" />
+
+    <ImageButton
+        android:id="@+id/buttonDelete3"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/verdeFitt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/quitardelalista" />
+
+    <ImageButton
+        android:id="@+id/buttonEdit3"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/verdeFitt"
+        app:layout_constraintEnd_toStartOf="@+id/buttonDelete3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/editar" />
+
+    <TextView
+        android:id="@+id/textNombreEjercicioTiempo"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Nombre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textEjercicioTiempo"
+        android:layout_width="141dp"
+        android:layout_height="wrap_content"
+        android:text="Repeticiones"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeriesEjercicioTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioTiempo" />
+
+    <TextView
+        android:id="@+id/textEjercicioSeries"
+        android:layout_width="141dp"
+        android:layout_height="wrap_content"
+        android:text="Series"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeriesEjercicioTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/textEjercicioTiempo" />
+
+    <TextView
+        android:id="@+id/textEjercicioDescanso"
+        android:layout_width="141dp"
+        android:layout_height="wrap_content"
+        android:text="Descanso"
+        app:layout_constraintStart_toEndOf="@+id/textViewDescansoEjercicioTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/textEjercicioSeries" />
+
+</android.support.constraint.ConstraintLayout>
