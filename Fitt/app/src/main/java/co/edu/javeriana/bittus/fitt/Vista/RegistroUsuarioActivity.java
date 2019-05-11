@@ -28,6 +28,7 @@ import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.DatePickerFragment;
 import co.edu.javeriana.bittus.fitt.Utilidades.Permisos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
 public class RegistroUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
@@ -100,24 +101,12 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
     }
 
     private void cargarFoto() {
-        Permisos.requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE,"Es necesario para carga una foto", UtilsMiguel.REQUEST_CODE_PERMISSION);
-
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
-        intent.createChooser(intent, StringsMiguel.SELECCIONAR_APLICACION);
-        startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO);
+        Utils.cargarFotoDesdeCamara(this, UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO);
 
     }
 
     private void tomarFoto() {
-        Permisos.requestPermission(this, Manifest.permission.CAMERA,"Es necesario para tomar fotos", UtilsMiguel.REQUEST_CODE_PERMISSION);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_TAKE_PHOTO);
-
-
-        }
+        Utils.tomarFotoDesdeCamara(this, UtilsMiguel.REQUEST_CODE_TAKE_PHOTO);
     }
 
 
