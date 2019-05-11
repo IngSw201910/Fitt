@@ -102,9 +102,6 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
     private void cargarFoto() {
         Permisos.requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE,"Es necesario para carga una foto", UtilsMiguel.REQUEST_CODE_PERMISSION);
 
-
-
-
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
         intent.createChooser(intent, StringsMiguel.SELECCIONAR_APLICACION);
