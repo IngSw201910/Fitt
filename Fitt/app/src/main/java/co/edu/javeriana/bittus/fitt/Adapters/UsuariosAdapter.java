@@ -48,6 +48,8 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
 
 
 
+
+
         return  view;
     }
     @NonNull
