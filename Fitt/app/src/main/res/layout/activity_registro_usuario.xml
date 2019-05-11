@@ -29,7 +29,7 @@
     <EditText
         android:id="@+id/editTextAltura"
         android:layout_width="100dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
         android:ems="10"
@@ -41,7 +41,7 @@
     <EditText
         android:id="@+id/editTextPeso"
         android:layout_width="100dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:ems="10"
@@ -88,7 +88,7 @@
     <EditText
         android:id="@+id/editTextContraseña"
         android:layout_width="277dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
@@ -102,7 +102,7 @@
     <EditText
         android:id="@+id/editTextNombre"
         android:layout_width="277dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
@@ -116,7 +116,7 @@
     <EditText
         android:id="@+id/editTextCorreo"
         android:layout_width="277dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
@@ -168,8 +168,8 @@
 
     <ImageView
         android:id="@+id/imageViewPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="131dp"
+        android:layout_height="136dp"
         android:layout_marginStart="64dp"
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +179,7 @@
     <EditText
         android:id="@+id/editTextFechaDeNacimiento"
         android:layout_width="277dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
