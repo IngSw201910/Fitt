@@ -16,7 +16,7 @@ public class StringsMiguel {
     public final static String LISTRA_EJERCICIOS_VACIOS = "La lista de ejercicios no puede estar vacía";
     public final static String CREACION_RUTINA_EXITOSA = "Se ha creado la rutina exítosamente";
     public static final String REGISTRO_USUARIO_CORRECTO = "Registro correcto ";
-
+    public static final String SIN_FOTO = "Debe usar alguna foto";
 
 
     public final static String[] DIFICULTADES_ENTRENAMIENTOS = new String[] {"Fácil", "Media", "Difícil"};
@@ -29,6 +29,7 @@ public class StringsMiguel {
     public final static String EJERCICIO_TIPO_TIEMPO = "Tiempo";
 
 
+    public static final CharSequence SELECCIONAR_APLICACION = "Seleccione la aplicación";
 
-
+    public static final String SIGUIENTE = "Siguiente";
 }

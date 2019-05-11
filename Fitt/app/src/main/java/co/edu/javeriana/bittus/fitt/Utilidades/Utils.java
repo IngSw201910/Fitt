@@ -1,7 +1,12 @@
 package co.edu.javeriana.bittus.fitt.Utilidades;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -45,6 +50,59 @@ public class Utils {
     public final static int REQUEST_CODE_EJERCICIO_DISTANCIA_EDITAR = 9;
     public final static Ejercicio EJERCICIO_DESCANSO = new Ejercicio("Descanso","Ninguno","Descanso","Baja",0,"Descanso entre ejercicios");
 
+
+
+
+    public static  void tomarFotoDesdeCamara(Activity context, int requestCode){
+
+        //Codigo de request recomendado UtilsMiguel.REQUEST_CODE_TAKE_PHOTO
+
+        Permisos.requestPermission(context, Manifest.permission.CAMERA,"Es necesario para tomar fotos", UtilsMiguel.REQUEST_CODE_PERMISSION);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (intent.resolveActivity(context.getPackageManager()) != null) {
+            context.startActivityForResult(intent, requestCode);
+
+        }
+
+    }
+    public  static void cargarFotoDesdeCamara(Activity context, int requestCode){
+        //Codigo de request recomendado UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO
+        Permisos.requestPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE,"Es necesario para carga una foto", UtilsMiguel.REQUEST_CODE_PERMISSION);
+
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        intent.createChooser(intent, StringsMiguel.SELECCIONAR_APLICACION);
+        context.startActivityForResult(intent, requestCode);
+
+
+    }
+
+    /*
+    Metodo sobre escrito en su activity
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+
+        if(requestCode== UtilsMiguel.REQUEST_CODE_TAKE_PHOTO && resultCode==RESULT_OK){
+            Bundle extras = data.getExtras();
+            bitmapFoto = (Bitmap) extras.get("data");
+            imageViewFotoPerfil.setImageBitmap(bitmapFoto);
+        }else if(requestCode == UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO  && resultCode==RESULT_OK){
+            Uri path = data.getData();
+            try {
+                bitmapFoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(),path);
+                imageViewFotoPerfil.setImageBitmap(bitmapFoto);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+     */
 
     public static boolean isEmailValid(String email) {
         boolean isValid = true;

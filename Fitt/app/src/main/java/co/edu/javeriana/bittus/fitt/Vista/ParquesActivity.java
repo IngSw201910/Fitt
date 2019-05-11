@@ -3,6 +3,7 @@ package co.edu.javeriana.bittus.fitt.Vista;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -34,12 +35,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.IOException;
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Adapters.CustomInfoWindowAdapter;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.GetNearbyPlaces;
 
@@ -54,6 +57,7 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
     private ImageView imagGPS;
     private EditText buscador;
     private LatLng miPosicion;
+    private LatLng lugarBuscado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +76,21 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
             requestLocation();
             mMap.setMyLocationEnabled(true);
             mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+                    String lines[] = marker.getSnippet().split("\n");
+                    String direccion[] = lines[0].split(":");
+                    Intent intent = new Intent(ParquesActivity.this, ParqueInformacionDetalladaActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("latitud", marker.getPosition().latitude);
+                    bundle.putDouble("longitud", marker.getPosition().longitude);
+                    bundle.putString("titulo", marker.getTitle());
+                    bundle.putString("direccion", direccion[1].trim());
+                    intent.putExtra("bundle", bundle);
+                    startActivity(intent);
+                }
+            });
             init();
         }
     }
@@ -117,8 +136,9 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
                     Toast.makeText(ParquesActivity.this, addressResult.getFeatureName(), Toast.LENGTH_SHORT).show();
                     if (mMap != null) {
                         moveCamera(position, DEFAULT_ZOOM);
-                        miPosicion = position;
-                        findParks();
+                        lugarBuscado = position;
+                        mMap.clear();
+                        findParks(lugarBuscado);
                     }
                 } else {Toast.makeText(ParquesActivity.this, "Dirección no encontrada", Toast.LENGTH_SHORT).show();}
             } catch (IOException e) {
@@ -143,7 +163,8 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
                         Toast.makeText(getBaseContext(), "longitud: " + location.getLongitude() + "latitud: " + location.getLatitude(), Toast.LENGTH_SHORT).show();*/
                         moveCamera(new LatLng(location.getLatitude(), location.getLongitude()), DEFAULT_ZOOM);
                         miPosicion = new LatLng(location.getLatitude(), location.getLongitude());
-                        findParks();
+                        mMap.clear();
+                        findParks(miPosicion);
                         Log.i(TAG, "llega");
                     }
                 }
@@ -194,10 +215,10 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
-    public void findParks(){
+    public void findParks(LatLng posicion){
 
         StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        stringBuilder.append("location="+miPosicion.latitude+","+miPosicion.longitude);
+        stringBuilder.append("location="+posicion.latitude+","+posicion.longitude);
         stringBuilder.append("&radius="+1000);
         stringBuilder.append("&keyword="+"park");
         stringBuilder.append("&key="+getResources().getString(R.string.google_places_key));
@@ -206,15 +227,19 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
         Log.d(TAG, "url"+url );
         Toast.makeText(this, url, Toast.LENGTH_LONG).show();
 
-        Object dataTransfer[] = new Object[2];
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(ParquesActivity.this));
+
+        Object dataTransfer[] = new Object[3];
         dataTransfer[0] = mMap;
         dataTransfer[1] = url;
+        dataTransfer[2] = miPosicion;
 
         GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces(this);
         getNearbyPlaces.execute(dataTransfer);
 
 
     }
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
