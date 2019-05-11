@@ -60,11 +60,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
 
-        Intent intent = getIntent();
-        if(intent.getExtras()!=null){
-            esEntrenador = true;
 
-        }
 
 
         editTextFechaNacimiento = (EditText) findViewById(R.id.editTextFechaDeNacimiento);
@@ -86,6 +82,12 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
         imageViewFotoPerfil = (ImageView) findViewById(R.id.imageViewPerfil);
 
         buttonRegistrarse = (Button) findViewById(R.id.buttonRegistrarse);
+
+        Intent intent = getIntent();
+        if(intent.getExtras()!=null){
+            esEntrenador = true;
+            buttonRegistrarse.setText(StringsMiguel.SIGUIENTE);
+        }
 
         buttonRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override

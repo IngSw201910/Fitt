@@ -31,4 +31,5 @@ public class StringsMiguel {
 
     public static final CharSequence SELECCIONAR_APLICACION = "Seleccione la aplicación";
 
+    public static final String SIGUIENTE = "Siguiente";
 }
