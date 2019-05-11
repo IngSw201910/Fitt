@@ -22,11 +22,13 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.Future;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.DatePickerFragment;
 import co.edu.javeriana.bittus.fitt.Utilidades.Permisos;
+import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
@@ -53,7 +55,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
     private Bitmap bitmapFoto;
 
     private Date fechaNacimiento;
-
+    private boolean esEntrenador = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,12 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
         imageViewFotoPerfil = (ImageView) findViewById(R.id.imageViewPerfil);
 
         buttonRegistrarse = (Button) findViewById(R.id.buttonRegistrarse);
+
+        Intent intent = getIntent();
+        if(intent.getExtras()!=null){
+            esEntrenador = true;
+            buttonRegistrarse.setText(StringsMiguel.SIGUIENTE);
+        }
 
         buttonRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,20 +188,29 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             Usuario usuarioNuevo = new Usuario(nombre,correo,contraseña,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
 
 
+            if(esEntrenador){
+                Intent intent = new Intent(RegistroUsuarioActivity.this, RegistroEntrenadorActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, usuarioNuevo);
+
+                startActivity(intent);
+            }
+            else{
+                Intent intent = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(StringsMiguel.LLAVE_USUARIO,usuarioNuevo);
+                intent.putExtras(bundle);
+                startActivity(intent);
+
+                PersistenciaFirebase.almacenarInformacionConRuta(StringsMiguel.RUTA_USUARIOS, usuarioNuevo);
 
 
-            Intent intent = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(StringsMiguel.LLAVE_USUARIO,usuarioNuevo);
-            intent.putExtras(bundle);
-            startActivity(intent);
+                int duracion = Toast.LENGTH_LONG;
+                Toast toast = Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO+nombre,duracion);
+                toast.show();
+                finish();
+            }
 
-            //Aquí va el llamdo para registrarlo en firebase
-            //el bitmap tiene la foto
-            //recordar incluir que debe iniciar sesión inmediatamente
-            int duracion = Toast.LENGTH_LONG;
-            Toast toast = Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO+nombre,duracion);
-            toast.show();
 
 
         }
