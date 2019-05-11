@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void registrarUsuario() {
-        Intent intent = new Intent(MainActivity.this, RegistroUsuarioActivity.class);
+        startActivity(new Intent(MainActivity.this, registroPrueba.class));
 
-
-        startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_REGISTRAR_USUARIO);
+        //Intent intent = new Intent(MainActivity.this, RegistroUsuarioActivity.class);
+        //startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_REGISTRAR_USUARIO);
 
 
 
