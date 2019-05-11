@@ -1,5 +1,6 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ import java.util.Date;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.DatePickerFragment;
+import co.edu.javeriana.bittus.fitt.Utilidades.Permisos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
@@ -98,6 +100,10 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
     }
 
     private void cargarFoto() {
+        Permisos.requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE,"Es necesario para carga una foto", UtilsMiguel.REQUEST_CODE_PERMISSION);
+
+
+
 
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         intent.setType("image/*");
@@ -107,7 +113,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
     }
 
     private void tomarFoto() {
-
+        Permisos.requestPermission(this, Manifest.permission.CAMERA,"Es necesario para tomar fotos", UtilsMiguel.REQUEST_CODE_PERMISSION);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (intent.resolveActivity(getPackageManager()) != null) {
