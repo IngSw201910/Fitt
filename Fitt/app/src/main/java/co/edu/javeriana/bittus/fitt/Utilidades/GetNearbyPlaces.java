@@ -34,6 +34,7 @@ public class GetNearbyPlaces extends AsyncTask<Object,String,String> {
 
     GoogleMap mMap;
     String url;
+    LatLng miPosicion;
     InputStream is;
     BufferedReader bufferedReader;
     StringBuilder stringBuilder;
@@ -43,6 +44,7 @@ public class GetNearbyPlaces extends AsyncTask<Object,String,String> {
     protected String doInBackground(Object... objects) {
         mMap = (GoogleMap) objects[0];
         url = (String) objects[1];
+        miPosicion = (LatLng) objects[2];
         Log.d("Prubea", "url"+url );
 
         try {
@@ -92,8 +94,12 @@ public class GetNearbyPlaces extends AsyncTask<Object,String,String> {
 
                     LatLng latLng = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
 
+                    UtilsJhonny utilsJhonny = new UtilsJhonny();
+                    Double distancia = utilsJhonny.distance(latLng.latitude, latLng.longitude, miPosicion.latitude, miPosicion.longitude );
+
+
                     mMap.addMarker(new MarkerOptions().position(latLng)
-                        .snippet(vicininty)
+                        .snippet("Dirección: "+vicininty+"\nDistancia: "+ distancia+"Km")
                         .title(name_park)
                         .alpha(0.5f)); //Transparencia
 
