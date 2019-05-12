@@ -10,6 +10,7 @@ public final class RutasBaseDeDatos {
 
     private static String rutaEjercicios = "/ejercicios/";
     private static String rutaRutinas = "/rutinas/";
+    private static String rutaUsuarios ="/Usuarios/";
 
     public static String getRutaEjercicios() {
         return rutaEjercicios;
@@ -17,4 +18,5 @@ public final class RutasBaseDeDatos {
     public static String getRutaRutinas() {
         return rutaRutinas;
     }
+    public static String getRutaUsuarios(){ return rutaUsuarios; }
 }

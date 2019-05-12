@@ -1,5 +1,6 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioButton;
+import android.widget.CheckBox;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import co.edu.javeriana.bittus.fitt.R;
@@ -26,6 +29,9 @@ public class PerfilEntrenadorFragment extends Fragment {
     ImageButton editarAltura;
     ImageButton editarExperiencia;
 
+    Button seguidores;
+    Button siguiendo;
+
     EditText nombre;
     EditText correo;
     EditText nacimiento;
@@ -34,8 +40,9 @@ public class PerfilEntrenadorFragment extends Fragment {
     EditText altura;
     EditText experiencia;
 
-    RadioButton privacidad;
+    CheckBox privacidad;
 
+    RatingBar puntaje;
 
     @Nullable
     @Override
@@ -54,27 +61,43 @@ public class PerfilEntrenadorFragment extends Fragment {
         editarPeso =v.findViewById(R.id.imageButtonEditarPesoE);
         editarAltura =v.findViewById(R.id.imageButtonEditarAlturaE);
         editarExperiencia =v.findViewById(R.id.imageButtonEdiatExperiencia);
+        seguidores =v.findViewById(R.id.buttonSeguidoresE);
+        siguiendo =v.findViewById(R.id.buttonSiguiendoE);
 
         nombre =v.findViewById(R.id.editTextNombre);
         nombre.setEnabled(false);
+        //Asignar valor
 
         correo =v.findViewById(R.id.editTextCorreo);
         correo.setEnabled(false);
+        //Asignar valor
 
         nacimiento =v.findViewById(R.id.editTextNaciemiento);
         nacimiento.setEnabled(false);
+        //Asignar valor
 
         registro = v.findViewById(R.id.editTextRegistro);
         registro.setEnabled(false);
+        //Asignar valor
 
         peso =v.findViewById(R.id.editTextPeso);
         peso.setEnabled(false);
+        //Asignar valor
 
         altura =v.findViewById(R.id.editTextAltura);
         altura.setEnabled(false);
+        //Asignar valor
 
         experiencia =v.findViewById(R.id.editTextExperiencia);
         experiencia.setEnabled(false);
+        //asignar valor
+
+        privacidad =v.findViewById(R.id.radioButtonPrivacidadE);
+        //asignar valor
+
+        puntaje =v.findViewById(R.id.ratingBarPerfilE);
+        puntaje.setEnabled(false);
+        //Asignar valor
 
         editarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,7 +262,21 @@ public class PerfilEntrenadorFragment extends Fragment {
             }
         });
 
-        /*privacidad.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener(){
+        seguidores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SeguidoresActivity.class));
+            }
+        });
+
+        siguiendo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SeguidosActivity.class));
+            }
+        });
+
+        privacidad.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -250,6 +287,6 @@ public class PerfilEntrenadorFragment extends Fragment {
                     //Cambiar a publico
                 }
             }
-        });*/
+        });
     }
 }

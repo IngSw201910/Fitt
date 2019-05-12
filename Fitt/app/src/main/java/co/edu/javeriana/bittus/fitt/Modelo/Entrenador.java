@@ -11,6 +11,7 @@ public class Entrenador implements Parcelable {
     private int aniosEx;
     private String acercaDe;
 
+
     public Entrenador(String nombre){
         this.nombre = nombre;
     }

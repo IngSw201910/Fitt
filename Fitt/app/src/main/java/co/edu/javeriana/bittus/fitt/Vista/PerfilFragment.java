@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -31,6 +33,8 @@ public class PerfilFragment extends Fragment {
     ImageButton ediarNacimiento;
     ImageButton editarPeso;
     ImageButton editarAltura;
+    Button seguidores;
+    Button siguiendo;
 
     EditText nombre;
     EditText correo;
@@ -39,7 +43,7 @@ public class PerfilFragment extends Fragment {
     EditText peso;
     EditText altura;
 
-    RadioButton privacidad;
+    CheckBox privacidad;
 
     @Nullable
     @Override
@@ -52,11 +56,14 @@ public class PerfilFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         View v = getView();
 
+
         editarNombre =v.findViewById(R.id.imageButtonEditarNombre);
         editarCorreo =v.findViewById(R.id.imageButtonEdicarCorreo);
         ediarNacimiento =v.findViewById(R.id.imageButtonEditarNacieminnto);
         editarPeso =v.findViewById(R.id.imageButtonEditarPeso);
         editarAltura =v.findViewById(R.id.imageButtonEditarAltura);
+        seguidores =v.findViewById(R.id.buttonSeguidoresUsuario);
+        siguiendo =v.findViewById(R.id.buttonSiguiendo);
 
         nombre =v.findViewById(R.id.editTextNombre);
         nombre.setEnabled(false);
@@ -76,6 +83,8 @@ public class PerfilFragment extends Fragment {
         altura =v.findViewById(R.id.editTextAltura);
         altura.setEnabled(false);
 
+        privacidad =v.findViewById(R.id.radioButtonPrivacidad);
+
         editarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +95,7 @@ public class PerfilFragment extends Fragment {
                         boolean procesado = false;
 
                         if (actionId == EditorInfo.IME_ACTION_DONE) {
-                            // Mostrar mensaje
+
 
                             if(nombre.getText()!=null){
                                 String nombreUs= nombre.getText().toString();
@@ -211,7 +220,21 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        /*privacidad.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener(){
+        seguidores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SeguidoresActivity.class));
+            }
+        });
+
+        siguiendo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SeguidosActivity.class));
+            }
+        });
+
+        privacidad.setOnCheckedChangeListener(new RadioButton.OnCheckedChangeListener(){
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -222,7 +245,7 @@ public class PerfilFragment extends Fragment {
                     //Cambiar a publico
                 }
             }
-        });*/
+        });
 
 
     }

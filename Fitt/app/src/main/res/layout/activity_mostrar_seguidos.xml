@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vista.BuscarUsuarioActivity">
+    tools:context=".Vista.SeguidosActivity">
 
     <TextView
         android:id="@+id/textView20"
@@ -14,7 +14,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Buscar Usuarios"
+        android:text="Siguiendo"
         android:textColorLink="@color/verdeFitt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <ImageButton
-        android:id="@+id/imageButtonBuscarUsuarioSeguidor"
+        android:id="@+id/imageButtonBuscarUsuarioSeguido"
         android:layout_width="48dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
@@ -56,7 +56,7 @@
         app:srcCompat="@drawable/buscar_rutinas" />
 
     <ListView
-        android:id="@+id/listUsuariosBuscar"
+        android:id="@+id/listUsuariosSeguidos"
         android:layout_width="376dp"
         android:layout_height="425dp"
         android:layout_marginStart="8dp"

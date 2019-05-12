@@ -64,7 +64,10 @@
         <activity android:name=".Vista.CrearEntrenamientoActivity" />
         <activity android:name=".Vista.EditarEntrenamientoActivity" />
         <activity android:name=".Vista.RegistroUsuarioActivity"/>
+        <activity android:name=".Vista.SeguidoresActivity"/>
+        <activity android:name=".Vista.SeguidosActivity"/>
         <activity android:name=".Vista.MainActivity">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
