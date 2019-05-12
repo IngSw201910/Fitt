@@ -225,7 +225,6 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
 
         String url = stringBuilder.toString();
         Log.d(TAG, "url"+url );
-        Toast.makeText(this, url, Toast.LENGTH_LONG).show();
 
         mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(ParquesActivity.this));
 
