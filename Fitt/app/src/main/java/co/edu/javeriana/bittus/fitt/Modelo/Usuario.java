@@ -16,6 +16,8 @@ public class Usuario implements Serializable {
     private String sexo;
     private float altura;
     private float peso;
+    private List<Usuario> seguidosList;
+    private List<Usuario> seguidoresList;
 
 
 
@@ -29,6 +31,8 @@ public class Usuario implements Serializable {
         this.altura = altura;
         this.peso = peso;
         entrenamientoList = new ArrayList<Entrenamiento>();
+        seguidosList = new ArrayList<Usuario>();
+        seguidoresList = new ArrayList<Usuario>();
     }
 
     public String getNombre() {
@@ -101,6 +105,22 @@ public class Usuario implements Serializable {
 
     public void setEntrenamientoList(List<Entrenamiento> entrenamientoList) {
         this.entrenamientoList = entrenamientoList;
+    }
+
+    public  List<Usuario> getSeguidosList(){
+        return seguidosList;
+    }
+
+    public void setSeguidosList(List<Usuario> seguidosList){
+        this.seguidosList=seguidosList;
+    }
+
+    public List<Usuario> getSeguidoresList(){
+        return seguidoresList;
+    }
+
+    public void setSeguidoresList(List<Usuario> seguidoresList){
+        this.seguidoresList=seguidoresList;
     }
 
     //usuario cambiado

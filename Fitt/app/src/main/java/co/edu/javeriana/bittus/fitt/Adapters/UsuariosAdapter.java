@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import java.util.List;
 
@@ -44,6 +45,26 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
         }
         usuarioSeleccionado = listUsuarios.get(position);
         Usuario usuario = usuarioSeleccionado;
+
+        TextView nombre = view.findViewById(R.id.textNombreBusqueda);
+        nombre.setText(usuario.getNombre());
+
+        TextView seguidores =view.findViewById(R.id.textSeguidoresBusqueda);
+        seguidores.setText(usuario.getSeguidoresList().size() + " Seguidores");
+
+        TextView seguidos = view.findViewById(R.id.textViewSeguidosBusqueda);
+        seguidores.setText(usuario.getSeguidosList().size()+" Seguidos");
+
+        ImageView foto = view.findViewById(R.id.imageViewPerfilBusqueda);
+        //INSERTAR IMAGEN!!
+
+        //Colocar lo del botón seguir
+
+
+
+
+
+
 
 
 
