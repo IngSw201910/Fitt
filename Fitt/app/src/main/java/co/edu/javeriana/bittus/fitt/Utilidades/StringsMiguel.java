@@ -15,7 +15,8 @@ public class StringsMiguel {
     public final static String CAMPO_OBLIGATORIO = "Campo obligatorio";
     public final static String LISTRA_EJERCICIOS_VACIOS = "La lista de ejercicios no puede estar vacía";
     public final static String CREACION_RUTINA_EXITOSA = "Se ha creado la rutina exítosamente";
-    public static final String REGISTRO_USUARIO_CORRECTO = "Registro correcto ";
+    public static final String REGISTRO_USUARIO_CORRECTO = "Se ha registrado correctamente el usuario";
+    public static final String REGISTRO_USUARIO_INCORRECTO = "No se pudo registrar el usuario";
     public static final String SIN_FOTO = "Debe usar alguna foto";
 
 
@@ -32,5 +33,6 @@ public class StringsMiguel {
     public static final CharSequence SELECCIONAR_APLICACION = "Seleccione la aplicación";
 
     public static final String SIGUIENTE = "Siguiente";
-    public static final String RUTA_USUARIOS = "Usuarios";
+    public static final String RUTA_USUARIOS = "Usuarios/";
+
 }

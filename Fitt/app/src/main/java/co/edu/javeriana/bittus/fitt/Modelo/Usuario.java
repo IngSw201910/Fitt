@@ -19,6 +19,7 @@ public class Usuario implements Serializable {
 
 
 
+
     public Usuario(String nombre, String correo, String contraseña, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
         this.nombre = nombre;
         this.correo = correo;
