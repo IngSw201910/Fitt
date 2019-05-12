@@ -7,7 +7,7 @@
     tools:context=".Vista.ComunidadFragment">
 
     <ImageView
-        android:id="@+id/imageViewFotoPerfil"
+        android:id="@+id/imageViewFotoPerfilE"
         android:layout_width="111dp"
         android:layout_height="98dp"
         android:layout_marginStart="8dp"
@@ -22,7 +22,7 @@
         tools:src="@tools:sample/avatars" />
 
     <EditText
-        android:id="@+id/editTextNombre"
+        android:id="@+id/editTextNombreE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -36,10 +36,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSiguiendo" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonSiguiendoE"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/editTextCorreo"
+        android:id="@+id/editTextCorreoE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -47,7 +48,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="480dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         android:text="MiCorreo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,13 +57,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
 
     <EditText
-        android:id="@+id/editTextRegistro"
+        android:id="@+id/editTextRegistroE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="416dp"
+        android:layout_marginBottom="432dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="FechaRegistro"
@@ -70,28 +70,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreoE" />
 
     <EditText
-        android:id="@+id/editTextNacimiento"
+        android:id="@+id/editTextNacimientoE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="320dp"
+        android:layout_marginBottom="368dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text|date"
         android:text="FechaNaciemiento"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegistro"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextRegistroE" />
 
     <EditText
-        android:id="@+id/editTextPeso"
+        android:id="@+id/editTextPesoE"
         android:layout_width="71dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
@@ -99,49 +97,47 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="296dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="Peso"
+        android:inputType="text|numberDecimal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.024"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNacimiento"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNacimientoE"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButtonEditarNombre"
+        android:id="@+id/imageButtonEditarNombreE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="544dp"
         android:src="@drawable/editar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toEndOf="@+id/editTextNombre"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonTomarFoto"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintHorizontal_bias="0.725"
+        app:layout_constraintStart_toEndOf="@+id/editTextNombreE"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonTomarFotoE" />
 
     <ImageButton
-        android:id="@+id/imageButtonEditarCorreo"
+        android:id="@+id/imageButtonEditarCorreoE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="488dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="480dp"
         android:src="@drawable/editar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.017"
-        app:layout_constraintStart_toEndOf="@+id/editTextCorreo"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonEditarNombre"
+        app:layout_constraintStart_toEndOf="@+id/editTextCorreoE"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonEditarNombreE"
         app:layout_constraintVertical_bias="0.75" />
 
     <ImageButton
-        android:id="@+id/imageButtonEdiatNacieminto"
+        android:id="@+id/imageButtonEdiatNaciemintoE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -151,13 +147,13 @@
         android:src="@drawable/editar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextNacimiento"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonEditarCorreo"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.775"
+        app:layout_constraintStart_toEndOf="@+id/editTextNacimientoE"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonEditarCorreoE"
+        app:layout_constraintVertical_bias="0.666" />
 
     <ImageButton
-        android:id="@+id/imageButton9"
+        android:id="@+id/imageButtonEditarPesoE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -167,13 +163,12 @@
         android:src="@drawable/editar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.125"
-        app:layout_constraintStart_toEndOf="@+id/editTextPeso"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNacimiento"
+        app:layout_constraintStart_toEndOf="@+id/editTextPesoE"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNacimientoE"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editTextAltura"
+        android:id="@+id/editTextAlturaE"
         android:layout_width="90dp"
         android:layout_height="44dp"
         android:layout_marginStart="56dp"
@@ -181,29 +176,28 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="text|numberDecimal"
         android:text="Altura"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton9"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNacimiento"
+        app:layout_constraintStart_toEndOf="@+id/imageButtonEditarPesoE"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNacimientoE"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButtonEditarAltura"
+        android:id="@+id/imageButtonEditarAlturaE"
         android:layout_width="46dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="312dp"
         android:src="@drawable/editar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextAltura"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNacimiento" />
+        app:layout_constraintStart_toEndOf="@+id/editTextAlturaE"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNacimientoE"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textViewPrivacidad"
@@ -222,7 +216,7 @@
         app:layout_constraintVertical_bias="0.911" />
 
     <RadioButton
-        android:id="@+id/radioButtonPrivacidad"
+        android:id="@+id/radioButtonPrivacidadE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -252,8 +246,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPeso"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPesoE"
+        app:layout_constraintVertical_bias="0.138" />
 
     <ImageButton
         android:id="@+id/imageButtonEdiatExperiencia"
@@ -262,17 +256,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="256dp"
+        android:layout_marginBottom="224dp"
         android:src="@drawable/editar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/editTextExperiencia"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonEditarAltura"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonEditarAlturaE"
+        app:layout_constraintVertical_bias="0.173" />
 
     <Button
-        android:id="@+id/buttonSeguidores"
+        android:id="@+id/buttonSeguidoresE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -288,7 +282,7 @@
         app:layout_constraintVertical_bias="0.011" />
 
     <Button
-        android:id="@+id/buttonSiguiendo"
+        android:id="@+id/buttonSiguiendoE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -300,11 +294,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.091"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSeguidores"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSeguidoresE"
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
-        android:id="@+id/imageButtonCargarFoto"
+        android:id="@+id/imageButtonCargarFotoE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -314,22 +308,25 @@
         android:src="@drawable/cargar_foto"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
+        app:layout_constraintHorizontal_bias="0.829"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.011" />
 
     <ImageButton
-        android:id="@+id/imageButtonTomarFoto"
+        android:id="@+id/imageButtonTomarFotoE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:src="@drawable/tomar_foto"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.996"
+        app:layout_constraintHorizontal_bias="0.829"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonCargarFoto" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonCargarFotoE"
+        app:layout_constraintVertical_bias="0.009" />
 
 </android.support.constraint.ConstraintLayout>

@@ -37,12 +37,12 @@ public class BuscarUsuarioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_usuario);
-        listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
+        //listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
         listUsuarios = new ArrayList<Usuario>();
         ImageButtonBuscarUsuarios = (ImageButton) findViewById(R.id.imageButtonBuscarUsuario);
         EditTextNombreUsuarioABuscar = (EditText) findViewById(R.id.editTextUsuario);
 
-        EditTextNombreUsuarioABuscar.addTextChangedListener((TextWatcher) this);
+        /*EditTextNombreUsuarioABuscar.addTextChangedListener((TextWatcher) this);
 
         adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios);
 
@@ -64,7 +64,7 @@ public class BuscarUsuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             }
-        });
+        });*/
 
     }
 
