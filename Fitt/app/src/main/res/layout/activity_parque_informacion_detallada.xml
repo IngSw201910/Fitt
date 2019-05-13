@@ -92,8 +92,8 @@
 
     <ListView
         android:id="@+id/ListViewReseñas"
-        android:layout_width="395dp"
-        android:layout_height="134dp"
+        android:layout_width="398dp"
+        android:layout_height="146dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -133,14 +133,16 @@
 
     <RatingBar
         android:id="@+id/ratingBarDetalle"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="5"
-        android:rating="2"
-        android:stepSize="1"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:clickable="false"
+        android:numStars="5"
+        android:rating="2"
+        android:stepSize="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/grid_view" />

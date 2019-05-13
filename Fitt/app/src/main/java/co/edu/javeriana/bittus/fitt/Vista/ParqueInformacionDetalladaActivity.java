@@ -25,6 +25,7 @@ import co.edu.javeriana.bittus.fitt.Adapters.GridAdapter;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopResenarParque;
 
 public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
 
@@ -85,17 +86,11 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             }
         });
 
-        calificacion.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                rating = v;
-            }
-        });
-
         añadirReseña.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ParqueInformacionDetalladaActivity.this, "rating: "+calificacion.getRating() , Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenarParque.class);
+                startActivity(intent);
             }
         });
 
