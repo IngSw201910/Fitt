@@ -1,5 +1,6 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Adapters.EntrenamientosAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerEntrenamientoRow;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
 public class BuscarEntrenamientosActivity extends AppCompatActivity implements TextWatcher {
@@ -43,18 +45,25 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
 
         nombreEdit.addTextChangedListener(this);
 
-        adapter = new EntrenamientosAdapter(this,R.layout.item_entrenamiento_row, listaEntrenamientosPublicos);
+        adapter = new EntrenamientosAdapter(this,R.layout.item_entrenamiento_row, listaEntrenamientosPublicos,  new BtnClickListenerEntrenamientoRow() {
+            @Override
+            public void onBtnClickAdoptar(int position) {
+
+                adoptarEntrenamiento(listaEntrenamientosPublicos.get(position));
+            }
+
+        });
 
         listViewL.setAdapter(adapter);
 
 
         database = FirebaseDatabase.getInstance();
-        descargarRutinasPublicas();
+        descargarEntrenamientosPublicos();
     }
 
 
     //El sistema descarga la lista de rutinas publicas y la información correspondiente
-    private void descargarRutinasPublicas (){
+    private void descargarEntrenamientosPublicos (){
 
         myRef = database.getReference(RutasBaseDeDatos.getRutaEntrenamientosPublicos());
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -88,5 +97,12 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    private void adoptarEntrenamiento (Entrenamiento entrenamiento){
+        Log.i("Entrenamientoo", entrenamiento.getNombre());
+        Intent intent = new Intent(BuscarEntrenamientosActivity.this, AdoptarEntrenamientoActivity.class);
+        intent.putExtra("entrenamiento", entrenamiento);
+        startActivity(intent);
     }
 }

@@ -15,26 +15,26 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Filtros.RutinasFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
+import co.edu.javeriana.bittus.fitt.Modelo.EntrenamientoAdoptado;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerEntrenamientoRow;
 
 
-public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
+public class EntrenamientosHoyAdapter extends ArrayAdapter<EntrenamientoAdoptado> {
 
-    private List<Entrenamiento> listEntrenamiento;
+    private List<EntrenamientoAdoptado> listEntrenamiento;
     private Context context;
     private int resource;
-    private Entrenamiento entrenamiento;
+    private EntrenamientoAdoptado entrenamientoAdoptado;
     private RutinasFiltro rutinasFiltro;
     private BtnClickListenerEntrenamientoRow mClickListenerAdoptar;
 
-    public EntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerEntrenamientoRow listenerAdoptar) {
+    public EntrenamientosHoyAdapter(@NonNull Context context, int resource, List<EntrenamientoAdoptado> objects) {
         super(context, resource, objects);
         this.listEntrenamiento = objects;
         this.context = context;
         this.resource = resource;
 
-        this.mClickListenerAdoptar = listenerAdoptar;
 
     }
 
@@ -48,13 +48,13 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
             view = LayoutInflater.from(context).inflate(resource, null);
         }
 
-        entrenamiento = listEntrenamiento.get(position);
+        entrenamientoAdoptado = listEntrenamiento.get(position);
 
         TextView nombre = view.findViewById(R.id.textView6);
-        nombre.setText(entrenamiento.getNombre());
+        nombre.setText(entrenamientoAdoptado.getEntrenamiento().getNombre());
 
         TextView dificultad = view.findViewById(R.id.textView14);
-        dificultad.setText(entrenamiento.getDificultad());
+        dificultad.setText(entrenamientoAdoptado.getEntrenamiento().getDificultad());
 
         ImageButton adoptar = view.findViewById(R.id.adoptar);
         adoptar.setTag(position);
@@ -72,17 +72,6 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         return  view;
     }
 
-    @NonNull
-    @Override
-    public Filter getFilter() {
-        if(rutinasFiltro ==null){
-            rutinasFiltro = new RutinasFiltro(listEntrenamiento, this);
-        }
 
-
-        return rutinasFiltro;
-
-
-    }
 
 }
