@@ -9,6 +9,7 @@ public class Usuario implements Serializable {
 
     private List<Entrenamiento> entrenamientoList;
     private String nombre;
+    private String id;
     private String correo;
     private String contraseña;
     private String direccionFoto;
@@ -19,7 +20,11 @@ public class Usuario implements Serializable {
     private List<Usuario> seguidosList;
     private List<Usuario> seguidoresList;
 
-
+    public Usuario(String correo, String id, String nombre){
+        this.nombre = nombre;
+        this.correo = correo;
+        this.id = id;
+    }
 
     public Usuario(String nombre, String correo, String contraseña, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
         this.nombre = nombre;
@@ -33,6 +38,14 @@ public class Usuario implements Serializable {
         entrenamientoList = new ArrayList<Entrenamiento>();
         seguidosList = new ArrayList<Usuario>();
         seguidoresList = new ArrayList<Usuario>();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNombre() {
