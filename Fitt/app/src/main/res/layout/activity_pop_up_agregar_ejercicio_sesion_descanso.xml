@@ -4,8 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00DCDCDC">
+    android:background="@drawable/border_pop_ups">
 
+
+    <ImageButton
+        android:id="@+id/imageButtonCancelar"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="52dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/cancelar"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCancelar2"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewCancelar2"
@@ -18,7 +29,7 @@
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/barrier4"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -53,23 +64,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicio" />
 
     <ImageButton
-        android:id="@+id/buttonCancelar"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="52dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitXY"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/textViewCancelar2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/cancelar" />
-
-    <ImageButton
         android:id="@+id/buttonAceptar"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginEnd="52dp"
-        android:background="#00FFFFFF"
+        android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/textViewAceptar"
@@ -87,7 +86,13 @@
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/barrier4"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
 
 </android.support.constraint.ConstraintLayout>
