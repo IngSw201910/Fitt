@@ -109,64 +109,68 @@ public class EjercicioRepeticionesFragment extends Fragment {
 
         manejadorEjercicio = new Thread() {
             public void run() {
-                if (estado == COMENZANDO){
-                    while (listener.estaDandoInstrucciones());
-                    String instruccionInicial = "";
+                try {
+                    if (estado == COMENZANDO) {
+                        while (listener.estaDandoInstrucciones()) ;
+                        String instruccionInicial = "";
 
-                    instruccionInicial += ejercicioRepeticiones.getEjercicio().getNombre();
-                    if (serie == 1 ){
-                        instruccionInicial += ". " + ejercicioRepeticiones.getEjercicio().getDescripción();
-                    }
-                    instruccionInicial += ". "+ "Serie "+ serie +"," + ejercicioRepeticiones.getRepeticiones() + "repeticiones";
-
-                    listener.darInstrucciones(instruccionInicial);
-                    while (listener.estaDandoInstrucciones());
-
-                    estado = CORRIENDO;
-
-                }
-                listener.iniciarMusicaEjercicioRepeticionOTiempo();
-                while (repeticion < ejercicioRepeticiones.getRepeticiones()) {
-                    if (estado == CORRIENDO) {
-                        listener.darInstrucciones("1");
-                        try {
-                            sleep(1000);
-                        } catch (InterruptedException e) {
-                            this.interrupt();
-                            break;
+                        instruccionInicial += ejercicioRepeticiones.getEjercicio().getNombre();
+                        if (serie == 1) {
+                            instruccionInicial += ". " + ejercicioRepeticiones.getEjercicio().getDescripción();
                         }
-                        listener.darInstrucciones("2");
-                        repeticion++;
-                        getActivity().runOnUiThread(new Runnable() {
+                        instruccionInicial += ". " + "Serie " + serie + "," + ejercicioRepeticiones.getRepeticiones() + "repeticiones";
 
+                        listener.darInstrucciones(instruccionInicial);
+                        while (listener.estaDandoInstrucciones()) ;
+
+                        estado = CORRIENDO;
+
+                    }
+                    listener.iniciarMusicaEjercicioRepeticionOTiempo();
+                    while (repeticion < ejercicioRepeticiones.getRepeticiones()) {
+                        if (estado == CORRIENDO) {
+                            listener.darInstrucciones("1");
+                            try {
+                                sleep(1000);
+                            } catch (InterruptedException e) {
+                                this.interrupt();
+                                break;
+                            }
+                            listener.darInstrucciones("2");
+                            repeticion++;
+                            getActivity().runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    repeticionesPB.setProgress(repeticion);
+                                    repeticiones.setText(repeticion + "/" + ejercicioRepeticiones.getRepeticiones());
+                                }
+                            });
+
+
+                            try {
+                                sleep(1000);
+                            } catch (InterruptedException e) {
+                                this.interrupt();
+                                break;
+                            }
+
+                        }
+
+                    }
+                    if (!this.isInterrupted()) {
+                        getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                repeticionesPB.setProgress(repeticion);
-                                repeticiones.setText(repeticion + "/" + ejercicioRepeticiones.getRepeticiones());
+                                listener.detenerMusica();
+                                listener.darInstrucciones("Fin de serie");
+                                while (listener.estaDandoInstrucciones()) ;
+                                listener.mostrarSiguienteEjercicio();
                             }
                         });
-
-
-                        try {
-                            sleep(1000);
-                        } catch (InterruptedException e) {
-                            this.interrupt();
-                            break;
-                        }
-
                     }
-
-                }
-                if (!this.isInterrupted()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            listener.detenerMusica();
-                            listener.darInstrucciones("Fin de serie");
-                            while (listener.estaDandoInstrucciones());
-                            listener.mostrarSiguienteEjercicio();
-                        }
-                    });
+                }catch (Exception e){
+                    e.printStackTrace(); //se termino la ejecución del ejercicio
                 }
             }
         };
@@ -194,6 +198,18 @@ public class EjercicioRepeticionesFragment extends Fragment {
 
 
     }
+
+    public void pausar(){
+        if (estado == CORRIENDO)
+            estado = PAUSADO;
+
+    }
+    public void reanudar(){
+        if (estado == PAUSADO)
+        estado = CORRIENDO;
+    }
+
+
 
 
 }

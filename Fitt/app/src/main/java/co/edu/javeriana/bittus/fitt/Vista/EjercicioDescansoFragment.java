@@ -56,10 +56,13 @@ public class EjercicioDescansoFragment extends Fragment {
 
     public interface FragmentEjercicioRepeticionesListener {
         void mostrarSiguienteEjercicio();
+
         boolean estaDandoInstrucciones();
+
         void darInstrucciones(String texto);
 
         void iniciarMusicaEjercicioDescanso();
+
         void detenerMusica();
 
     }
@@ -98,26 +101,29 @@ public class EjercicioDescansoFragment extends Fragment {
 
         manejadorEjercicio = new Thread() {
             public void run() {
-                if (estado == COMENZANDO){
-                    while (listener.estaDandoInstrucciones());
+                try {
+                    if (estado == COMENZANDO) {
+                        while (listener.estaDandoInstrucciones()) ;
 
-                    listener.darInstrucciones("Descanso.   "+ ejercicioDescanso.getDuracion() +"segundos");
-                    while (listener.estaDandoInstrucciones());
-                    estado = CORRIENDO;
+                        listener.darInstrucciones("Descanso.   " + ejercicioDescanso.getDuracion() + "segundos");
+                        while (listener.estaDandoInstrucciones()) ;
+                        estado = CORRIENDO;
 
-                }
-                listener.iniciarMusicaEjercicioDescanso();
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-                        chrono.start();
                     }
-                });
+                    listener.iniciarMusicaEjercicioDescanso();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+                            chrono.start();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         };
         manejadorEjercicio.start();
-
     }
 
     private void inicializarCronometro(View v) {
@@ -126,25 +132,29 @@ public class EjercicioDescansoFragment extends Fragment {
         chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                long time = SystemClock.elapsedRealtime() - chronometer.getBase();
-                long segundos = time / 1000;
-                String t = segundos + " s";
-                segundo = (int) segundos;
-                chronometer.setText(t);
+                try {
+                    long time = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    long segundos = time / 1000;
+                    String t = segundos + " s";
+                    segundo = (int) segundos;
+                    chronometer.setText(t);
 
-                segundosDescansoPB.setProgress(segundo);
+                    segundosDescansoPB.setProgress(segundo);
 
 
-                if (segundos != 0 && (ejercicioDescanso.getDuracion()/2 == segundos || ((ejercicioDescanso.getDuracion()/4)*3) == segundos)) {
-                    listener.darInstrucciones("Quedan " + (ejercicioDescanso.getDuracion() - segundo) + "segundos de descanso");
-                }
+                    if (segundos != 0 && (ejercicioDescanso.getDuracion() / 2 == segundos || ((ejercicioDescanso.getDuracion() / 4) * 3) == segundos)) {
+                        listener.darInstrucciones("Quedan " + (ejercicioDescanso.getDuracion() - segundo) + "segundos de descanso");
+                    }
 
-                if (segundos >= ejercicioDescanso.getDuracion()) {
-                    chrono.stop();
-                    listener.detenerMusica();
-                    listener.darInstrucciones("Fin del descanso");
-                    while (listener.estaDandoInstrucciones());
-                    listener.mostrarSiguienteEjercicio();
+                    if (segundos >= ejercicioDescanso.getDuracion()) {
+                        chrono.stop();
+                        listener.detenerMusica();
+                        listener.darInstrucciones("Fin del descanso");
+                        while (listener.estaDandoInstrucciones()) ;
+                        listener.mostrarSiguienteEjercicio();
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
 
             }
@@ -171,6 +181,27 @@ public class EjercicioDescansoFragment extends Fragment {
             chrono.stop();
         super.onDetach();
     }
+
+    public void pausar(){
+        if (estado == CORRIENDO) {
+
+            estado = PAUSADO;
+            timeWhenStopped = (chrono.getBase() - SystemClock.elapsedRealtime());
+            chrono.stop();
+        }
+    }
+
+    public void reanudar(){
+        if (estado == PAUSADO) {
+            estado = CORRIENDO;
+            chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+            chrono.start();
+        }
+    }
+
+
+
+
 
 
 }
