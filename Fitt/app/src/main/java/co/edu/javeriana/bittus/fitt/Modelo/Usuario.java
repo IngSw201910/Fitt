@@ -10,7 +10,6 @@ public class Usuario implements Serializable {
     private List<Entrenamiento> entrenamientoList;
     private String nombre;
     private String correo;
-    private String contraseña;
     private String direccionFoto;
     private Date fechaNacimiento;
     private String sexo;
@@ -20,10 +19,9 @@ public class Usuario implements Serializable {
 
 
 
-    public Usuario(String nombre, String correo, String contraseña, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
+    public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
         this.nombre = nombre;
         this.correo = correo;
-        this.contraseña = contraseña;
         this.direccionFoto = direccionFoto;
         this.fechaNacimiento = fechaNacimiento;
         this.sexo = sexo;
@@ -48,13 +46,6 @@ public class Usuario implements Serializable {
         this.correo = correo;
     }
 
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
 
     public String getDireccionFoto() {
         return direccionFoto;

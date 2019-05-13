@@ -217,7 +217,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             }else if(radioButtonOtro.isChecked()){
                 sexo = "Otro";
             }
-            usuarioNuevo = new Usuario(nombre,correo,contraseña,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
+            usuarioNuevo = new Usuario(nombre,correo,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
 
 
             if(esEntrenador){
@@ -238,12 +238,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-
-
-
                             iniciarConNuevoUsuario();
-
-
                         }
                         else {
                             Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_INCORRECTO,Toast.LENGTH_LONG).show();

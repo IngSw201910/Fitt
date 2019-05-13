@@ -11,28 +11,28 @@
         android:layout_width="167dp"
         android:layout_height="54dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/verdeFitt"
         android:text="Unirse a Fitt"
         android:textColorHighlight="@color/verdeBotones"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/barrier2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPorqueElegirte"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonTomarFoto"
         android:layout_width="54dp"
         android:layout_height="54dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="36dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageViewTitulo"
         app:layout_constraintTop_toBottomOf="@+id/textViewTituloRegistro"
         app:srcCompat="@drawable/tomar_foto" />
 
@@ -40,20 +40,22 @@
         android:id="@+id/imageButtonCargarFoto"
         android:layout_width="54dp"
         android:layout_height="54dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="24dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageViewTitulo"
         app:layout_constraintTop_toBottomOf="@+id/imageButtonTomarFoto"
         app:srcCompat="@drawable/cargar_foto" />
 
     <ImageView
         android:id="@+id/imageViewTitulo"
-        android:layout_width="196dp"
-        android:layout_height="189dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="187dp"
+        android:layout_height="208dp"
+        android:layout_marginStart="44dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTituloRegistro"
         tools:srcCompat="@tools:sample/avatars" />
@@ -102,4 +104,10 @@
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewTitulo" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
 </android.support.constraint.ConstraintLayout>
