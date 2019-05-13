@@ -29,26 +29,34 @@
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_width="203dp"
+        android:layout_height="18dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
         android:text="NombreRutina"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView7"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView14"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_width="203dp"
+        android:layout_height="18dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:text="Dificultad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView12"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <ImageButton
+        android:id="@+id/adoptar"
+        android:layout_width="38dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/verdeFitt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:srcCompat="@drawable/agregar"
+        tools:layout_editor_absoluteY="15dp" />
 </android.support.constraint.ConstraintLayout>
