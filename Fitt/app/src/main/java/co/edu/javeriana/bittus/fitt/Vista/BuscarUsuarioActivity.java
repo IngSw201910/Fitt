@@ -1,6 +1,7 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,13 +57,19 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
         listViewUsuarios.setAdapter(adapterUsuarios);
 
-       /* listViewUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listViewUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 usuarioSeleccionado = listUsuarios.get(position);
 
+                //Si el usuario no lo sigue
+                //Intent intent = new Intent(BuscarUsuarioActivity.this,MostrarUsuarioActivity.class);
+                //intent.putExtra("objectData",usuarioSeleccionado);
+                //startActivity(intent);
+
+
             }
-        });*/
+        });
 
         database = FirebaseDatabase.getInstance();
 
@@ -84,7 +91,8 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    listUsuarios.add(singleSnapshot.getValue(Usuario.class));
+                    Usuario aux =singleSnapshot.getValue(Usuario.class); //Se muere aquí
+                    listUsuarios.add(aux);
                     //Log.i("Prueba", singleSnapshot.getValue(Usuario.class).getDireccionFoto());
                 }
                 adapterUsuarios.notifyDataSetChanged();

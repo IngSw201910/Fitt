@@ -223,14 +223,20 @@ public class PerfilFragment extends Fragment {
         seguidores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SeguidoresActivity.class));
+
+                Intent intent =new Intent(getActivity(), SeguidoresActivity.class);
+               // intent.putExtra("listaSeguidores",);
+                startActivity(intent);
             }
         });
 
         siguiendo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), SeguidosActivity.class));
+
+                Intent intent =new Intent(getActivity(), SeguidosActivity.class);
+                // intent.putExtra("listaSeguidos",);
+                startActivity(intent);
             }
         });
 

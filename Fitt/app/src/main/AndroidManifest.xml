@@ -66,6 +66,8 @@
         <activity android:name=".Vista.RegistroUsuarioActivity"/>
         <activity android:name=".Vista.SeguidoresActivity"/>
         <activity android:name=".Vista.SeguidosActivity"/>
+        <activity android:name=".Vista.MostrarUsuarioActivity"/>
+        <activity android:name=".Vista.MostrarUsuarioSeguidoActivity$MostrarUsuarioActivity"/>
         <activity android:name=".Vista.MainActivity">
 
 

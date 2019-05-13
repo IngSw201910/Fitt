@@ -35,6 +35,12 @@ public class Usuario implements Serializable {
         seguidoresList = new ArrayList<Usuario>();
     }
 
+    public Usuario(){
+        entrenamientoList = new ArrayList<Entrenamiento>();
+        seguidosList = new ArrayList<Usuario>();
+        seguidoresList = new ArrayList<Usuario>();
+    }
+
     public String getNombre() {
         return nombre;
     }
