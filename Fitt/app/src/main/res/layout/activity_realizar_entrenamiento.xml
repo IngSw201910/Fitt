@@ -153,6 +153,7 @@
         android:layout_marginBottom="56dp"
         android:background="@android:color/transparent"
         android:cropToPadding="false"
+        android:focusableInTouchMode="false"
         android:scaleType="fitXY"
         android:src="@drawable/iniciar"
         app:layout_constraintBottom_toBottomOf="parent"
