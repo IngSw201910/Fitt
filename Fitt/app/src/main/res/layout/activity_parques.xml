@@ -37,7 +37,7 @@
             android:layout_marginLeft="7dp"
             android:layout_toRightOf="@+id/ic_magnify"
             android:background="@null"
-            android:hint="Inserte un parque"
+            android:hint="Escriba el lugar donde quiere buscar parques "
             android:imeOptions="actionSearch"
             android:textColor="#000"
             android:textSize="15sp" />
