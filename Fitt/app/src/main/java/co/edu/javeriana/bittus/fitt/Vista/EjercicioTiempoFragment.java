@@ -48,10 +48,6 @@ public class EjercicioTiempoFragment extends Fragment {
     private long timeWhenStopped = 0;
 
 
-
-
-
-
     private int estado = COMENZANDO;
 
     private static final int COMENZANDO = 0;
@@ -61,17 +57,18 @@ public class EjercicioTiempoFragment extends Fragment {
     private boolean ejercicioTerminado = false;
 
 
-
     Activity realizarEntrenaActivity;
 
     public interface FragmentEjercicioRepeticionesListener {
         void mostrarSiguienteEjercicio();
+
         boolean estaDandoInstrucciones();
+
         void darInstrucciones(String texto);
 
         void iniciarMusicaEjercicioRepeticionOTiempo();
-        void detenerMusica();
 
+        void detenerMusica();
 
 
     }
@@ -98,11 +95,8 @@ public class EjercicioTiempoFragment extends Fragment {
         chrono = v.findViewById(R.id.tiempoSerie);
 
 
-
-
         seriesPB = v.findViewById(R.id.pbSeriesTiempo);
         segundosPB = v.findViewById(R.id.pbTiempo);
-
 
 
         seriesPB.setMax(ejercicioTiempo.getSeries());
@@ -123,65 +117,71 @@ public class EjercicioTiempoFragment extends Fragment {
 
         manejadorEjercicio = new Thread() {
             public void run() {
-                if (estado == COMENZANDO){
-                    while (listener.estaDandoInstrucciones());
-                    String instruccionInicial = "";
-                    instruccionInicial += ejercicioTiempo.getEjercicio().getNombre();
+                try {
+                    if (estado == COMENZANDO) {
+                        while (listener.estaDandoInstrucciones()) ;
+                        String instruccionInicial = "";
+                        instruccionInicial += ejercicioTiempo.getEjercicio().getNombre();
 
 
-                    if (serie == 1){
-                        instruccionInicial += ". "+ ejercicioTiempo.getEjercicio().getDescripción();
+                        if (serie == 1) {
+                            instruccionInicial += ". " + ejercicioTiempo.getEjercicio().getDescripción();
+
+                        }
+                        instruccionInicial += ". " + "Serie " + serie + "," + ejercicioTiempo.getTiempo() + "segundos";
+                        listener.darInstrucciones(instruccionInicial);
+                        while (listener.estaDandoInstrucciones()) ;
+                        estado = CORRIENDO;
 
                     }
-                    instruccionInicial += ". "+ "Serie "+ serie +"," + ejercicioTiempo.getTiempo() + "segundos";
-                    listener.darInstrucciones(instruccionInicial);
-                    while (listener.estaDandoInstrucciones());
-                    estado = CORRIENDO;
-
+                    listener.iniciarMusicaEjercicioRepeticionOTiempo();
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+                            chrono.start();
+                        }
+                    });
+                } catch (Exception e) {
+                    //Se termino corto la ejecución del ejercicio
+                    e.printStackTrace();
                 }
-                listener.iniciarMusicaEjercicioRepeticionOTiempo();
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-                        chrono.start();
-                    }
-                });
             }
         };
         manejadorEjercicio.start();
     }
 
-    private void inicializarCronometro(View v){
-        chrono  = (Chronometer) v.findViewById(R.id.tiempoSerie);
+    private void inicializarCronometro(View v) {
+        chrono = (Chronometer) v.findViewById(R.id.tiempoSerie);
         chrono.stop();
-        chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
+        chrono.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                long time = SystemClock.elapsedRealtime() - chronometer.getBase();
-                long segundos = time/1000;
-                String t = segundos + " s";
-                segundo = (int) segundos;
-                chronometer.setText(t);
+                try {
+                    long time = SystemClock.elapsedRealtime() - chronometer.getBase();
+                    long segundos = time / 1000;
+                    String t = segundos + " s";
+                    segundo = (int) segundos;
+                    chronometer.setText(t);
 
-                segundosPB.setProgress(segundo);
+                    segundosPB.setProgress(segundo);
 
 
+                    if (segundos != 0 && (ejercicioTiempo.getTiempo() / 2 == segundos || ((ejercicioTiempo.getTiempo() / 4) * 3) == segundos)) {
+                        listener.darInstrucciones("Quedan " + (ejercicioTiempo.getTiempo() - segundo) + "segundos");
+                    }
 
+                    if (segundos >= ejercicioTiempo.getTiempo()) {
+                        chrono.stop();
+                        listener.detenerMusica();
+                        listener.darInstrucciones("Fin de serie");
+                        while (listener.estaDandoInstrucciones()) ;
+                        listener.mostrarSiguienteEjercicio();
 
-                if (segundos!=0 && (ejercicioTiempo.getTiempo()/2 == segundos || ((ejercicioTiempo.getTiempo()/4)*3) == segundos)){
-                    listener.darInstrucciones("Quedan "+(ejercicioTiempo.getTiempo() - segundo) + "segundos");
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
                 }
-
-                if (segundos >= ejercicioTiempo.getTiempo()){
-                    chrono.stop();
-                    listener.detenerMusica();
-                    listener.darInstrucciones("Fin de serie");
-                    while (listener.estaDandoInstrucciones());
-                    listener.mostrarSiguienteEjercicio();
-
-                }
-
             }
         });
         chrono.setBase(SystemClock.elapsedRealtime());
@@ -206,6 +206,22 @@ public class EjercicioTiempoFragment extends Fragment {
             chrono.stop();
         listener = null;
         super.onDetach();
+    }
+
+    public void pausar(){
+        if (estado == CORRIENDO) {
+            estado = PAUSADO;
+            timeWhenStopped = (chrono.getBase() - SystemClock.elapsedRealtime());
+            chrono.stop();
+        }
+    }
+
+    public void reanudar(){
+        if (estado == PAUSADO) {
+            estado = CORRIENDO;
+            chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+            chrono.start();
+        }
     }
 
 

@@ -42,6 +42,14 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
             }
         });
 
+
+        diaSemana.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RealizarEntrenamiento_EntrenamientosHoyActivity.this, AdoptarEntrenamientoActivity.class));
+            }
+        });
+
         inicializarVista ();
     }
 
