@@ -1,9 +1,10 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Entrenamiento {
+public class Entrenamiento implements Serializable {
 
     private int ID;
     private int numDiasDescanso;

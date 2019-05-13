@@ -11,6 +11,8 @@ public final class RutasBaseDeDatos {
     private static String rutaEjercicios = "/ejercicios/";
     private static String rutaEntrenamientos = "/entrenamientos/";
     private static String rutaEntrenamientosPublicos = "/entrenamientos_publicos/";
+    private static String rutaEntrenamientosAdoptados = "/entrenamientos_adoptados/";
+
 
     public static String getRutaEjercicios() {
         return rutaEjercicios;
@@ -19,4 +21,5 @@ public final class RutasBaseDeDatos {
         return rutaEntrenamientos;
     }
     public static String getRutaEntrenamientosPublicos(){return rutaEntrenamientosPublicos;}
+    public static String getRutaEntrenamientosAdoptados(){return rutaEntrenamientosAdoptados;}
 }
