@@ -26,7 +26,7 @@ public class PopEditarEjercicioEntrenamientoDescanso extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_descanso);
 
-        aceptarButton = (ImageButton) findViewById(R.id.buttonAceptar);
+        aceptarButton = (ImageButton) findViewById(R.id.imageButtonAceptar);
         cancelarButton = (ImageButton) findViewById(R.id.imageButtonCancelar);
 
         duracionT = (EditText)findViewById(R.id.editTextDuracion);

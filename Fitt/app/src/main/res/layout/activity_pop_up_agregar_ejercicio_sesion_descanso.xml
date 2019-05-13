@@ -18,11 +18,22 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewCancelar2"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageButton
+        android:id="@+id/imageButtonAceptar"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginEnd="52dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/aceptar"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAceptar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/textViewCancelar2"
         android:layout_width="69dp"
         android:layout_height="22dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="56dp"
         android:layout_marginBottom="24dp"
         android:fontFamily="sans-serif-medium"
         android:text="Cancelar"
@@ -62,18 +73,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicio" />
-
-    <ImageButton
-        android:id="@+id/buttonAceptar"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="52dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/textViewAceptar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/aceptar" />
 
     <TextView
         android:id="@+id/textViewAceptar"

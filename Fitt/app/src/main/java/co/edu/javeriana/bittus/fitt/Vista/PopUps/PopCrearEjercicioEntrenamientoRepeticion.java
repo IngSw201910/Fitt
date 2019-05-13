@@ -12,6 +12,7 @@ import android.widget.TextView;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.InformacionEjercicioActivity;
 import pl.droidsonroids.gif.GifImageView;
@@ -39,9 +40,9 @@ public class PopCrearEjercicioEntrenamientoRepeticion extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_repeticion);
 
-        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar4);
-        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar4);
-        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio3);
+        aceptarButton = (ImageButton)findViewById(R.id.imageButtonAceptar);
+        cancelarButton = (ImageButton)findViewById(R.id.imageButtonCancelar);
+        informacionEjercicioB = (ImageButton)findViewById(R.id.imageButtonInformacion);
         repeticionesT = (EditText)findViewById(R.id.editTextRepeticiones);
         seriesT = (EditText)findViewById(R.id.editTextSeries);
         descansoT = (EditText)findViewById(R.id.editTextDescansos);
@@ -54,7 +55,7 @@ public class PopCrearEjercicioEntrenamientoRepeticion extends Activity {
 
         Bundle bundle = this.getIntent().getExtras();
 
-        ejercicio = (Ejercicio) bundle.getSerializable("ejercicio");
+        ejercicio = (Ejercicio) bundle.getSerializable(StringsMiguel.LLAVE_EJERCICIO);
 
         nombreEjercicioT.setText(ejercicio.getNombre());
         musculosEjercicioT.setText(ejercicio.getMusculos());
@@ -96,7 +97,7 @@ public class PopCrearEjercicioEntrenamientoRepeticion extends Activity {
     private void verInfo() {
         Intent inten = new Intent(PopCrearEjercicioEntrenamientoRepeticion.this, InformacionEjercicioActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ejercicio",ejercicio);
+        bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO,ejercicio);
         inten.putExtras(bundle);
 
         startActivity(inten);
@@ -111,15 +112,15 @@ public class PopCrearEjercicioEntrenamientoRepeticion extends Activity {
         boolean completado = true;
 
         if(sRepeticiones.isEmpty()){
-            repeticionesT.setError("Campo obligatorio");
+            repeticionesT.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completado = false;
         }
         if(sSeries.isEmpty()){
-            seriesT.setError("Campo obligatorio");
+            seriesT.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completado = false;
         }
         if(sDescansos.isEmpty()){
-            descansoT.setError("Campo obligatorio");
+            descansoT.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completado = false;
         }
         if(completado){
@@ -131,7 +132,7 @@ public class PopCrearEjercicioEntrenamientoRepeticion extends Activity {
 
             Intent intent = this.getIntent();
             Bundle bundle = intent.getExtras();
-            bundle.putSerializable("ejercicioRepeticion", ejercicioRepeticiones);
+            bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO_ENTRENAMIENTO_REPETICION, ejercicioRepeticiones);
             intent.putExtras(bundle);
 
 

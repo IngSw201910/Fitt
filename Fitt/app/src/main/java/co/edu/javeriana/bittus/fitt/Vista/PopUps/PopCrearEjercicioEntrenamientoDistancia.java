@@ -36,10 +36,10 @@ public class PopCrearEjercicioEntrenamientoDistancia extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_distancia);
 
-        informacionEjercicioB = (ImageButton)findViewById(R.id.buttonInformacionEjercicio);
+        informacionEjercicioB = (ImageButton)findViewById(R.id.imageButtonInformacion);
 
-        aceptarButton = (ImageButton)findViewById(R.id.buttonAceptar2);
-        cancelarButton = (ImageButton)findViewById(R.id.buttonCancelar2);
+        aceptarButton = (ImageButton)findViewById(R.id.imageButtonAceptar);
+        cancelarButton = (ImageButton)findViewById(R.id.imageButtonCancelar);
         distanciaT = (EditText)findViewById(R.id.editText5Distanciasd);
 
         nombreEjercicioT = (TextView) findViewById(R.id.textNombreEjercicio);
