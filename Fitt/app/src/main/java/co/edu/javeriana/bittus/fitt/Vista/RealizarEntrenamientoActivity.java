@@ -214,7 +214,12 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
                 if (reproductor != null)
                     reproductor.stop();
 
+
+
                 mostrarSiguienteEjercicio();
+                if (estado == PAUSADO)
+                    pausarEntrenamiento();
+
             }
         });
 
