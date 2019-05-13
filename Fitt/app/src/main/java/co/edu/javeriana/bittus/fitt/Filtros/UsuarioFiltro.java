@@ -12,37 +12,37 @@ public class UsuarioFiltro extends Filter {
 
 
 
-    private List<Usuario> listRutinas;
+    private List<Usuario> listUsuarios;
     private UsuariosAdapter adapter;
     private List<Usuario> listTemporal;
 
 
 
-    public UsuarioFiltro(List<Usuario> listRutinas, UsuariosAdapter adapter) {
-        this.listRutinas = listRutinas;
+    public UsuarioFiltro(List<Usuario> listUsuarios, UsuariosAdapter adapter) {
+        this.listUsuarios = listUsuarios;
         this.adapter = adapter;
         listTemporal = new ArrayList<Usuario>();
-        this.listTemporal.addAll(listRutinas);
+        this.listTemporal.addAll(listUsuarios);
     }
 
     @Override
     protected FilterResults performFiltering(CharSequence constraint) {
 
-        listRutinas.clear();
-        listRutinas.addAll(listTemporal);
+        listUsuarios.clear();
+        listUsuarios.addAll(listTemporal);
 
         FilterResults results = new FilterResults();
         List<Usuario> filtrados = new ArrayList<Usuario>();
         if(constraint==null || constraint.length()==0) {
-            filtrados.addAll(listRutinas);
+            filtrados.addAll(listUsuarios);
         }
         else{
             String filterString = constraint.toString().toLowerCase().trim();
 
-            for (Usuario rutina:listRutinas) {
-               /* if(rutina.getNombre().toLowerCase().contains(filterString)){
-                    filtrados.add(rutina);
-                }*/
+            for (Usuario usuario:listUsuarios) {
+                if(usuario.getNombre().toLowerCase().contains(filterString)) {
+                    filtrados.add(usuario);
+                }
             }
 
         }
@@ -61,8 +61,8 @@ public class UsuarioFiltro extends Filter {
 
     }
 
-    //@Override
-   /* public CharSequence convertResultToString(Object resultValue) {
+    @Override
+    public CharSequence convertResultToString(Object resultValue) {
         return ((Usuario)resultValue).getNombre();
-    }*/
+    }
 }
