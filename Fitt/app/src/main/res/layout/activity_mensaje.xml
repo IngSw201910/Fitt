@@ -8,12 +8,12 @@
 
 
     <RelativeLayout
+        android:id="@+id/topInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/verdeFitt"
-        android:paddingBottom="10dp"
         android:layout_alignParentTop="true"
-        >
+        android:background="@color/verdeFitt"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/txt_msg_username"
@@ -21,11 +21,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="52dp"
+            android:layout_toRightOf="@id/img_msg_foto"
             android:text="TextView"
+            android:textColor="#fff"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#fff"
-            android:layout_toRightOf="@id/img_msg_foto"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -39,7 +39,17 @@
             tools:srcCompat="@tools:sample/avatars" />
 
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/msgRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topInfo"
+        android:layout_above="@id/messageBar"/>
+
+
     <RelativeLayout
+        android:id="@+id/messageBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -50,20 +60,20 @@
         <EditText
             android:id="@+id/text_send"
             android:layout_width="match_parent"
-            android:hint= "Escribe un mensaje..."
-            android:layout_marginLeft="10dp"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btn_sendMessage"></EditText>
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@id/btn_sendMessage"
+            android:hint="Escribe un mensaje..."></EditText>
 
         <ImageButton
             android:id="@+id/btn_sendMessage"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="@drawable/icon_send"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+            android:background="@drawable/icon_send" />
     </RelativeLayout>
 
 </RelativeLayout>
