@@ -111,7 +111,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, RegistroUsuarioActivity.class);
 
 
+
         startActivity(intent);
+
+        //Intent intent = new Intent(MainActivity.this, RegistroUsuarioActivity.class);
+        //startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_REGISTRAR_USUARIO);
+
 
 
 
