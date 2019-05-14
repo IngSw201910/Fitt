@@ -80,7 +80,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="368dp"
         android:ems="10"
-        android:inputType="text|date"
+        android:inputType="date"
         android:text="FechaNaciemiento"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

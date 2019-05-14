@@ -20,6 +20,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Vista.BuscarUsuarioActivity;
 import co.edu.javeriana.bittus.fitt.Vista.MostrarUsuarioActivity;
+import co.edu.javeriana.bittus.fitt.Vista.MostrarUsuarioSeguidoActivity;
 
 
 public class UsuariosAdapter extends ArrayAdapter<Usuario> {
@@ -71,6 +72,11 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
                 Intent intent = new Intent(context, MostrarUsuarioActivity.class);
                 intent.putExtra("objectData",usuarioSeleccionado);
                 context.startActivity(intent);
+
+                //Si el usuario lo sigue
+               /* Intent intent = new Intent(context, MostrarUsuarioSeguidoActivityActivity.class);
+                intent.putExtra("objectData",usuarioSeleccionado);
+                context.startActivity(intent);*/
             }
         });
 

@@ -18,6 +18,7 @@ public class Usuario implements Serializable {
     private float peso;
     private List<Usuario> seguidosList;
     private List<Usuario> seguidoresList;
+    private boolean privacidad;
 
 
 
@@ -30,6 +31,7 @@ public class Usuario implements Serializable {
         this.sexo = sexo;
         this.altura = altura;
         this.peso = peso;
+        this.privacidad =false;
         entrenamientoList = new ArrayList<Entrenamiento>();
         seguidosList = new ArrayList<Usuario>();
         seguidoresList = new ArrayList<Usuario>();
@@ -127,6 +129,14 @@ public class Usuario implements Serializable {
 
     public void setSeguidoresList(List<Usuario> seguidoresList){
         this.seguidoresList=seguidoresList;
+    }
+
+    public boolean getPrivacidad(){
+        return privacidad;
+    }
+
+    public void setPrivacidad(boolean privacidad) {
+        this.privacidad = privacidad;
     }
 
     //usuario cambiado
