@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="305dp"
-        android:layout_height="507dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -49,10 +49,10 @@
         android:id="@+id/spinnerDificultad"
         android:layout_width="150dp"
         android:layout_height="38dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="68dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDescripcionEntrenamiento" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDuracion" />
 
     <TextView
         android:id="@+id/textViewTitulo"
@@ -94,14 +94,13 @@
         android:hint="Nombre"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewInformacionTitulo" />
 
     <EditText
         android:id="@+id/editTextDescripcionEntrenamiento"
         android:layout_width="277dp"
-        android:layout_height="82dp"
+        android:layout_height="75dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -109,7 +108,6 @@
         android:hint="Descripción"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNombreEntrenamiento"
         tools:textAlignment="textStart" />
@@ -152,23 +150,40 @@
         android:text="Dificultad"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/spinnerDificultad"
-        app:layout_constraintHorizontal_bias="0.613"
+        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDescripcionEntrenamiento" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDuracion" />
 
     <ImageButton
         android:id="@+id/imageButtonSiguienteCrearRutina"
         android:layout_width="74dp"
         android:layout_height="74dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="68dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:background="@android:color/transparent"
         android:tint="@color/verdeBotones"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/barrier"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDiasDescanso"
-        app:layout_constraintVertical_bias="0.9"
         app:srcCompat="@drawable/siguiente" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
+
+    <EditText
+        android:id="@+id/editTextDuracion"
+        android:layout_width="277dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Duración"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescripcionEntrenamiento" />
 
 </android.support.constraint.ConstraintLayout>

@@ -41,9 +41,9 @@ public class PopEditarEjercicioEntrenamientoTiempo extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pop_up_agregar_ejercicio_sesion_tiempo);
 
-        imageButtonAceptar = (ImageButton)findViewById(R.id.buttonAceptar3);
-        imageButtonCancelar = (ImageButton)findViewById(R.id.buttonCancelar3);
-        imageButtonInformacionEjercicio = (ImageButton)findViewById(R.id.buttonInformacionEjercicio2);
+        imageButtonAceptar = (ImageButton)findViewById(R.id.imageButtonAceptar);
+        imageButtonCancelar = (ImageButton)findViewById(R.id.imageButtonCancelar);
+        imageButtonInformacionEjercicio = (ImageButton)findViewById(R.id.imageButtonInformacion);
 
 
         textViewNombreEjercicio = (TextView)findViewById(R.id.textNombreEjercicio2);

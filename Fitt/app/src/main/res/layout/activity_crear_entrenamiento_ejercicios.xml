@@ -12,27 +12,23 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="16dp"
         android:text="Agregar descanos"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textViewGuardar"
-        app:layout_constraintStart_toEndOf="@+id/textViewAgregarEjercicio"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonAdicionarDescanso"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/textViewAgregarEjercicio" />
 
     <TextView
         android:id="@+id/textViewGuardar"
         android:layout_width="90dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="32dp"
         android:text="Guardar"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonGuardarEntrenamiento"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textViewTitulo"
@@ -68,10 +64,12 @@
     <ListView
         android:id="@+id/listViewEjerciciosEntrenamiento"
         android:layout_width="320dp"
-        android:layout_height="338dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButtonAdicionarDescanso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTituloAgregarEjercicios" />
@@ -81,52 +79,52 @@
         android:layout_width="74dp"
         android:layout_height="74dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:src="@drawable/crear_rutina"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAgregarDescanso"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonGuardarEntrenamiento"
-        app:layout_constraintHorizontal_bias="0.557"
-        app:layout_constraintStart_toEndOf="@+id/imageButtonAdicionarEjercicioEntrenamiento"
-        app:layout_constraintTop_toBottomOf="@+id/listViewEjerciciosEntrenamiento" />
+        app:layout_constraintStart_toEndOf="@+id/imageButtonAdicionarEjercicioEntrenamiento" />
 
     <ImageButton
         android:id="@+id/imageButtonAdicionarEjercicioEntrenamiento"
         android:layout_width="74dp"
         android:layout_height="74dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="50dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:src="@drawable/crear_rutina"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewEjerciciosEntrenamiento" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewAgregarEjercicio"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/imageButtonGuardarEntrenamiento"
         android:layout_width="74dp"
         android:layout_height="74dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="60dp"
+        android:layout_marginEnd="50dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:src="@drawable/guardar"
         android:tint="@color/verdeFitt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewEjerciciosEntrenamiento" />
+        app:layout_constraintBottom_toTopOf="@+id/textViewGuardar"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textViewAgregarEjercicio"
         android:layout_width="94dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="22dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="16dp"
         android:text="Agregar Ejercicio"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButtonAdicionarEjercicioEntrenamiento"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
 
 </android.support.constraint.ConstraintLayout>

@@ -34,6 +34,7 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
 
     private EditText editTextNombreEntrenamiento;
     private EditText editTextDescripcion;
+    private EditText editTextDuracion;
 
     private RadioButton radioButtonPublica;
 
@@ -50,6 +51,7 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
         spinnerDescanso = (Spinner)findViewById(R.id.spinnerDiasDescanso);
         editTextNombreEntrenamiento = (EditText) findViewById(R.id.editTextNombreEntrenamiento);
         editTextDescripcion = (EditText)findViewById(R.id.editTextDescripcionEntrenamiento);
+        editTextDuracion = (EditText) findViewById(R.id.editTextDuracion);
         radioButtonPublica = (RadioButton) findViewById(R.id.radioButtonPublica);
 
         List<String> stringDificultadList = new ArrayList<>();
@@ -86,7 +88,10 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
             editTextDescripcion.setError(StringsMiguel.CAMPO_OBLIGATORIO);
             completo = false;
         }
-
+        if(editTextDuracion.getText().toString().isEmpty()){
+            editTextDuracion.setError(StringsMiguel.CAMPO_OBLIGATORIO);
+            completo = false;
+        }
 
         if(completo){
             startActivityForResult(new Intent(CrearEntrenamientoActivity.this, CrearEntrenamientoEjerciciosActivity.class),Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS);
@@ -106,13 +111,17 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
             String nombreRutina = editTextNombreEntrenamiento.getText().toString();
             String descripcion = editTextDescripcion.getText().toString();
             String dificultad = (String) spinnerDificultad.getSelectedItem();
+            String sDuracion = editTextDuracion.getText().toString();
+
             boolean publica = radioButtonPublica.isChecked();
             String sDiasDescanso = (String) spinnerDescanso.getSelectedItem();
 
 
             int diasDescanso = Integer.parseInt(sDiasDescanso);
+            int duracion = Integer.parseInt(sDuracion);
 
-            Entrenamiento entrenamiento = new Entrenamiento(0,diasDescanso,descripcion,dificultad,publica,nombreRutina);
+
+            Entrenamiento entrenamiento = new Entrenamiento(0,diasDescanso,descripcion,dificultad,publica,nombreRutina,duracion);
             entrenamiento.setEjercicioEntrenamientoList(entrenamientoList);
 
 
