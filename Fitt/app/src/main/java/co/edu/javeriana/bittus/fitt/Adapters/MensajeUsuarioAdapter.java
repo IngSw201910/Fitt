@@ -27,8 +27,8 @@ public class MensajeUsuarioAdapter extends RecyclerView.Adapter<MensajeUsuarioAd
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.user_item, viewGroup, false);
-        return new MensajeUsuarioAdapter.ViewHolder(view);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.user_item, viewGroup, false);
+        return new ViewHolder(view);
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,9 +58,9 @@ public class nuevoMensajeActivity extends AppCompatActivity {
                     assert usuario != null;
                     assert firebaseUser != null;
 
-                    if(!usuario.getId().equals(firebaseUser.getUid())){
-                        mUsuarios.add(usuario);
-                    }
+                    Log.d("CHAT", "nuevo user" + usuario.getNombre());
+                    mUsuarios.add(usuario);
+
 
                 }
 

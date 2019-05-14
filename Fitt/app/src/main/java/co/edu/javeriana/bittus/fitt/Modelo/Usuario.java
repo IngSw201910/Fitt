@@ -20,6 +20,10 @@ public class Usuario implements Serializable {
     private List<Usuario> seguidosList;
     private List<Usuario> seguidoresList;
 
+    public Usuario(){
+        //No-argument constructor
+    }
+
     public Usuario(String correo, String id, String nombre){
         this.nombre = nombre;
         this.correo = correo;
