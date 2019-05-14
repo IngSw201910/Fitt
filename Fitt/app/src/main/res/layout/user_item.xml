@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="15dp"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/imagenPerfilUser"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/ic_launcher"
+        />
+
+    <TextView
+        android:id="@+id/nombreUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="username"
+        android:layout_toRightOf="@+id/imagenPerfilUser"
+        android:layout_toEndOf="@+id/imagenPerfilUser"
+        android:layout_marginLeft="20dp"
+        android:layout_centerVertical="true"
+        android:textSize="18sp"
+        />
+
+
+</RelativeLayout>

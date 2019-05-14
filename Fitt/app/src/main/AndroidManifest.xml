@@ -31,8 +31,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
 
+
         <activity android:name=".Vista.PopUps.PopResenarParque"/>
         <activity android:name=".Vista.AdoptarEntrenamientoActivity"></activity>
+
+        <activity android:name=".Vista.nuevoMensajeActivity"></activity>
+
+
         <activity android:name=".Vista.ParqueInformacionDetalladaActivity" />
 
         <activity android:name=".Vista.registroPrueba"></activity>

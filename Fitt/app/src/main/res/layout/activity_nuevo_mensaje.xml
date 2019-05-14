@@ -4,35 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Vista.ChatsActivity">
+    tools:context=".Vista.nuevoMensajeActivity">
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/chats_activity_name"
+        android:text="@string/nuevoMensaje_activity_name"
         android:textColor="@color/verdeFitt"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="187dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="8dp"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/listaUsuariosChat"
+        android:layout_width="336dp"
+        android:layout_height="619dp"
+        android:layout_marginStart="44dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="40dp"
-        android:background="@color/verdeFitt"
-        android:onClick="gotoNewMessage"
-        android:text="@string/chats_activity_button_newMessage_name"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
 </android.support.constraint.ConstraintLayout>
