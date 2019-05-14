@@ -22,6 +22,9 @@ public class Usuario implements Serializable {
 
     public Usuario(){
         //No-argument constructor
+        entrenamientoList = new ArrayList<Entrenamiento>();
+        seguidosList = new ArrayList<Usuario>();
+        seguidoresList = new ArrayList<Usuario>();
     }
 
     public Usuario(String correo, String id, String nombre){
@@ -46,11 +49,7 @@ public class Usuario implements Serializable {
     }
 
 
-    public Usuario() {
-        entrenamientoList = new ArrayList<Entrenamiento>();
-        seguidosList = new ArrayList<Usuario>();
-        seguidoresList = new ArrayList<Usuario>();
-    }
+
 
     public String getId() {
         return id;
