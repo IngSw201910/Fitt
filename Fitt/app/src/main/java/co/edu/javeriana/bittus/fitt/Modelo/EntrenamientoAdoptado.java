@@ -8,6 +8,12 @@ public class EntrenamientoAdoptado {
     public EntrenamientoAdoptado() {
     }
 
+    public EntrenamientoAdoptado(Entrenamiento entrenamiento, String dia, String hora) {
+        this.entrenamiento = entrenamiento;
+        this.dia = dia;
+        this.hora = hora;
+    }
+
     public Entrenamiento getEntrenamiento() {
         return entrenamiento;
     }

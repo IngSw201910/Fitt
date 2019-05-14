@@ -1,11 +1,13 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
@@ -23,7 +25,9 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioTiempo;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
+import co.edu.javeriana.bittus.fitt.Modelo.EntrenamientoAdoptado;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 
 public class RealizarEntrenamientoActivity extends AppCompatActivity implements EjercicioRepeticionesFragment.FragmentEjercicioRepeticionesListener, EjercicioTiempoFragment.FragmentEjercicioRepeticionesListener, EjercicioDescansoFragment.FragmentEjercicioRepeticionesListener, EntrenamientoTerminadoFragment.FragmentEjercicioRepeticionesListener {
 
@@ -75,35 +79,12 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
 
         inicializarCronometro();
 
-        //MOCK ENTRENAMIENTO:
-        entrenamiento = new Entrenamiento();
-        entrenamiento.setDescripcion("");
-        List<EjercicioEntrenamiento> ejerciciosEntrenamiento = new ArrayList<EjercicioEntrenamiento>();
+        Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();
 
-        //EJERCICIO 1:
-        Ejercicio ejercicioGrande = new Ejercicio();
-        ejercicioGrande.setNombre("Flexiones de pecho");
-        ejercicioGrande.setDescripción("Coloque las dos manos junto al suelo y flexione los codos");
-        ejercicioGrande.setRutaGIF("/imagenes/ejercicios/prueba.gif");
-        ejercicioGrande.setTipo("Repetición");
+        entrenamiento = (Entrenamiento) bundle.getSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO);
 
 
-        EjercicioRepeticiones ejercicioRepeticiones = new EjercicioRepeticiones(ejercicioGrande, 15, 2, 10);
-
-
-        /*ejerciciosEntrenamiento.add(ejercicioRepeticiones);
-        ejerciciosEntrenamiento.add(ejercicioRepeticiones);
-        ejerciciosEntrenamiento.add(ejercicioRepeticiones);*/
-
-        EjercicioTiempo ejercicioTiempo = new EjercicioTiempo(ejercicioGrande, 20, 2, 20);
-
-
-        ejerciciosEntrenamiento.add(ejercicioRepeticiones);
-        ejerciciosEntrenamiento.add(ejercicioTiempo);
-
-
-        entrenamiento.setEjercicioEntrenamientoList(ejerciciosEntrenamiento);
-        //FIN MOCK ENTRENAMIENTO
 
 
         iniciaroReanudarPausarB = findViewById(R.id.btnIniciarPausarReanudar);
@@ -122,7 +103,7 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    Locale locSpanish = new Locale("spa", "MEX");
+                    Locale locSpanish = new Locale("ES", "MEX");
 
 
                     int result = textToSpeech.setLanguage(Locale.ENGLISH);
@@ -352,7 +333,7 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
             siguienteEjercicio = entrenamiento.getEjercicioEntrenamientoList().get(numSiguienteEjercicio);
 
 
-            if (siguienteEjercicio instanceof EjercicioRepeticiones) {
+            if (siguienteEjercicio.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_REPETICIÓN)) {
                 if (sigueDescanso) {
                     fragment = new EjercicioDescansoFragment();
                     args.putSerializable("ejercicioDescanso", (EjercicioDescanso) new EjercicioDescanso(null, ((EjercicioRepeticiones) siguienteEjercicio).getDescanso()));
@@ -371,7 +352,7 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
                     }
                 }
             } else {
-                if (siguienteEjercicio instanceof EjercicioTiempo) {
+                if (siguienteEjercicio.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_TIEMPO)) {
                     if (sigueDescanso) {
                         fragment = new EjercicioDescansoFragment();
                         args.putSerializable("ejercicioDescanso", (EjercicioDescanso) new EjercicioDescanso(null, ((EjercicioTiempo) siguienteEjercicio).getDescanso()));
@@ -393,7 +374,7 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
                     }
 
                 } else {
-                    if (siguienteEjercicio instanceof EjercicioDescanso) {
+                    if (siguienteEjercicio.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DESCANSO)) {
                         fragment = new EjercicioDescansoFragment();
                         args.putSerializable("ejercicioDescanso", (EjercicioDescanso) siguienteEjercicio);
                         numSiguienteEjercicio++;

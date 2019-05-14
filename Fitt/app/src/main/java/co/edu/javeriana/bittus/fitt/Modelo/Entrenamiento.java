@@ -15,6 +15,8 @@ public class Entrenamiento implements Serializable {
     private List<EjercicioEntrenamiento> ejercicioEntrenamientoList;
     private int duracion;
 
+
+
     public Entrenamiento(int ID, int numDiasDescanso, String descripcion, String dificultad, boolean publica, String nombre, int duracion) {
         this.ID = ID;
         this.numDiasDescanso = numDiasDescanso;
@@ -44,6 +46,7 @@ public class Entrenamiento implements Serializable {
     public void setEjercicioEntrenamientoList(List<EjercicioEntrenamiento> ejercicioEntrenamientoList) {
         this.ejercicioEntrenamientoList = ejercicioEntrenamientoList;
     }
+
     public int getID() {
         return ID;
     }

@@ -14,8 +14,9 @@
         }
 
         public EjercicioEntrenamiento() {
-            super();
         }
+
+
 
         public Ejercicio getEjercicio() {
             return ejercicio;

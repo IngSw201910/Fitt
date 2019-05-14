@@ -28,10 +28,16 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Adapters.EntrenamientosAdapter;
 import co.edu.javeriana.bittus.fitt.Adapters.EntrenamientosHoyAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioTiempo;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EntrenamientoAdoptado;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsJhonny;
 
 public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatActivity {
@@ -62,34 +68,16 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
         fecha = findViewById(R.id.fechaMisEntrenamientosTV);
         entrenamientosL = findViewById(R.id.listViewEntrenamientosHoy);
 
-        adapter = new EntrenamientosHoyAdapter(this ,R.layout.item_entrenamiento_row, listaEntrenamientosAdoptadosHoy);
+        adapter = new EntrenamientosHoyAdapter(this ,R.layout.item_entrenamiento_adoptado_row, listaEntrenamientosAdoptadosHoy);
         entrenamientosL.setAdapter(adapter);
-
-        // por ahora esta este evento para probar
-        //DEBE SER CAMBIADO para desencadenar el evento cuando se toque un elemento de la lista
-        fecha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RealizarEntrenamiento_EntrenamientosHoyActivity.this, RealizarEntrenamientoActivity.class));
-            }
-        });
-
-
-        diaSemana.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(RealizarEntrenamiento_EntrenamientosHoyActivity.this, AdoptarEntrenamientoActivity.class));
-            }
-        });
 
         entrenamientosL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 EntrenamientoAdoptado entrenamientoAdoptado = listaEntrenamientosAdoptadosHoy.get(position);
                 Intent intent = new Intent (RealizarEntrenamiento_EntrenamientosHoyActivity.this, RealizarEntrenamientoActivity.class);
-                intent.putExtra("entrenamiento",entrenamientoAdoptado.getEntrenamiento());
+                intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO,entrenamientoAdoptado.getEntrenamiento());
                 startActivity(intent);
-
             }
         });
 
@@ -124,7 +112,43 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                    listaEntrenamientosAdoptadosHoy.add(snapshot.getValue(EntrenamientoAdoptado.class));
+
+                    EntrenamientoAdoptado entrenamiento = snapshot.getValue(EntrenamientoAdoptado.class);
+                    List<EjercicioEntrenamiento> ejercicioEntrenamientos = new ArrayList<>();
+                    for(DataSnapshot singleSnapshotE: snapshot.getChildren()){
+
+                        for(DataSnapshot singleSnapshotF: singleSnapshotE.getChildren()){
+
+                            for(DataSnapshot singleSnapshotG: singleSnapshotF.getChildren()) {
+
+                                EjercicioEntrenamiento ejercicioEntrenamiento = singleSnapshotG.getValue(EjercicioEntrenamiento.class);
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_REPETICIÓN)){
+                                    EjercicioRepeticiones ejercicioRepeticiones = singleSnapshotG.getValue(EjercicioRepeticiones.class);
+                                    ejercicioEntrenamientos.add(ejercicioRepeticiones);
+                                }
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DESCANSO)){
+                                    EjercicioDescanso ejercicioDescanso = singleSnapshotG.getValue(EjercicioDescanso.class);
+                                    ejercicioEntrenamientos.add(ejercicioDescanso);
+                                }
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_TIEMPO)){
+                                    EjercicioTiempo ejercicioTiempo = singleSnapshotG.getValue(EjercicioTiempo.class);
+                                    ejercicioEntrenamientos.add(ejercicioTiempo);
+                                }
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DISTANCIA)){
+                                    EjercicioDistancia ejercicioDistancia = singleSnapshotG.getValue(EjercicioDistancia.class);
+                                    ejercicioEntrenamientos.add(ejercicioDistancia);
+                                }
+
+                            }
+                        }
+
+
+                    }
+                    entrenamiento.getEntrenamiento().setEjercicioEntrenamientoList(ejercicioEntrenamientos);
+                    Log.i("PRUEBARUTINA:", entrenamiento.getEntrenamiento().getDescripcion());
+
+
+                    listaEntrenamientosAdoptadosHoy.add(entrenamiento);
                 }
                 adapter.notifyDataSetChanged();
             }

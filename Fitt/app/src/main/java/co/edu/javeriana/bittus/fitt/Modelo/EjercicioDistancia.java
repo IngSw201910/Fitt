@@ -10,7 +10,9 @@ public class EjercicioDistancia extends EjercicioEntrenamiento implements Serial
         super(ejercicio);
         this.distancia = distancia;
     }
-
+    public EjercicioDistancia() {
+        super();
+    }
 
 
 

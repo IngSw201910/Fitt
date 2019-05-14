@@ -56,19 +56,6 @@ public class EntrenamientosHoyAdapter extends ArrayAdapter<EntrenamientoAdoptado
         TextView dificultad = view.findViewById(R.id.textView14);
         dificultad.setText(entrenamientoAdoptado.getEntrenamiento().getDificultad());
 
-        ImageButton adoptar = view.findViewById(R.id.adoptar);
-        adoptar.setTag(position);
-
-        adoptar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mClickListenerAdoptar != null)
-                    mClickListenerAdoptar.onBtnClickAdoptar((Integer) v.getTag());
-            }
-        });
-
-
-
         return  view;
     }
 

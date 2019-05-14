@@ -16,6 +16,10 @@ public class EjercicioTiempo extends EjercicioEntrenamiento implements Serializa
         this.descanso = descanso;
     }
 
+    public EjercicioTiempo() {
+        super();
+    }
+
     public int getTiempo() {
         return tiempo;
     }

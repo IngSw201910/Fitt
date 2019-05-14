@@ -28,7 +28,7 @@ import co.edu.javeriana.bittus.fitt.R;
 public class EjercicioDescansoFragment extends Fragment {
     private FragmentEjercicioRepeticionesListener listener;
 
-    private TextView descripcion;
+
 
     private TextView series;
     private Chronometer chrono;

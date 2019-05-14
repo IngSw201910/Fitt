@@ -14,7 +14,9 @@ public class EjercicioRepeticiones extends EjercicioEntrenamiento implements Ser
         this.series = series;
         this.descanso = descanso;
     }
-
+    public EjercicioRepeticiones() {
+        super();
+    }
     public int getRepeticiones() {
         return repeticiones;
     }
@@ -39,4 +41,8 @@ public class EjercicioRepeticiones extends EjercicioEntrenamiento implements Ser
         this.descanso = descanso;
     }
 
+
+
 }
+
+

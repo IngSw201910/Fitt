@@ -12,6 +12,11 @@ public class EjercicioDescanso extends EjercicioEntrenamiento implements Seriali
         this.duracion = duracion;
     }
 
+    public EjercicioDescanso() {
+        super();
+    }
+
+
     public int getDuracion() {
         return duracion;
     }

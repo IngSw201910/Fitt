@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,12 +21,15 @@ import java.util.concurrent.TimeUnit;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import pl.droidsonroids.gif.GifImageView;
 
 public class EjercicioRepeticionesFragment extends Fragment {
     private FragmentEjercicioRepeticionesListener listener;
 
     private TextView descripcion;
 
+    private TextView titulo;
     private TextView series;
     private TextView repeticiones;
 
@@ -40,7 +44,7 @@ public class EjercicioRepeticionesFragment extends Fragment {
 
 
     private TextToSpeech textToSpeech;
-
+    private GifImageView gifImageView;
 
 
     private static final int COMENZANDO = 0;
@@ -71,7 +75,12 @@ public class EjercicioRepeticionesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ejercicioRepeticiones = (EjercicioRepeticiones) getArguments().getSerializable("ejercicioRepeticiones");
         serie = getArguments().getInt("serie");
+        Log.i("Ory",ejercicioRepeticiones.getDescanso()+"");
+
         return inflater.inflate(R.layout.fragment_ejercicio_repeticiones, null, false);
+
+
+
     }
 
 
@@ -80,7 +89,8 @@ public class EjercicioRepeticionesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         View v = getView();
-        TextView descripcion = (TextView) v.findViewById(R.id.descripcionEjercicioRepeticiones);
+        descripcion = (TextView) v.findViewById(R.id.descripcionEjercicioRepeticiones);
+        titulo = (TextView) v.findViewById(R.id.textView25);
         descripcion.setMovementMethod(new ScrollingMovementMethod());
 
         series = v.findViewById(R.id.tvSerieRepeticiones);
@@ -99,6 +109,12 @@ public class EjercicioRepeticionesFragment extends Fragment {
         repeticionesPB.setMax(ejercicioRepeticiones.getRepeticiones());
         repeticionesPB.setProgress(0);
         repeticiones.setText(repeticion + "/" + ejercicioRepeticiones.getRepeticiones());
+
+        gifImageView = v.findViewById(R.id.gifEjercicio8);
+
+        descripcion.setText(ejercicioRepeticiones.getEjercicio().getDescripción());
+        titulo.setText(ejercicioRepeticiones.getEjercicio().getNombre());
+        Utils.descargarYMostrarGIF(ejercicioRepeticiones.getEjercicio().getRutaGIF(), gifImageView);
 
         iniciarEjercicio();
 

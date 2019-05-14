@@ -25,11 +25,14 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioTiempo;
 import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import pl.droidsonroids.gif.GifImageView;
 
 public class EjercicioTiempoFragment extends Fragment {
     private FragmentEjercicioRepeticionesListener listener;
 
     private TextView descripcion;
+    private TextView titulo;
 
     private TextView series;
     private Chronometer chrono;
@@ -44,6 +47,8 @@ public class EjercicioTiempoFragment extends Fragment {
     private EjercicioTiempo ejercicioTiempo;
     private int serie;
     private int segundo = 0;
+
+    private GifImageView gifImageView;
 
     private long timeWhenStopped = 0;
 
@@ -88,8 +93,9 @@ public class EjercicioTiempoFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         View v = getView();
-        TextView descripcion = (TextView) v.findViewById(R.id.descripcionEjercicioTiempo);
+        descripcion = (TextView) v.findViewById(R.id.descripcionEjercicioTiempo);
         descripcion.setMovementMethod(new ScrollingMovementMethod());
+        titulo = (TextView) v.findViewById(R.id.textView25);
 
         series = v.findViewById(R.id.tvSerieTiempo);
         chrono = v.findViewById(R.id.tiempoSerie);
@@ -106,6 +112,15 @@ public class EjercicioTiempoFragment extends Fragment {
 
         segundosPB.setMax(ejercicioTiempo.getTiempo());
         segundosPB.setProgress(0);
+
+
+        gifImageView = v.findViewById(R.id.gifEjercicio5);
+
+        descripcion.setText(ejercicioTiempo.getEjercicio().getDescripción());
+        titulo.setText(ejercicioTiempo.getEjercicio().getNombre());
+        Utils.descargarYMostrarGIF(ejercicioTiempo.getEjercicio().getRutaGIF(), gifImageView);
+
+
 
         inicializarCronometro(v);
         iniciarEjercicio();

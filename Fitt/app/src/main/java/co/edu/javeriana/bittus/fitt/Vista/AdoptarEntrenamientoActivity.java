@@ -116,6 +116,6 @@ public class AdoptarEntrenamientoActivity extends AppCompatActivity {
 
         Toast.makeText(AdoptarEntrenamientoActivity.this, "Rutina adoptada exitosamente!", Toast.LENGTH_LONG).show();
 
-        startActivity(new Intent(AdoptarEntrenamientoActivity.this, BuscarEntrenamientosActivity.class));
+        finish();
     }
 }

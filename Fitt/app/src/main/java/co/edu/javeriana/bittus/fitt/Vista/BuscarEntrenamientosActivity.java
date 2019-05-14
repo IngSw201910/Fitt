@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,10 +21,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.EntrenamientosAdapter;
+import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioTiempo;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerEntrenamientoRow;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 
 public class BuscarEntrenamientosActivity extends AppCompatActivity implements TextWatcher {
 
@@ -71,6 +79,35 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){ //PARA CADA USUARIO
                         Entrenamiento entrenamiento = singleSnapshot.getValue(Entrenamiento.class);
+                        List<EjercicioEntrenamiento> ejercicioEntrenamientos = new ArrayList<>();
+                        for(DataSnapshot singleSnapshotE: singleSnapshot.getChildren()){
+
+                            for(DataSnapshot singleSnapshotF: singleSnapshotE.getChildren()){
+                                EjercicioEntrenamiento ejercicioEntrenamiento = singleSnapshotF.getValue(EjercicioEntrenamiento.class);
+
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_REPETICIÓN)){
+                                    EjercicioRepeticiones ejercicioRepeticiones = singleSnapshotF.getValue(EjercicioRepeticiones.class);
+                                    ejercicioEntrenamientos.add(ejercicioRepeticiones);
+                                }
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DESCANSO)){
+                                    EjercicioDescanso ejercicioDescanso = singleSnapshotF.getValue(EjercicioDescanso.class);
+                                    ejercicioEntrenamientos.add(ejercicioDescanso);
+                                }
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_TIEMPO)){
+                                    EjercicioTiempo ejercicioTiempo = singleSnapshotF.getValue(EjercicioTiempo.class);
+                                    ejercicioEntrenamientos.add(ejercicioTiempo);
+                                }
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DISTANCIA)){
+                                    EjercicioDistancia ejercicioDistancia = singleSnapshotF.getValue(EjercicioDistancia.class);
+                                    ejercicioEntrenamientos.add(ejercicioDistancia);
+                                }
+
+
+                            }
+
+
+                        }
+                        entrenamiento.setEjercicioEntrenamientoList(ejercicioEntrenamientos);
                         Log.i("PRUEBARUTINA:", entrenamiento.getDescripcion());
                         listaEntrenamientosPublicos.add(entrenamiento);
                 }
