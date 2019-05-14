@@ -9,10 +9,11 @@ public class Entrenador extends Usuario implements Serializable {
     private String fotoTitulo;
     private String porqueElegirme;
 
+
     public Entrenador(String nombre, String correo, String contraseña, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
         super(nombre, correo, direccionFoto, fechaNacimiento, sexo, altura, peso);
-    }
 
+    }
     public String getDescripccion() {
         return descripccion;
     }
