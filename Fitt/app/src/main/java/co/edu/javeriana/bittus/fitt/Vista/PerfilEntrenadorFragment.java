@@ -18,7 +18,18 @@ import android.widget.CheckBox;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenador;
+import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
 public class PerfilEntrenadorFragment extends Fragment {
 
@@ -44,6 +55,12 @@ public class PerfilEntrenadorFragment extends Fragment {
 
     RatingBar puntaje;
 
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    private FirebaseUser mAuth;
+
+    private Entrenador entrenador;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -54,6 +71,10 @@ public class PerfilEntrenadorFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         View v = getView();
+
+        mAuth = FirebaseAuth.getInstance().getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(RutasBaseDeDatos.getRutaEntrenadores()).child(mAuth.getUid());
 
         editarNombre =v.findViewById(R.id.imageButtonEditarNombreE);
         editarCorreo =v.findViewById(R.id.imageButtonEditarCorreoE);
@@ -66,38 +87,58 @@ public class PerfilEntrenadorFragment extends Fragment {
 
         nombre =v.findViewById(R.id.editTextNombre);
         nombre.setEnabled(false);
-        //Asignar valor
+
 
         correo =v.findViewById(R.id.editTextCorreo);
         correo.setEnabled(false);
-        //Asignar valor
+
 
         nacimiento =v.findViewById(R.id.editTextNaciemiento);
         nacimiento.setEnabled(false);
-        //Asignar valor
+
 
         registro = v.findViewById(R.id.editTextRegistro);
         registro.setEnabled(false);
-        //Asignar valor
+
 
         peso =v.findViewById(R.id.editTextPeso);
         peso.setEnabled(false);
-        //Asignar valor
+
 
         altura =v.findViewById(R.id.editTextAltura);
         altura.setEnabled(false);
-        //Asignar valor
+
 
         experiencia =v.findViewById(R.id.editTextExperiencia);
         experiencia.setEnabled(false);
-        //asignar valor
+
 
         privacidad =v.findViewById(R.id.radioButtonPrivacidadE);
-        //asignar valor
+
 
         puntaje =v.findViewById(R.id.ratingBarPerfilE);
         puntaje.setEnabled(false);
-        //Asignar valor
+
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                entrenador = dataSnapshot.getValue(Entrenador.class);
+                nombre.setText(entrenador.getNombre());
+                /*correo.setText(entrenador.getCorreo());
+                peso.setText(String.valueOf(entrenador.getPeso()));
+                altura.setText(String.valueOf(entrenador.getAltura()));
+                nacimiento.setText(String.valueOf(entrenador.getFechaNacimiento()));*/
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         editarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +154,7 @@ public class PerfilEntrenadorFragment extends Fragment {
 
                             if(nombre.getText()!=null){
                                 String nombreUs= nombre.getText().toString();
+
                                 nombre.setEnabled(false);
                                 //Guardar nuevo nombre
 

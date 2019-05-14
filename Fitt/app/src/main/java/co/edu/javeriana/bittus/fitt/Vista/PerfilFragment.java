@@ -5,25 +5,34 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.view.KeyEvent;
-import android.view.inputmethod.EditorInfo;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-
+import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PerfilFragment extends Fragment {
 
@@ -45,6 +54,12 @@ public class PerfilFragment extends Fragment {
 
     CheckBox privacidad;
 
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    private FirebaseUser mAuth;
+
+    private Usuario usuario;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +70,11 @@ public class PerfilFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         View v = getView();
+
+        mAuth = FirebaseAuth.getInstance().getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios()).child(mAuth.getUid());
+
 
 
         editarNombre =v.findViewById(R.id.imageButtonEditarNombre);
@@ -71,6 +91,7 @@ public class PerfilFragment extends Fragment {
         correo =v.findViewById(R.id.editTextCorreo);
         correo.setEnabled(false);
 
+
         nacimiento =v.findViewById(R.id.editTextNaciemiento);
         nacimiento.setEnabled(false);
 
@@ -85,6 +106,25 @@ public class PerfilFragment extends Fragment {
 
         privacidad =v.findViewById(R.id.radioButtonPrivacidad);
 
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                usuario = dataSnapshot.getValue(Usuario.class);
+                nombre.setText(usuario.getNombre());
+                correo.setText(usuario.getCorreo());
+                peso.setText(String.valueOf(usuario.getPeso()));
+                altura.setText(String.valueOf(usuario.getAltura()));
+                nacimiento.setText(String.valueOf(usuario.getFechaNacimiento()));
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         editarNombre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,9 +138,14 @@ public class PerfilFragment extends Fragment {
 
 
                             if(nombre.getText()!=null){
+
                                 String nombreUs= nombre.getText().toString();
+                                usuario.setNombre(nombreUs);
+
+                                myRef.setValue(usuario);
+                                nombre.setText(nombreUs);
                                 nombre.setEnabled(false);
-                                //Guardar nuevo nombres
+
                             }
 
                             procesado = true;
@@ -126,6 +171,9 @@ public class PerfilFragment extends Fragment {
 
                             if(correo.getText()!=null){
                                 String correoNew= correo.getText().toString();
+                                usuario.setCorreo(correoNew);
+                                myRef.setValue(usuario);
+                                correo.setText(correoNew);
                                 correo.setEnabled(false);
                                 //Guardar nuevo nombre
 
@@ -153,6 +201,11 @@ public class PerfilFragment extends Fragment {
 
                             if(nacimiento.getText()!=null){
                                 String nacimientoNew= nacimiento.getText().toString();
+
+                                //    usuario.setFechaNacimiento(SimpleDateFormat.parse(nacimientoNew));
+
+                                myRef.setValue(usuario);
+                                nacimiento.setText(nacimientoNew);
                                 nacimiento.setEnabled(false);
                                 //Guardar nuevo nombre
 
@@ -180,8 +233,10 @@ public class PerfilFragment extends Fragment {
 
                             if(altura.getText()!=null){
                                 float alturaNew= Float.parseFloat(altura.getText().toString());
+                                usuario.setAltura(alturaNew);
+                                myRef.setValue(usuario);
                                 altura.setEnabled(false);
-                                //Guardar nuevo nombre
+
 
                             }
 
@@ -207,6 +262,8 @@ public class PerfilFragment extends Fragment {
 
                             if(peso.getText()!=null){
                                 float pesoNew= Float.parseFloat(peso.getText().toString());
+                                usuario.setPeso(pesoNew);
+                                myRef.setValue(usuario);
                                 peso.setEnabled(false);
                                 //Guardar nuevo nombre
 
@@ -246,14 +303,39 @@ public class PerfilFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if(isChecked){
-                    //Cambiar a privado
+                    usuario.setPrivacidad(true);
+                    myRef.setValue(usuario);
                 }else{
-                    //Cambiar a publico
+                    usuario.setPrivacidad(false);
+                    myRef.setValue(usuario);
                 }
             }
         });
 
 
+    }
+
+    private void descargarUsuarios (){
+
+        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
+                    Usuario aux =singleSnapshot.getValue(Usuario.class);
+
+                    if(aux.getCorreo().compareTo(mAuth.getEmail())==0){
+
+                    }
+                    //Log.i("Prueba", singleSnapshot.getValue(Usuario.class).getDireccionFoto());
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("Error:", "Error en la consulta", databaseError.toException());
+            }
+        });
     }
 
 

@@ -62,10 +62,6 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 usuarioSeleccionado = listUsuarios.get(position);
 
-                //Si el usuario no lo sigue
-                //Intent intent = new Intent(BuscarUsuarioActivity.this,MostrarUsuarioActivity.class);
-                //intent.putExtra("objectData",usuarioSeleccionado);
-                //startActivity(intent);
 
 
             }
@@ -91,7 +87,7 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    Usuario aux =singleSnapshot.getValue(Usuario.class); //Se muere aquí
+                    Usuario aux =singleSnapshot.getValue(Usuario.class);
                     listUsuarios.add(aux);
                     //Log.i("Prueba", singleSnapshot.getValue(Usuario.class).getDireccionFoto());
                 }
