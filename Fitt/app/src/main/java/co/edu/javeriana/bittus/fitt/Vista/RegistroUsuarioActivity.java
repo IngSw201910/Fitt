@@ -7,9 +7,11 @@ import android.graphics.Bitmap;
 import android.graphics.Picture;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,14 +22,23 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.Future;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.DatePickerFragment;
 import co.edu.javeriana.bittus.fitt.Utilidades.Permisos;
+import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
 public class RegistroUsuarioActivity extends AppCompatActivity implements View.OnClickListener{
@@ -50,8 +61,13 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
 
     private ImageView imageViewFotoPerfil;
     private Bitmap bitmapFoto;
+    private Usuario usuarioNuevo;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     private Date fechaNacimiento;
+    private boolean esEntrenador = false;
+    private Intent intentMenuPrincipal;
 
 
     @Override
@@ -79,6 +95,31 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
 
         buttonRegistrarse = (Button) findViewById(R.id.buttonRegistrarse);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
+        final Intent intent = getIntent();
+        if(intent.getExtras()!=null){
+            esEntrenador = true;
+            buttonRegistrarse.setText(StringsMiguel.SIGUIENTE);
+        }
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    PersistenciaFirebase.almacenarInformacionConRuta(StringsMiguel.RUTA_USUARIOS+user.getUid(), usuarioNuevo);
+                    Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO,Toast.LENGTH_LONG).show();
+                    startActivity(intentMenuPrincipal);
+                } else {
+
+                }
+            }
+        };
+        firebaseAuth.addAuthStateListener(mAuthListener);
+
+
         buttonRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,24 +141,12 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
     }
 
     private void cargarFoto() {
-        Permisos.requestPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE,"Es necesario para carga una foto", UtilsMiguel.REQUEST_CODE_PERMISSION);
-
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        intent.setType("image/*");
-        intent.createChooser(intent, StringsMiguel.SELECCIONAR_APLICACION);
-        startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO);
+        Utils.cargarFotoDesdeCamara(this, UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO);
 
     }
 
     private void tomarFoto() {
-        Permisos.requestPermission(this, Manifest.permission.CAMERA,"Es necesario para tomar fotos", UtilsMiguel.REQUEST_CODE_PERMISSION);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_TAKE_PHOTO);
-
-
-        }
+        Utils.tomarFotoDesdeCamara(this, UtilsMiguel.REQUEST_CODE_TAKE_PHOTO);
     }
 
 
@@ -188,27 +217,91 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             }else if(radioButtonOtro.isChecked()){
                 sexo = "Otro";
             }
-            Usuario usuarioNuevo = new Usuario(nombre,correo,contraseña,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
+            usuarioNuevo = new Usuario(nombre,correo,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
+
+
+            if(esEntrenador){
+                Intent intent = new Intent(RegistroUsuarioActivity.this, RegistroEntrenadorActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, usuarioNuevo);
+
+                startActivity(intent);
+            }
+            else{
+                intentMenuPrincipal = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(StringsMiguel.LLAVE_USUARIO,usuarioNuevo);
+                intentMenuPrincipal.putExtras(bundle);
+
+
+                firebaseAuth.createUserWithEmailAndPassword(correo, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            iniciarConNuevoUsuario();
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_INCORRECTO,Toast.LENGTH_LONG).show();
+
+                        }
+
+                    }
+                });
 
 
 
+            }
 
-            Intent intent = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable(StringsMiguel.LLAVE_USUARIO,usuarioNuevo);
-            intent.putExtras(bundle);
-            startActivity(intent);
-
-            //Aquí va el llamdo para registrarlo en firebase
-            //el bitmap tiene la foto
-            //recordar incluir que debe iniciar sesión inmediatamente
-            int duracion = Toast.LENGTH_LONG;
-            Toast toast = Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO+nombre,duracion);
-            toast.show();
 
 
         }
 
+    }
+
+    private void iniciarConNuevoUsuario() {
+        signInUser();
+    }
+
+
+    protected void signInUser(){
+        if(validateForm()){
+            String email = editTextCorreo.getText().toString();
+            String password = editTextContraseña.getText().toString();
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (!task.isSuccessful()) {
+                                Toast.makeText(RegistroUsuarioActivity.this, R.string.auth_failed,
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
+
+    private boolean validateForm() {
+        boolean valid = true;
+        String email = editTextCorreo.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            valid = false;
+        } else {
+            if (!Utils.isEmailValid(email)){
+                editTextCorreo.setError("Email inválido.");
+                valid = false;
+            }
+            else {
+                editTextCorreo.setError(null);
+            }
+        }
+        String password = editTextContraseña.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            valid = false;
+        } else {
+            editTextContraseña.setError(null);
+        }
+        return valid;
     }
 
     @Override
@@ -237,5 +330,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
     private String dosDigitos(int n) {
         return (n<=9) ? ("0"+n) : String.valueOf(n);
     }
+
+
 
 }
