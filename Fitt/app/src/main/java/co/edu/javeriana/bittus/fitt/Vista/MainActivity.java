@@ -113,8 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
         }
-        correoET.setText("");
-        passET.setText("");
+
     }
 
     private boolean validateForm() {
