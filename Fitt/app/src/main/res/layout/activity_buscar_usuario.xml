@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.011" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editTextUsuarioSeguido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/imageButtonBuscarUsuarioSeguidor"
         android:layout_width="48dp"
         android:layout_height="45dp"
         android:layout_marginStart="8dp"
@@ -49,9 +49,25 @@
         android:tint="@color/verdeFitt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.021"
-        app:layout_constraintStart_toEndOf="@+id/editText2"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toEndOf="@+id/editTextUsuarioSeguido"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.088"
         app:srcCompat="@drawable/buscar_rutinas" />
+
+    <ListView
+        android:id="@+id/listUsuariosBuscar"
+        android:layout_width="376dp"
+        android:layout_height="425dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextUsuarioSeguido"
+        app:layout_constraintVertical_bias="0.101" />
 </android.support.constraint.ConstraintLayout>

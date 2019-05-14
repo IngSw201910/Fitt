@@ -5,21 +5,55 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00DCDCDC">
+    android:background="@drawable/border_pop_ups">
 
+
+    <ImageButton
+        android:id="@+id/imageButtonInformacion"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/informacion"
+        app:layout_constraintStart_toEndOf="@+id/textDificultadEjercicio3"
+        app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicio3" />
+
+    <ImageButton
+        android:id="@+id/imageButtonAceptar"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginEnd="52dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/aceptar"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAceptar4"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCancelar"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="52dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/cancelar"
+        app:layout_constraintBottom_toTopOf="@+id/txtCancelar1"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txtCancelar1"
         android:layout_width="69dp"
         android:layout_height="0dp"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="56dp"
         android:layout_marginBottom="24dp"
         android:fontFamily="sans-serif-medium"
         android:text="Cancelar"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/barrier5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -33,42 +67,8 @@
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/barrier5"
         app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/buttonInformacionEjercicio3"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitXY"
-        app:layout_constraintStart_toEndOf="@+id/textTipoEjercicio3"
-        app:layout_constraintTop_toBottomOf="@+id/textMusculosEjercicio3"
-        app:srcCompat="@drawable/informacion" />
-
-    <ImageButton
-        android:id="@+id/buttonAceptar4"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="52dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/textViewAceptar4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/aceptar" />
-
-    <ImageButton
-        android:id="@+id/buttonCancelar4"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="48dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/txtCancelar1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/cancelar" />
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifEjercicio3"
@@ -133,7 +133,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textDificultadEjercicio3" />
 
     <EditText
-        android:id="@+id/editTextDescanso"
+        android:id="@+id/editTextSeries"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
         android:layout_marginStart="8dp"
@@ -157,5 +157,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextSeries" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
 
 </android.support.constraint.ConstraintLayout>

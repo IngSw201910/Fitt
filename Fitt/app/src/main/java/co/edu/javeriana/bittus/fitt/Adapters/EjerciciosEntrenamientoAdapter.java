@@ -34,7 +34,7 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
 
 
     public EjerciciosEntrenamientoAdapter(@NonNull Context context, List<EjercicioEntrenamiento> objects, BtnClickListenerRow listenerEditar) {
-        super(context, R.layout.item_ejercicio_descanso_nuevo_row, objects);
+        super(context, R.layout.item_ejercicio_tiempo_nuevo_row, objects);
         this.listEjercios = objects;
         this.context = context;
         this.mClickListenerEditar = listenerEditar;
@@ -44,27 +44,27 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
 
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        View view = convertView;
+
         if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DISTANCIA)){
-            return getViewEjercicioDistancia(position,view, parent);
+            return getViewEjercicioDistancia(position,convertView, parent);
         }
         if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_TIEMPO)){
-            return getViewEjercicioTiempo(position,view, parent);
+            return getViewEjercicioTiempo(position,convertView, parent);
         }
         if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DESCANSO)){
-            return getViewEjercicioDescanso(position,view, parent);
+            return getViewEjercicioDescanso(position,convertView, parent);
         }
         if(listEjercios.get(position).getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_REPETICIÓN)){
-            return getViewEjercicioRepeticiones(position,view, parent);
+            return getViewEjercicioRepeticiones(position,convertView, parent);
         }
-        return  view;
+        return  convertView;
     }
 
     private View getViewEjercicioDescanso(int position, View view, ViewGroup parent) {
 
-        if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_descanso_nuevo_row, null);
-        }
+
+        view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_descanso_nuevo_row, null);
+
         ejercicioEntrenamiento = listEjercios.get(position);
         EjercicioDescanso ejercicio = (EjercicioDescanso) ejercicioEntrenamiento;
 
@@ -106,9 +106,9 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
 
     private View getViewEjercicioRepeticiones(int position, View view, ViewGroup parent) {
 
-        if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_repeticion_nuevo_row, null);
-        }
+
+        view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_repeticion_nuevo_row, null);
+
         ejercicioEntrenamiento = listEjercios.get(position);
         EjercicioRepeticiones ejercicio = (EjercicioRepeticiones) ejercicioEntrenamiento;
 
@@ -162,9 +162,9 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
 
     private View getViewEjercicioTiempo(int position, View view, ViewGroup parent) {
 
-        if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_tiempo_nuevo_row, null);
-        }
+
+        view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_tiempo_nuevo_row, null);
+
         ejercicioEntrenamiento = listEjercios.get(position);
         EjercicioTiempo ejercicio = (EjercicioTiempo) ejercicioEntrenamiento;
 
@@ -216,9 +216,9 @@ public class EjerciciosEntrenamientoAdapter extends ArrayAdapter<EjercicioEntren
 
     private View getViewEjercicioDistancia(int position, View view, ViewGroup parent) {
 
-        if(view == null){
-            view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_distancia_nuevo_row, null);
-        }
+
+        view = LayoutInflater.from(context).inflate(R.layout.item_ejercicio_distancia_nuevo_row, null);
+
         ejercicioEntrenamiento = listEjercios.get(position);
         EjercicioDistancia ejercicio = (EjercicioDistancia) ejercicioEntrenamiento;
 

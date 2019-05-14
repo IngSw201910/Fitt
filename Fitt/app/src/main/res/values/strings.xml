@@ -18,8 +18,9 @@
 
 
     <!--Strings activity_chats.xml-->
-    <string name="chats_activity_name">Chat</string>
+    <string name="chats_activity_name">Tus Mensajes</string>
     <string name="chats_activity_user">Username</string>
+    <string name="chats_activity_button_newMessage_name">Nuevo Mensaje</string>
 
     <!--Strings activity_entrenador_buscar_entrenador.xml-->
     <string name="entrenador_buscarEntrenador_activity_name">Buscar entrenador</string>
@@ -27,10 +28,26 @@
     <!--Strings activity_entrenador_miEntrenador.xml-->
     <string name="entrenador_miEntrenador_activity_name">Datos de mi entrenador</string>
     <string name="entrenador_miEntrenador_activity_username">Username</string>
+
+    <!--Strings activity_nuevo_mensaje.xml-->
+    <string name="nuevoMensaje_activity_name">Contactos</string>
+
+
     <!--Your comment-->
 
     <string name="google_places_key">AIzaSyCfgUbdpuSBiocdZjspf77fcGavcnDVv4g</string>
 
+
+
+    <string-array name="diasSemana">
+        <item>Lunes</item>
+        <item>Martes</item>
+        <item>Miércoles</item>
+        <item>Jueves</item>
+        <item>Viernes</item>
+        <item>Sábado</item>
+        <item>Domingo</item>
+    </string-array>
 
 
 

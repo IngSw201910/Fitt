@@ -24,5 +24,6 @@
         <item name = "android:windowIsTranslucent">true</item>
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="buttonStyle">@style/miBoton</item>
+
     </style>
 </resources>

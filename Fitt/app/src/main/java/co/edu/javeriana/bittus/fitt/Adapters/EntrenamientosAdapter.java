@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Filtros.RutinasFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerEntrenamientoRow;
 
 
 public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
@@ -24,12 +26,15 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
     private int resource;
     private Entrenamiento entrenamiento;
     private RutinasFiltro rutinasFiltro;
+    private BtnClickListenerEntrenamientoRow mClickListenerAdoptar;
 
-    public EntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects) {
+    public EntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerEntrenamientoRow listenerAdoptar) {
         super(context, resource, objects);
         this.listEntrenamiento = objects;
         this.context = context;
         this.resource = resource;
+
+        this.mClickListenerAdoptar = listenerAdoptar;
 
     }
 
@@ -50,6 +55,18 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
 
         TextView dificultad = view.findViewById(R.id.textView14);
         dificultad.setText(entrenamiento.getDificultad());
+
+        ImageButton adoptar = view.findViewById(R.id.adoptar);
+        adoptar.setTag(position);
+
+        adoptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickListenerAdoptar != null)
+                    mClickListenerAdoptar.onBtnClickAdoptar((Integer) v.getTag());
+            }
+        });
+
 
 
         return  view;

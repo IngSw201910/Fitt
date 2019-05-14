@@ -30,7 +30,11 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
 
     private Button iniciarSesionB;
-    private TextView registrarUsuarioB;
+
+
+    private TextView textViewRegistrarUsuario;
+    private TextView textViewregistrarUsuarioEntrenador;
+
     private EditText correoET;
     private EditText passET;
 
@@ -49,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         iniciarSesionB = (Button) findViewById(R.id.buttonIniciarSesion);
-        registrarUsuarioB = (TextView) findViewById(R.id.textViewRegistrarseUsuario);
+        textViewRegistrarUsuario = (TextView) findViewById(R.id.textViewRegistrarseUsuario);
+        textViewregistrarUsuarioEntrenador = (TextView) findViewById(R.id.textViewRegistrarseUsuarioEntrenador);
+
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -67,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        registrarUsuarioB.setOnClickListener(new View.OnClickListener() {
+        textViewRegistrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -77,7 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
+        textViewregistrarUsuarioEntrenador.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registrarUsuarioEntrenador();
+            }
+        });
         iniciarSesionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,12 +97,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void registrarUsuarioEntrenador() {
+        Intent intent = new Intent(MainActivity.this, RegistroUsuarioActivity.class);
+        intent.putExtras(new Bundle());
+
+        startActivity(intent);
+
+    }
+
+
 
     private void registrarUsuario() {
         Intent intent = new Intent(MainActivity.this, RegistroUsuarioActivity.class);
 
 
-        startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_REGISTRAR_USUARIO);
+
+        startActivity(intent);
+
+        //Intent intent = new Intent(MainActivity.this, RegistroUsuarioActivity.class);
+        //startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_REGISTRAR_USUARIO);
+
 
 
 
