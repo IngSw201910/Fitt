@@ -9,48 +9,53 @@
     <TextView
         android:id="@+id/textView30"
         android:layout_width="75dp"
-        android:layout_height="42dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:text="Día"
-        android:textSize="24sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descripcionEntrenamiento" />
 
     <TextView
         android:id="@+id/nombreEntrenamiento"
-        android:layout_width="346dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:text="Nombre: Brazos"
-        android:textSize="24sp"
+        android:layout_marginEnd="32dp"
+        android:text="Nombre: "
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text2" />
 
     <TextView
         android:id="@+id/text2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="47dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="32dp"
         android:text="Adoptar entrenamiento"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/verdeFitt"
+        android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/descripcionEntrenamiento"
-        android:layout_width="346dp"
+        android:layout_width="0dp"
         android:layout_height="114dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="32dp"
         android:inputType="textMultiLine"
-        android:text="Descripcion: Fortalece tus brazos en solo 10 minutos"
-        android:textSize="18sp"
+        android:text="Descripción:"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,13 +63,13 @@
 
     <TextView
         android:id="@+id/dificultadEntrenamiento"
-        android:layout_width="346dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="Dificultad: Díficil"
-        android:textSize="24sp"
+        android:layout_marginEnd="32dp"
+        android:text="Dificultad: "
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,11 +78,11 @@
     <TextView
         android:id="@+id/textView29"
         android:layout_width="79dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
         android:text="Hora"
-        android:textSize="24sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
@@ -113,20 +118,22 @@
 
     <Button
         android:id="@+id/adoptarEntrenamiento"
-        android:layout_width="220dp"
-        android:layout_height="94dp"
+        android:layout_width="160dp"
+        android:layout_height="69dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/verdeFitt"
-        android:text="Adoptar entrenamiento"
+        android:text="Adoptar"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/barrier6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/horaEntrenamiento"
-        app:layout_constraintVertical_bias="0.317" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
 
 </android.support.constraint.ConstraintLayout>
