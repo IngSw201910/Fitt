@@ -73,7 +73,7 @@ public class PerfilFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios()).child(mAuth.getUid());
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
 
 
@@ -317,7 +317,7 @@ public class PerfilFragment extends Fragment {
 
     private void descargarUsuarios (){
 
-        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios());
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
