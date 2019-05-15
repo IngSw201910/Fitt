@@ -5,6 +5,8 @@ import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,8 +22,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Adapters.MessageAdapter;
+import co.edu.javeriana.bittus.fitt.Modelo.Chat;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 
@@ -37,6 +43,11 @@ public class MensajeActivity extends AppCompatActivity {
     ImageButton btn_sendMessage;
     EditText text_send;
 
+    MessageAdapter messageAdapter;
+    List<Chat> mchat;
+
+    RecyclerView recyclerView;
+
     Intent intent;
 
     @Override
@@ -48,6 +59,12 @@ public class MensajeActivity extends AppCompatActivity {
         profile_image_msg = findViewById(R.id.img_msg_foto);
         btn_sendMessage = findViewById(R.id.btn_sendMessage);
         text_send = findViewById(R.id.text_send);
+
+        recyclerView = findViewById(R.id.msgRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
 
         intent = getIntent();
         final String userid = intent.getStringExtra("id");
@@ -61,6 +78,8 @@ public class MensajeActivity extends AppCompatActivity {
                 Usuario usuario = dataSnapshot.getValue(Usuario.class);
                 nombre_usuario_msg.setText(usuario.getNombre());
                 profile_image_msg.setImageResource(R.mipmap.ic_launcher);
+
+                readMessages(firebaseUser.getUid(), userid, usuario.getDireccionFoto());
             }
 
             @Override
@@ -93,5 +112,30 @@ public class MensajeActivity extends AppCompatActivity {
         hashMap.put("message", message);
 
         reference.child("Chats").push().setValue(hashMap);
+    }
+
+    private void readMessages(final String myid, final String userid, final String imageUrl){
+        mchat = new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mchat.clear();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if(chat.getReceiver().equals(myid) && chat.getSender().equals(userid) || chat.getReceiver().equals(userid) && chat.getSender().equals(myid)){
+                        mchat.add(chat);
+                    }
+
+                    messageAdapter = new MessageAdapter(MensajeActivity.this, mchat, imageUrl);
+                    recyclerView.setAdapter(messageAdapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

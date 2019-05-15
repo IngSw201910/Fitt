@@ -20,10 +20,6 @@ public class Usuario implements Serializable {
     private List<Usuario> seguidoresList;
     private boolean privacidad;
 
-    public Usuario(){
-        //No-argument constructor
-    }
-
     public Usuario(String correo, String id, String nombre){
         this.nombre = nombre;
         this.correo = correo;
@@ -47,9 +43,9 @@ public class Usuario implements Serializable {
 
 
     public Usuario() {
-        entrenamientoList = new ArrayList<Entrenamiento>();
-        seguidosList = new ArrayList<Usuario>();
-        seguidoresList = new ArrayList<Usuario>();
+        //entrenamientoList = new ArrayList<Entrenamiento>();
+        //seguidosList = new ArrayList<Usuario>();
+        //seguidoresList = new ArrayList<Usuario>();
     }
 
     public String getId() {
