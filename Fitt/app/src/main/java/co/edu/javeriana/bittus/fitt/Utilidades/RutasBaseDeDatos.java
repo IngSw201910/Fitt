@@ -11,10 +11,18 @@ public final class RutasBaseDeDatos {
     private static String rutaEjercicios = "/ejercicios/";
     private static String rutaRutinas = "/rutinas/";
 
+    public static final String RUTA_USUARIOS = "/usuarios/";
+
+    public static final String RUTA_FOTO_USUARIOS = "/FotoUsuarios/";
+
+
     public static String getRutaEjercicios() {
         return rutaEjercicios;
     }
     public static String getRutaRutinas() {
         return rutaRutinas;
     }
+
+
+
 }
