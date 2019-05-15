@@ -20,6 +20,11 @@ public final class RutasBaseDeDatos {
     private static String rutaEntrenadores ="/Entrenadores/";
 
 
+    public static final String RUTA_USUARIOS = "/usuarios/";
+
+    public static final String RUTA_FOTO_USUARIOS = "/FotoUsuarios/";
+
+
     public static String getRutaEjercicios() {
         return rutaEjercicios;
     }
@@ -27,11 +32,13 @@ public final class RutasBaseDeDatos {
         return rutaEntrenamientos;
     }
 
+
     public static String getRutaEntrenamientosPublicos(){return rutaEntrenamientosPublicos;}
     public static String getRutaEntrenamientosAdoptados(){return rutaEntrenamientosAdoptados;}
 
     public static String getRutaUsuarios(){ return rutaUsuarios; }
 
     public static String getRutaEntrenadores(){ return rutaEntrenadores; }
+
 
 }
