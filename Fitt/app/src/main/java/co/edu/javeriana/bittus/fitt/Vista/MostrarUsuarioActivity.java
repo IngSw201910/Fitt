@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,9 +42,17 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
         seguidos.setText(item.getSeguidosList().size()+" seguidos");
 
         seguidores =findViewById(R.id.buttonSeguidoresUN);
-        seguidos.setText(item.getSeguidoresList().size()+" seguidores");
+        seguidores.setText(item.getSeguidoresList().size()+" seguidores");
 
         seguir =findViewById(R.id.buttonSeguirUN);
+        seguir.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        }
+        );
 
         entrenador =findViewById(R.id.textViewNombreEntrenadorUN);
         //entrenador.setText();
