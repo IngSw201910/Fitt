@@ -32,6 +32,7 @@
         android:layout_marginTop="25dp"
         android:layout_toRightOf="@+id/imagenPerfilUser"
         android:text="message"
+        android:maxLines="1"
         android:textSize="18sp" />
 
 
