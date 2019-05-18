@@ -4,30 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo_realizar_recorrido"
     tools:context=".Vista.IniciarRecorridoActivity">
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/correr"
+        android:tint="@color/gris"
+        app:layout_constraintBottom_toBottomOf="@+id/btnFinalizarRecorrido"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tiempoRecorrido"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/caloriasRecorrido"
-        android:layout_width="175dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="190dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
         android:text="Calorias:\n0 kcal"
-        android:textSize="17sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toEndOf="@+id/pasosRecorridos"
         app:layout_constraintTop_toBottomOf="@+id/velocidadPromedioRecorrido" />
 
     <TextView
         android:id="@+id/pasosRecorridos"
-        android:layout_width="159dp"
-        android:layout_height="42dp"
+        android:layout_width="160dp"
+        android:layout_height="51dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
         android:text="Pasos:\n0"
-        android:textSize="17sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/distanciaRecorrido" />
 
@@ -45,6 +63,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -64,6 +84,8 @@
         map:layout_constraintTop_toBottomOf="@+id/tituloRecorridoL"
         map:layout_constraintVertical_bias="0.111"
         tools:context=".Vista.PruebaMapas" />
+
+
 
     <ImageButton
         android:id="@+id/btnIniciarRecorrido"
@@ -109,19 +131,21 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
         android:text="Distancia: \n0.00 km"
-        android:textSize="17sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tiempoRecorrido" />
 
     <TextView
         android:id="@+id/velocidadPromedioRecorrido"
-        android:layout_width="175dp"
-        android:layout_height="wrap_content"
+        android:layout_width="194dp"
+        android:layout_height="51dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="24dp"
         android:text="Velocidad promedio:\n0.0 km/h"
-        android:textSize="17sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toEndOf="@+id/distanciaRecorrido"
@@ -137,6 +161,7 @@
         android:layout_marginEnd="8dp"
         android:format="%s"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map" />
