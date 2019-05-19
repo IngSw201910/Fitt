@@ -20,9 +20,7 @@ public class Usuario implements Serializable {
     private List<Usuario> seguidoresList;
     private boolean privacidad;
 
-    public Usuario(){
-        //No-argument constructor
-    }
+
 
     public Usuario(String correo, String id, String nombre){
         this.nombre = nombre;

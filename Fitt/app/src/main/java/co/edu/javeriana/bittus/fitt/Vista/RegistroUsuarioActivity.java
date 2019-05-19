@@ -2,6 +2,7 @@ package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Picture;
@@ -28,6 +29,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.Future;
@@ -37,6 +39,7 @@ import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.DatePickerFragment;
 import co.edu.javeriana.bittus.fitt.Utilidades.Permisos;
 import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
@@ -109,11 +112,15 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    PersistenciaFirebase.almacenarInformacionConRuta(StringsMiguel.RUTA_USUARIOS+user.getUid(), usuarioNuevo);
+                    usuarioNuevo.setDireccionFoto(RutasBaseDeDatos.RUTA_USUARIOS+user.getUid());
+                    PersistenciaFirebase.almacenarInformacionConRuta(RutasBaseDeDatos.RUTA_USUARIOS+user.getUid(), usuarioNuevo);
+                    Uri uriFoto = UtilsMiguel.getImageUri(RegistroUsuarioActivity.this,bitmapFoto, user.getUid());
+                    PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS, user.getUid(), uriFoto);
                     Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO,Toast.LENGTH_LONG).show();
-                    startActivity(intentMenuPrincipal);
-                } else {
 
+
+
+                    startActivity(intentMenuPrincipal);
                 }
             }
         };
@@ -232,6 +239,8 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
                 Bundle bundle = new Bundle();
                 bundle.putSerializable(StringsMiguel.LLAVE_USUARIO,usuarioNuevo);
                 intentMenuPrincipal.putExtras(bundle);
+
+
 
 
                 firebaseAuth.createUserWithEmailAndPassword(correo, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {

@@ -2,8 +2,10 @@ package co.edu.javeriana.bittus.fitt.Utilidades;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -115,7 +117,40 @@ public class PersistenciaFirebase {
     
 
 
+    public static void subirArchivoFirebase(String carpeta, String nombre, Uri uri){
+        StorageReference filepPath = mStorageRef.child(carpeta).child(nombre);
 
 
+        filepPath.putFile(uri);
+    }
+
+    public static void descargarFotoYPonerEnImageView(String ruta, final ImageView imageView){
+        StorageReference foto = mStorageRef.child(ruta);
+        File localFile = null;
+        try {
+            localFile = File.createTempFile("images", "jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        final File finalLocalFile = localFile;
+        foto.getFile(localFile)
+                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        // Successfully downloaded data to local file
+                        // ...
+                        String filePath = finalLocalFile.getPath();
+                        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+                        imageView.setImageBitmap(bitmap);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle failed download
+                // ...
+            }
+        });
+    }
 
 }
