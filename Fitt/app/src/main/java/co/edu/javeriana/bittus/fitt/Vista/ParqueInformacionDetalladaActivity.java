@@ -29,16 +29,18 @@ import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopResenarParque;
 
 public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
 
-    TextView nombreParque;
-    TextView direccion;
-    ImageButton btnTomarFoto;
-    ImageButton btnAñadirFotos;
-    GridView gridView;
-    RatingBar calificacion;
-    Button añadirReseña;
-    ListView reseñas;
-    List<Bitmap> imagenes;
-    float rating;
+    private TextView nombreParque;
+    private TextView direccion;
+    private ImageButton btnTomarFoto;
+    private ImageButton btnAñadirFotos;
+    private GridView gridView;
+    private RatingBar calificacion;
+    private Button añadirReseña;
+    private ListView reseñas;
+    private List<Bitmap> imagenes;
+    private float rating;
+    private double longitud;
+    private double latitud;
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 11;
     public static final int REQUEST_CODE_UPLOAD_PHOTO = 12;
@@ -58,9 +60,12 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         reseñas = (ListView) findViewById(R.id.ListViewReseñas);
         imagenes = new ArrayList<Bitmap>();
 
+
         Bundle bundle = getIntent().getBundleExtra("bundle");
         nombreParque.setText(bundle.getString("titulo"));
         direccion.setText(bundle.getString("direccion"));
+        longitud = bundle.getDouble("longitud");
+        latitud = bundle.getDouble("latitud");
 
         if (!imagenes.isEmpty()) {
             GridAdapter gridAdapter = new GridAdapter(this, imagenes);
@@ -90,6 +95,10 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenarParque.class);
+                Bundle bundle = new Bundle();
+                bundle.putDouble("latitud", latitud);
+                bundle.putDouble("longitud", longitud);
+                intent.putExtra("bundle", bundle);
                 startActivity(intent);
             }
         });
@@ -126,4 +135,5 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         }
 
     }
+
 }
