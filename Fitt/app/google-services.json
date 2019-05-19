@@ -15,22 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "870199726309-v57nqqpltitnie5cmrhrtcfhqg3jeuj2.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "co.edu.javeriana.bittus.fitt",
-            "certificate_hash": "05b65216a458ed6922c93087c036c30e78026dfa"
-          }
-        },
-        {
-          "client_id": "870199726309-hm8j2b1alvqbroq9mllt8dnd01v03bfb.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "co.edu.javeriana.bittus.fitt",
-            "certificate_hash": "51bdfa400de1f7efe00c3e958578867b6a55a91e"
-          }
-        },
-        {
           "client_id": "870199726309-efbvtn1fbm27eomtqp9akklh93s93du6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
