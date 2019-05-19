@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,35 +21,38 @@ import co.edu.javeriana.bittus.fitt.R;
 
 public class SeguidoresActivity extends AppCompatActivity {
 
-    /*private ListView listViewUsuarios;
+    private ListView listViewUsuarios;
     private UsuariosAdapter adapterUsuarios;
-    private List<Usuario> listUsuarios;
+    //private List<Usuario> listUsuarios;
     private ImageButton ImageButtonBuscarUsuarios;
     private EditText EditTextNombreUsuarioABuscar;
 
     private Usuario usuarioSeleccionado;
 
     FirebaseDatabase database;
-    DatabaseReference myRef;*/
+    DatabaseReference myRef;
+
+    private List<Usuario> item;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_seguidores);
-        //listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
+        listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
        // listUsuarios = new ArrayList<Usuario>();
-        //ImageButtonBuscarUsuarios = (ImageButton) findViewById(R.id.imageButtonBuscarUsuarioSeguidor);
-        //EditTextNombreUsuarioABuscar = (EditText) findViewById(R.id.editTextUsuarioSeguidor);
+        ImageButtonBuscarUsuarios = (ImageButton) findViewById(R.id.imageButtonBuscarUsuarioSeguidor);
+        EditTextNombreUsuarioABuscar = (EditText) findViewById(R.id.editTextUsuarioSeguidor);
 
-        /*EditTextNombreUsuarioABuscar.addTextChangedListener((TextWatcher) this);
+        EditTextNombreUsuarioABuscar.addTextChangedListener((TextWatcher) this);
 
-        adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios);
+        adapterUsuarios = new UsuariosAdapter(SeguidoresActivity.this, R.layout.item_usuario_row, item);
 
         listViewUsuarios.setAdapter(adapterUsuarios);
         listViewUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                usuarioSeleccionado = listUsuarios.get(position);
+                usuarioSeleccionado = item.get(position);
                 //abrirPopUp();
             }
         });
@@ -60,7 +66,7 @@ public class SeguidoresActivity extends AppCompatActivity {
             public void onClick(View v) {
 
             }
-        });*/
+        });
 
     }
 

@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,11 +42,18 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
     FirebaseDatabase database;
     DatabaseReference myRef;
+    private FirebaseUser mAuth;
+
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_usuario);
+
+        mAuth = FirebaseAuth.getInstance().getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
         listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
         listUsuarios = new ArrayList<Usuario>();

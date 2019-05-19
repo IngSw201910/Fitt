@@ -31,6 +31,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -282,7 +283,7 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent =new Intent(getActivity(), SeguidoresActivity.class);
-               // intent.putExtra("listaSeguidores",);
+                intent.putExtra("listaSeguidores", (Serializable) usuario.getSeguidoresList());
                 startActivity(intent);
             }
         });
@@ -292,7 +293,7 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent =new Intent(getActivity(), SeguidosActivity.class);
-                // intent.putExtra("listaSeguidos",);
+                 intent.putExtra("listaSeguidos", (Serializable) usuario.getSeguidosList());
                 startActivity(intent);
             }
         });
