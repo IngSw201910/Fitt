@@ -26,14 +26,14 @@
         android:layout_width="54dp"
         android:layout_height="54dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="36dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageViewTitulo"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTituloRegistro"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombreDelTitulo"
         app:srcCompat="@drawable/tomar_foto" />
 
     <ImageButton
@@ -56,8 +56,9 @@
         android:layout_width="187dp"
         android:layout_height="208dp"
         android:layout_marginStart="44dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTituloRegistro"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombreDelTitulo"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -80,13 +81,13 @@
         android:layout_width="277dp"
         android:layout_height="81dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="64dp"
         android:ems="10"
         android:hint=" Escribenos ¿Porque elegirte?"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextExperiencia" />
 
@@ -95,13 +96,13 @@
         android:layout_width="277dp"
         android:layout_height="79dp"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="64dp"
         android:ems="10"
         android:hint="Escribe aquí tú experiencia "
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewTitulo" />
 
@@ -110,4 +111,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top" />
+
+    <EditText
+        android:id="@+id/editTextNombreDelTitulo"
+        android:layout_width="273dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="64dp"
+        android:ems="10"
+        android:hint="Nombre del título"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTituloRegistro" />
 </android.support.constraint.ConstraintLayout>
