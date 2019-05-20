@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -59,6 +60,10 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         ImageButton adoptar = view.findViewById(R.id.adoptar);
         adoptar.setTag(position);
 
+        RatingBar ratingBar = view.findViewById(R.id.ratingBarEntrenamiento);
+        ratingBar.setRating(calcularRating(entrenamiento));
+        
+
         adoptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +75,20 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
 
 
         return  view;
+    }
+
+    private float calcularRating(Entrenamiento entrenamiento) {
+        float rating = 0f;
+        for(int i = 0;i < entrenamiento.getReseñas().size(); i++){
+            rating += entrenamiento.getReseñas().get(i).getCalificacion();
+        }
+        if(entrenamiento.getReseñas().size()==0){
+            rating = 3f;
+        }else{
+            rating = rating / entrenamiento.getReseñas().size();
+        }
+
+        return  rating;
     }
 
     @NonNull

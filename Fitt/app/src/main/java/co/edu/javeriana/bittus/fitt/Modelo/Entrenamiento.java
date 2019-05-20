@@ -6,19 +6,20 @@ import java.util.List;
 
 public class Entrenamiento implements Serializable {
 
-    private int ID;
+
     private int numDiasDescanso;
     private String descripcion;
     private String dificultad;
     private boolean publica;
     private String nombre;
     private List<EjercicioEntrenamiento> ejercicioEntrenamientoList;
+    private List<Reseña> reseñas;
     private int duracion;
 
 
 
-    public Entrenamiento(int ID, int numDiasDescanso, String descripcion, String dificultad, boolean publica, String nombre, int duracion) {
-        this.ID = ID;
+    public Entrenamiento(int numDiasDescanso, String descripcion, String dificultad, boolean publica, String nombre, int duracion) {
+
         this.numDiasDescanso = numDiasDescanso;
         this.descripcion = descripcion;
         this.dificultad = dificultad;
@@ -26,8 +27,16 @@ public class Entrenamiento implements Serializable {
         this.nombre = nombre;
 
         ejercicioEntrenamientoList = new ArrayList<EjercicioEntrenamiento>();
+        reseñas = new ArrayList<Reseña>();
     }
 
+    public List<Reseña> getReseñas() {
+        return reseñas;
+    }
+
+    public void setReseñas(List<Reseña> reseñas) {
+        this.reseñas = reseñas;
+    }
 
     public Entrenamiento() {super();}
 
@@ -47,13 +56,7 @@ public class Entrenamiento implements Serializable {
         this.ejercicioEntrenamientoList = ejercicioEntrenamientoList;
     }
 
-    public int getID() {
-        return ID;
-    }
 
-    public void setID(int ID) {
-        this.ID = ID;
-    }
 
     public int getNumDiasDescanso() {
         return numDiasDescanso;

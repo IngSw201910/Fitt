@@ -80,8 +80,8 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){ //PARA CADA USUARIO
                         Entrenamiento entrenamiento = singleSnapshot.getValue(Entrenamiento.class);
                         List<EjercicioEntrenamiento> ejercicioEntrenamientos = new ArrayList<>();
-                        for(DataSnapshot singleSnapshotE: singleSnapshot.getChildren()){
 
+                        DataSnapshot singleSnapshotE = singleSnapshot.child("ejercicioEntrenamientoList");
                             for(DataSnapshot singleSnapshotF: singleSnapshotE.getChildren()){
                                 EjercicioEntrenamiento ejercicioEntrenamiento = singleSnapshotF.getValue(EjercicioEntrenamiento.class);
 
@@ -106,7 +106,7 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
                             }
 
 
-                        }
+
                         entrenamiento.setEjercicioEntrenamientoList(ejercicioEntrenamientos);
                         Log.i("PRUEBARUTINA:", entrenamiento.getDescripcion());
                         listaEntrenamientosPublicos.add(entrenamiento);
