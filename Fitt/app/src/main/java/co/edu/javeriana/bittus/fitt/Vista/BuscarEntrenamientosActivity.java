@@ -60,6 +60,11 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
                 adoptarEntrenamiento(listaEntrenamientosPublicos.get(position));
             }
 
+            @Override
+            public void onBtnClickInfo(int position) {
+                mostrarInfoEntrenamiento(listaEntrenamientosPublicos.get(position));
+            }
+
         });
 
         listViewL.setAdapter(adapter);
@@ -67,6 +72,10 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
 
         database = FirebaseDatabase.getInstance();
         descargarEntrenamientosPublicos();
+    }
+
+    private void mostrarInfoEntrenamiento(Entrenamiento entrenamiento) {
+
     }
 
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <ImageButton
-        android:id="@+id/imageButtonInformacion2"
+        android:id="@+id/imageButtonInformacion"
         android:layout_width="38dp"
         android:layout_height="38dp"
         android:layout_marginTop="12dp"
@@ -74,7 +74,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:tint="@color/verdeFitt"
-        app:layout_constraintEnd_toStartOf="@+id/imageButtonInformacion2"
+        app:layout_constraintEnd_toStartOf="@+id/imageButtonInformacion"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/agregar" />
 
