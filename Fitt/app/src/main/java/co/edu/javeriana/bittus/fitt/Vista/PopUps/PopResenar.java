@@ -126,7 +126,8 @@ public class PopResenar extends Activity {
             }
         });
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        //es addListenerForSingleValueEvent no el otro o sino se va a poner a repetir este metodo una y otra vez
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 usuario = dataSnapshot.getValue(Usuario.class);
