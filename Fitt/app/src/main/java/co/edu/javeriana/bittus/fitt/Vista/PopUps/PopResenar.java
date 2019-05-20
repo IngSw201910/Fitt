@@ -80,7 +80,10 @@ public class PopResenar extends Activity {
 
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios()).child(mAuth.getUid());
+        //es RUTA_USUARIOS
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+
+
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

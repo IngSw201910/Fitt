@@ -15,7 +15,7 @@ public final class RutasBaseDeDatos {
     private static String rutaEntrenamientosAdoptados = "/entrenamientos_adoptados/";
 
 
-    private static String rutaRutinas = "/rutinas/";
+
     private static String rutaUsuarios ="/Usuarios/";
     private static String rutaEntrenadores ="/Entrenadores/";
     private static String rutaParques ="/Parques/";
