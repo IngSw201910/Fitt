@@ -33,13 +33,6 @@ implements BottomNavigationView.OnNavigationItemSelectedListener{
 
         loadFragment(new InicioUsuarioFragment());
 
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
-        if(bundle != null){
-            Usuario usuario = (Usuario) bundle.getSerializable(StringsMiguel.LLAVE_USUARIO);
-
-            Log.i("usuario", usuario.getNombre());
-        }
 
 
     }
