@@ -75,7 +75,7 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
     }
 
     private void mostrarInfoEntrenamiento(Entrenamiento entrenamiento) {
-
+            startActivity(new Intent(BuscarEntrenamientosActivity.this, InformacionEntrenamientoActivity.class));
     }
 
 
