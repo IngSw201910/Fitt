@@ -1,31 +1,54 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
-//Notas
-//Encontrar una forma de obtener la fecha por firebase
+import java.io.Serializable;
 
-public class Reseña {
-    private int id;
-    private int referencia;
-    private int catAsociada;
-    private String comentario;
+public class Reseña implements Serializable {
+
+    private Usuario usuario;
+    private String reseña;
     private String fecha;
-    private int calificacion;
+    private float calificacion;
 
-    public Reseña(){ super(); }
-
-    public Reseña(int id, int referencia, int catAsociada, String comentario, int calificacion){
-        this.id = id;
-        this.referencia = referencia;
-        this.catAsociada = catAsociada;
-        this.comentario = comentario;
+    public Reseña(Usuario usuario, String reseña, String fecha, float calificacion) {
+        this.usuario = usuario;
+        this.reseña = reseña;
+        this.fecha = fecha;
         this.calificacion = calificacion;
-        this.fecha = "01/01/2019";
     }
 
-    public int getIdReseña(){ return id;}
-    public int getReferencia(){ return referencia;}
-    public int getCatAsociada(){ return catAsociada;}
-    public String getComentario(){ return comentario;}
-    public String getFecha(){ return fecha;}
-    public int getCalificacion(){ return calificacion;}
+    public Reseña() {
+
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getReseña() {
+        return reseña;
+    }
+
+    public void setReseña(String reseña) {
+        this.reseña = reseña;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public float getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(float calificacion) {
+        this.calificacion = calificacion;
+    }
 }

@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -24,21 +23,22 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Adapters.GridAdapter;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
-import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopResenarParque;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopResenar;
 
 public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
 
-    TextView nombreParque;
-    TextView direccion;
-    ImageButton btnTomarFoto;
-    ImageButton btnAñadirFotos;
-    GridView gridView;
-    RatingBar calificacion;
-    Button añadirReseña;
-    ListView reseñas;
-    List<Bitmap> imagenes;
-    float rating;
+    private TextView nombreParque;
+    private TextView direccion;
+    private ImageButton btnTomarFoto;
+    private ImageButton btnAñadirFotos;
+    private GridView gridView;
+    private RatingBar calificacion;
+    private Button añadirReseña;
+    private ListView reseñas;
+    private List<Bitmap> imagenes;
+    private float rating;
+    private double longitud;
+    private double latitud;
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 11;
     public static final int REQUEST_CODE_UPLOAD_PHOTO = 12;
@@ -58,9 +58,12 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         reseñas = (ListView) findViewById(R.id.ListViewReseñas);
         imagenes = new ArrayList<Bitmap>();
 
+
         Bundle bundle = getIntent().getBundleExtra("bundle");
         nombreParque.setText(bundle.getString("titulo"));
         direccion.setText(bundle.getString("direccion"));
+        longitud = bundle.getDouble("longitud");
+        latitud = bundle.getDouble("latitud");
 
         if (!imagenes.isEmpty()) {
             GridAdapter gridAdapter = new GridAdapter(this, imagenes);
@@ -89,7 +92,12 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         añadirReseña.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenarParque.class);
+                Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenar.class);
+                Bundle bundle = new Bundle();
+                bundle.putDouble("latitud", latitud);
+                bundle.putDouble("longitud", longitud);
+                //el bundle deberia tener como llave "parquesReseña" o algo asi, haciendo referencia a lo que pasa, men pa sidoso
+                intent.putExtra("bundle", bundle);
                 startActivity(intent);
             }
         });
@@ -126,4 +134,5 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         }
 
     }
+
 }
