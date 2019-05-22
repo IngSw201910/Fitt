@@ -128,9 +128,9 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
 
             listaReseñas.add(new Reseña(null, "prueba2", "hoy", 1.5f));
 
-            Utils.almacenarInformacionConKey(RutasBaseDeDatos.getRutaEntrenamientos()+user.getUid()+"/", entrenamiento);
+            String key = PersistenciaFirebase.almacenarInformacionConKey(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+user.getUid()+"/", entrenamiento);
             if (entrenamiento.isPublica())
-                PersistenciaFirebase.almacenarInformacionConKey(RutasBaseDeDatos.getRutaEntrenamientosPublicos(),entrenamiento);
+                PersistenciaFirebase.almacenarInformacionConKeyPersonalizada(RutasBaseDeDatos.getRutaEntrenamientosPublicos(),entrenamiento, key);
 
             finish();
         }

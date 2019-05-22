@@ -9,7 +9,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.EntrenamientosAdapter;
-import co.edu.javeriana.bittus.fitt.Modelo.Ejercicio;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
@@ -38,6 +36,7 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
     FirebaseDatabase database;
     DatabaseReference myRef;
     private List<Entrenamiento> listaEntrenamientosPublicos = new ArrayList<>();
+    private List<String> listaKeysEntrenamientos = new ArrayList<>();
     private ListView listViewL;
     private EntrenamientosAdapter adapter;
     private EditText nombreEdit;
@@ -62,7 +61,7 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
 
             @Override
             public void onBtnClickInfo(int position) {
-                mostrarInfoEntrenamiento(listaEntrenamientosPublicos.get(position));
+                mostrarInfoEntrenamiento(listaEntrenamientosPublicos.get(position), listaKeysEntrenamientos.get(position));
             }
 
         });
@@ -74,10 +73,11 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
         descargarEntrenamientosPublicos();
     }
 
-    private void mostrarInfoEntrenamiento(Entrenamiento entrenamiento) {
+    private void mostrarInfoEntrenamiento(Entrenamiento entrenamiento, String llave) {
             Intent intent = new Intent(BuscarEntrenamientosActivity.this, InformacionEntrenamientoActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
+            bundle.putSerializable(StringsMiguel.LLAVE_LLAVE, llave);
             intent.putExtras(bundle);
             startActivity(intent);
     }
@@ -93,7 +93,9 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){ //PARA CADA USUARIO
                         Entrenamiento entrenamiento = singleSnapshot.getValue(Entrenamiento.class);
                         List<EjercicioEntrenamiento> ejercicioEntrenamientos = new ArrayList<>();
-
+                        String llaveEntrenamiento = singleSnapshot.getKey();
+                        listaKeysEntrenamientos.add(llaveEntrenamiento);
+                        Log.i("ENTRENAMIENTO_KEY", llaveEntrenamiento);
                         DataSnapshot singleSnapshotE = singleSnapshot.child("ejercicioEntrenamientoList");
                             for(DataSnapshot singleSnapshotF: singleSnapshotE.getChildren()){
                                 EjercicioEntrenamiento ejercicioEntrenamiento = singleSnapshotF.getValue(EjercicioEntrenamiento.class);
