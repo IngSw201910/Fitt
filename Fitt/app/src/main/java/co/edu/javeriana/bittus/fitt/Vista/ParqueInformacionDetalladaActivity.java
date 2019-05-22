@@ -93,6 +93,8 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         park = null;
         database = FirebaseDatabase.getInstance();
 
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+
         //es addListenerForSingleValueEvent no el otro o sino se va a poner a repetir este metodo una y otra vez
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
