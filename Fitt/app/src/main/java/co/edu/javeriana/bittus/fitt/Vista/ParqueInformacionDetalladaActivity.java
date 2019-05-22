@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -17,12 +18,24 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.GridAdapter;
+import co.edu.javeriana.bittus.fitt.Adapters.ReseñaParquesAdaptador;
+import co.edu.javeriana.bittus.fitt.Modelo.Parque;
+import co.edu.javeriana.bittus.fitt.Modelo.ReseñaParque;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopResenarParque;
@@ -41,6 +54,11 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
     private float rating;
     private double longitud;
     private double latitud;
+    private Parque park;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private FirebaseUser mAuth;
+
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 11;
     public static final int REQUEST_CODE_UPLOAD_PHOTO = 12;
@@ -60,6 +78,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         reseñas = (ListView) findViewById(R.id.ListViewReseñas);
         imagenes = new ArrayList<Bitmap>();
 
+        mAuth = FirebaseAuth.getInstance().getCurrentUser();
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
         nombreParque.setText(bundle.getString("titulo"));
@@ -67,18 +86,34 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         longitud = bundle.getDouble("longitud");
         latitud = bundle.getDouble("latitud");
 
-        if (!imagenes.isEmpty()) {
+        park = null;
+        database = FirebaseDatabase.getInstance();
+        buscarParque();
+        if (park!=null){
+            //sacar imagenes de la base de datos
+            /*GridAdapter gridAdapter = new GridAdapter(this, park.getImagenes());*/
             GridAdapter gridAdapter = new GridAdapter(this, imagenes);
             gridView.setAdapter(gridAdapter);
+            Toast.makeText(ParqueInformacionDetalladaActivity.this, park.getReseñas().size(), Toast.LENGTH_LONG).show();
+            Toast.makeText(ParqueInformacionDetalladaActivity.this, "ok", Toast.LENGTH_LONG).show();
+            ReseñaParquesAdaptador reseñaParquesAdaptador = new ReseñaParquesAdaptador(this, park.getReseñas());
+            reseñas.setAdapter(reseñaParquesAdaptador);
+            calificacion.setRating(obtenercalificacion());
+            System.out.println(obtenercalificacion());
         }
         else{
-            Toast.makeText(ParqueInformacionDetalladaActivity.this, "No hay imagenes disponibles", Toast.LENGTH_LONG).show();
+            Toast.makeText(ParqueInformacionDetalladaActivity.this, "No hay informacion disponible de este parque", Toast.LENGTH_LONG).show();
         }
 
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utils utils = new Utils();
+                if (park == null) {
+                    Parque nuevoParque = new Parque(nombreParque.getText().toString(), (float) 2.0, latitud, longitud);
+                    subirParque(nuevoParque);
+                    park = nuevoParque;
+                }
                 utils.tomarFotoDesdeCamara(ParqueInformacionDetalladaActivity.this,REQUEST_CODE_TAKE_PHOTO);
             }
         });
@@ -87,6 +122,11 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Utils utils = new Utils();
+                if (park == null) {
+                    Parque nuevoParque = new Parque(nombreParque.getText().toString(), (float) 2.0, latitud, longitud);
+                    subirParque(nuevoParque);
+                    park = nuevoParque;
+                }
                 utils.cargarFotoDesdeCamara(ParqueInformacionDetalladaActivity.this, REQUEST_CODE_UPLOAD_PHOTO);
             }
         });
@@ -98,10 +138,12 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putDouble("latitud", latitud);
                 bundle.putDouble("longitud", longitud);
+                bundle.putString("nombreParque", nombreParque.getText().toString());
                 intent.putExtra("bundle", bundle);
                 startActivity(intent);
             }
         });
+
 
 
 
@@ -134,6 +176,57 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
 
         }
 
+    }
+
+    public void buscarParque() {
+        myRef = database.getReference(RutasBaseDeDatos.getRutaParques());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                    Parque parque = singleSnapshot.getValue(Parque.class);
+                    Log.i("aiuda", "Encontró usuario: " + parque.getNombreParque());
+                    if (longitud == parque.getLongitud() &&  latitud == parque.getLatitud()) {
+                        Toast.makeText(ParqueInformacionDetalladaActivity.this, "El parque si existe"+parque.getCalificación(),Toast.LENGTH_SHORT).show();
+                        park = parque;
+                        break;
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Aiuda", "error en la consulta", databaseError.toException());
+            }
+        });
+    }
+
+    public void subirParque (Parque parque){
+        almacenarInformacionParque(RutasBaseDeDatos.getRutaParques(),parque);
+
+    }
+
+    //Guarda la información en la ruta+/+key
+    public String almacenarInformacionParque (String ruta, Parque parque){
+        database = FirebaseDatabase.getInstance();
+        myRef=database.getReference(ruta);
+        String key = parque.getNombreParque();
+        myRef=database.getReference(ruta+key);
+        myRef.setValue(parque);
+        return key;
+    }
+
+    public float obtenercalificacion() {
+        float promedio = 0;
+        if (park!= null){
+            for (ReseñaParque reseña : park.getReseñas()){
+                promedio = promedio + reseña.getCalificacion();
+            }
+            promedio = promedio/park.getReseñas().size();
+            return promedio;
+        }
+        else{
+            return -1;
+        }
     }
 
 }

@@ -6,15 +6,15 @@ import java.util.List;
 
 public class Parque implements Serializable {
 
-    private String latYLong;
+    private String nombreParqueFire;
     private List<String> imagenes;
     private  List<ReseñaParque> reseñas;
     private float calificación;
     private double longitud;
     private double latitud;
 
-    public Parque(String latYLong, float calificación, double latitud, double longitud) {
-        this.latYLong = latYLong;
+    public Parque(String nombreParqueFire, float calificación, double latitud, double longitud) {
+        this.nombreParqueFire = nombreParqueFire;
         imagenes = new ArrayList<String>();
         reseñas = new ArrayList<ReseñaParque>();
         this.calificación = calificación;
@@ -22,16 +22,16 @@ public class Parque implements Serializable {
         this.longitud = longitud;
     }
 
-    public Parque(float calificación) {
+    public Parque() {
 
     }
 
-    public String getLatYLong() {
-        return latYLong;
+    public String getNombreParque() {
+        return nombreParqueFire;
     }
 
-    public void setLatYLong(String latYLong) {
-        this.latYLong = latYLong;
+    public void setNombreParque(String nombreParque) {
+        this.nombreParqueFire = nombreParque;
     }
 
     public List<String> getImagenes() {

@@ -23,6 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Parque;
 import co.edu.javeriana.bittus.fitt.Modelo.ReseñaParque;
@@ -45,6 +47,7 @@ public class PopResenarParque extends Activity {
     private Button botonCancelar;
     private Button botonPublicar;
 
+    private String nombreParque;
     private double longitud;
     private double latitud;
     private Parque park;
@@ -67,6 +70,8 @@ public class PopResenarParque extends Activity {
         Bundle bundle = getIntent().getBundleExtra("bundle");
         longitud = bundle.getDouble("longitud");
         latitud = bundle.getDouble("latitud");
+        nombreParque = bundle.getString("nombreParque");
+
         park = null;
         fecha = Calendar.getInstance().getTime();
 
@@ -98,15 +103,16 @@ public class PopResenarParque extends Activity {
                     ReseñaParque reseñaParque = new ReseñaParque(usuario, reseña.getText().toString(),fecha.toString(), calificacion.getRating());
                     park.getReseñas().add(reseñaParque);
                     agregarReseñaParque();
+                    finish();
                 }
                 else{
-                    Parque nuevoParque = new Parque(latitud+" "+longitud, (float) 2.0,latitud, longitud);
+                    Parque nuevoParque = new Parque(nombreParque, (float) 2.0,latitud, longitud);
                     subirParque(nuevoParque);
                     park = nuevoParque;
                     ReseñaParque reseñaParque = new ReseñaParque(usuario, reseña.getText().toString(),fecha.toString(), calificacion.getRating());
                     park.getReseñas().add(reseñaParque);
                     agregarReseñaParque();
-
+                    finish();
                 }
 
             }
@@ -131,11 +137,11 @@ public class PopResenarParque extends Activity {
 
     }
 
-    //Guarda la información en la ruta+/+key (la key se genera automaticamente)
+    //Guarda la información en la ruta+/+key
     public String almacenarInformacionParque (String ruta, Parque parque){
         database = FirebaseDatabase.getInstance();
         myRef=database.getReference(ruta);
-        String key = parque.getLatYLong();
+        String key =  parque.getNombreParque() + myRef.push().getKey() ;
         myRef=database.getReference(ruta+key);
         myRef.setValue(parque);
         return key;
@@ -148,7 +154,7 @@ public class PopResenarParque extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Parque parque = singleSnapshot.getValue(Parque.class);
-                    Log.i("aiuda", "Encontró usuario: " + parque.getLatYLong());
+                    Log.i("aiuda", "Encontró usuario: " + parque.getLatitud());
                     if (longitud == parque.getLongitud() &&  latitud == parque.getLatitud()) {
                         Toast.makeText(PopResenarParque.this, "El parque si existe", Toast.LENGTH_SHORT).show();
                         park = parque;
@@ -164,23 +170,7 @@ public class PopResenarParque extends Activity {
     }
 
     public void agregarReseñaParque() {
-        myRef = database.getReference(RutasBaseDeDatos.getRutaParques());
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
-                    Parque parque = singleSnapshot.getValue(Parque.class);
-                    Log.i("aiuda", "Encontró usuario: " + parque.getLatYLong());
-                    if (longitud == parque.getLongitud() &&  latitud == parque.getLatitud()) {
-                        DatabaseReference refi = singleSnapshot.getRef();
-                        refi.setValue(park);
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w("Aiuda", "error en la consulta", databaseError.toException());
-            }
-        });
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef.child("Parques").child(nombreParque).setValue(park);
     }
 }
