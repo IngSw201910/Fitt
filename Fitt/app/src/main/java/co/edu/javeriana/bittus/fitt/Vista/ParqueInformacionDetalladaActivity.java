@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,9 +34,13 @@ import co.edu.javeriana.bittus.fitt.Adapters.GridAdapter;
 import co.edu.javeriana.bittus.fitt.Adapters.ReseñaAdaptador;
 import co.edu.javeriana.bittus.fitt.Modelo.Parque;
 import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
+import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsSebastian;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopResenar;
 
 public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
@@ -56,6 +61,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private FirebaseUser mAuth;
+    private Usuario usuario;
 
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 11;
@@ -86,10 +92,24 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
 
         park = null;
         database = FirebaseDatabase.getInstance();
-        buscarParque();
+
+        //es addListenerForSingleValueEvent no el otro o sino se va a poner a repetir este metodo una y otra vez
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usuario = dataSnapshot.getValue(Usuario.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        /*buscarParque();
         if (park!=null){
             //sacar imagenes de la base de datos
-            /*GridAdapter gridAdapter = new GridAdapter(this, park.getImagenes());*/
+            /*GridAdapter gridAdapter = new GridAdapter(this, park.getImagenes());
             GridAdapter gridAdapter = new GridAdapter(this, imagenes);
             gridView.setAdapter(gridAdapter);
             Toast.makeText(ParqueInformacionDetalladaActivity.this, park.getReseñas().size(), Toast.LENGTH_LONG).show();
@@ -101,17 +121,17 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         }
         else{
             Toast.makeText(ParqueInformacionDetalladaActivity.this, "No hay informacion disponible de este parque", Toast.LENGTH_LONG).show();
-        }
+        }*/
 
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utils utils = new Utils();
-                if (park == null) {
+                /*if (park == null) {
                     Parque nuevoParque = new Parque(nombreParque.getText().toString(), (float) 2.0, latitud, longitud);
                     subirParque(nuevoParque);
                     park = nuevoParque;
-                }
+                }*/
                 utils.tomarFotoDesdeCamara(ParqueInformacionDetalladaActivity.this,REQUEST_CODE_TAKE_PHOTO);
             }
         });
@@ -120,11 +140,11 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Utils utils = new Utils();
-                if (park == null) {
+                /*if (park == null) {
                     Parque nuevoParque = new Parque(nombreParque.getText().toString(), (float) 2.0, latitud, longitud);
                     subirParque(nuevoParque);
                     park = nuevoParque;
-                }
+                }*/
                 utils.cargarFotoDesdeCamara(ParqueInformacionDetalladaActivity.this, REQUEST_CODE_UPLOAD_PHOTO);
             }
         });
@@ -132,14 +152,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         añadirReseña.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenar.class);
-                Bundle bundle = new Bundle();
-                bundle.putDouble("latitud", latitud);
-                bundle.putDouble("longitud", longitud);
-
-                bundle.putString("nombreParque", nombreParque.getText().toString());
-                intent.putExtra("bundle", bundle);
-                startActivity(intent);
+                iniciarPopupParque();
             }
         });
 
@@ -177,7 +190,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
 
     }
 
-    public void buscarParque() {
+    /*public void buscarParque() {
         myRef = database.getReference(RutasBaseDeDatos.getRutaParques());
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -226,6 +239,18 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         else{
             return -1;
         }
+    }*/
+
+    public void iniciarPopupParque (){
+        Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenar.class);
+        Bundle bundle = new Bundle();
+        bundle.putDouble("latitud", latitud);
+        bundle.putDouble("longitud", longitud);
+
+        bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, usuario);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, Utils.REQUEST_CODE_RESENA);
     }
+
 
 }

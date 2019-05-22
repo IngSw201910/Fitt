@@ -52,7 +52,7 @@ public class ReseñaAdaptador extends BaseAdapter {
         ImageView fotoUsuario = (ImageView) vista.findViewById(R.id.imageViewFotoUsuarioRP);
 
         nombreUsuario.setText(reseñas.get(i).getUsuario().getNombre());
-        fecha.setText(reseñas.get(i).getFecha());
+        fecha.setText(reseñas.get(i).getFecha().toString());
         comentario.setText(reseñas.get(i).getReseña());
         calificacion.setRating(reseñas.get(i).getCalificacion());
         /*fotoUsuario.setImageBitmap(reseñas.get(i).getUsuario().);*/

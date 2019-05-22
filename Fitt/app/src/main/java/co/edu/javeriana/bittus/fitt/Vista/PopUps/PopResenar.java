@@ -1,6 +1,7 @@
 package co.edu.javeriana.bittus.fitt.Vista.PopUps;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
@@ -30,7 +31,12 @@ import co.edu.javeriana.bittus.fitt.Modelo.Parque;
 import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsSebastian;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
 public class PopResenar extends Activity {
 
@@ -46,12 +52,8 @@ public class PopResenar extends Activity {
     private Button botonCancelar;
     private Button botonPublicar;
 
-    private String nombreParque;
-    private double longitud;
-    private double latitud;
-    private Parque park;
     private Date fecha;
-    private Bundle bundleParques;
+    private Bundle bundle;
 
 
     @Override
@@ -68,26 +70,12 @@ public class PopResenar extends Activity {
 
 
         //el bundle deberia tener como llave "parquesReseña" o algo asi, haciendo referencia a lo que pasa, men pa sidoso
-        bundleParques = getIntent().getBundleExtra("bundle");
-
-        //con esto me aseguro que si lo llaman desde lo del parque va a ser una reseña de un parque, pero no deberia ser así, todos esos metodos que instancian un parque deberia hacerlos desde donde los llamos, esta clase solo instancia reseñas y nada mas
-        if(bundleParques!=null){
-            longitud = bundleParques.getDouble("longitud");
-            latitud = bundleParques.getDouble("latitud");
-            nombreParque = bundleParques.getString("nombreParque");
-        }
-
-
-
-        park = null;
-        fecha = Calendar.getInstance().getTime();
-
-        mAuth = FirebaseAuth.getInstance().getCurrentUser();
-        database = FirebaseDatabase.getInstance();
-        //es RUTA_USUARIOS
-        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
-
-
+        bundle = getIntent().getExtras();
+        usuario =(Usuario) bundle.getSerializable(StringsMiguel.LLAVE_USUARIO);
+        nombreUsuario.setText(usuario.getNombre());
+        PersistenciaFirebase.descargarFotoYPonerEnImageView(usuario.getDireccionFoto(), fotoUsuario);
+        //Falta inflar la fecha
+        fecha = new Date();
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -107,43 +95,29 @@ public class PopResenar extends Activity {
         botonPublicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //lo mismo que dije arriba
-                if(bundleParques!=null){
-                    buscarParque();
-                    if (park!=null){
-                        Reseña reseña = new Reseña(usuario, PopResenar.this.reseña.getText().toString(),fecha.toString(), calificacion.getRating());
-                        park.getReseñas().add(reseña);
-                        agregarReseñaParque();
-                    }
-                    else{
-                        Parque nuevoParque = new Parque(latitud+" "+longitud, (float) 2.0,latitud, longitud);
-                        subirParque(nuevoParque);
-                        park = nuevoParque;
-                        Reseña reseña = new Reseña(usuario, PopResenar.this.reseña.getText().toString(),fecha.toString(), calificacion.getRating());
-                        park.getReseñas().add(reseña);
-                        agregarReseñaParque();
-                    }
-                }
-
+                generarReseña();
             }
         });
 
-        //es addListenerForSingleValueEvent no el otro o sino se va a poner a repetir este metodo una y otra vez
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                usuario = dataSnapshot.getValue(Usuario.class);
-                nombreUsuario.setText(usuario.getNombre());
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+    }
 
-            }
-        });
+    public void generarReseña(){
+        String comentario = reseña.getText().toString();
+        float rating = calificacion.getRating();
+        if (comentario.isEmpty()){
+            reseña.setError(StringsMiguel.CAMPO_OBLIGATORIO);
+        }
+        else{
+            Reseña reseña = new Reseña(usuario, comentario, fecha, rating);
+            Intent intent = getIntent();
+            bundle.putSerializable(StringsSebastian.LLAVE_RESENA, reseña);
+            intent.putExtras(bundle);
+            setResult(Activity.RESULT_OK, intent);
+        }
     }
         //esto no deberia ir aca
-    public void subirParque (Parque parque){
+    /*public void subirParque (Parque parque){
         almacenarInformacionParque(RutasBaseDeDatos.getRutaParques(),parque);
 
     }
@@ -183,5 +157,5 @@ public class PopResenar extends Activity {
     public void agregarReseñaParque() {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         rootRef.child("Parques").child(nombreParque).setValue(park);
-    }
+    }*/
 }

@@ -37,7 +37,7 @@ public class Utils {
     private static FirebaseUser user = mAuth.getCurrentUser();
 
 
-
+    public final static int REQUEST_CODE_RESENA = 50;
     public final static int REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS = 0;
     public final static int REQUEST_CODE_EJERCICIO_DISTANCIA = 1;
     public final static int REQUEST_CODE_EJERCICIO_TIEMPO = 2;
