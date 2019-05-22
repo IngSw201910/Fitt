@@ -11,6 +11,8 @@ public class Usuario implements Serializable {
     protected List<Entrenamiento> entrenamientoList;
     protected String nombre;
     protected String id;
+    protected String idEntrenador = "default";
+    protected int tipoUsuario;
     protected String correo;
     protected String direccionFoto;
     protected Date fechaNacimiento;
@@ -77,7 +79,6 @@ public class Usuario implements Serializable {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
 
     public String getDireccionFoto() {
         return direccionFoto;
@@ -149,6 +150,22 @@ public class Usuario implements Serializable {
 
     public void setPrivacidad(boolean privacidad) {
         this.privacidad = privacidad;
+    }
+
+    public String getIdEntrenador() {
+        return idEntrenador;
+    }
+
+    public void setIdEntrenador(String idEntrenador) {
+        this.idEntrenador = idEntrenador;
+    }
+
+    public int getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(int tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     //usuario cambiado
