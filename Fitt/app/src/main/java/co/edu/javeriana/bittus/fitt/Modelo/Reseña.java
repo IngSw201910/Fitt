@@ -1,15 +1,16 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Reseña implements Serializable {
 
     private Usuario usuario;
     private String reseña;
-    private String fecha;
+    private Date fecha;
     private float calificacion;
 
-    public Reseña(Usuario usuario, String reseña, String fecha, float calificacion) {
+    public Reseña(Usuario usuario, String reseña, Date fecha, float calificacion) {
         this.usuario = usuario;
         this.reseña = reseña;
         this.fecha = fecha;
@@ -36,11 +37,11 @@ public class Reseña implements Serializable {
         this.reseña = reseña;
     }
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 

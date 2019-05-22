@@ -27,6 +27,8 @@ public final class RutasBaseDeDatos {
 
     public static final String RUTA_FOTO_TITULOS = "/FotoTitulos/";
 
+    public static final String RUTA_FOTO_PARQUE = "/FotoParque/";
+
 
     public static String getRutaEjercicios() {
         return rutaEjercicios;
