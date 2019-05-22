@@ -27,7 +27,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.GridAdapter;
@@ -36,6 +39,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Parque;
 import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsSebastian;
@@ -53,8 +57,6 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
     private RatingBar calificacion;
     private Button añadirReseña;
     private ListView reseñas;
-    private List<Bitmap> imagenes;
-    private float rating;
     private double longitud;
     private double latitud;
     private Parque park;
@@ -80,8 +82,6 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         calificacion = (RatingBar) findViewById(R.id.ratingBarDetalle);
         añadirReseña = (Button) findViewById(R.id.buttonAgregarReseña);
         reseñas = (ListView) findViewById(R.id.ListViewReseñas);
-        imagenes = new ArrayList<Bitmap>();
-
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
 
         Bundle bundle = getIntent().getBundleExtra("bundle");
@@ -106,32 +106,30 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             }
         });
 
-        /*buscarParque();
+        buscarParque();
         if (park!=null){
             //sacar imagenes de la base de datos
-            /*GridAdapter gridAdapter = new GridAdapter(this, park.getImagenes());
-            GridAdapter gridAdapter = new GridAdapter(this, imagenes);
+            GridAdapter gridAdapter = new GridAdapter(this, park);
             gridView.setAdapter(gridAdapter);
-            Toast.makeText(ParqueInformacionDetalladaActivity.this, park.getReseñas().size(), Toast.LENGTH_LONG).show();
-            Toast.makeText(ParqueInformacionDetalladaActivity.this, "ok", Toast.LENGTH_LONG).show();
+            /*Toast.makeText(ParqueInformacionDetalladaActivity.this, park.getReseñas().size(), Toast.LENGTH_LONG).show();
+            Toast.makeText(ParqueInformacionDetalladaActivity.this, "ok", Toast.LENGTH_LONG).show();*/
             ReseñaAdaptador reseñaAdaptador = new ReseñaAdaptador(this, park.getReseñas());
             reseñas.setAdapter(reseñaAdaptador);
             calificacion.setRating(obtenercalificacion());
-            System.out.println(obtenercalificacion());
         }
         else{
             Toast.makeText(ParqueInformacionDetalladaActivity.this, "No hay informacion disponible de este parque", Toast.LENGTH_LONG).show();
-        }*/
+        }
 
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Utils utils = new Utils();
-                /*if (park == null) {
+                if (park == null) {
                     Parque nuevoParque = new Parque(nombreParque.getText().toString(), (float) 2.0, latitud, longitud);
                     subirParque(nuevoParque);
                     park = nuevoParque;
-                }*/
+                }
                 utils.tomarFotoDesdeCamara(ParqueInformacionDetalladaActivity.this,REQUEST_CODE_TAKE_PHOTO);
             }
         });
@@ -140,11 +138,11 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Utils utils = new Utils();
-                /*if (park == null) {
+                if (park == null) {
                     Parque nuevoParque = new Parque(nombreParque.getText().toString(), (float) 2.0, latitud, longitud);
                     subirParque(nuevoParque);
                     park = nuevoParque;
-                }*/
+                }
                 utils.cargarFotoDesdeCamara(ParqueInformacionDetalladaActivity.this, REQUEST_CODE_UPLOAD_PHOTO);
             }
         });
@@ -155,11 +153,6 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                 iniciarPopupParque();
             }
         });
-
-
-
-
-
     }
 
     @Override
@@ -170,34 +163,66 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         if(requestCode== REQUEST_CODE_TAKE_PHOTO && resultCode==RESULT_OK){
             Bundle extras = data.getExtras();
             bitmapFoto = (Bitmap) extras.get("data");
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = new Date();
             //Subir foto a firebase y descargarlas fotos en imagenes, borrar linea de abajo
-            imagenes.add(bitmapFoto);
-            GridAdapter gridAdapter = new GridAdapter(this,  imagenes);
+            PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire(), formatter.format(date), UtilsMiguel.getImageUri(ParqueInformacionDetalladaActivity.this ,bitmapFoto, "x"));
+            String ruta =RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire()+"/"+formatter.format(date);
+            //subir ruta foto
+            subirRutaFoto (ruta);
+            GridAdapter gridAdapter = new GridAdapter(this,  park);
             gridView.setAdapter(gridAdapter);
         }else if(requestCode == REQUEST_CODE_UPLOAD_PHOTO  && resultCode==RESULT_OK){
             Uri path = data.getData();
             try {
                 bitmapFoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(),path);
+                Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date();
                 //Subir foto a firebase y descargarlas fotos en imagenes, borrar linea de abajo
-                imagenes.add(bitmapFoto);
-                GridAdapter gridAdapter = new GridAdapter(this,  imagenes);
+                PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire(), formatter.format(date), UtilsMiguel.getImageUri(ParqueInformacionDetalladaActivity.this ,bitmapFoto, "x"));
+                String ruta =RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire()+"/"+formatter.format(date);
+                //subir ruta foto
+                subirRutaFoto (ruta);
+                GridAdapter gridAdapter = new GridAdapter(this,  park);
                 gridView.setAdapter(gridAdapter);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
+        } else if(requestCode == Utils.REQUEST_CODE_RESENA  && resultCode==RESULT_OK){
+            Reseña reseñarecibida = (Reseña) data.getExtras().getSerializable(StringsSebastian.LLAVE_RESENA);
+            subirReseña(reseñarecibida);
         }
 
     }
 
-    /*public void buscarParque() {
+    public void subirReseña (Reseña reseña){
+        park.getReseñas().add(reseña);
+        database = FirebaseDatabase.getInstance();
+        myRef=database.getReference(RutasBaseDeDatos.getRutaParques());
+        String key =  park.getNombreParqueFire() ;
+        myRef=database.getReference(key);
+        myRef.setValue(park);
+    }
+
+
+    public void subirRutaFoto (String ruta){
+        park.getImagenes().add(ruta);
+        database = FirebaseDatabase.getInstance();
+        myRef=database.getReference(RutasBaseDeDatos.getRutaParques());
+        String key =  park.getNombreParqueFire() ;
+        myRef=database.getReference(key);
+        myRef.setValue(park);
+    }
+
+    public void buscarParque() {
         myRef = database.getReference(RutasBaseDeDatos.getRutaParques());
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Parque parque = singleSnapshot.getValue(Parque.class);
-                    Log.i("aiuda", "Encontró usuario: " + parque.getNombreParque());
+                    Log.i("aiuda", "Encontró usuario: " + parque.getNombreParqueFire());
                     if (longitud == parque.getLongitud() &&  latitud == parque.getLatitud()) {
                         Toast.makeText(ParqueInformacionDetalladaActivity.this, "El parque si existe"+parque.getCalificación(),Toast.LENGTH_SHORT).show();
                         park = parque;
@@ -214,17 +239,15 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
 
     public void subirParque (Parque parque){
         almacenarInformacionParque(RutasBaseDeDatos.getRutaParques(),parque);
-
     }
 
-    //Guarda la información en la ruta+/+key
-    public String almacenarInformacionParque (String ruta, Parque parque){
+    public void almacenarInformacionParque (String ruta, Parque parque){
         database = FirebaseDatabase.getInstance();
         myRef=database.getReference(ruta);
-        String key = parque.getNombreParque();
+        String key =  parque.getNombre() + myRef.push().getKey() ;
+        parque.setNombreParqueFire(key);
         myRef=database.getReference(ruta+key);
         myRef.setValue(parque);
-        return key;
     }
 
     public float obtenercalificacion() {
@@ -239,14 +262,11 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         else{
             return -1;
         }
-    }*/
+    }
 
     public void iniciarPopupParque (){
         Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenar.class);
         Bundle bundle = new Bundle();
-        bundle.putDouble("latitud", latitud);
-        bundle.putDouble("longitud", longitud);
-
         bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, usuario);
         intent.putExtras(bundle);
         startActivityForResult(intent, Utils.REQUEST_CODE_RESENA);

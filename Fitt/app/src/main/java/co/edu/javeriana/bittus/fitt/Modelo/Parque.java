@@ -7,14 +7,15 @@ import java.util.List;
 public class Parque implements Serializable {
 
     private String nombreParqueFire;
+    private String nombre;
     private List<String> imagenes;
     private  List<Reseña> reseñas;
     private float calificación;
     private double longitud;
     private double latitud;
 
-    public Parque(String nombreParqueFire, float calificación, double latitud, double longitud) {
-        this.nombreParqueFire = nombreParqueFire;
+    public Parque(String nombre ,float calificación, double latitud, double longitud) {
+        this.nombre = nombre;
         imagenes = new ArrayList<String>();
         reseñas = new ArrayList<Reseña>();
         this.calificación = calificación;
@@ -26,12 +27,20 @@ public class Parque implements Serializable {
 
     }
 
-    public String getNombreParque() {
+    public String getNombreParqueFire() {
         return nombreParqueFire;
     }
 
-    public void setNombreParque(String nombreParque) {
-        this.nombreParqueFire = nombreParque;
+    public void setNombreParqueFire(String nombreParqueFire) {
+        this.nombreParqueFire = nombreParqueFire;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public List<String> getImagenes() {
