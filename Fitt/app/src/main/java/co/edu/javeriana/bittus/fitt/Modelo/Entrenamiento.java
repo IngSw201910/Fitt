@@ -56,15 +56,15 @@ public class Entrenamiento implements Serializable {
         this.ejercicioEntrenamientoList = ejercicioEntrenamientoList;
     }
 
-    public float calcularRating(Entrenamiento entrenamiento) {
+    public float calcularRating() {
         float rating = 0f;
-        for (int i = 0; i < entrenamiento.getReseñas().size(); i++) {
-            rating += entrenamiento.getReseñas().get(i).getCalificacion();
+        for (int i = 0; i < reseñas.size(); i++) {
+            rating += reseñas.get(i).getCalificacion();
         }
-        if (entrenamiento.getReseñas().size() == 0) {
+        if (reseñas.size() == 0) {
             rating = 3f;
         } else {
-            rating = rating / entrenamiento.getReseñas().size();
+            rating = rating / reseñas.size();
         }
         return  rating;
     }

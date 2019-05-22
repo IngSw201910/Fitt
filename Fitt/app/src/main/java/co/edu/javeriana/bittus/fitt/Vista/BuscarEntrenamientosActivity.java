@@ -75,7 +75,11 @@ public class BuscarEntrenamientosActivity extends AppCompatActivity implements T
     }
 
     private void mostrarInfoEntrenamiento(Entrenamiento entrenamiento) {
-            startActivity(new Intent(BuscarEntrenamientosActivity.this, InformacionEntrenamientoActivity.class));
+            Intent intent = new Intent(BuscarEntrenamientosActivity.this, InformacionEntrenamientoActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
+            intent.putExtras(bundle);
+            startActivity(intent);
     }
 
 

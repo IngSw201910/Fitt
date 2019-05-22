@@ -6,12 +6,79 @@
     android:layout_height="match_parent"
     tools:context=".Vista.InformacionEntrenamientoActivity">
 
+    <RatingBar
+        android:id="@+id/ratingBarEntrenamiento"
+        android:layout_width="244dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="false"
+        android:isIndicator="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <ImageView
+        android:id="@+id/imageViewPerfilCreador"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/tituloBuscarRutina2"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/imageButtonAdoptar"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:tint="@color/verdeFitt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@id/textViewNombreCreador"
+        app:srcCompat="@drawable/agregar" />
+
     <TextView
-        android:id="@+id/textView8"
-        android:layout_width="71dp"
+        android:id="@+id/textView35"
+        android:layout_width="86dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Dificultad:"
+        android:textColor="#4BC6AA"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDuracion" />
+
+    <ImageButton
+        android:id="@+id/imageButtonVerEjerciciosEntrenamiento"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:tint="@color/verdeBotones"
+        app:layout_constraintBottom_toTopOf="@+id/textView36"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:srcCompat="@drawable/siguiente" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
         android:text="Nombre:"
         android:textColor="#4BC6AA"
         android:textSize="16sp"
@@ -20,7 +87,7 @@
 
     <TextView
         android:id="@+id/textView22"
-        android:layout_width="85dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="16dp"
@@ -32,7 +99,7 @@
 
     <TextView
         android:id="@+id/textView34"
-        android:layout_width="77dp"
+        android:layout_width="86dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="16dp"
@@ -43,20 +110,39 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewDificultad" />
 
     <TextView
-        android:id="@+id/textView33"
+        android:id="@+id/textViewNombreCreador"
         android:layout_width="77dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
-        android:text="Dificultad:"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Nombre"
+        android:textAlignment="center"
+        android:textColor="#4BC6AA"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewPerfilCreador" />
+
+    <TextView
+        android:id="@+id/textView36"
+        android:layout_width="77dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Ejercicios"
+        android:textAlignment="center"
         android:textColor="#4BC6AA"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDuracion" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline6" />
 
     <TextView
         android:id="@+id/textView31"
-        android:layout_width="77dp"
+        android:layout_width="86dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginTop="16dp"
@@ -89,7 +175,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="nombreRutina"
+        android:text="duracion"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
         app:layout_constraintStart_toEndOf="@+id/textView31"
@@ -135,7 +221,7 @@
         android:text="dificultad"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toEndOf="@+id/textView33"
+        app:layout_constraintStart_toEndOf="@+id/textView35"
         app:layout_constraintTop_toBottomOf="@+id/textViewDuracion" />
 
     <TextView
@@ -143,7 +229,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="8dp"
         android:text="nombreEntrenamiento"
         android:textSize="16sp"
@@ -163,7 +249,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="428dp" />
+        app:layout_constraintGuide_begin="399dp" />
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier7"
@@ -172,14 +258,15 @@
         app:barrierDirection="top" />
 
     <ListView
+        android:id="@+id/listViewResenas"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toTopOf="@+id/barrier7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline7" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarEntrenamiento" />
 </android.support.constraint.ConstraintLayout>

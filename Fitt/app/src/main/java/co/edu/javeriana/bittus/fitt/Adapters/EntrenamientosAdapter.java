@@ -64,7 +64,7 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         info.setTag(position);
 
         RatingBar ratingBar = view.findViewById(R.id.ratingBarEntrenamiento);
-        ratingBar.setRating(entrenamiento.calcularRating(entrenamiento));
+        ratingBar.setRating(entrenamiento.calcularRating());
         
 
         adoptar.setOnClickListener(new View.OnClickListener() {
