@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/solEntrButton"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0C009688">
@@ -39,5 +40,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:src="@drawable/nuevoentrenador_image" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/textView8"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:onClick="goToBuscarEntrenador"
+        android:text="@string/solicitarEntrenador_button" />
 
 </RelativeLayout>

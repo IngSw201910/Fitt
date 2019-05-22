@@ -35,6 +35,7 @@
     <!--Strings activity_pop_solicitarentrenador.xml-->
     <string name="solicitarEntrenador_name">Al parecer no tienes entrenador</string>
     <string name="solicitarEntrenador_descripccion">Para acceder a esta función necesitas un entrenador, agrega a uno ahora.</string>
+    <string name="solicitarEntrenador_button">Buscar Entrenador</string>
     <!--Your comment-->
 
     <string name="google_places_key">AIzaSyCfgUbdpuSBiocdZjspf77fcGavcnDVv4g</string>
