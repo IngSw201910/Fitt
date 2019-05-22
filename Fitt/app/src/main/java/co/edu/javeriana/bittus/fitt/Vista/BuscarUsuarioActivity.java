@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.ImageButton;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -100,7 +101,11 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
                     listUsuarios.add(aux);
                     //Log.i("Prueba", singleSnapshot.getValue(Usuario.class).getDireccionFoto());
                 }
-                adapterUsuarios.notifyDataSetChanged();
+                if(listUsuarios!=null) {
+                    adapterUsuarios.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(BuscarUsuarioActivity.this, "No hay usuarios en el sistema", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
