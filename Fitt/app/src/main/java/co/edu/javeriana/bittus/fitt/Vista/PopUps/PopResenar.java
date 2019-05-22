@@ -40,11 +40,7 @@ import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
 public class PopResenar extends Activity {
 
-    FirebaseDatabase database;
-    DatabaseReference myRef;
-    private FirebaseUser mAuth;
     private Usuario usuario;
-
     private TextView nombreUsuario;
     private ImageView fotoUsuario;
     private RatingBar calificacion;

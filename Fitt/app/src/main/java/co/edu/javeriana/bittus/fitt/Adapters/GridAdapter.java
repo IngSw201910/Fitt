@@ -10,23 +10,27 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Parque;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsSebastian;
 
 public class GridAdapter extends BaseAdapter {
 
     Context context;
-    private final List<Bitmap> imagenes;
+    private Parque parque;
     View view;
     LayoutInflater layoutInflater;
 
-    public GridAdapter(Context context, List<Bitmap> imagenes) {
+    public GridAdapter(Context context, Parque parque) {
         this.context = context;
-        this.imagenes = imagenes;
+        this.parque = parque;
     }
 
     @Override
     public int getCount() {
-        return imagenes.size();
+        return parque.getImagenes().size();
     }
 
     @Override
@@ -50,7 +54,7 @@ public class GridAdapter extends BaseAdapter {
         }
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.ImagenParque);
-        imageView.setImageBitmap(imagenes.get(i));
+        PersistenciaFirebase.descargarFotoYPonerEnImageView(parque.getImagenes().get(i),imageView);
         return convertView;
     }
 }

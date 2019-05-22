@@ -13,6 +13,7 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 
 public class ReseñaAdaptador extends BaseAdapter {
 
@@ -51,11 +52,13 @@ public class ReseñaAdaptador extends BaseAdapter {
         RatingBar calificacion = (RatingBar) vista.findViewById(R.id.ratingBarSP);
         ImageView fotoUsuario = (ImageView) vista.findViewById(R.id.imageViewFotoUsuarioRP);
 
-        nombreUsuario.setText(reseñas.get(i).getUsuario().getNombre());
-        fecha.setText(reseñas.get(i).getFecha().toString());
-        comentario.setText(reseñas.get(i).getReseña());
-        calificacion.setRating(reseñas.get(i).getCalificacion());
-        /*fotoUsuario.setImageBitmap(reseñas.get(i).getUsuario().);*/
+        if (!reseñas.isEmpty()) {
+            nombreUsuario.setText(reseñas.get(i).getUsuario().getNombre());
+            fecha.setText(reseñas.get(i).getFecha().toString());
+            comentario.setText(reseñas.get(i).getReseña());
+            calificacion.setRating(reseñas.get(i).getCalificacion());
+            PersistenciaFirebase.descargarFotoYPonerEnImageView(reseñas.get(i).getUsuario().getDireccionFoto(), fotoUsuario);
+        }
         return null;
     }
 }
