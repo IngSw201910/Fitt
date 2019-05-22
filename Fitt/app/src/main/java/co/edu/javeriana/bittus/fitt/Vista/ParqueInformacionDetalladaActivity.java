@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -31,14 +30,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.GridAdapter;
-import co.edu.javeriana.bittus.fitt.Adapters.ReseñaParquesAdaptador;
+import co.edu.javeriana.bittus.fitt.Adapters.ReseñaAdaptador;
 import co.edu.javeriana.bittus.fitt.Modelo.Parque;
-import co.edu.javeriana.bittus.fitt.Modelo.ReseñaParque;
+import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
-import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
-import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopResenarParque;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopResenar;
 
 public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
 
@@ -96,8 +94,8 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             gridView.setAdapter(gridAdapter);
             Toast.makeText(ParqueInformacionDetalladaActivity.this, park.getReseñas().size(), Toast.LENGTH_LONG).show();
             Toast.makeText(ParqueInformacionDetalladaActivity.this, "ok", Toast.LENGTH_LONG).show();
-            ReseñaParquesAdaptador reseñaParquesAdaptador = new ReseñaParquesAdaptador(this, park.getReseñas());
-            reseñas.setAdapter(reseñaParquesAdaptador);
+            ReseñaAdaptador reseñaAdaptador = new ReseñaAdaptador(this, park.getReseñas());
+            reseñas.setAdapter(reseñaAdaptador);
             calificacion.setRating(obtenercalificacion());
             System.out.println(obtenercalificacion());
         }
@@ -134,10 +132,11 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         añadirReseña.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenarParque.class);
+                Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenar.class);
                 Bundle bundle = new Bundle();
                 bundle.putDouble("latitud", latitud);
                 bundle.putDouble("longitud", longitud);
+
                 bundle.putString("nombreParque", nombreParque.getText().toString());
                 intent.putExtra("bundle", bundle);
                 startActivity(intent);
@@ -218,7 +217,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
     public float obtenercalificacion() {
         float promedio = 0;
         if (park!= null){
-            for (ReseñaParque reseña : park.getReseñas()){
+            for (Reseña reseña : park.getReseñas()){
                 promedio = promedio + reseña.getCalificacion();
             }
             promedio = promedio/park.getReseñas().size();

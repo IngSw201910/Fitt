@@ -27,13 +27,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Parque;
-import co.edu.javeriana.bittus.fitt.Modelo.ReseñaParque;
+import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
-import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
-public class PopResenarParque extends Activity {
+public class PopResenar extends Activity {
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -52,13 +51,13 @@ public class PopResenarParque extends Activity {
     private double latitud;
     private Parque park;
     private Date fecha;
-
+    private Bundle bundleParques;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop_resenar_parque);
+        setContentView(R.layout.activity_pop_resenar);
 
         nombreUsuario = (TextView) findViewById(R.id.textViewNombreUsuario);
         fotoUsuario = (ImageView) findViewById(R.id.imageViewFP);
@@ -67,17 +66,28 @@ public class PopResenarParque extends Activity {
         botonCancelar = (Button) findViewById(R.id.buttonCancelarReseña);
         botonPublicar = (Button) findViewById(R.id.buttonPublicarReseña);
 
-        Bundle bundle = getIntent().getBundleExtra("bundle");
-        longitud = bundle.getDouble("longitud");
-        latitud = bundle.getDouble("latitud");
-        nombreParque = bundle.getString("nombreParque");
+
+        //el bundle deberia tener como llave "parquesReseña" o algo asi, haciendo referencia a lo que pasa, men pa sidoso
+        bundleParques = getIntent().getBundleExtra("bundle");
+
+        //con esto me aseguro que si lo llaman desde lo del parque va a ser una reseña de un parque, pero no deberia ser así, todos esos metodos que instancian un parque deberia hacerlos desde donde los llamos, esta clase solo instancia reseñas y nada mas
+        if(bundleParques!=null){
+            longitud = bundleParques.getDouble("longitud");
+            latitud = bundleParques.getDouble("latitud");
+            nombreParque = bundleParques.getString("nombreParque");
+        }
+
+
 
         park = null;
         fecha = Calendar.getInstance().getTime();
 
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios()).child(mAuth.getUid());
+        //es RUTA_USUARIOS
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+
+
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -97,28 +107,29 @@ public class PopResenarParque extends Activity {
         botonPublicar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                buscarParque();
-                if (park!=null){
-                    ReseñaParque reseñaParque = new ReseñaParque(usuario, reseña.getText().toString(),fecha.toString(), calificacion.getRating());
-                    park.getReseñas().add(reseñaParque);
-                    agregarReseñaParque();
-                    finish();
-                }
-                else{
-                    Parque nuevoParque = new Parque(nombreParque, (float) 2.0,latitud, longitud);
-                    subirParque(nuevoParque);
-                    park = nuevoParque;
-                    ReseñaParque reseñaParque = new ReseñaParque(usuario, reseña.getText().toString(),fecha.toString(), calificacion.getRating());
-                    park.getReseñas().add(reseñaParque);
-                    agregarReseñaParque();
-                    finish();
+                //lo mismo que dije arriba
+                if(bundleParques!=null){
+                    buscarParque();
+                    if (park!=null){
+                        Reseña reseña = new Reseña(usuario, PopResenar.this.reseña.getText().toString(),fecha.toString(), calificacion.getRating());
+                        park.getReseñas().add(reseña);
+                        agregarReseñaParque();
+                    }
+                    else{
+                        Parque nuevoParque = new Parque(latitud+" "+longitud, (float) 2.0,latitud, longitud);
+                        subirParque(nuevoParque);
+                        park = nuevoParque;
+                        Reseña reseña = new Reseña(usuario, PopResenar.this.reseña.getText().toString(),fecha.toString(), calificacion.getRating());
+                        park.getReseñas().add(reseña);
+                        agregarReseñaParque();
+                    }
                 }
 
             }
         });
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        //es addListenerForSingleValueEvent no el otro o sino se va a poner a repetir este metodo una y otra vez
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 usuario = dataSnapshot.getValue(Usuario.class);
@@ -131,7 +142,7 @@ public class PopResenarParque extends Activity {
             }
         });
     }
-
+        //esto no deberia ir aca
     public void subirParque (Parque parque){
         almacenarInformacionParque(RutasBaseDeDatos.getRutaParques(),parque);
 
@@ -146,7 +157,7 @@ public class PopResenarParque extends Activity {
         myRef.setValue(parque);
         return key;
     }
-
+        //por dos
     public void buscarParque() {
         myRef = database.getReference(RutasBaseDeDatos.getRutaParques());
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -156,7 +167,7 @@ public class PopResenarParque extends Activity {
                     Parque parque = singleSnapshot.getValue(Parque.class);
                     Log.i("aiuda", "Encontró usuario: " + parque.getLatitud());
                     if (longitud == parque.getLongitud() &&  latitud == parque.getLatitud()) {
-                        Toast.makeText(PopResenarParque.this, "El parque si existe", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PopResenar.this, "El parque si existe", Toast.LENGTH_SHORT).show();
                         park = parque;
                         break;
                     }
@@ -168,7 +179,7 @@ public class PopResenarParque extends Activity {
             }
         });
     }
-
+        //esto hagalo en la clase que llamo, utilizando el metodo onActivityResult sidoso, mire mis popUps
     public void agregarReseñaParque() {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         rootRef.child("Parques").child(nombreParque).setValue(park);

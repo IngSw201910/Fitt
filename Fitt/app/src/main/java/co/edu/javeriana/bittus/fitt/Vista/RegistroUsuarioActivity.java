@@ -116,11 +116,24 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
                     PersistenciaFirebase.almacenarInformacionConRuta(RutasBaseDeDatos.RUTA_USUARIOS+user.getUid(), usuarioNuevo);
                     Uri uriFoto = UtilsMiguel.getImageUri(RegistroUsuarioActivity.this,bitmapFoto, user.getUid());
                     PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS, user.getUid(), uriFoto);
-                    Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO,Toast.LENGTH_LONG).show();
 
 
 
-                    startActivity(intentMenuPrincipal);
+                    if(esEntrenador){
+                        Intent intent = new Intent(RegistroUsuarioActivity.this, RegistroEntrenadorActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, usuarioNuevo);
+                        intent.putExtras(bundle);
+                        firebaseAuth.removeAuthStateListener(mAuthListener);
+                        startActivity(intent);
+                    }else{
+                        intentMenuPrincipal = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
+                        Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO,Toast.LENGTH_LONG).show();
+                        firebaseAuth.removeAuthStateListener(mAuthListener);
+                        startActivity(intentMenuPrincipal);
+                        finish();
+                    }
+
                 }
             }
         };
@@ -227,23 +240,8 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             usuarioNuevo = new Usuario(nombre,correo,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
 
 
-            if(esEntrenador){
-                Intent intent = new Intent(RegistroUsuarioActivity.this, RegistroEntrenadorActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, usuarioNuevo);
 
-                startActivity(intent);
-            }
-            else{
-                intentMenuPrincipal = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(StringsMiguel.LLAVE_USUARIO,usuarioNuevo);
-                intentMenuPrincipal.putExtras(bundle);
-
-
-
-
-                firebaseAuth.createUserWithEmailAndPassword(correo, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            firebaseAuth.createUserWithEmailAndPassword(correo, contraseña).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
@@ -255,11 +253,11 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
                         }
 
                     }
-                });
+            });
 
 
 
-            }
+
 
 
 

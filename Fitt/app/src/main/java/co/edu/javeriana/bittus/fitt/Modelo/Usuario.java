@@ -7,18 +7,21 @@ import java.util.List;
 
 public class Usuario implements Serializable {
 
-    private List<Entrenamiento> entrenamientoList;
-    private String nombre;
-    private String id;
-    private String correo;
-    private String direccionFoto;
-    private Date fechaNacimiento;
-    private String sexo;
-    private float altura;
-    private float peso;
-    private List<Usuario> seguidosList;
-    private List<Usuario> seguidoresList;
-    private boolean privacidad;
+
+    protected List<Entrenamiento> entrenamientoList;
+    protected String nombre;
+    protected String id;
+    protected String correo;
+    protected String direccionFoto;
+    protected Date fechaNacimiento;
+    protected String sexo;
+    protected float altura;
+    protected float peso;
+    protected List<Usuario> seguidosList;
+    protected List<Usuario> seguidoresList;
+    protected boolean privacidad;
+
+
 
 
 
@@ -27,6 +30,8 @@ public class Usuario implements Serializable {
         this.correo = correo;
         this.id = id;
     }
+
+
 
 
     public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {

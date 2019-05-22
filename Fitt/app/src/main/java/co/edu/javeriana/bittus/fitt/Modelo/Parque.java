@@ -8,7 +8,7 @@ public class Parque implements Serializable {
 
     private String nombreParqueFire;
     private List<String> imagenes;
-    private  List<ReseñaParque> reseñas;
+    private  List<Reseña> reseñas;
     private float calificación;
     private double longitud;
     private double latitud;
@@ -16,7 +16,7 @@ public class Parque implements Serializable {
     public Parque(String nombreParqueFire, float calificación, double latitud, double longitud) {
         this.nombreParqueFire = nombreParqueFire;
         imagenes = new ArrayList<String>();
-        reseñas = new ArrayList<ReseñaParque>();
+        reseñas = new ArrayList<Reseña>();
         this.calificación = calificación;
         this.latitud = latitud;
         this.longitud = longitud;
@@ -42,11 +42,11 @@ public class Parque implements Serializable {
         this.imagenes = imagenes;
     }
 
-    public List<ReseñaParque> getReseñas() {
+    public List<Reseña> getReseñas() {
         return reseñas;
     }
 
-    public void setReseñas(List<ReseñaParque> reseñas) {
+    public void setReseñas(List<Reseña> reseñas) {
         this.reseñas = reseñas;
     }
 
