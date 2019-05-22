@@ -122,6 +122,9 @@
         <activity
             android:name=".Vista.PopUps.PopEditarEjercicioEntrenamientoDescanso"
             android:theme="@style/AppTheme.CustomThemePopUp" />
+        <activity
+            android:name=".Vista.PopUps.PopSolicitarEntrenador"
+            android:theme="@style/AppTheme.CustomThemePopUp" />
 
         <meta-data
             android:name="preloaded_fonts"
