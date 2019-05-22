@@ -11,17 +11,17 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import co.edu.javeriana.bittus.fitt.Modelo.ReseñaParque;
+import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
 import co.edu.javeriana.bittus.fitt.R;
 
-public class ReseñaParquesAdaptador extends BaseAdapter {
+public class ReseñaAdaptador extends BaseAdapter {
 
     private static LayoutInflater inflater = null;
 
     Context context;
-    List<ReseñaParque> reseñas;
+    List<Reseña> reseñas;
 
-    public ReseñaParquesAdaptador(Context context, List<ReseñaParque> reseñas) {
+    public ReseñaAdaptador(Context context, List<Reseña> reseñas) {
         this.context = context;
         this.reseñas = reseñas;
         inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
