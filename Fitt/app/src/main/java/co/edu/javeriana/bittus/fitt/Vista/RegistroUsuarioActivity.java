@@ -112,7 +112,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    usuarioNuevo.setDireccionFoto(RutasBaseDeDatos.RUTA_USUARIOS+user.getUid());
+                    usuarioNuevo.setDireccionFoto(RutasBaseDeDatos.RUTA_FOTO_USUARIOS+user.getUid());
                     PersistenciaFirebase.almacenarInformacionConRuta(RutasBaseDeDatos.RUTA_USUARIOS+user.getUid(), usuarioNuevo);
                     Uri uriFoto = UtilsMiguel.getImageUri(RegistroUsuarioActivity.this,bitmapFoto, user.getUid());
                     PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS, user.getUid(), uriFoto);

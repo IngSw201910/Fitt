@@ -13,7 +13,10 @@ import android.widget.ListView;
 import android.widget.ImageButton;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,15 +39,27 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
     private ImageButton ImageButtonBuscarUsuarios;
     private EditText EditTextNombreUsuarioABuscar;
 
+    private List<String> uidsUsuarios;
+
     private Usuario usuarioSeleccionado;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
+    private FirebaseUser mAuth;
+
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_usuario);
+
+
+        uidsUsuarios = new ArrayList<>();
+        mAuth = FirebaseAuth.getInstance().getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+
 
         listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
         listUsuarios = new ArrayList<Usuario>();
@@ -53,19 +68,41 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
         EditTextNombreUsuarioABuscar.addTextChangedListener(this);
 
-        adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios);
+        adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios );
 
-        listViewUsuarios.setAdapter(adapterUsuarios);
+
+
+
 
         listViewUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                usuarioSeleccionado = listUsuarios.get(position);
 
 
+                //Si el usuario no lo sigue
+                Log.i("entra","entra");
+
+                abrirSiguienteVentana(listUsuarios.get(position), uidsUsuarios.get(position));
 
             }
         });
+        listViewUsuarios.setAdapter(adapterUsuarios);
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                usuario = dataSnapshot.getValue(Usuario.class);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         database = FirebaseDatabase.getInstance();
 
@@ -80,18 +117,41 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
     }
 
+    public boolean usuarioSeguido(){
+        for(String usr: usuario.getSeguidosList()){
+            if(mAuth.getUid().equals(usr)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void abrirSiguienteVentana(Usuario usuario, String uidUsuario) {
+        Intent intent = new Intent(BuscarUsuarioActivity.this, MostrarUsuarioActivity.class);
+
+        intent.putExtra("objectData",usuario);
+        intent.putExtra("llaveUsuario", uidUsuario);
+
+        startActivity(intent);
+    }
+
+
     private void descargarUsuarios (){
 
-      myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios());
+      myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
                     Usuario aux =singleSnapshot.getValue(Usuario.class);
+                    uidsUsuarios.add(singleSnapshot.getKey());
                     listUsuarios.add(aux);
-                    //Log.i("Prueba", singleSnapshot.getValue(Usuario.class).getDireccionFoto());
                 }
-                adapterUsuarios.notifyDataSetChanged();
+                if(listUsuarios!=null) {
+                    adapterUsuarios.notifyDataSetChanged();
+                }else{
+                    Toast.makeText(BuscarUsuarioActivity.this, "No hay usuarios en el sistema", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

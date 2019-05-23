@@ -1,6 +1,8 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -29,19 +32,29 @@ import com.google.firebase.database.ValueEventListener;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase.descargarFotoYPonerEnImageView;
+
 public class PerfilFragment extends Fragment {
 
+
+    ImageView fotoPerfil;
 
     ImageButton editarNombre;
     ImageButton editarCorreo;
     ImageButton ediarNacimiento;
     ImageButton editarPeso;
     ImageButton editarAltura;
+    ImageButton cambiarFoto;
+    ImageButton tomarFoto;
     Button seguidores;
     Button siguiendo;
 
@@ -53,6 +66,8 @@ public class PerfilFragment extends Fragment {
     EditText altura;
 
     CheckBox privacidad;
+
+    private Bitmap bitmapFoto;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -73,7 +88,7 @@ public class PerfilFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios()).child(mAuth.getUid());
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
 
 
@@ -84,6 +99,9 @@ public class PerfilFragment extends Fragment {
         editarAltura =v.findViewById(R.id.imageButtonEditarAltura);
         seguidores =v.findViewById(R.id.buttonSeguidoresUsuario);
         siguiendo =v.findViewById(R.id.buttonSiguiendo);
+        fotoPerfil= v.findViewById(R.id.imageViewFotoPerfil);
+        cambiarFoto= v.findViewById(R.id.imageButtonCargarFotoPerfil);
+        tomarFoto= v.findViewById(R.id.imageButtonTomarFoto);
 
         nombre =v.findViewById(R.id.editTextNombre);
         nombre.setEnabled(false);
@@ -115,13 +133,42 @@ public class PerfilFragment extends Fragment {
                 correo.setText(usuario.getCorreo());
                 peso.setText(String.valueOf(usuario.getPeso()));
                 altura.setText(String.valueOf(usuario.getAltura()));
-                nacimiento.setText(String.valueOf(usuario.getFechaNacimiento()));
+                Date fecha=new Date();
+                fecha.setYear(usuario.getFechaNacimiento().getYear());
+                fecha.setMonth(usuario.getFechaNacimiento().getMonth());
+                fecha.setDate(usuario.getFechaNacimiento().getDate());
+                nacimiento.setText(fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear());
+                descargarFotoYPonerEnImageView(usuario.getDireccionFoto(),fotoPerfil);
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        cambiarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarFoto();
+                Uri uriFoto = UtilsMiguel.getImageUri(getActivity(),bitmapFoto, mAuth.getUid());
+                PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS, mAuth.getUid(), uriFoto);
+                usuario.setDireccionFoto(RutasBaseDeDatos.RUTA_USUARIOS+mAuth.getUid());
+
+                myRef.setValue(usuario);
+            }
+        });
+
+        tomarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tomarFoto();
+                Uri uriFoto = UtilsMiguel.getImageUri(getActivity(),bitmapFoto, mAuth.getUid());
+                PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS, mAuth.getUid(), uriFoto);
+                usuario.setDireccionFoto(RutasBaseDeDatos.RUTA_USUARIOS+mAuth.getUid());
+
+                myRef.setValue(usuario);
             }
         });
 
@@ -282,7 +329,7 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent =new Intent(getActivity(), SeguidoresActivity.class);
-               // intent.putExtra("listaSeguidores",);
+                intent.putExtra("listaSeguidores", (Serializable) usuario.getSeguidoresList());
                 startActivity(intent);
             }
         });
@@ -292,7 +339,7 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent =new Intent(getActivity(), SeguidosActivity.class);
-                // intent.putExtra("listaSeguidos",);
+                 intent.putExtra("listaSeguidos", (Serializable) usuario.getSeguidosList());
                 startActivity(intent);
             }
         });
@@ -317,7 +364,7 @@ public class PerfilFragment extends Fragment {
 
     private void descargarUsuarios (){
 
-        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios());
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -336,6 +383,15 @@ public class PerfilFragment extends Fragment {
                 Log.w("Error:", "Error en la consulta", databaseError.toException());
             }
         });
+    }
+
+    private void cargarFoto() {
+        Utils.cargarFotoDesdeCamara(getActivity(), UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO);
+
+    }
+
+    private void tomarFoto() {
+        Utils.tomarFotoDesdeCamara(getActivity(), UtilsMiguel.REQUEST_CODE_TAKE_PHOTO);
     }
 
 

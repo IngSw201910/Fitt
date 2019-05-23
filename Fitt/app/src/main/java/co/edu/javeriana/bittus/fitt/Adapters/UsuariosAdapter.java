@@ -12,15 +12,27 @@ import android.widget.Filter;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Filtros.UsuarioFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Vista.BuscarUsuarioActivity;
 import co.edu.javeriana.bittus.fitt.Vista.MostrarUsuarioActivity;
 import co.edu.javeriana.bittus.fitt.Vista.MostrarUsuarioSeguidoActivity;
+
+import static co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase.descargarFotoYPonerEnImageView;
 
 
 public class UsuariosAdapter extends ArrayAdapter<Usuario> {
@@ -30,6 +42,8 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
     private int resource;
     private Usuario usuarioSeleccionado;
     private UsuarioFiltro usuariosFiltro;
+
+
 
 
     public UsuariosAdapter(@NonNull Context context, int resource, List<Usuario> objects) {
@@ -44,13 +58,15 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
 
+
         if(view == null){
             view = LayoutInflater.from(context).inflate(resource, null);
         }
-        usuarioSeleccionado = listUsuarios.get(position);
-        Usuario usuario = usuarioSeleccionado;
 
-       TextView nombre = view.findViewById(R.id.textNombreBusqueda);
+        usuarioSeleccionado = listUsuarios.get(position);
+        final Usuario usuario = usuarioSeleccionado;
+
+        TextView nombre = view.findViewById(R.id.textNombreBusqueda);
         nombre.setText(usuario.getNombre());
 
         TextView seguidores =view.findViewById(R.id.textSeguidoresBusqueda);
@@ -60,25 +76,13 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
         seguidos.setText(usuario.getSeguidosList().size()+" Seguidos");
 
         ImageView foto = view.findViewById(R.id.imageViewPerfilBusqueda);
-        //INSERTAR IMAGEN!!
+        descargarFotoYPonerEnImageView(usuario.getDireccionFoto(),foto);
 
 
         Button bSeguir =view.findViewById(R.id.buttonSeguirBusqueda);
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Si el usuario no lo sigue
-                Intent intent = new Intent(context, MostrarUsuarioActivity.class);
-                intent.putExtra("objectData",usuarioSeleccionado);
-                context.startActivity(intent);
 
-                //Si el usuario lo sigue
-               /* Intent intent = new Intent(context, MostrarUsuarioSeguidoActivityActivity.class);
-                intent.putExtra("objectData",usuarioSeleccionado);
-                context.startActivity(intent);*/
-            }
-        });
+
 
         return  view;
     }
@@ -92,5 +96,9 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
         return usuariosFiltro;
 
     }
+
+
+
+
 
 }
