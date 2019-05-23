@@ -9,11 +9,13 @@
 
     <ImageView
         android:id="@+id/imageViewFotoUsuarioN"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSeguidoresUN"
         app:layout_constraintEnd_toStartOf="@+id/textViewNombreUsuarioN"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +25,7 @@
         android:id="@+id/textViewNombreUsuarioN"
         android:layout_width="170dp"
         android:layout_height="45dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:text="NombreUsuario"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,32 +36,33 @@
         android:layout_width="105dp"
         android:layout_height="54dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="112dp"
         android:text="Seguidores"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoUsuarioN" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreUsuarioN" />
 
     <Button
         android:id="@+id/buttonSeguidosUN"
         android:layout_width="105dp"
         android:layout_height="54dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="8dp"
         android:text="Seguidos"
         app:layout_constraintEnd_toStartOf="@+id/buttonSeguirUN"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toEndOf="@+id/buttonSeguidoresUN"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoUsuarioN" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreUsuarioN" />
 
     <Button
         android:id="@+id/buttonSeguirUN"
         android:layout_width="105dp"
         android:layout_height="54dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="24dp"
         android:text="Seguir"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewFotoUsuarioN" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreUsuarioN" />
 
     <TextView
         android:id="@+id/textView2"
