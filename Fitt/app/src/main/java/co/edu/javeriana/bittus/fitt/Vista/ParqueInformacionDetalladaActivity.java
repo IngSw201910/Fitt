@@ -109,7 +109,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         buscarParque();
         if (park!=null){
             //sacar imagenes de la base de datos
-            GridAdapter gridAdapter = new GridAdapter(this, park);
+            GridAdapter gridAdapter = new GridAdapter(this, park.getImagenes());
             gridView.setAdapter(gridAdapter);
             /*Toast.makeText(ParqueInformacionDetalladaActivity.this, park.getReseñas().size(), Toast.LENGTH_LONG).show();
             Toast.makeText(ParqueInformacionDetalladaActivity.this, "ok", Toast.LENGTH_LONG).show();*/
@@ -170,7 +170,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             String ruta =RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire()+"/"+formatter.format(date);
             //subir ruta foto
             subirRutaFoto (ruta);
-            GridAdapter gridAdapter = new GridAdapter(this,  park);
+            GridAdapter gridAdapter = new GridAdapter(this,  park.getImagenes());
             gridView.setAdapter(gridAdapter);
         }else if(requestCode == REQUEST_CODE_UPLOAD_PHOTO  && resultCode==RESULT_OK){
             Uri path = data.getData();
@@ -183,7 +183,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                 String ruta =RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire()+"/"+formatter.format(date);
                 //subir ruta foto
                 subirRutaFoto (ruta);
-                GridAdapter gridAdapter = new GridAdapter(this,  park);
+                GridAdapter gridAdapter = new GridAdapter(this,  park.getImagenes());
                 gridView.setAdapter(gridAdapter);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -192,6 +192,8 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         } else if(requestCode == Utils.REQUEST_CODE_RESENA  && resultCode==RESULT_OK){
             Reseña reseñarecibida = (Reseña) data.getExtras().getSerializable(StringsSebastian.LLAVE_RESENA);
             subirReseña(reseñarecibida);
+            ReseñaAdaptador reseñaAdaptador = new ReseñaAdaptador(this, park.getReseñas());
+            reseñas.setAdapter(reseñaAdaptador);
         }
 
     }
