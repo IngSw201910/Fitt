@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
@@ -126,7 +127,7 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
             entrenamiento.setEjercicioEntrenamientoList(entrenamientoList);
             List<Reseña> listaReseñas = entrenamiento.getReseñas();
 
-            listaReseñas.add(new Reseña(null, "prueba2", "hoy", 1.5f));
+            listaReseñas.add(new Reseña(null, "prueba2", new Date(), 1.5f));
 
             String key = PersistenciaFirebase.almacenarInformacionConKey(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+user.getUid()+"/", entrenamiento);
             if (entrenamiento.isPublica())

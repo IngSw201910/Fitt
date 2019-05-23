@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -16,6 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.io.Serializable;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
@@ -64,7 +67,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
         imageViewFotoCreador = (ImageView) findViewById(R.id.imageViewPerfilCreador);
 
         imageButtonAdoptar = (ImageButton) findViewById(R.id.imageButtonAdoptar);
-        imageButtonAdoptar = (ImageButton) findViewById(R.id.imageButtonVerEjerciciosEntrenamiento);
+        imageButtonEjercicios = (ImageButton) findViewById(R.id.imageButtonVerEjerciciosEntrenamiento);
 
         ratingBarEntrenamiento = (RatingBar) findViewById(R.id.ratingBarEntrenamiento);
 
@@ -122,6 +125,34 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
 
             }
         });
+        imageButtonAdoptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adoptar();
+            }
+        });
+        imageButtonEjercicios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ejercicios();
+            }
+        });
+    }
 
+    private void ejercicios() {
+        Intent intent = new Intent(InformacionEntrenamientoActivity.this, InformacionEntrenamientoEjerciciosActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
+        intent.putExtras(bundle);
+        startActivity(intent);
+
+    }
+
+    private void adoptar() {
+        Intent intent = new Intent(InformacionEntrenamientoActivity.this, AdoptarEntrenamientoActivity.class);
+        intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
+        startActivity(intent);
+        finish();
     }
 }

@@ -30,7 +30,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Vista.InformacionEntrenamientoActivity"></activity>
+        <activity android:name=".Vista.InformacionEntrenamientoEjerciciosActivity"></activity>
+        <activity android:name=".Vista.InformacionEntrenamientoActivity" />
         <activity
             android:name=".Vista.PopUps.PopResenar"
             android:theme="@style/AppTheme.CustomThemePopUp" />
