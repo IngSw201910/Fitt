@@ -24,7 +24,8 @@ public class Parque implements Serializable {
     }
 
     public Parque() {
-
+        reseñas = new ArrayList<>();
+        imagenes = new ArrayList<>();
     }
 
     public String getNombreParqueFire() {

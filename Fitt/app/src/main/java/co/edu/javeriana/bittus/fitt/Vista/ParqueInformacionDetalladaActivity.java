@@ -64,7 +64,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
     private DatabaseReference myRef;
     private FirebaseUser mAuth;
     private Usuario usuario;
-
+    private ReseñaAdaptador reseñaAdaptador;
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 11;
     public static final int REQUEST_CODE_UPLOAD_PHOTO = 12;
@@ -115,7 +115,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             gridView.setAdapter(gridAdapter);
             /*Toast.makeText(ParqueInformacionDetalladaActivity.this, park.getReseñas().size(), Toast.LENGTH_LONG).show();
             Toast.makeText(ParqueInformacionDetalladaActivity.this, "ok", Toast.LENGTH_LONG).show();*/
-            ReseñaAdaptador reseñaAdaptador = new ReseñaAdaptador(this, park.getReseñas());
+            reseñaAdaptador = new ReseñaAdaptador(this, R.layout.elemento_lista_resena_parque, park.getReseñas());
             reseñas.setAdapter(reseñaAdaptador);
             calificacion.setRating(obtenercalificacion());
         }
@@ -152,6 +152,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         añadirReseña.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 iniciarPopupParque();
             }
         });
@@ -194,8 +195,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         } else if(requestCode == Utils.REQUEST_CODE_RESENA  && resultCode==RESULT_OK){
             Reseña reseñarecibida = (Reseña) data.getExtras().getSerializable(StringsSebastian.LLAVE_RESENA);
             subirReseña(reseñarecibida);
-            ReseñaAdaptador reseñaAdaptador = new ReseñaAdaptador(this, park.getReseñas());
-            reseñas.setAdapter(reseñaAdaptador);
+            reseñaAdaptador.notifyDataSetChanged();
         }
 
     }
