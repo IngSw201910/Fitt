@@ -30,6 +30,8 @@ import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerEntrenamientoRow;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerMisEntrenamientoRow;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
 public class MisEntrenamientosActivity extends AppCompatActivity {
 
@@ -104,9 +106,9 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
                     Entrenamiento entrenamientoEncontrado = singleSnapshot.getValue(Entrenamiento.class);
                     if(entrenamientoEncontrado.getNombre().equals(entrenamiento.getNombre())){
-                            
+                        llave = singleSnapshot.getKey();
+                        abrirEditarEntrenamiento(entrenamiento);
                     }
-
                 }
 
             }
@@ -117,6 +119,16 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void abrirEditarEntrenamiento(Entrenamiento entrenamiento) {
+        Intent intent = new Intent(MisEntrenamientosActivity.this, EditarEntrenamientoActivity.class);
+
+        intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
+        intent.putExtra(StringsMiguel.LLAVE_LLAVE, llave);
+
+        startActivityForResult(intent, Utils.REQUEST_CODE_EDITAR_ENTRENAMIENTO);
 
     }
 

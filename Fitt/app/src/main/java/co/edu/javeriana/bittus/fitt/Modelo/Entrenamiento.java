@@ -25,6 +25,7 @@ public class Entrenamiento implements Serializable {
         this.dificultad = dificultad;
         this.publica = publica;
         this.nombre = nombre;
+        this.duracion = duracion;
 
         ejercicioEntrenamientoList = new ArrayList<EjercicioEntrenamiento>();
         reseñas = new ArrayList<Reseña>();

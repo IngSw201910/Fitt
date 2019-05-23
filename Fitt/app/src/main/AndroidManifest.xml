@@ -45,6 +45,7 @@
         <activity android:name=".Vista.InformacionMiEntrenamientoActivity"/>
         <activity android:name=".Vista.InformacionEntrenamientoReseñarActivity"/>
         <activity android:name=".Vista.Entrenador_miEntrenadorActivity" />
+        <activity android:name=".Vista.EditarEntrenamientoActivity"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
