@@ -22,6 +22,7 @@ public class EntrenamientoTerminadoFragment extends Fragment {
     private FragmentEjercicioRepeticionesListener listener;
 
     private Entrenamiento entrenamiento;
+    private int calorias;
     private String tiempo;
 
     private TextView caloriasTV;
