@@ -19,9 +19,8 @@ import co.edu.javeriana.bittus.fitt.Utilidades.StringsSebastian;
 public class GridAdapter extends BaseAdapter {
 
     Context context;
-    private final List<String> imagenes;
-    View view;
-    LayoutInflater layoutInflater;
+    private  List<String> imagenes;
+    private LayoutInflater thisInflater;
 
     public GridAdapter(Context context, List<String> imagenes) {
         this.context = context;
@@ -35,26 +34,23 @@ public class GridAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return i;
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
 
-        if (layoutInflater == null){
-            layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
         if (convertView == null){
-            convertView=layoutInflater.inflate(R.layout.single_item, null);
+            convertView=thisInflater.inflate(R.layout.single_item, viewGroup, false);
+            ImageView imageView = (ImageView) convertView.findViewById(R.id.ImagenParque);
+            PersistenciaFirebase.descargarFotoYPonerEnImageView(imagenes.get(i),imageView);
         }
 
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.ImagenParque);
-        PersistenciaFirebase.descargarFotoYPonerEnImageView(imagenes.get(i),imageView);
         return convertView;
     }
 }

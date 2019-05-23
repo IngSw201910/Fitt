@@ -65,6 +65,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
     private FirebaseUser mAuth;
     private Usuario usuario;
     private ReseñaAdaptador reseñaAdaptador;
+    private GridAdapter gridAdapter;
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 11;
     public static final int REQUEST_CODE_UPLOAD_PHOTO = 12;
@@ -179,7 +180,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             String ruta =RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire()+"/"+formatter.format(date);
             //subir ruta foto
             subirRutaFoto (ruta);
-            GridAdapter gridAdapter = new GridAdapter(this,  park.getImagenes());
+            gridAdapter = new GridAdapter(this,  park.getImagenes());
             gridView.setAdapter(gridAdapter);
         }else if(requestCode == REQUEST_CODE_UPLOAD_PHOTO  && resultCode==RESULT_OK){
             Uri path = data.getData();
@@ -192,7 +193,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                 String ruta =RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire()+"/"+formatter.format(date);
                 //subir ruta foto
                 subirRutaFoto (ruta);
-                GridAdapter gridAdapter = new GridAdapter(this,  park.getImagenes());
+                gridAdapter = new GridAdapter(this,  park.getImagenes());
                 gridView.setAdapter(gridAdapter);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -232,6 +233,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean encontrado= false;
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Parque parque = singleSnapshot.getValue(Parque.class);
                     Log.i("aiuda", "Encontró usuario: " + parque.getNombreParqueFire());
@@ -240,8 +242,15 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                         park = parque;
                         reseñaAdaptador = new ReseñaAdaptador(ParqueInformacionDetalladaActivity.this, R.layout.elemento_lista_resena_parque, park.getReseñas());
                         reseñas.setAdapter(reseñaAdaptador);
+                        gridAdapter = new GridAdapter(ParqueInformacionDetalladaActivity.this, park.getImagenes());
+                        gridView.setAdapter(gridAdapter);
+                        calificacion.setRating(obtenercalificacion());
+                        encontrado = true;
                         break;
                     }
+                }
+                if (encontrado == false) {
+                    Toast.makeText(ParqueInformacionDetalladaActivity.this, "No hay informacion disponible de este parque", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
