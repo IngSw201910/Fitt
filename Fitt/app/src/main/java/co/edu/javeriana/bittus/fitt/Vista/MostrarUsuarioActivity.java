@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -24,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenador;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 
 import co.edu.javeriana.bittus.fitt.R;
@@ -36,6 +38,7 @@ import static co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase.desca
 public class MostrarUsuarioActivity extends AppCompatActivity {
 
 
+    private Entrenador aux;
     private Usuario item;
     private Usuario usuarioConectado;
 
@@ -58,6 +61,7 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_usuario);
 
+        //aux=(Entrenador) getIntent().getSerializableExtra("objectData");
         item= (Usuario) getIntent().getSerializableExtra("objectData");
         uidUsuario = (String) getIntent().getStringExtra("llaveUsuario");
 
@@ -76,16 +80,19 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
 
                 usuarioConectado = dataSnapshot.getValue(Usuario.class);
                 seguir.setOnClickListener(new View.OnClickListener(){
-                                              @Override
-                                              public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
 
+                        if(SePuedeSeguir()){
+                            seguirUsuario();
+                        }else if(usuarioConectado.validarSeguido(uidUsuario)){
+                            dejarDeSeguir();
+                        }else{
+                            Toast.makeText(MostrarUsuarioActivity.this,"No puede seguirse a si mismo",Toast.LENGTH_SHORT).show();
+                        }
 
-                                                  seguirUsuario();
-
-
-
-                                              }
-                                          }
+                    }
+                }
                 );
             }
 
@@ -106,8 +113,6 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
 
         fotoU= findViewById(R.id.imageViewFotoUsuarioN);
         descargarFotoYPonerEnImageView(item.getDireccionFoto(),fotoU);
-
-
 
 
 
@@ -136,13 +141,33 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
 
     private void seguirUsuario() {
 
-
-
         usuarioConectado.getSeguidosList().add(uidUsuario);
+        Entrenador aux= (Entrenador) usuarioConectado;
         myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 item.getSeguidoresList().add(mAuth.getUid());
+                myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                myRef.setValue(item);
+            }
+        });
+
+    }
+    private boolean SePuedeSeguir(){
+        if(uidUsuario.compareTo(mAuth.getUid())==0){
+            return false;
+        }else if(usuarioConectado.validarSeguido(uidUsuario)){
+            return false;
+        }
+        return true;
+    }
+    private void dejarDeSeguir() {
+
+        usuarioConectado.getSeguidosList().remove(uidUsuario);
+        myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                item.getSeguidoresList().remove(mAuth.getUid());
                 myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
                 myRef.setValue(item);
             }

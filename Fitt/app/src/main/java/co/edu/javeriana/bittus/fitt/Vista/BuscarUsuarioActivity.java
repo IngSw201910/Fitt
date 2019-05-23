@@ -66,6 +66,7 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
         myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
 
+
         listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
         listUsuarios = new ArrayList<Usuario>();
         ImageButtonBuscarUsuarios = (ImageButton) findViewById(R.id.imageButtonBuscarUsuarioSeguidor);
@@ -73,23 +74,7 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
         EditTextNombreUsuarioABuscar.addTextChangedListener(this);
 
-        adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios,new BtnClickListenerSeguir() {
-            @Override
-            public void onBtnClickSeguir(int position) {
-                //positionEditar = position;
-                //item=listUsuarios.get(positionEditar);
-                //uidUsuario=uidsUsuarios.get(positionEditar);
-                //dejarDeSeguir();
-                /*if(!usuario.validarSeguido(uidUsuario)){
-                    seguirUsuario();
-                }else{
-
-                }*/
-
-            }
-        } );
-
-
+        adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios);
 
 
 
@@ -100,8 +85,13 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
                 //Si el usuario no lo sigue
                 Log.i("entra","entra");
-
                 abrirSiguienteVentana(listUsuarios.get(position), uidsUsuarios.get(position));
+
+                /*if(!usuario.validarSeguido(uidUsuario)){
+abrirSiguienteVentanaUS(listUsuarios.get(position), uidsUsuarios.get(position));
+                }else{
+
+                }*/
 
             }
         });
@@ -154,6 +144,15 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
         startActivity(intent);
     }
 
+    private void abrirSiguienteVentanaUS(Usuario usuario, String uidUsuario) {
+        Intent intent = new Intent(BuscarUsuarioActivity.this, MostrarUsuarioSeguidoActivity.class);
+
+        intent.putExtra("objectData",usuario);
+        intent.putExtra("llaveUsuario", uidUsuario);
+
+        startActivity(intent);
+    }
+
 
     private void descargarUsuarios (){
 
@@ -197,7 +196,7 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
     private void seguirUsuario() {
 
         usuario.getSeguidosList().add(uidUsuario);
-        myRef.setValue(usuario, new DatabaseReference.CompletionListener() {
+       myRef.setValue(usuario, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 item.getSeguidoresList().add(mAuth.getUid());

@@ -12,7 +12,7 @@
         android:layout_width="193dp"
         android:layout_height="37dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:focusable="false"
         android:text="Nombre"
@@ -33,38 +33,30 @@
 
     <TextView
         android:id="@+id/textSeguidoresBusqueda"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="23dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Seguidores"
+        android:layout_marginEnd="20dp"
         android:focusable="false"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSeguirBusqueda"
+        android:text="Seguidores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toEndOf="@+id/imageViewPerfilBusqueda"
         app:layout_constraintTop_toBottomOf="@+id/textNombreBusqueda" />
 
     <TextView
         android:id="@+id/textViewSeguidosBusqueda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="22dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:text="Seguidos"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
         android:focusable="false"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSeguirBusqueda"
+        android:text="Seguidos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
         app:layout_constraintStart_toEndOf="@+id/imageViewPerfilBusqueda"
         app:layout_constraintTop_toBottomOf="@+id/textSeguidoresBusqueda" />
 
-    <Button
-        android:id="@+id/buttonSeguirBusqueda"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Seguir"
-        android:focusable="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNombreBusqueda" />
 </android.support.constraint.ConstraintLayout>

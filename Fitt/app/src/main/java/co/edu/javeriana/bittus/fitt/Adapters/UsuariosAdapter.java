@@ -48,12 +48,12 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
 
 
 
-    public UsuariosAdapter(@NonNull Context context, int resource, List<Usuario> objects,BtnClickListenerSeguir listenerSeguir) {
+    public UsuariosAdapter(@NonNull Context context, int resource, List<Usuario> objects) {
         super(context, resource, objects);
         this.listUsuarios = objects;
         this.context = context;
         this.resource = resource;
-        this.mClickListenerSeguir=listenerSeguir;
+
 
     }
 
@@ -82,15 +82,7 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
         descargarFotoYPonerEnImageView(usuario.getDireccionFoto(),foto);
 
 
-        Button bSeguir =view.findViewById(R.id.buttonSeguirBusqueda);
-        bSeguir.setTag(position);
-        bSeguir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mClickListenerSeguir != null)
-                    mClickListenerSeguir.onBtnClickSeguir((Integer) v.getTag());
-            }
-        });
+
 
 
 

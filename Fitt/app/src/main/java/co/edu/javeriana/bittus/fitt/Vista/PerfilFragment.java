@@ -329,6 +329,7 @@ public class PerfilFragment extends Fragment {
 
                 Intent intent =new Intent(getActivity(), SeguidoresActivity.class);
                 intent.putExtra("usuario", (Serializable) usuario);
+                intent.putExtra("id",(Serializable) mAuth.getUid());
                 startActivity(intent);
             }
         });
@@ -339,6 +340,7 @@ public class PerfilFragment extends Fragment {
 
                 Intent intent =new Intent(getActivity(), SeguidosActivity.class);
                  intent.putExtra("usuario", (Serializable) usuario);
+                 intent.putExtra("id",(Serializable) mAuth.getUid());
                 startActivity(intent);
             }
         });
@@ -361,28 +363,6 @@ public class PerfilFragment extends Fragment {
 
     }
 
-    private void descargarUsuarios (){
-
-        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS);
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    Usuario aux =singleSnapshot.getValue(Usuario.class);
-
-                    if(aux.getCorreo().compareTo(mAuth.getEmail())==0){
-
-                    }
-                    //Log.i("Prueba", singleSnapshot.getValue(Usuario.class).getDireccionFoto());
-                }
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("Error:", "Error en la consulta", databaseError.toException());
-            }
-        });
-    }
 
     private void cargarFoto() {
         Utils.cargarFotoDesdeCamara(getActivity(), UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO);

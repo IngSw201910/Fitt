@@ -145,5 +145,14 @@ public class Usuario implements Serializable {
         this.privacidad = privacidad;
     }
 
+    public boolean validarSeguido(String uidUsuario) {
+        for(String usuario: seguidosList){
+            if(usuario.compareTo(uidUsuario)==0){
+                return true;
+            }
+        }
+        return false;
+    }
+
     //usuario cambiado
 }
