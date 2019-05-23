@@ -19,18 +19,18 @@ import co.edu.javeriana.bittus.fitt.Utilidades.StringsSebastian;
 public class GridAdapter extends BaseAdapter {
 
     Context context;
-    private Parque parque;
+    private final List<String> imagenes;
     View view;
     LayoutInflater layoutInflater;
 
-    public GridAdapter(Context context, Parque parque) {
+    public GridAdapter(Context context, List<String> imagenes) {
         this.context = context;
-        this.parque = parque;
+        this.imagenes = imagenes;
     }
 
     @Override
     public int getCount() {
-        return parque.getImagenes().size();
+        return imagenes.size();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class GridAdapter extends BaseAdapter {
         }
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.ImagenParque);
-        PersistenciaFirebase.descargarFotoYPonerEnImageView(parque.getImagenes().get(i),imageView);
+        PersistenciaFirebase.descargarFotoYPonerEnImageView(imagenes.get(i),imageView);
         return convertView;
     }
 }
