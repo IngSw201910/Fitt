@@ -1,15 +1,18 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@IgnoreExtraProperties
 public class Usuario implements Serializable {
 
     private List<Entrenamiento> entrenamientoList;
     private String nombre;
-    private String id;
+    @Exclude private String id;
     private String correo;
     private String direccionFoto;
     private Date fechaNacimiento;
@@ -49,11 +52,11 @@ public class Usuario implements Serializable {
         seguidosList = new ArrayList<Usuario>();
         seguidoresList = new ArrayList<Usuario>();
     }
-
+    @Exclude
     public String getId() {
         return id;
     }
-
+    @Exclude
     public void setId(String id) {
         this.id = id;
     }

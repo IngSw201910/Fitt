@@ -42,12 +42,8 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
     private int resource;
     private Usuario usuarioSeleccionado;
     private UsuarioFiltro usuariosFiltro;
-    private Usuario usuarioConectado;
-    FirebaseDatabase database;
-    FirebaseDatabase copia;
-    DatabaseReference myRef;
-    DatabaseReference myRef2;
-    private FirebaseUser mAuth;
+
+
 
 
     public UsuariosAdapter(@NonNull Context context, int resource, List<Usuario> objects) {
@@ -56,30 +52,11 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
         this.context = context;
         this.resource = resource;
 
-
     }
 
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = convertView;
-
-        mAuth = FirebaseAuth.getInstance().getCurrentUser();
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
-
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                usuarioConectado = dataSnapshot.getValue(Usuario.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
 
 
         if(view == null){
@@ -89,7 +66,7 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
         usuarioSeleccionado = listUsuarios.get(position);
         final Usuario usuario = usuarioSeleccionado;
 
-       TextView nombre = view.findViewById(R.id.textNombreBusqueda);
+        TextView nombre = view.findViewById(R.id.textNombreBusqueda);
         nombre.setText(usuario.getNombre());
 
         TextView seguidores =view.findViewById(R.id.textSeguidoresBusqueda);
@@ -104,47 +81,8 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
 
         Button bSeguir =view.findViewById(R.id.buttonSeguirBusqueda);
 
-        /*if(usuario.getId().compareTo(usuarioConectado.getId())==0){
-            bSeguir.setVisibility(View.GONE);
-        }*/
 
-        bSeguir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                usuarioConectado.getSeguidosList().add(usuarioSeleccionado);
-                myRef.setValue(usuarioConectado);
-
-                myRef2 = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(usuarioSeleccionado.getId());
-                usuarioSeleccionado.getSeguidoresList().add(usuarioConectado);
-                myRef2.setValue(usuarioSeleccionado);
-
-            }
-        });
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                /*if(usuarioSeleccionado.getId().compareTo(usuarioConectado.getId())==0){
-
-                }else{*/
-                    boolean seguido = usuarioSeguido(usuarioSeleccionado);
-                    if(!seguido){
-                        //Si el usuario no lo sigue
-                        Intent intent = new Intent(context, MostrarUsuarioActivity.class);
-                        intent.putExtra("objectData",usuarioSeleccionado);
-                        context.startActivity(intent);
-                    } else{
-                        //Si el usuario lo sigue
-                        Intent intent = new Intent(context, MostrarUsuarioSeguidoActivity.class);
-                        intent.putExtra("objectData",usuarioSeleccionado);
-                        context.startActivity(intent);
-                    }
-                }
-
-            //}
-        });
 
         return  view;
     }
@@ -159,14 +97,7 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
 
     }
 
-    public boolean usuarioSeguido(Usuario usuarioS){
-        for(Usuario usr: usuarioConectado.getSeguidosList()){
-            if(usuarioS.getId().compareTo(usr.getId())==0){
-                return true;
-            }
-        }
-        return false;
-    }
+
 
 
 

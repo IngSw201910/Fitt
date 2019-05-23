@@ -13,7 +13,10 @@
         android:layout_height="37dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:focusable="false"
         android:text="Nombre"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageViewPerfilBusqueda"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,6 +24,7 @@
         android:id="@+id/imageViewPerfilBusqueda"
         android:layout_width="98dp"
         android:layout_height="101dp"
+        android:focusableInTouchMode="false"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +37,10 @@
         android:layout_height="23dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Seguidores"
+        android:focusable="false"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSeguirBusqueda"
         app:layout_constraintStart_toEndOf="@+id/imageViewPerfilBusqueda"
         app:layout_constraintTop_toBottomOf="@+id/textNombreBusqueda" />
 
@@ -43,7 +50,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
         android:text="Seguidos"
+        android:focusable="false"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSeguirBusqueda"
         app:layout_constraintStart_toEndOf="@+id/imageViewPerfilBusqueda"
         app:layout_constraintTop_toBottomOf="@+id/textSeguidoresBusqueda" />
 
@@ -51,9 +61,10 @@
         android:id="@+id/buttonSeguirBusqueda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:text="Seguir"
-        app:layout_constraintStart_toEndOf="@+id/textSeguidoresBusqueda"
+        android:focusable="false"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textNombreBusqueda" />
 </android.support.constraint.ConstraintLayout>

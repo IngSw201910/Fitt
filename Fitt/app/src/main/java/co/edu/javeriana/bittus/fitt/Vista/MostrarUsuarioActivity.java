@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
+import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -48,7 +49,6 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference myRef;
-    DatabaseReference myRef2;
     private FirebaseUser mAuth;
 
 
@@ -59,15 +59,33 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
 
         item= (Usuario) getIntent().getSerializableExtra("objectData");
 
+
+
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+
+        seguir =findViewById(R.id.buttonSeguirUN);
+
+
 
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 usuarioConectado = dataSnapshot.getValue(Usuario.class);
+                seguir.setOnClickListener(new View.OnClickListener(){
+                                              @Override
+                                              public void onClick(View v) {
+
+
+                                                  seguirUsuario();
+
+
+
+                                              }
+                                          }
+                );
             }
 
             @Override
@@ -88,21 +106,8 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
         fotoU= findViewById(R.id.imageViewFotoUsuarioN);
         descargarFotoYPonerEnImageView(item.getDireccionFoto(),fotoU);
 
-        seguir =findViewById(R.id.buttonSeguirUN);
-        seguir.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-
-                usuarioConectado.getSeguidosList().add(item);
-                myRef.setValue(usuarioConectado);
-                item.getSeguidoresList().add(usuarioConectado);
-                myRef2 = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(item.getId());
-                myRef2.setValue(item);
 
 
-            }
-        }
-        );
 
 
         entrenador =findViewById(R.id.textViewNombreEntrenadorUN);
@@ -126,6 +131,17 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void seguirUsuario() {
+
+        usuarioConectado.getSeguidosList().add(item);
+        myRef.setValue(usuarioConectado,1);
+        item.getSeguidoresList().add(usuarioConectado);
+
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(item.getId());
+
+        myRef.setValue(item, 2);
     }
 
 }

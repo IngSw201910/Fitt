@@ -66,17 +66,39 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
         adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios );
 
-        listViewUsuarios.setAdapter(adapterUsuarios);
+
+
+
 
         listViewUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 usuarioSeleccionado = listUsuarios.get(position);
+                //Si el usuario no lo sigue
+                Log.i("entra","entra");
 
-
+                abrirSiguienteVentana(usuarioSeleccionado);
 
             }
         });
+        listViewUsuarios.setAdapter(adapterUsuarios);
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                usuario = dataSnapshot.getValue(Usuario.class);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
         database = FirebaseDatabase.getInstance();
 
@@ -91,6 +113,24 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
     }
 
+    public boolean usuarioSeguido(Usuario usuarioS){
+        for(Usuario usr: usuario.getSeguidosList()){
+            if(usuarioS.getId().compareTo(usr.getId())==0){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void abrirSiguienteVentana(Usuario usuario) {
+        Intent intent = new Intent(BuscarUsuarioActivity.this, MostrarUsuarioActivity.class);
+
+        intent.putExtra("objectData",usuarioSeleccionado);
+
+        startActivity(intent);
+    }
+
+
     private void descargarUsuarios (){
 
       myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS);
@@ -101,7 +141,7 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
                     Usuario aux =singleSnapshot.getValue(Usuario.class);
                     aux.setId(singleSnapshot.getKey());
                     listUsuarios.add(aux);
-                    //Log.i("Prueba", singleSnapshot.getValue(Usuario.class).getDireccionFoto());
+                    Log.i("Prueba", aux.getId());
                 }
                 if(listUsuarios!=null) {
                     adapterUsuarios.notifyDataSetChanged();
