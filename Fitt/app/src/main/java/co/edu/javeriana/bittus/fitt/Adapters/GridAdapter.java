@@ -48,9 +48,9 @@ public class GridAdapter extends BaseAdapter {
 
         if (convertView == null){
             convertView=thisInflater.inflate(R.layout.single_item, viewGroup, false);
-            ImageView imageView = (ImageView) convertView.findViewById(R.id.ImagenParque);
-            PersistenciaFirebase.descargarFotoYPonerEnImageView(imagenes.get(i),imageView);
         }
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.ImagenParque);
+        PersistenciaFirebase.descargarFotoYPonerEnImageView(imagenes.get(i),imageView);
 
         return convertView;
     }
