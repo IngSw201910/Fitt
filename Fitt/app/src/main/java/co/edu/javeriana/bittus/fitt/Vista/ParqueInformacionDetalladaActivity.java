@@ -203,7 +203,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef=database.getReference(RutasBaseDeDatos.getRutaParques());
         String key =  park.getNombreParqueFire() ;
-        myRef=database.getReference(key);
+        myRef=database.getReference(RutasBaseDeDatos.getRutaParques()+key);
         myRef.setValue(park);
     }
 
@@ -213,7 +213,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef=database.getReference(RutasBaseDeDatos.getRutaParques());
         String key =  park.getNombreParqueFire() ;
-        myRef=database.getReference(key);
+        myRef=database.getReference(RutasBaseDeDatos.getRutaParques()+key);
         myRef.setValue(park);
     }
 
