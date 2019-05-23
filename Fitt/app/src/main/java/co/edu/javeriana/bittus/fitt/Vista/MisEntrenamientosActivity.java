@@ -86,13 +86,37 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onBtnClickBorrar(int position) {
-
+            public void onBtnClickEditar(int position) {
+                editarEntrenamiento(entrenamientos.get(position));
             }
-        }, adoptado);
+        }, adoptado, esMio);
 
         listViewEntrenamientos.setAdapter(adapter);
         obtenerEntrenamientos();
+
+    }
+
+    private void editarEntrenamiento(final Entrenamiento entrenamiento) {
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+firebaseAuth.getCurrentUser().getUid());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
+                    Entrenamiento entrenamientoEncontrado = singleSnapshot.getValue(Entrenamiento.class);
+                    if(entrenamientoEncontrado.getNombre().equals(entrenamiento.getNombre())){
+                            
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 
@@ -183,14 +207,9 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
 
 
                     }
-
-
-
                     entrenamiento.setEjercicioEntrenamientoList(ejercicioEntrenamientos);
                     adoptado.add(Boolean.FALSE);
                     adapter.notifyDataSetChanged();
-
-
                 }
                 obtenerEntrenamientosAdoptados();
             }
@@ -247,9 +266,6 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
                                 adoptado.add(Boolean.TRUE);
                                 entrenamientoAdoptado.getEntrenamiento().setEjercicioEntrenamientoList(ejercicioEntrenamientos);
                                 entrenamientos.add(entrenamientoAdoptado.getEntrenamiento());
-
-
-
                             }
 
                             adapter.notifyDataSetChanged();

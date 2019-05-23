@@ -15,9 +15,7 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Filtros.RutinasFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
-import co.edu.javeriana.bittus.fitt.Modelo.EntrenamientoAdoptado;
 import co.edu.javeriana.bittus.fitt.R;
-import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerEntrenamientoRow;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerMisEntrenamientoRow;
 
 
@@ -29,13 +27,15 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
     private int resource;
     private Entrenamiento entrenamiento;
     private RutinasFiltro rutinasFiltro;
+    private List<Boolean> esMio;
     private BtnClickListenerMisEntrenamientoRow mClickListener;
 
-    public MisEntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerMisEntrenamientoRow listenerAdoptar, List<Boolean> adoptado) {
+    public MisEntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerMisEntrenamientoRow listenerAdoptar, List<Boolean> adoptado, List<Boolean>esMio) {
         super(context, resource, objects);
         this.listEntrenamiento = objects;
         this.context = context;
         this.resource = resource;
+        this.esMio = esMio;
         this.adoptado = adoptado;
         this.mClickListener = listenerAdoptar;
 
@@ -66,6 +66,7 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         }
 
 
+
         ImageButton info = view.findViewById(R.id.imageButtonInformacion);
         info.setTag(position);
 
@@ -77,6 +78,10 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         ImageButton edit = view.findViewById(R.id.buttonEdit);
         edit.setTag(position);
 
+        if(!esMio.get(position)){
+            edit.setImageResource(R.drawable.noeditable);
+            edit.setClickable(false);
+        }
 
         adoptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +97,13 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
                     mClickListener.onBtnClickInfo((Integer) v.getTag());
             }
         });
-
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickListener != null)
+                    mClickListener.onBtnClickEditar((Integer) v.getTag());
+            }
+        });
 
         return  view;
     }
