@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,23 +29,24 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
     private final View mWindow;
     private Context mContext;
-    private LatLng posicion;
+    private Double longitud;
+    private Double latitud;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private FirebaseUser mAuth;
     private Parque parqueEncontrado;
 
 
-    public CustomInfoWindowAdapter(Context context, LatLng posicion) {
+    public CustomInfoWindowAdapter(Context context) {
+        database = FirebaseDatabase.getInstance();
         mContext = context;
-        this.posicion = posicion;
         this.parqueEncontrado = null;
         mWindow = LayoutInflater.from(context).inflate(R.layout.custom_info_window, null);
     }
 
     private void rendowWindowText(Marker marker, View view){
 
-        buscarParque();
+
         String title = marker.getTitle();
         TextView tvTitle = (TextView) view.findViewById(R.id.tituloInformacion);
 
@@ -58,11 +60,25 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         if(!snippet.equals("")){
             tvSnippet.setText(snippet);
         }
+        ImageView fotoParque = (ImageView) view.findViewById(R.id.imageViewParque);
 
-        if (!parqueEncontrado.getImagenes().isEmpty()) {
-            ImageView fotoParque = (ImageView) view.findViewById(R.id.imageViewParque);
-            PersistenciaFirebase.descargarFotoYPonerEnImageView(parqueEncontrado.getImagenes().get(0), fotoParque);
-        }
+        RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+
+        buscarParque(fotoParque, ratingBar);
+
+
+
+
+
+        String ss = marker.getSnippet();
+        String[] lineasPartidas = ss.split("\n");
+        String[] longitudP = lineasPartidas[2].split(": ");
+        longitud = Double.parseDouble(longitudP[1]);
+
+        String[] latitudP = lineasPartidas[3].split(": ");
+        latitud = Double.parseDouble(latitudP[1]);
+
+
         // Aqui se tienen que hacer las consultas para agregar la imagen la calificacion y demas
     }
 
@@ -78,7 +94,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         return mWindow;
     }
 
-    public void buscarParque() {
+    public void buscarParque(final ImageView imageView,final RatingBar ratingBar) {
         myRef = database.getReference(RutasBaseDeDatos.getRutaParques());
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -86,11 +102,24 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
                 boolean encontrado= false;
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Parque parque = singleSnapshot.getValue(Parque.class);
-                    Log.i("aiuda", "Encontró usuario: " + parque.getNombreParqueFire());
-                    if (posicion.longitude == parque.getLongitud() &&  posicion.longitude == parque.getLatitud()) {
+
+                    Log.i("aiuda", "Encontró usuario: " + longitud+ " "+parque.getLongitud());
+                    if (longitud== parque.getLongitud()  && latitud == parque.getLatitud()) {
+
                         parqueEncontrado = parque;
+                        if(parque!=null){
+
+                            if (!parqueEncontrado.getImagenes().isEmpty()) {
+
+                                PersistenciaFirebase.descargarFotoYPonerEnImageView(parqueEncontrado.getImagenes().get(0), imageView);
+
+
+                                ratingBar.setRating(parque.obtenercalificacion());
+                            }
+                        }
                         break;
                     }
+
                 }
             }
             @Override

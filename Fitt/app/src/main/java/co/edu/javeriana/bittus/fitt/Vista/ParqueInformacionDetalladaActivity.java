@@ -202,6 +202,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             reseñaAdaptador = new ReseñaAdaptador(this, R.layout.elemento_lista_resena_parque, park.getReseñas());
             reseñas.setAdapter(reseñaAdaptador);
             reseñaAdaptador.notifyDataSetChanged();
+            calificacion.setRating(park.obtenercalificacion());
         }
 
     }
@@ -241,7 +242,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                         reseñas.setAdapter(reseñaAdaptador);
                         fotoParquesAdapter = new FotoParquesAdapter(ParqueInformacionDetalladaActivity.this, R.layout.single_item ,park.getImagenes());
                         listViewImagenes.setAdapter(fotoParquesAdapter);
-                        calificacion.setRating(obtenercalificacion());
+                        calificacion.setRating(parque.obtenercalificacion());
                         encontrado = true;
                         break;
                     }
@@ -270,19 +271,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         myRef.setValue(parque);
     }
 
-    public float obtenercalificacion() {
-        float promedio = 0;
-        if (park!= null){
-            for (Reseña reseña : park.getReseñas()){
-                promedio = promedio + reseña.getCalificacion();
-            }
-            promedio = promedio/park.getReseñas().size();
-            return promedio;
-        }
-        else{
-            return -1;
-        }
-    }
+
 
     public void iniciarPopupParque (){
         Intent intent = new Intent(ParqueInformacionDetalladaActivity.this, PopResenar.class);

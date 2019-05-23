@@ -92,7 +92,7 @@ public class PopResenar extends Activity {
             @Override
             public void onClick(View view) {
                 generarReseña();
-                finish();
+
             }
         });
 
@@ -111,6 +111,7 @@ public class PopResenar extends Activity {
             bundle.putSerializable(StringsSebastian.LLAVE_RESENA, reseña);
             intent.putExtras(bundle);
             setResult(Activity.RESULT_OK, intent);
+            finish();
         }
     }
         //esto no deberia ir aca

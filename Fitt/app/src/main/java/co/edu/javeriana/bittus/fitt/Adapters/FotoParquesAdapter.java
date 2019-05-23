@@ -16,7 +16,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 
-public class FotoParquesAdapter extends ArrayAdapter {
+public class FotoParquesAdapter extends ArrayAdapter<String> {
     private static LayoutInflater inflater = null;
 
     Context context;
@@ -37,11 +37,11 @@ public class FotoParquesAdapter extends ArrayAdapter {
         if(vista == null){
             vista = LayoutInflater.from(context).inflate(R.layout.single_item, null);
         }
-
         ImageView fotoParque = (ImageView) vista.findViewById(R.id.ImagenParque);
-
-        if (!imagenes.isEmpty()) {
-            PersistenciaFirebase.descargarFotoYPonerEnImageView(imagenes.get(i), fotoParque);
+        if(fotoParque.getDrawable()==null){
+            if (!imagenes.isEmpty()) {
+                PersistenciaFirebase.descargarFotoYPonerEnImageView(imagenes.get(i), fotoParque);
+            }
         }
         return vista;
     }
