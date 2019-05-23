@@ -53,6 +53,8 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
     private static final int ACTIVADO = 0;
     private static final int DESACTIVADO = 1;
 
+    private static final int CALORIAS_POR_HORA = 500;
+
     private long timeWhenStopped = 0;
 
     private TextToSpeech textToSpeech;
@@ -436,6 +438,20 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
         Toast.makeText(RealizarEntrenamientoActivity.this, "Entrenamiento terminado!", Toast.LENGTH_LONG).show();
         Toast.makeText(RealizarEntrenamientoActivity.this, "Los datos de este entrenamiento serán almacenados", Toast.LENGTH_LONG).show();
         Fragment fragment = new EntrenamientoTerminadoFragment();
+
+        //calculo de calorias en base al tiempo
+        long time = SystemClock.elapsedRealtime() - chrono.getBase();
+        long segundos = (int)(time * 0.001);
+        int calorias = (int) (CALORIAS_POR_HORA * 0.00028* segundos);
+
+
+        //AQUÍ SE SUBE LA INFORMACIÓN A FIREBASE CON LOS RESULTADOS DEL ENTRENAMIENTO
+
+        Bundle args = new Bundle();
+        args.putSerializable("entrenamiento", entrenamiento);
+        args.putInt("calorias", calorias);
+        args.putString("tiempo", chrono.getText().toString());
+        fragment.setArguments(args);
         loadFragment(fragment);
     }
 
