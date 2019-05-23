@@ -89,6 +89,7 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
 
         iniciaroReanudarPausarB = findViewById(R.id.btnIniciarPausarReanudar);
         iniciaroReanudarPausarB.setFocusableInTouchMode(false);
+        iniciaroReanudarPausarB.setColorFilter(getResources().getColor(R.color.gris));
 
 
         iniciarPausarReaundarTV = findViewById(R.id.iniciarPausarReaunarTV);
@@ -122,6 +123,7 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
                         while (estaDandoInstrucciones()) ;
                     }
                     iniciaroReanudarPausarB.setFocusableInTouchMode(true);
+                    iniciaroReanudarPausarB.setColorFilter(getResources().getColor(R.color.verdeFitt));
                 }
             }
         });
@@ -193,7 +195,8 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
             @Override
             public void onClick(View v) {
 
-                estado = CORRIENDO;
+                if (estado == PAUSADO)
+                    reanudarEntrenamiento();
                 cambiarBoton();
 
 
@@ -314,7 +317,7 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
         chrono.setText("00:00:00");
     }
 
-    public void darInstrucciones(String texto) {
+    public synchronized void darInstrucciones(String texto) {
         if (estadoSonidoAyuda == ACTIVADO) {
             textToSpeech.speak(texto, TextToSpeech.QUEUE_FLUSH, null, null);
         }
@@ -436,17 +439,14 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
         loadFragment(fragment);
     }
 
-    public synchronized boolean estaDandoInstrucciones() {
+    public boolean estaDandoInstrucciones() {
         if (textToSpeech.isSpeaking())
             return true;
         return false;
     }
 
     public synchronized void iniciarMusicaEjercicioRepeticionOTiempo(boolean iniciarInmediatamente) {
-        if (reproductor != null) {
-            reproductor.stop();
-            reproductor = null;
-        }
+
 
         reproductor = MediaPlayer.create(this, R.raw.training_music);
         reproductor.setLooping(true);
@@ -461,10 +461,7 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
     }
 
     public synchronized void iniciarMusicaEjercicioDescanso(boolean iniciarInmediatamente) {
-        if (reproductor != null) {
-            reproductor.stop();
-            reproductor = null;
-        }
+
 
         reproductor = MediaPlayer.create(this, R.raw.sonido_descanso);
         reproductor.setLooping(true);

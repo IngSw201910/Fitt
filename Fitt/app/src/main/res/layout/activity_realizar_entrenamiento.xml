@@ -66,6 +66,7 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/btnSiguienteEjercicio"
         app:layout_constraintEnd_toStartOf="@+id/tiempoEntrenamiento"
+        app:layout_constraintHorizontal_bias="0.312"
         app:layout_constraintStart_toEndOf="@+id/textView20" />
 
     <ImageButton
@@ -81,6 +82,7 @@
         android:tint="@color/verdeFitt"
         app:layout_constraintBottom_toTopOf="@+id/textView21"
         app:layout_constraintEnd_toStartOf="@+id/tiempoEntrenamiento"
+        app:layout_constraintHorizontal_bias="0.318"
         app:layout_constraintStart_toEndOf="@+id/btnSonidoNarrador" />
 
     <ImageButton
@@ -107,6 +109,7 @@
         android:src="@drawable/siguiente_ejercicio"
         app:layout_constraintBottom_toTopOf="@+id/textView23"
         app:layout_constraintEnd_toStartOf="@+id/btnFinalizarEntrenamiento"
+        app:layout_constraintHorizontal_bias="0.47"
         app:layout_constraintStart_toEndOf="@+id/btnIniciarPausarReanudar" />
 
     <ImageButton
@@ -128,10 +131,12 @@
         android:layout_height="72dp"
         android:layout_marginStart="34dp"
         android:background="@android:color/transparent"
+        android:clickable="false"
         android:cropToPadding="false"
         android:focusableInTouchMode="false"
         android:scaleType="fitXY"
         android:src="@drawable/iniciar"
+        android:tint="@color/gris"
         app:layout_constraintBottom_toTopOf="@+id/iniciarPausarReaunarTV"
         app:layout_constraintStart_toStartOf="parent" />
 
