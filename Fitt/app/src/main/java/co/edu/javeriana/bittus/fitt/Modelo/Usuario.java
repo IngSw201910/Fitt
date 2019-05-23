@@ -10,26 +10,28 @@ import java.util.List;
 @IgnoreExtraProperties
 public class Usuario implements Serializable {
 
-    private List<Entrenamiento> entrenamientoList;
-    private String nombre;
-    @Exclude private String id;
-    private String correo;
-    private String direccionFoto;
-    private Date fechaNacimiento;
-    private String sexo;
-    private float altura;
-    private float peso;
-    private List<Usuario> seguidosList;
-    private List<Usuario> seguidoresList;
-    private boolean privacidad;
+
+    protected List<Entrenamiento> entrenamientoList;
+    protected String nombre;
+    protected String correo;
+    protected String direccionFoto;
+    protected Date fechaNacimiento;
+    protected String sexo;
+    protected float altura;
+    protected float peso;
+    protected List<String> seguidosList;
+    protected List<String> seguidoresList;
+    protected boolean privacidad;
 
 
 
-    public Usuario(String correo, String id, String nombre){
+    public Usuario(String correo, String nombre){
         this.nombre = nombre;
         this.correo = correo;
-        this.id = id;
+
     }
+
+
 
 
     public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
@@ -42,24 +44,17 @@ public class Usuario implements Serializable {
         this.peso = peso;
         this.privacidad =false;
         entrenamientoList = new ArrayList<Entrenamiento>();
-        seguidosList = new ArrayList<Usuario>();
-        seguidoresList = new ArrayList<Usuario>();
+        seguidosList = new ArrayList<String>();
+        seguidoresList = new ArrayList<String>();
     }
 
 
     public Usuario() {
         entrenamientoList = new ArrayList<Entrenamiento>();
-        seguidosList = new ArrayList<Usuario>();
-        seguidoresList = new ArrayList<Usuario>();
+        seguidosList = new ArrayList<String>();
+        seguidoresList = new ArrayList<String>();
     }
-    @Exclude
-    public String getId() {
-        return id;
-    }
-    @Exclude
-    public void setId(String id) {
-        this.id = id;
-    }
+
 
     public String getNombre() {
         return nombre;
@@ -126,19 +121,19 @@ public class Usuario implements Serializable {
         this.entrenamientoList = entrenamientoList;
     }
 
-    public  List<Usuario> getSeguidosList(){
+    public  List<String> getSeguidosList(){
         return seguidosList;
     }
 
-    public void setSeguidosList(List<Usuario> seguidosList){
+    public void setSeguidosList(List<String> seguidosList){
         this.seguidosList=seguidosList;
     }
 
-    public List<Usuario> getSeguidoresList(){
+    public List<String> getSeguidoresList(){
         return seguidoresList;
     }
 
-    public void setSeguidoresList(List<Usuario> seguidoresList){
+    public void setSeguidoresList(List<String> seguidoresList){
         this.seguidoresList=seguidoresList;
     }
 
