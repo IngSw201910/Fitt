@@ -1,10 +1,13 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@IgnoreExtraProperties
 public class Usuario implements Serializable {
 
 
@@ -17,19 +20,19 @@ public class Usuario implements Serializable {
     protected String sexo;
     protected float altura;
     protected float peso;
-    protected List<Usuario> seguidosList;
-    protected List<Usuario> seguidoresList;
+    protected List<String> seguidosList;
+    protected List<String> seguidoresList;
     protected boolean privacidad;
 
 
 
-
-
-    public Usuario(String correo, String id, String nombre){
+    public Usuario(String correo, String nombre) {
         this.nombre = nombre;
         this.correo = correo;
-        this.id = id;
     }
+
+
+
 
 
 
@@ -44,24 +47,17 @@ public class Usuario implements Serializable {
         this.peso = peso;
         this.privacidad =false;
         entrenamientoList = new ArrayList<Entrenamiento>();
-        seguidosList = new ArrayList<Usuario>();
-        seguidoresList = new ArrayList<Usuario>();
+        seguidosList = new ArrayList<String>();
+        seguidoresList = new ArrayList<String>();
     }
 
 
     public Usuario() {
         entrenamientoList = new ArrayList<Entrenamiento>();
-        seguidosList = new ArrayList<Usuario>();
-        seguidoresList = new ArrayList<Usuario>();
+        seguidosList = new ArrayList<String>();
+        seguidoresList = new ArrayList<String>();
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
@@ -128,19 +124,19 @@ public class Usuario implements Serializable {
         this.entrenamientoList = entrenamientoList;
     }
 
-    public  List<Usuario> getSeguidosList(){
+    public  List<String> getSeguidosList(){
         return seguidosList;
     }
 
-    public void setSeguidosList(List<Usuario> seguidosList){
+    public void setSeguidosList(List<String> seguidosList){
         this.seguidosList=seguidosList;
     }
 
-    public List<Usuario> getSeguidoresList(){
+    public List<String> getSeguidoresList(){
         return seguidoresList;
     }
 
-    public void setSeguidoresList(List<Usuario> seguidoresList){
+    public void setSeguidoresList(List<String> seguidoresList){
         this.seguidoresList=seguidoresList;
     }
 
@@ -150,6 +146,15 @@ public class Usuario implements Serializable {
 
     public void setPrivacidad(boolean privacidad) {
         this.privacidad = privacidad;
+    }
+
+    public boolean validarSeguido(String uidUsuario) {
+        for(String usuario: seguidosList){
+            if(usuario.compareTo(uidUsuario)==0){
+                return true;
+            }
+        }
+        return false;
     }
 
     //usuario cambiado

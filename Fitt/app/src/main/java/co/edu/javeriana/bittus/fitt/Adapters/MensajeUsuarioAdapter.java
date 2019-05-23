@@ -44,7 +44,7 @@ public class MensajeUsuarioAdapter extends RecyclerView.Adapter<MensajeUsuarioAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, MensajeActivity.class);
-                intent.putExtra("id", usuario.getId());
+                //intent.putExtra("id", usuario.getId());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
