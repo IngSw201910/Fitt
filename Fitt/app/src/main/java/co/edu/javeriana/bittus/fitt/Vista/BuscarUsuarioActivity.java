@@ -56,6 +56,7 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
+
         listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
         listUsuarios = new ArrayList<Usuario>();
         ImageButtonBuscarUsuarios = (ImageButton) findViewById(R.id.imageButtonBuscarUsuarioSeguidor);
@@ -63,7 +64,7 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
         EditTextNombreUsuarioABuscar.addTextChangedListener(this);
 
-        adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios);
+        adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios );
 
         listViewUsuarios.setAdapter(adapterUsuarios);
 
@@ -92,12 +93,13 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
     private void descargarUsuarios (){
 
-      myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios());
+      myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
                     Usuario aux =singleSnapshot.getValue(Usuario.class);
+                    aux.setId(singleSnapshot.getKey());
                     listUsuarios.add(aux);
                     //Log.i("Prueba", singleSnapshot.getValue(Usuario.class).getDireccionFoto());
                 }
