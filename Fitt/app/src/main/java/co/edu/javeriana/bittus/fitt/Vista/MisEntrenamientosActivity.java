@@ -39,11 +39,14 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
     private MisEntrenamientosAdapter adapter;
     private List<Entrenamiento> entrenamientos;
     private List<Boolean> adoptado;
+    private List<Boolean> esMio;
 
     private String llave = "";
     private DatabaseReference myRef;
     private FirebaseDatabase database;
     private FirebaseAuth firebaseAuth;
+    private String llaveCreador;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mis_entrenamientos);
 
         listViewEntrenamientos = (ListView) findViewById(R.id.listViewMisEntrenamientos);
-
+        esMio  = new ArrayList<>();
 
         adoptado = new ArrayList<>();
         entrenamientos = new ArrayList<>();
@@ -104,6 +107,9 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
 
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
                     Entrenamiento entrenamiento = singleSnapshot.getValue(Entrenamiento.class);
+
+                    esMio.add(Boolean.TRUE);
+
                     entrenamientos.add(entrenamiento);
                     List<EjercicioEntrenamiento> ejercicioEntrenamientos = new ArrayList<>();
                     String llaveEntrenamiento = singleSnapshot.getKey();
@@ -165,7 +171,7 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
                             }
                         }
                         if(!existe){
-
+                            esMio.add(Boolean.FALSE);
                             List<EjercicioEntrenamiento> ejercicioEntrenamientos = new ArrayList<>();
                             String llaveEntrenamiento = singleSnapsho2.getKey();
                             Log.i("ENTRENAMIENTO_KEY", llaveEntrenamiento);
@@ -233,6 +239,7 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
                         Entrenamiento entrenamientoE = singleSnapshot2.getValue(Entrenamiento.class);
 
                         if(entrenamientoE.getNombre().equals(entrenamiento.getNombre())){
+                            llaveCreador = singleSnapshot.getKey();
                             llave = singleSnapshot2.getKey();
                             if(singleSnapshot.getKey().equals(firebaseAuth.getCurrentUser().getUid())){
                                 mostrarInfo(entrenamiento);
@@ -260,7 +267,7 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
         Intent intent = new Intent(MisEntrenamientosActivity.this, InformacionEntrenamientoReseñarActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
-
+        bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, llaveCreador);
         bundle.putSerializable(StringsMiguel.LLAVE_LLAVE,llave );
         intent.putExtras(bundle);
         startActivity(intent);

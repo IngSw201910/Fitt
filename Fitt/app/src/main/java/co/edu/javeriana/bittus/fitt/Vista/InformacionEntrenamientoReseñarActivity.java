@@ -51,6 +51,7 @@ public class InformacionEntrenamientoReseñarActivity extends AppCompatActivity 
     private Entrenamiento entrenamiento;
     private Usuario usuarioCreador;
     private String llaveEntrenamiento;
+    private String llaveUsuarioCreador;
     private Usuario usuario;
     private ReseñaAdaptador adaptador;
 
@@ -83,6 +84,8 @@ public class InformacionEntrenamientoReseñarActivity extends AppCompatActivity 
         Bundle bundle = getIntent().getExtras();
         entrenamiento = (Entrenamiento) bundle.getSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO);
         llaveEntrenamiento = (String) bundle.getSerializable(StringsMiguel.LLAVE_LLAVE);
+        llaveUsuarioCreador = (String) bundle.getSerializable(StringsMiguel.LLAVE_USUARIO);
+
 
         Log.i("llave", llaveEntrenamiento);
 
@@ -203,8 +206,9 @@ public class InformacionEntrenamientoReseñarActivity extends AppCompatActivity 
         entrenamiento.getReseñas().add(reseña);
         database = FirebaseDatabase.getInstance();
         String key =  llaveEntrenamiento ;
-        myRef=database.getReference(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+key);
+        myRef=database.getReference(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+llaveUsuarioCreador+"/"+key);
         myRef.setValue(entrenamiento);
+        ratingBarEntrenamiento.setRating(entrenamiento.calcularRating());
     }
     private void ejercicios() {
         Intent intent = new Intent(InformacionEntrenamientoReseñarActivity.this, InformacionEntrenamientoEjerciciosActivity.class);
