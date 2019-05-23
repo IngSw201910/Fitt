@@ -62,9 +62,9 @@ public class SeguidosActivity extends AppCompatActivity implements TextWatcher  
 
         EditTextNombreUsuarioABuscar.addTextChangedListener((TextWatcher) this);
 
-        if(item.getSeguidosList()!=null) {
+        if(item.getSeguidosList().size()!=0) {
 
-            descargarUsuarios();
+            //Toast.makeText(SeguidosActivity.this, " sigue a usuario", Toast.LENGTH_SHORT).show();
             adapterUsuarios = new UsuariosAdapter(SeguidosActivity.this, R.layout.item_usuario_row, listUsuarios);
 
             listViewUsuarios.setAdapter(adapterUsuarios);
@@ -78,7 +78,7 @@ public class SeguidosActivity extends AppCompatActivity implements TextWatcher  
 
             database = FirebaseDatabase.getInstance();
 
-
+            descargarUsuarios(0);
 
             ImageButtonBuscarUsuarios.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,25 +86,27 @@ public class SeguidosActivity extends AppCompatActivity implements TextWatcher  
 
                 }
             });
+
         }else{
-            Toast.makeText(SeguidosActivity.this, "No sigues a ningún usuario", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SeguidosActivity.this, "No sigue a ningún usuario", Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    private void descargarUsuarios (){
+    private void descargarUsuarios (final int i){
 
-        for(int i=0;i<item.getSeguidosList().size();i++){
+        if (i < item.getSeguidosList().size()) {
             myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS+item.getSeguidosList().get(i));
             myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            listUsuarios.add(dataSnapshot.getValue(Usuario.class));
-                    if(listUsuarios!=null)
-                    {
+                    listUsuarios.add(dataSnapshot.getValue(Usuario.class));
+                    descargarUsuarios(i + 1);
+                    if (listUsuarios != null) {
                         adapterUsuarios.notifyDataSetChanged();
                     }
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
                     Log.w("Error:", "Error en la consulta", databaseError.toException());
@@ -112,22 +114,7 @@ public class SeguidosActivity extends AppCompatActivity implements TextWatcher  
             });
         }
 
-        /*myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS);
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    if(estaEnLista(dataSnapshot.getKey())) {
-                        listUsuarios.add(singleSnapshot.getValue(Usuario.class));
-                    }
-                }
-                adapterUsuarios.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("Error:", "Error en la consulta", databaseError.toException());
-            }
-        });*/
+
     }
 
     public boolean estaEnLista(String id){

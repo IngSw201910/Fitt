@@ -66,7 +66,6 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
         myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
 
-
         listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
         listUsuarios = new ArrayList<Usuario>();
         ImageButtonBuscarUsuarios = (ImageButton) findViewById(R.id.imageButtonBuscarUsuarioSeguidor);

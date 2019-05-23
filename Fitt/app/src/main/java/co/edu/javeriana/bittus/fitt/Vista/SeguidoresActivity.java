@@ -61,7 +61,8 @@ public class SeguidoresActivity extends AppCompatActivity implements TextWatcher
 
         EditTextNombreUsuarioABuscar.addTextChangedListener((TextWatcher) this);
 
-        if(item.getSeguidoresList()!=null) {
+        if(item.getSeguidoresList().size()!=0) {
+            Toast.makeText(SeguidoresActivity.this, " hay seguidores", Toast.LENGTH_SHORT).show();
 
             adapterUsuarios = new UsuariosAdapter(SeguidoresActivity.this, R.layout.item_usuario_row, listUsuarios);
 
@@ -76,7 +77,7 @@ public class SeguidoresActivity extends AppCompatActivity implements TextWatcher
 
             database = FirebaseDatabase.getInstance();
 
-            descargarUsuarios();
+            descargarUsuarios(0);
 
             ImageButtonBuscarUsuarios.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,24 +91,25 @@ public class SeguidoresActivity extends AppCompatActivity implements TextWatcher
 
     }
 
-    private void descargarUsuarios (){
+    private void descargarUsuarios (final int i){
 
-        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS);
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS+item.getSeguidoresList().get(i));
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    if(estaEnLista(dataSnapshot.getKey())) {
-                        listUsuarios.add(singleSnapshot.getValue(Usuario.class));
-                    }
+                listUsuarios.add(dataSnapshot.getValue(Usuario.class));
+                descargarUsuarios(i + 1);
+                if (listUsuarios != null) {
+                    adapterUsuarios.notifyDataSetChanged();
                 }
-                adapterUsuarios.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w("Error:", "Error en la consulta", databaseError.toException());
             }
         });
+
     }
 
     public boolean estaEnLista(String id){
