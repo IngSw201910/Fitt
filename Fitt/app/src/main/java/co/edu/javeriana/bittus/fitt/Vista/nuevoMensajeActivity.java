@@ -59,11 +59,11 @@ public class nuevoMensajeActivity extends AppCompatActivity {
                     Usuario usuario = snapshot.getValue(Usuario.class);
                     assert usuario != null;
                     assert firebaseUser != null;
-
+                    /*
                     if(!usuario.getId().equals(firebaseUser.getUid().toString())){
                         mUsuarios.add(usuario);
                         Log.d("CHAT_DATABASE", "Usuario:" + usuario.getId() + " - " + firebaseUser.getUid());
-                    }
+                    }*/
                 }
                 adapter = new MensajeUsuarioAdapter(getApplicationContext(), mUsuarios);
                 recyclerView.setAdapter(adapter);

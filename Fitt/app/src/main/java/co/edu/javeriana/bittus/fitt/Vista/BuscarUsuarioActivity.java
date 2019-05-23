@@ -39,6 +39,8 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
     private ImageButton ImageButtonBuscarUsuarios;
     private EditText EditTextNombreUsuarioABuscar;
 
+    private List<String> uidsUsuarios;
+
     private Usuario usuarioSeleccionado;
 
     FirebaseDatabase database;
@@ -52,6 +54,8 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_usuario);
 
+
+        uidsUsuarios = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
@@ -74,11 +78,11 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                usuarioSeleccionado = listUsuarios.get(position);
+
                 //Si el usuario no lo sigue
                 Log.i("entra","entra");
 
-                abrirSiguienteVentana(usuarioSeleccionado);
+                abrirSiguienteVentana(listUsuarios.get(position), uidsUsuarios.get(position));
 
             }
         });
@@ -113,19 +117,20 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
     }
 
-    public boolean usuarioSeguido(Usuario usuarioS){
-        for(Usuario usr: usuario.getSeguidosList()){
-            if(usuarioS.getId().compareTo(usr.getId())==0){
+    public boolean usuarioSeguido(){
+        for(String usr: usuario.getSeguidosList()){
+            if(mAuth.getUid().equals(usr)){
                 return true;
             }
         }
         return false;
     }
 
-    private void abrirSiguienteVentana(Usuario usuario) {
+    private void abrirSiguienteVentana(Usuario usuario, String uidUsuario) {
         Intent intent = new Intent(BuscarUsuarioActivity.this, MostrarUsuarioActivity.class);
 
-        intent.putExtra("objectData",usuarioSeleccionado);
+        intent.putExtra("objectData",usuario);
+        intent.putExtra("llaveUsuario", uidUsuario);
 
         startActivity(intent);
     }
@@ -139,9 +144,8 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
                     Usuario aux =singleSnapshot.getValue(Usuario.class);
-                    aux.setId(singleSnapshot.getKey());
+                    uidsUsuarios.add(singleSnapshot.getKey());
                     listUsuarios.add(aux);
-                    Log.i("Prueba", aux.getId());
                 }
                 if(listUsuarios!=null) {
                     adapterUsuarios.notifyDataSetChanged();

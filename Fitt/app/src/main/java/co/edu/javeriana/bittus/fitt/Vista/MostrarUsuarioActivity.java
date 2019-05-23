@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
@@ -50,7 +51,7 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef;
     private FirebaseUser mAuth;
-
+    private String uidUsuario;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mostrar_usuario);
 
         item= (Usuario) getIntent().getSerializableExtra("objectData");
-
+        uidUsuario = (String) getIntent().getStringExtra("llaveUsuario");
 
 
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
@@ -135,13 +136,20 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
 
     private void seguirUsuario() {
 
-        usuarioConectado.getSeguidosList().add(item);
-        myRef.setValue(usuarioConectado,1);
-        item.getSeguidoresList().add(usuarioConectado);
+        usuarioConectado.getSeguidosList().add(uidUsuario);
+        myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                item.getSeguidoresList().add(mAuth.getUid());
+                myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                myRef.setValue(item);
+            }
+        });
 
-        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(item.getId());
 
-        myRef.setValue(item, 2);
+
+
+
     }
 
 }
