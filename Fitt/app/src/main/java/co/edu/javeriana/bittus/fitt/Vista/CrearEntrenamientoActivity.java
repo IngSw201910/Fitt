@@ -128,7 +128,6 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
             entrenamiento.setEjercicioEntrenamientoList(entrenamientoList);
             List<Reseña> listaReseñas = entrenamiento.getReseñas();
 
-            listaReseñas.add(new Reseña(new Usuario("pruebarr","prueba",RutasBaseDeDatos.RUTA_FOTO_USUARIOS+user.getUid(),new Date(),"Sexo",2f,3f), "prueba2", new Date(), 1.5f));
 
 
             String key = PersistenciaFirebase.almacenarInformacionConKey(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+user.getUid()+"/", entrenamiento);

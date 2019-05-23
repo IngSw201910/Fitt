@@ -23,6 +23,7 @@ public class Usuario implements Serializable {
     protected List<String> seguidosList;
     protected List<String> seguidoresList;
     protected boolean privacidad;
+    protected String tipo;
 
 
 
@@ -37,7 +38,7 @@ public class Usuario implements Serializable {
 
 
 
-    public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
+    public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso, String tipo) {
         this.nombre = nombre;
         this.correo = correo;
         this.direccionFoto = direccionFoto;
@@ -46,6 +47,7 @@ public class Usuario implements Serializable {
         this.altura = altura;
         this.peso = peso;
         this.privacidad =false;
+        this.tipo=tipo;
         entrenamientoList = new ArrayList<Entrenamiento>();
         seguidosList = new ArrayList<String>();
         seguidoresList = new ArrayList<String>();
@@ -146,6 +148,14 @@ public class Usuario implements Serializable {
 
     public void setPrivacidad(boolean privacidad) {
         this.privacidad = privacidad;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public boolean validarSeguido(String uidUsuario) {

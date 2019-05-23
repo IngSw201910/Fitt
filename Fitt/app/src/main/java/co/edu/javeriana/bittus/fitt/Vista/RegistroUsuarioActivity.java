@@ -237,7 +237,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             }else if(radioButtonOtro.isChecked()){
                 sexo = "Otro";
             }
-            usuarioNuevo = new Usuario(nombre,correo,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
+            usuarioNuevo = new Usuario(nombre,correo,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso),"usuarioPredeterminado");
 
 
 
