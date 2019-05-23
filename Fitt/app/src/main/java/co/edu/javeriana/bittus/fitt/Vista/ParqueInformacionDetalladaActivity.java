@@ -152,7 +152,11 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         añadirReseña.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (park == null) {
+                    Parque nuevoParque = new Parque(nombreParque.getText().toString(), (float) 2.0, latitud, longitud);
+                    subirParque(nuevoParque);
+                    park = nuevoParque;
+                }
                 iniciarPopupParque();
             }
         });
