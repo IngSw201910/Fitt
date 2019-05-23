@@ -27,6 +27,7 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Filtros.UsuarioFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerSeguir;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Vista.BuscarUsuarioActivity;
 import co.edu.javeriana.bittus.fitt.Vista.MostrarUsuarioActivity;
@@ -42,15 +43,17 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
     private int resource;
     private Usuario usuarioSeleccionado;
     private UsuarioFiltro usuariosFiltro;
+    private BtnClickListenerSeguir mClickListenerSeguir = null;
 
 
 
 
-    public UsuariosAdapter(@NonNull Context context, int resource, List<Usuario> objects) {
+    public UsuariosAdapter(@NonNull Context context, int resource, List<Usuario> objects,BtnClickListenerSeguir listenerSeguir) {
         super(context, resource, objects);
         this.listUsuarios = objects;
         this.context = context;
         this.resource = resource;
+        this.mClickListenerSeguir=listenerSeguir;
 
     }
 
@@ -80,6 +83,14 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
 
 
         Button bSeguir =view.findViewById(R.id.buttonSeguirBusqueda);
+        bSeguir.setTag(position);
+        bSeguir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickListenerSeguir != null)
+                    mClickListenerSeguir.onBtnClickSeguir((Integer) v.getTag());
+            }
+        });
 
 
 

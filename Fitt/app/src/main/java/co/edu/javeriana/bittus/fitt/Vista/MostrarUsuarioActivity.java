@@ -136,6 +136,8 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
 
     private void seguirUsuario() {
 
+
+
         usuarioConectado.getSeguidosList().add(uidUsuario);
         myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
             @Override
@@ -145,10 +147,6 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
                 myRef.setValue(item);
             }
         });
-
-
-
-
 
     }
 

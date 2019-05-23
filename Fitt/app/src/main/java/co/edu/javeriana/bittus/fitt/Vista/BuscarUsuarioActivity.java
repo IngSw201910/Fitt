@@ -3,6 +3,7 @@ package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,6 +30,7 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Adapters.UsuariosAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerSeguir;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
 public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatcher {
@@ -48,6 +50,9 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
     private FirebaseUser mAuth;
 
     private Usuario usuario;
+    private Usuario item;
+    private String uidUsuario;
+    private int positionEditar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,21 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
 
         EditTextNombreUsuarioABuscar.addTextChangedListener(this);
 
-        adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios );
+        adapterUsuarios = new UsuariosAdapter(BuscarUsuarioActivity.this, R.layout.item_usuario_row, listUsuarios,new BtnClickListenerSeguir() {
+            @Override
+            public void onBtnClickSeguir(int position) {
+                //positionEditar = position;
+                //item=listUsuarios.get(positionEditar);
+                //uidUsuario=uidsUsuarios.get(positionEditar);
+                //dejarDeSeguir();
+                /*if(!usuario.validarSeguido(uidUsuario)){
+                    seguirUsuario();
+                }else{
+
+                }*/
+
+            }
+        } );
 
 
 
@@ -173,5 +192,31 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
     @Override
     public void afterTextChanged(Editable s) {
 
+    }
+
+    private void seguirUsuario() {
+
+        usuario.getSeguidosList().add(uidUsuario);
+        myRef.setValue(usuario, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                item.getSeguidoresList().add(mAuth.getUid());
+                myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                myRef.setValue(item);
+            }
+        });
+
+    }
+
+    public void dejarDeSeguir(){
+        usuario.getSeguidosList().remove(uidUsuario);
+        myRef.setValue(usuario, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                item.getSeguidoresList().remove(mAuth.getUid());
+                myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                myRef.setValue(item);
+            }
+        });
     }
 }
