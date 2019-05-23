@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewDescansoEjercicioRepeticion"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Descanso:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSeriesEjercicioRepeticion" />
+
+    <TextView
+        android:id="@+id/textViewRepeticionesEjercicioRepeticion"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Repeticiones:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioRepeticion" />
+
+    <TextView
+        android:id="@+id/textViewSeriesEjercicioRepeticion"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Series:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRepeticionesEjercicioRepeticion" />
+
+    <TextView
+        android:id="@+id/textNombreEjercicioRepeticion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textEjercicioRepeticiones"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        android:text="Repeticiones"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeriesEjercicioRepeticion"
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioRepeticion" />
+
+    <TextView
+        android:id="@+id/textEjercicioSeries"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="8dp"
+        android:text="Series"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeriesEjercicioRepeticion"
+        app:layout_constraintTop_toBottomOf="@+id/textEjercicioRepeticiones" />
+
+    <TextView
+        android:id="@+id/textEjercicioDescanso"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:layout_marginEnd="8dp"
+        android:text="Descanso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewDescansoEjercicioRepeticion"
+        app:layout_constraintTop_toBottomOf="@+id/textEjercicioSeries" />
+
+</android.support.constraint.ConstraintLayout>

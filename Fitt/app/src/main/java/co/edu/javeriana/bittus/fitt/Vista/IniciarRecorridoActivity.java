@@ -28,6 +28,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
@@ -54,7 +55,7 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
     private TextView velocidadPromedioRecorrido;
     private double velocidadPromedioRecorridoN;
     private TextView caloriasRecorrido;
-    private double caloriasRecorridoN;
+    private int caloriasRecorridoN;
     private TextView tiempoRecorrido;
 
     private Chronometer chrono;
@@ -153,16 +154,28 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
 
         // Add a marker in Sydney and move the camera
 
+        mMap.setMapStyle(MapStyleOptions
+                .loadRawResourceStyle(this, R.raw.mapa_recorrido_style));
 
-        //Los botones adquieren funcionalidad únicamente cuando el mapa está listo:
+
+        //Los botones adquieren funcionalidad únicamente cuando el mapa está listo y hay permisos
 
         iniciarRecorrido = (ImageButton) findViewById(R.id.btnIniciarRecorrido);
+        iniciarRecorrido.setClickable(false);
+        iniciarRecorrido.setColorFilter(getResources().getColor(R.color.gris));
+
         finalizarRecorrido = (ImageButton) findViewById(R.id.btnFinalizarRecorrido);
+
+        Permisos.requestPermission(this, Manifest.permission.ACCESS_FINE_LOCATION, "El permiso es necesario para iniciar el recorrido.", ID_PERMISSION_LOCATION);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            iniciarRecorrido.setColorFilter(getResources().getColor(R.color.verdeFitt));
+            iniciarRecorrido.setClickable(true);
+        }
 
         iniciarRecorrido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Permisos.requestPermission((Activity) v.getContext(), Manifest.permission.ACCESS_FINE_LOCATION, "El permiso es necesario para acceder a la localización.", ID_PERMISSION_LOCATION);
+
                 startLocationUpdates();
 
                 chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
@@ -212,8 +225,8 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
 
     protected LocationRequest createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(20000); //cada 20 seg se obtiene la ubicación del usuario
-        mLocationRequest.setFastestInterval(20000); //máxima tasa de refresco
+        mLocationRequest.setInterval(10000); //cada 20 seg se obtiene la ubicación del usuario
+        mLocationRequest.setFastestInterval(10000); //máxima tasa de refresco
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         return mLocationRequest;
     }
@@ -240,7 +253,7 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
     }
 
     private void dibujarRuta (Location location){
-        PolylineOptions options = new PolylineOptions().width(5).color(Color.BLUE).geodesic(true);
+        PolylineOptions options = new PolylineOptions().width(6).color(R.color.verdeBotones).geodesic(true);
         options.add(new LatLng(latitudUltimaUbicacion, longitudUltimaUbicacion));
         options.add(new LatLng(location.getLatitude(), location.getLongitude()));
         mMap.addPolyline(options);
@@ -256,7 +269,7 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         //VELOCIDAD PROMEDIO
         int elapsedSeg = (int) (SystemClock.elapsedRealtime() - chrono.getBase())/1000;
         if (elapsedSeg!=0) {
-            Toast.makeText(getApplicationContext(), "tiempo: " + elapsedSeg, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "tiempo: " + elapsedSeg, Toast.LENGTH_SHORT).show();
             velocidadPromedioRecorridoN = (distanciaRecorridoN / elapsedSeg) * 3600;
             velocidadPromedioRecorrido.setText("Velocidad promedio:\n" + String.format("%.1f", velocidadPromedioRecorridoN) + " km/h");
         }
@@ -277,13 +290,31 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         pasosRecorridosN = (int) (distanciaRecorridoN / (distanciaPaso*0.001));
         pasosRecorridos.setText("Pasos:\n"+pasosRecorridosN);
 
+
+
+        caloriasRecorridoN = 0;
         //CALORIAS
+        if (velocidadPromedioRecorridoN>0 && velocidadPromedioRecorridoN<=8){
+            caloriasRecorridoN = (int) ((480*0.00028) * elapsedSeg);
+        }
+
+        if (velocidadPromedioRecorridoN>8 && velocidadPromedioRecorridoN<=9.6)
+            caloriasRecorridoN = (int) ((600*0.00028) * elapsedSeg);
 
 
+        if (velocidadPromedioRecorridoN>9.6 && velocidadPromedioRecorridoN<=11.2)
+            caloriasRecorridoN = (int) ((680*0.00028) * elapsedSeg);
 
 
+        if (velocidadPromedioRecorridoN>11.2 && velocidadPromedioRecorridoN<=12.8)
+            caloriasRecorridoN = (int) ((830*0.00028) * elapsedSeg);
 
 
+        if (velocidadPromedioRecorridoN>12.8)
+            caloriasRecorridoN = (int) ((890*0.00028) * elapsedSeg);
+
+
+        caloriasRecorrido.setText("Calorias:\n" + caloriasRecorridoN + " kcal");
 
 
     }
@@ -298,10 +329,13 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == ID_PERMISSION_LOCATION ){
                 if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    Toast.makeText(this, "Ya hay permiso para acceder a la localización", Toast.LENGTH_LONG).show();
-                    startLocationUpdates();
+                    Toast.makeText(this, "Ya hay permiso para acceder a la localización.", Toast.LENGTH_LONG).show();
+                    iniciarRecorrido.setColorFilter(getResources().getColor(R.color.verdeFitt));
+                    iniciarRecorrido.setClickable(true);
                 } else {
-                    Toast.makeText(this, "No hay Permiso", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "No hay permiso, no se puede iniciar el recorrido.", Toast.LENGTH_LONG).show();
+                    iniciarRecorrido.setColorFilter(getResources().getColor(R.color.gris));
+                    iniciarRecorrido.setClickable(false);
                 }
                 return;
         }

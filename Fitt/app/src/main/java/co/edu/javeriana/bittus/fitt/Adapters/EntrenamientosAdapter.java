@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
     private int resource;
     private Entrenamiento entrenamiento;
     private RutinasFiltro rutinasFiltro;
-    private BtnClickListenerEntrenamientoRow mClickListenerAdoptar;
+    private BtnClickListenerEntrenamientoRow mClickListener;
 
     public EntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerEntrenamientoRow listenerAdoptar) {
         super(context, resource, objects);
@@ -34,7 +35,7 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         this.context = context;
         this.resource = resource;
 
-        this.mClickListenerAdoptar = listenerAdoptar;
+        this.mClickListener = listenerAdoptar;
 
     }
 
@@ -59,14 +60,27 @@ public class EntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         ImageButton adoptar = view.findViewById(R.id.adoptar);
         adoptar.setTag(position);
 
+        ImageButton info = view.findViewById(R.id.imageButtonInformacion);
+        info.setTag(position);
+
+        RatingBar ratingBar = view.findViewById(R.id.ratingBarEntrenamiento);
+        ratingBar.setRating(entrenamiento.calcularRating());
+        
+
         adoptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mClickListenerAdoptar != null)
-                    mClickListenerAdoptar.onBtnClickAdoptar((Integer) v.getTag());
+                if(mClickListener != null)
+                    mClickListener.onBtnClickAdoptar((Integer) v.getTag());
             }
         });
-
+        info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickListener != null)
+                    mClickListener.onBtnClickInfo((Integer) v.getTag());
+            }
+        });
 
 
         return  view;

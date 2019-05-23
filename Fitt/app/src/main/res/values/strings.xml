@@ -38,7 +38,6 @@
     <string name="google_places_key">AIzaSyCfgUbdpuSBiocdZjspf77fcGavcnDVv4g</string>
 
 
-
     <string-array name="diasSemana">
         <item>Lunes</item>
         <item>Martes</item>
@@ -48,7 +47,6 @@
         <item>Sábado</item>
         <item>Domingo</item>
     </string-array>
-
 
 
 </resources>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#19B9B8B8"
-    tools:context=".Vista.PopUps.PopResenarParque">
+    tools:context=".Vista.PopUps.PopResenar">
 
     <TextView
         android:id="@+id/textViewNombreUsuario"

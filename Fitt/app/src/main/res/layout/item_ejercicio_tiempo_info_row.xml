@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textViewDescansoEjercicioTiempo"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Descanso:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSeriesEjercicioTiempo" />
+
+    <TextView
+        android:id="@+id/textViewTiempoEjercicioRepeticion"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Tiempo:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioTiempo" />
+
+    <TextView
+        android:id="@+id/textViewSeriesEjercicioTiempo"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Series:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTiempoEjercicioRepeticion" />
+
+    <TextView
+        android:id="@+id/textNombreEjercicioTiempo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Nombre"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textEjercicioTiempo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Repeticiones"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeriesEjercicioTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/textNombreEjercicioTiempo" />
+
+    <TextView
+        android:id="@+id/textEjercicioSeries"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Series"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewSeriesEjercicioTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/textEjercicioTiempo" />
+
+    <TextView
+        android:id="@+id/textEjercicioDescanso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Descanso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewDescansoEjercicioTiempo"
+        app:layout_constraintTop_toBottomOf="@+id/textEjercicioSeries" />
+
+</android.support.constraint.ConstraintLayout>

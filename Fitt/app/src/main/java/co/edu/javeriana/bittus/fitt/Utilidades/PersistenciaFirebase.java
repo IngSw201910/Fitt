@@ -153,4 +153,9 @@ public class PersistenciaFirebase {
         });
     }
 
+    public static void almacenarInformacionConKeyPersonalizada(String ruta, Object objeto, String key) {
+        myRef=database.getReference(ruta);
+        myRef=database.getReference(ruta+key);
+        myRef.setValue(objeto);
+    }
 }

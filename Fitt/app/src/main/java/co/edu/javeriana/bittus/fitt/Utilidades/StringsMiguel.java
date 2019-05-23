@@ -11,6 +11,7 @@ public class StringsMiguel {
     public final static String LLAVE_EJERCICIO_ENTRENAMIENTO_TIEMPO= "ejercicioTiempo";
     public final static String LLAVE_EJERCICIO_ENTRENAMIENTO_REPETICION= "ejercicioRepeticion";
     public static final String LLAVE_USUARIO = "usuario";
+    public static final String LLAVE_LLAVE = "llave";
 
     public final static String CAMPO_OBLIGATORIO = "Campo obligatorio";
     public final static String LISTRA_EJERCICIOS_VACIOS = "La lista de ejercicios no puede estar vacía";
@@ -33,6 +34,7 @@ public class StringsMiguel {
     public static final CharSequence SELECCIONAR_APLICACION = "Seleccione la aplicación";
 
     public static final String SIGUIENTE = "Siguiente";
+
 
 
 }
