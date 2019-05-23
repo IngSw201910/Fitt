@@ -184,7 +184,6 @@ public class EjercicioDescansoFragment extends Fragment {
 
     public void pausar(){
         if (estado == CORRIENDO) {
-
             estado = PAUSADO;
             timeWhenStopped = (chrono.getBase() - SystemClock.elapsedRealtime());
             chrono.stop();

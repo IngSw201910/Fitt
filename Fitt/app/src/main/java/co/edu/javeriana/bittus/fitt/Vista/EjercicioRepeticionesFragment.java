@@ -145,14 +145,16 @@ public class EjercicioRepeticionesFragment extends Fragment {
                     listener.iniciarMusicaEjercicioRepeticionOTiempo();
                     while (repeticion < ejercicioRepeticiones.getRepeticiones()) {
                         if (estado == CORRIENDO) {
-                            listener.darInstrucciones("1");
+                            if (estado == CORRIENDO)
+                                listener.darInstrucciones("1");
                             try {
                                 sleep(1000);
                             } catch (InterruptedException e) {
                                 this.interrupt();
                                 break;
                             }
-                            listener.darInstrucciones("2");
+                            if (estado == CORRIENDO)
+                                listener.darInstrucciones("2");
                             repeticion++;
                             getActivity().runOnUiThread(new Runnable() {
 
