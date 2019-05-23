@@ -121,6 +121,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         }
         else{
             Toast.makeText(ParqueInformacionDetalladaActivity.this, "No hay informacion disponible de este parque", Toast.LENGTH_LONG).show();
+
         }
 
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +157,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                     Parque nuevoParque = new Parque(nombreParque.getText().toString(), (float) 2.0, latitud, longitud);
                     subirParque(nuevoParque);
                     park = nuevoParque;
+
                 }
                 iniciarPopupParque();
             }
@@ -199,6 +201,8 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         } else if(requestCode == Utils.REQUEST_CODE_RESENA  && resultCode==RESULT_OK){
             Reseña reseñarecibida = (Reseña) data.getExtras().getSerializable(StringsSebastian.LLAVE_RESENA);
             subirReseña(reseñarecibida);
+            reseñaAdaptador = new ReseñaAdaptador(this, R.layout.elemento_lista_resena_parque, park.getReseñas());
+            reseñas.setAdapter(reseñaAdaptador);
             reseñaAdaptador.notifyDataSetChanged();
         }
 
@@ -234,6 +238,8 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                     if (longitud == parque.getLongitud() &&  latitud == parque.getLatitud()) {
                         Toast.makeText(ParqueInformacionDetalladaActivity.this, "El parque si existe"+parque.getCalificación(),Toast.LENGTH_SHORT).show();
                         park = parque;
+                        reseñaAdaptador = new ReseñaAdaptador(ParqueInformacionDetalladaActivity.this, R.layout.elemento_lista_resena_parque, park.getReseñas());
+                        reseñas.setAdapter(reseñaAdaptador);
                         break;
                     }
                 }
