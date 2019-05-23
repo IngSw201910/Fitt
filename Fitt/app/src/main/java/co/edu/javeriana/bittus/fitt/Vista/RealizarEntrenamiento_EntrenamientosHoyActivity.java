@@ -117,7 +117,7 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
                     List<EjercicioEntrenamiento> ejercicioEntrenamientos = new ArrayList<>();
                     for(DataSnapshot singleSnapshotE: snapshot.getChildren()){
 
-                        for(DataSnapshot singleSnapshotF: singleSnapshotE.getChildren()){
+                        DataSnapshot singleSnapshotF = singleSnapshotE.child("ejercicioEntrenamientoList");
 
                             for(DataSnapshot singleSnapshotG: singleSnapshotF.getChildren()) {
 
@@ -140,7 +140,6 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
                                 }
 
                             }
-                        }
 
 
                     }

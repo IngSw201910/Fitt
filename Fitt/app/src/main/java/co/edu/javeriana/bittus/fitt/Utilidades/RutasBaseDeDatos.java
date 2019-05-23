@@ -10,7 +10,7 @@ public final class RutasBaseDeDatos {
 
     private static String rutaEjercicios = "/ejercicios/";
 
-    private static String rutaEntrenamientos = "/entrenamientos/";
+    public static String RUTA_ENTRENAMIENTOS = "/entrenamientos/";
     private static String rutaEntrenamientosPublicos = "/entrenamientos_publicos/";
     private static String rutaEntrenamientosAdoptados = "/entrenamientos_adoptados/";
 
@@ -27,13 +27,13 @@ public final class RutasBaseDeDatos {
 
     public static final String RUTA_FOTO_TITULOS = "/FotoTitulos/";
 
+    public static final String RUTA_FOTO_PARQUE = "/FotoParque/";
+
 
     public static String getRutaEjercicios() {
         return rutaEjercicios;
     }
-    public static String getRutaEntrenamientos() {
-        return rutaEntrenamientos;
-    }
+
 
 
     public static String getRutaEntrenamientosPublicos(){return rutaEntrenamientosPublicos;}
