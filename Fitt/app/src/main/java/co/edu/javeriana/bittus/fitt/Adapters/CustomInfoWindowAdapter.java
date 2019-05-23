@@ -61,6 +61,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             tvSnippet.setText(snippet);
         }
         ImageView fotoParque = (ImageView) view.findViewById(R.id.imageViewParque);
+        fotoParque.setImageResource(R.drawable.parques);
 
         RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
 
