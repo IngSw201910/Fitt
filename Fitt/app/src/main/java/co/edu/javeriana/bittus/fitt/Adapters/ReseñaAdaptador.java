@@ -38,7 +38,7 @@ public class ReseñaAdaptador extends ArrayAdapter<Reseña> {
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         View vista = convertView;
         if(vista == null){
-            vista = inflater.inflate(R.layout.elemento_lista_resena_parque, null);
+            vista = LayoutInflater.from(context).inflate(R.layout.elemento_lista_resena_parque, null);
         }
         TextView nombreUsuario = (TextView) vista.findViewById(R.id.textViewNomUsuario);
         TextView fecha = (TextView) vista.findViewById(R.id.textViewFechaReseña);
@@ -48,7 +48,7 @@ public class ReseñaAdaptador extends ArrayAdapter<Reseña> {
 
         if (!reseñas.isEmpty()) {
             nombreUsuario.setText(reseñas.get(i).getUsuario().getNombre());
-            fecha.setText(reseñas.get(i).getFecha().toString());
+            fecha.setText(reseñas.get(i).getFecha().getDate()+"/"+(reseñas.get(i).getFecha().getMonth()+1)+"/"+(reseñas.get(i).getFecha().getYear()+1900));
             comentario.setText(reseñas.get(i).getReseña());
             calificacion.setRating(reseñas.get(i).getCalificacion());
             PersistenciaFirebase.descargarFotoYPonerEnImageView(reseñas.get(i).getUsuario().getDireccionFoto(), fotoUsuario);

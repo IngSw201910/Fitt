@@ -20,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 
+import co.edu.javeriana.bittus.fitt.Adapters.ReseñaAdaptador;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
@@ -82,6 +83,11 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
         textViewDescripcion.setText(entrenamiento.getDescripcion());
 
         ratingBarEntrenamiento.setRating(entrenamiento.calcularRating());
+
+
+        ReseñaAdaptador adaptador = new ReseñaAdaptador(this,R.layout.elemento_lista_resena_parque,entrenamiento.getReseñas());
+
+        listViewReseñas.setAdapter(adaptador);
 
 
         database = FirebaseDatabase.getInstance();

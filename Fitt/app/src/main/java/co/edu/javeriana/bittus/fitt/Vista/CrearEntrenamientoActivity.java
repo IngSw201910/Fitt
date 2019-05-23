@@ -22,6 +22,7 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
+import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
@@ -127,7 +128,8 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
             entrenamiento.setEjercicioEntrenamientoList(entrenamientoList);
             List<Reseña> listaReseñas = entrenamiento.getReseñas();
 
-            listaReseñas.add(new Reseña(null, "prueba2", new Date(), 1.5f));
+            listaReseñas.add(new Reseña(new Usuario("pruebarr","prueba",RutasBaseDeDatos.RUTA_FOTO_USUARIOS+user.getUid(),new Date(),"Sexo",2f,3f), "prueba2", new Date(), 1.5f));
+
 
             String key = PersistenciaFirebase.almacenarInformacionConKey(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+user.getUid()+"/", entrenamiento);
             if (entrenamiento.isPublica())
