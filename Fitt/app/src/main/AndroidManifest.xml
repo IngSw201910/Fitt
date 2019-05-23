@@ -67,7 +67,7 @@
         <activity android:name=".Vista.IniciarRecorridoActivity" />
         <activity android:name=".Vista.EntrenadorActivity" />
         <activity android:name=".Vista.CalendarioActivity" />
-        <activity android:name=".Vista.MisRutinasActivity" />
+        <activity android:name=".Vista.MisEntrenamientosActivity" />
         <activity android:name=".Vista.MiProgresoActivity" />
         <activity android:name=".Vista.LogrosActivity" />
         <activity android:name=".Vista.MenuPrincipalUsuarioFragment" />

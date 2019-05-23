@@ -5,11 +5,15 @@ import android.os.Bundle;
 
 import co.edu.javeriana.bittus.fitt.R;
 
-public class MisRutinasActivity extends AppCompatActivity {
+public class MisEntrenamientosActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_rutinas);
+
+
+        
+
     }
 }
