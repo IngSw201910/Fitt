@@ -35,6 +35,8 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private DatabaseReference myRef;
     private FirebaseUser mAuth;
     private Parque parqueEncontrado;
+    private ImageView fotoParque;
+    private RatingBar ratingBar;
 
 
     public CustomInfoWindowAdapter(Context context) {
@@ -60,16 +62,11 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         if(!snippet.equals("")){
             tvSnippet.setText(snippet);
         }
-        ImageView fotoParque = (ImageView) view.findViewById(R.id.imageViewParque);
-        fotoParque.setImageResource(R.drawable.parques);
+        fotoParque = (ImageView) view.findViewById(R.id.imageViewParque);
+        //fotoParque.setImageResource(R.drawable.parques);
 
-        RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
-
-        buscarParque(fotoParque, ratingBar);
-
-
-
-
+        //ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+        //ratingBar.setRating(0.0f);
 
         String ss = marker.getSnippet();
         String[] lineasPartidas = ss.split("\n");
@@ -80,7 +77,10 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         latitud = Double.parseDouble(latitudP[1]);
 
 
-        // Aqui se tienen que hacer las consultas para agregar la imagen la calificacion y demas
+        buscarParque(view);
+
+
+      // Aqui se tienen que hacer las consultas para agregar la imagen la calificacion y demas
     }
 
     @Override
@@ -95,7 +95,7 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         return mWindow;
     }
 
-    public void buscarParque(final ImageView imageView,final RatingBar ratingBar) {
+    public void buscarParque( final View view) {
         myRef = database.getReference(RutasBaseDeDatos.getRutaParques());
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -108,19 +108,27 @@ public class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
                     if (longitud== parque.getLongitud()  && latitud == parque.getLatitud()) {
 
                         parqueEncontrado = parque;
-                        if(parque!=null){
+                        if(parqueEncontrado!=null){
 
                             if (!parqueEncontrado.getImagenes().isEmpty()) {
-
-                                PersistenciaFirebase.descargarFotoYPonerEnImageView(parqueEncontrado.getImagenes().get(0), imageView);
-
-
-                                ratingBar.setRating(parque.obtenercalificacion());
+                                PersistenciaFirebase.descargarFotoYPonerEnImageView(parqueEncontrado.getImagenes().get(0), fotoParque);
                             }
+
+                            ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+                            ratingBar.setRating(parqueEncontrado.obtenercalificacion());
+                            //ratingBar.setRating(parqueEncontrado.obtenercalificacion());
+                            Log.i("aiuda", "Entra: "+ parqueEncontrado.obtenercalificacion());
+                            encontrado = true;
+                            break;
                         }
-                        break;
                     }
 
+                }
+                if(encontrado == false) {
+                    ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
+                    ratingBar.setRating(0.0f);
+                    fotoParque = (ImageView) view.findViewById(R.id.imageViewParque);
+                    fotoParque.setImageResource(R.drawable.parques);
                 }
             }
             @Override
