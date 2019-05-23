@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -16,6 +15,7 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Filtros.RutinasFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
+import co.edu.javeriana.bittus.fitt.Modelo.EntrenamientoAdoptado;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerEntrenamientoRow;
 
@@ -23,18 +23,19 @@ import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerEntrenamientoRow;
 public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
 
     private List<Entrenamiento> listEntrenamiento;
+    private List<Boolean> adoptado;
     private Context context;
     private int resource;
     private Entrenamiento entrenamiento;
     private RutinasFiltro rutinasFiltro;
     private BtnClickListenerEntrenamientoRow mClickListener;
 
-    public MisEntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerEntrenamientoRow listenerAdoptar) {
+    public MisEntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerEntrenamientoRow listenerAdoptar, List<Boolean> adoptado) {
         super(context, resource, objects);
         this.listEntrenamiento = objects;
         this.context = context;
         this.resource = resource;
-
+        this.adoptado = adoptado;
         this.mClickListener = listenerAdoptar;
 
     }
@@ -56,9 +57,12 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
 
         TextView dificultad = view.findViewById(R.id.textView14);
         dificultad.setText(entrenamiento.getDificultad());
-
         ImageButton adoptar = view.findViewById(R.id.adoptar);
-        adoptar.setTag(position);
+        if(adoptado.get(position)){
+            adoptar.setImageResource(R.drawable.borrar);
+            adoptar.setTag(position);
+        }
+
 
         ImageButton info = view.findViewById(R.id.imageButtonInformacion);
         info.setTag(position);
@@ -67,7 +71,9 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         ratingBar.setRating(entrenamiento.calcularRating());
 
 
-        ImageButton edit = view.findViewById(R.id.ratingBarEntrenamiento);
+
+        ImageButton edit = view.findViewById(R.id.buttonEdit);
+        edit.setTag(position);
 
 
         adoptar.setOnClickListener(new View.OnClickListener() {

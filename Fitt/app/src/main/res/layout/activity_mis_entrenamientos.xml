@@ -7,7 +7,7 @@
     tools:context=".Vista.MisEntrenamientosActivity">
 
     <ListView
-        android:id="@+id/listViewRutinas"
+        android:id="@+id/listViewMisEntrenamientos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="30dp"
