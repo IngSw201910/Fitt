@@ -63,19 +63,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <GridView
-        android:id="@+id/grid_view"
-        android:layout_width="0dp"
-        android:layout_height="183dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="25dp"
-        android:columnWidth="100dp"
-        android:numColumns="2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDireccion" />
-
     <Button
         android:id="@+id/buttonAgregarReseña"
         android:layout_width="wrap_content"
@@ -109,10 +96,8 @@
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/grid_view"
         app:layout_constraintEnd_toStartOf="@+id/imageButtonAnadirFotos"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/ic_take_photo" />
@@ -123,10 +108,8 @@
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/grid_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/ic_add_photos" />
@@ -145,6 +128,17 @@
         android:stepSize="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/grid_view" />
+        app:layout_constraintTop_toBottomOf="@+id/listViewImagenesParque" />
+
+    <ListView
+        android:id="@+id/listViewImagenesParque"
+        android:layout_width="0dp"
+        android:layout_height="184dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDireccion" />
 
 </android.support.constraint.ConstraintLayout>

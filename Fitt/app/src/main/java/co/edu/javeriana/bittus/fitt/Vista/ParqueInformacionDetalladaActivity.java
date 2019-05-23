@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -29,11 +28,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import co.edu.javeriana.bittus.fitt.Adapters.GridAdapter;
+import co.edu.javeriana.bittus.fitt.Adapters.FotoParquesAdapter;
 import co.edu.javeriana.bittus.fitt.Adapters.ReseñaAdaptador;
 import co.edu.javeriana.bittus.fitt.Modelo.Parque;
 import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
@@ -53,7 +50,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
     private TextView direccion;
     private ImageButton btnTomarFoto;
     private ImageButton btnAñadirFotos;
-    private GridView gridView;
+    private ListView listViewImagenes;
     private RatingBar calificacion;
     private Button añadirReseña;
     private ListView reseñas;
@@ -65,7 +62,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
     private FirebaseUser mAuth;
     private Usuario usuario;
     private ReseñaAdaptador reseñaAdaptador;
-    private GridAdapter gridAdapter;
+    private FotoParquesAdapter fotoParquesAdapter;
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 11;
     public static final int REQUEST_CODE_UPLOAD_PHOTO = 12;
@@ -79,7 +76,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         direccion = (TextView) findViewById(R.id.textViewDireccion);
         btnTomarFoto = (ImageButton) findViewById(R.id.imageButtonTomarFoto);
         btnAñadirFotos = (ImageButton) findViewById(R.id.imageButtonAnadirFotos);
-        gridView= (GridView) findViewById(R.id.grid_view);
+        listViewImagenes= (ListView) findViewById(R.id.listViewImagenesParque);
         calificacion = (RatingBar) findViewById(R.id.ratingBarDetalle);
         añadirReseña = (Button) findViewById(R.id.buttonAgregarReseña);
         reseñas = (ListView) findViewById(R.id.ListViewReseñas);
@@ -110,12 +107,12 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         });
 
         buscarParque();
-        if (park!=null){
+        /*if (park!=null){
             //sacar imagenes de la base de datos
             GridAdapter gridAdapter = new GridAdapter(this, park.getImagenes());
             gridView.setAdapter(gridAdapter);
             /*Toast.makeText(ParqueInformacionDetalladaActivity.this, park.getReseñas().size(), Toast.LENGTH_LONG).show();
-            Toast.makeText(ParqueInformacionDetalladaActivity.this, "ok", Toast.LENGTH_LONG).show();*/
+            Toast.makeText(ParqueInformacionDetalladaActivity.this, "ok", Toast.LENGTH_LONG).show();
             reseñaAdaptador = new ReseñaAdaptador(this, R.layout.elemento_lista_resena_parque, park.getReseñas());
             reseñas.setAdapter(reseñaAdaptador);
             calificacion.setRating(obtenercalificacion());
@@ -123,7 +120,7 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
         else{
             Toast.makeText(ParqueInformacionDetalladaActivity.this, "No hay informacion disponible de este parque", Toast.LENGTH_LONG).show();
 
-        }
+        }*/
 
         btnTomarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,8 +177,8 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
             String ruta =RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire()+"/"+formatter.format(date);
             //subir ruta foto
             subirRutaFoto (ruta);
-            gridAdapter = new GridAdapter(this,  park.getImagenes());
-            gridView.setAdapter(gridAdapter);
+            fotoParquesAdapter = new FotoParquesAdapter(this, R.layout.single_item ,park.getImagenes());
+            listViewImagenes.setAdapter(fotoParquesAdapter);
         }else if(requestCode == REQUEST_CODE_UPLOAD_PHOTO  && resultCode==RESULT_OK){
             Uri path = data.getData();
             try {
@@ -193,8 +190,8 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                 String ruta =RutasBaseDeDatos.RUTA_FOTO_PARQUE+park.getNombreParqueFire()+"/"+formatter.format(date);
                 //subir ruta foto
                 subirRutaFoto (ruta);
-                gridAdapter = new GridAdapter(this,  park.getImagenes());
-                gridView.setAdapter(gridAdapter);
+                fotoParquesAdapter = new FotoParquesAdapter(this, R.layout.single_item ,park.getImagenes());
+                listViewImagenes.setAdapter(fotoParquesAdapter);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -242,8 +239,8 @@ public class ParqueInformacionDetalladaActivity extends AppCompatActivity {
                         park = parque;
                         reseñaAdaptador = new ReseñaAdaptador(ParqueInformacionDetalladaActivity.this, R.layout.elemento_lista_resena_parque, park.getReseñas());
                         reseñas.setAdapter(reseñaAdaptador);
-                        gridAdapter = new GridAdapter(ParqueInformacionDetalladaActivity.this, park.getImagenes());
-                        gridView.setAdapter(gridAdapter);
+                        fotoParquesAdapter = new FotoParquesAdapter(ParqueInformacionDetalladaActivity.this, R.layout.single_item ,park.getImagenes());
+                        listViewImagenes.setAdapter(fotoParquesAdapter);
                         calificacion.setRating(obtenercalificacion());
                         encontrado = true;
                         break;
