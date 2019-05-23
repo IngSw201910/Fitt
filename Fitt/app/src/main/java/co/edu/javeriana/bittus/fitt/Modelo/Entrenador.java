@@ -88,19 +88,20 @@ public class Entrenador extends Usuario implements Serializable {
     }
 
 
-    public  List<Usuario> getSeguidosList(){
+
+    public  List<String> getSeguidosList(){
         return seguidosList;
     }
 
-    public void setSeguidosList(List<Usuario> seguidosList){
+    public void setSeguidosList(List<String> seguidosList){
         this.seguidosList=seguidosList;
     }
 
-    public List<Usuario> getSeguidoresList(){
+    public List<String> getSeguidoresList(){
         return seguidoresList;
     }
 
-    public void setSeguidoresList(List<Usuario> seguidoresList){
+    public void setSeguidoresList(List<String> seguidoresList){
         this.seguidoresList=seguidoresList;
     }
 
@@ -111,6 +112,7 @@ public class Entrenador extends Usuario implements Serializable {
     public void setPrivacidad(boolean privacidad) {
         this.privacidad = privacidad;
     }
+
     public String getDescripccion() {
         return descripccion;
     }

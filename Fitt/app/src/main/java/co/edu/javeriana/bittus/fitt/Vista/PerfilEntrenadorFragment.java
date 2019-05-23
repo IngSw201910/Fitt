@@ -85,6 +85,10 @@ public class PerfilEntrenadorFragment extends Fragment {
         seguidores =v.findViewById(R.id.buttonSeguidoresE);
         siguiendo =v.findViewById(R.id.buttonSiguiendoE);
 
+        puntaje=v.findViewById(R.id.ratingBarPerfilE);
+        puntaje.setNumStars(5);
+        puntaje.setEnabled(false);
+
         nombre =v.findViewById(R.id.editTextNombre);
         nombre.setEnabled(false);
 
@@ -126,11 +130,12 @@ public class PerfilEntrenadorFragment extends Fragment {
 
                 entrenador = dataSnapshot.getValue(Entrenador.class);
                 nombre.setText(entrenador.getNombre());
-                /*correo.setText(entrenador.getCorreo());
+                correo.setText(entrenador.getCorreo());
                 peso.setText(String.valueOf(entrenador.getPeso()));
                 altura.setText(String.valueOf(entrenador.getAltura()));
-                nacimiento.setText(String.valueOf(entrenador.getFechaNacimiento()));*/
-
+                nacimiento.setText(entrenador.getFechaNacimiento().getDate()+"/"+entrenador.getFechaNacimiento().getMonth()+"/"+entrenador.getFechaNacimiento().getYear());
+                //puntaje.setRating(entrenador.get);
+                experiencia.setText(entrenador.getDescripccion());
 
             }
 
