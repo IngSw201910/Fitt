@@ -10,10 +10,9 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mis_rutinas);
+        setContentView(R.layout.activity_mis_entrenamientos);
 
 
-        
 
     }
 }
