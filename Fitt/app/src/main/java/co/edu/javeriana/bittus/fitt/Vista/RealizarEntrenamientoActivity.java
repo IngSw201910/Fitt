@@ -118,7 +118,7 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
                         textToSpeech.setPitch(0.6f);
                         textToSpeech.setSpeechRate(1.0f);
 
-                        darInstrucciones("Hola, ¿preparado para entrenar?");
+                        darInstrucciones("Hola, bienvenido a tu entrenamiento "+entrenamiento.getNombre());
                         while (estaDandoInstrucciones()) ;
                     }
                     iniciaroReanudarPausarB.setFocusableInTouchMode(true);
@@ -175,12 +175,14 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
                 switch (estadoSonidoMusica) {
                     case ACTIVADO:
                         estadoSonidoMusica = DESACTIVADO;
-                        reproductor.setVolume(0.0f, 0.0f);
+                        if (reproductor != null)
+                            reproductor.setVolume(0.0f, 0.0f);
                         cambiarBotonSonidoMusica();
                         break;
                     case DESACTIVADO:
                         estadoSonidoMusica = ACTIVADO;
-                        reproductor.setVolume(1.0f, 1.0f);
+                        if (reproductor !=null)
+                            reproductor.setVolume(1.0f, 1.0f);
                         cambiarBotonSonidoMusica();
                         break;
                 }
@@ -191,14 +193,22 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
             @Override
             public void onClick(View v) {
 
+                estado = CORRIENDO;
+                cambiarBoton();
 
-                if (textToSpeech != null)
+
+                if (textToSpeech != null){
                     textToSpeech.stop();
-                if (reproductor != null)
-                    reproductor.pause();
+                }
+
+                if (reproductor != null) {
+                    reproductor.stop();
+                    reproductor = null;
+                }
                 mostrarSiguienteEjercicio();
-                if (estado == PAUSADO)
-                    pausarEntrenamiento();
+                // cuando se coloca el siguiente ejercicio, automaticamente se reanuda la reproducción
+
+
 
             }
         });
@@ -432,22 +442,51 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
         return false;
     }
 
-    public void iniciarMusicaEjercicioRepeticionOTiempo() {
+    public void iniciarMusicaEjercicioRepeticionOTiempo(boolean iniciarInmediatamente) {
+        if (reproductor != null) {
+            reproductor.stop();
+            reproductor = null;
+        }
+
         reproductor = MediaPlayer.create(this, R.raw.training_music);
         reproductor.setLooping(true);
-        reproductor.start();
+        if (estadoSonidoMusica == DESACTIVADO)
+            reproductor.setVolume(0.0f, 0.0f);
+        if (iniciarInmediatamente)
+            reproductor.start();
     }
 
-    public void iniciarMusicaEjercicioDescanso() {
+    public void iniciarMusicaEjercicioDescanso(boolean iniciarInmediatamente) {
+        if (reproductor != null) {
+            reproductor.stop();
+            reproductor = null;
+        }
+
         reproductor = MediaPlayer.create(this, R.raw.sonido_descanso);
         reproductor.setLooping(true);
-        reproductor.start();
+        if (estadoSonidoMusica == DESACTIVADO)
+            reproductor.setVolume(0.0f, 0.0f);
+        if (iniciarInmediatamente)
+            reproductor.start();
     }
 
     public void detenerMusica() {
         if (reproductor != null) {
             reproductor.stop();
             reproductor = null;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        super.onBackPressed();
+        if (reproductor != null) {
+            reproductor.stop();
+            reproductor = null;
+        }
+        if(textToSpeech !=null){
+            textToSpeech.stop();
         }
     }
 }
