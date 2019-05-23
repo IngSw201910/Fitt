@@ -59,8 +59,9 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         TextView dificultad = view.findViewById(R.id.textView14);
         dificultad.setText(entrenamiento.getDificultad());
         ImageButton adoptar = view.findViewById(R.id.adoptar);
+        adoptar.setTag(position);
         if(adoptado.get(position)){
-            adoptar.setImageResource(R.drawable.ic_delete_forever_black_24dp);
+            adoptar.setImageResource(R.drawable.desadopterdp);
             adoptar.setTag(position);
         }
 
