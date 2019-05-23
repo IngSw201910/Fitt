@@ -24,6 +24,7 @@ public class GridAdapter extends BaseAdapter {
 
     public GridAdapter(Context context, List<String> imagenes) {
         this.context = context;
+        this.thisInflater = LayoutInflater.from(context);
         this.imagenes = imagenes;
     }
 
