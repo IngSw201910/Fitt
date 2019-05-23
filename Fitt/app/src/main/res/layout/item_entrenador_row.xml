@@ -12,7 +12,7 @@
         android:src="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/nombreUsuarioEntrenador"
+        android:id="@+id/item_nombreEntrenador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="username"
@@ -23,22 +23,34 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/item_numClientesEntrenador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="# Clientes"
-        android:textSize="16sp"
-        android:layout_toRightOf="@id/imagenPerfilUser"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@id/imagenPerfilUser"
+        android:text="# Clientes"
+        android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/item_estatus_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="estatusTitulo"
-        android:textSize="16sp"
-        android:layout_toRightOf="@id/imagenPerfilUser"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:layout_toRightOf="@id/imagenPerfilUser"
+        android:text="estatusTitulo"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/item_aniosExpEntrenador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="70dp"
+        android:layout_toRightOf="@id/imagenPerfilUser"
+        android:text="# Años de experiencia"
+        android:textSize="16sp" />
 
     <RatingBar
         android:id="@+id/ratingBarDetalle"
@@ -53,5 +65,14 @@
         android:stepSize="1"
         android:layout_toRightOf="@id/imagenPerfilUser"
         />
+
+    <ImageView
+        android:id="@+id/masInfoImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/mas_info_entrenador"
+        android:tint="@color/verdeFitt" />
 
 </RelativeLayout>
