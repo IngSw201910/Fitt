@@ -21,10 +21,15 @@ public class Usuario implements Serializable {
     protected float peso;
 
 
-
     protected List<String> seguidosList;
     protected List<String> seguidoresList;
     protected boolean privacidad;
+
+
+
+
+
+
 
 
 
@@ -33,9 +38,6 @@ public class Usuario implements Serializable {
         this.nombre = nombre;
         this.correo = correo;
     }
-
-
-
 
 
 

@@ -83,4 +83,14 @@ public class Parque implements Serializable {
     public void setLatitud(double latitud) {
         this.latitud = latitud;
     }
+
+    public float obtenercalificacion() {
+        float promedio = 0;
+
+        for (Reseña reseña : reseñas){
+                promedio = promedio + reseña.getCalificacion();
+        }
+        promedio = promedio/reseñas.size();
+        return promedio;
+    }
 }
