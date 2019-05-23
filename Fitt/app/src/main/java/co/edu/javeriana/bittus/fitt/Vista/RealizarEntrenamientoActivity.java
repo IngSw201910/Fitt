@@ -436,13 +436,13 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
         loadFragment(fragment);
     }
 
-    public boolean estaDandoInstrucciones() {
+    public synchronized boolean estaDandoInstrucciones() {
         if (textToSpeech.isSpeaking())
             return true;
         return false;
     }
 
-    public void iniciarMusicaEjercicioRepeticionOTiempo(boolean iniciarInmediatamente) {
+    public synchronized void iniciarMusicaEjercicioRepeticionOTiempo(boolean iniciarInmediatamente) {
         if (reproductor != null) {
             reproductor.stop();
             reproductor = null;
@@ -454,9 +454,13 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
             reproductor.setVolume(0.0f, 0.0f);
         if (iniciarInmediatamente)
             reproductor.start();
+        else {
+            reproductor.start();
+            reproductor.pause();
+        }
     }
 
-    public void iniciarMusicaEjercicioDescanso(boolean iniciarInmediatamente) {
+    public synchronized void iniciarMusicaEjercicioDescanso(boolean iniciarInmediatamente) {
         if (reproductor != null) {
             reproductor.stop();
             reproductor = null;
@@ -468,9 +472,13 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
             reproductor.setVolume(0.0f, 0.0f);
         if (iniciarInmediatamente)
             reproductor.start();
+        else {
+            reproductor.start();
+            reproductor.pause();
+        }
     }
 
-    public void detenerMusica() {
+    public synchronized void detenerMusica() {
         if (reproductor != null) {
             reproductor.stop();
             reproductor = null;
