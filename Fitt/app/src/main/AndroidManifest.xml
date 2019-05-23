@@ -42,6 +42,8 @@
         <activity android:name=".Vista.registroPrueba" />
         <activity android:name=".Vista.RealizarEntrenamientoActivity" />
         <activity android:name=".Vista.Entrenador_buscarEntrenadorActivity" />
+        <activity android:name=".Vista.InformacionMiEntrenamientoActivity"/>
+        <activity android:name=".Vista.InformacionEntrenamientoReseñarActivity"/>
         <activity android:name=".Vista.Entrenador_miEntrenadorActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

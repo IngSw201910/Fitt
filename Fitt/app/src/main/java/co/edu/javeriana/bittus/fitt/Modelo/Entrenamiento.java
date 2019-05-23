@@ -38,7 +38,10 @@ public class Entrenamiento implements Serializable {
         this.reseñas = reseñas;
     }
 
-    public Entrenamiento() {super();}
+    public Entrenamiento() {super();
+        reseñas= new ArrayList<>();
+        ejercicioEntrenamientoList = new ArrayList<>();
+    }
 
     public int getDuracion() {
         return duracion;

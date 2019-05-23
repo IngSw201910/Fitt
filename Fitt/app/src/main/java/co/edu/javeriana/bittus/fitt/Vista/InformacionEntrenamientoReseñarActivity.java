@@ -1,35 +1,39 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
-
 import co.edu.javeriana.bittus.fitt.Adapters.ReseñaAdaptador;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
+import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
-import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsSebastian;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopResenar;
 
-public class InformacionEntrenamientoActivity extends AppCompatActivity {
+public class InformacionEntrenamientoReseñarActivity extends AppCompatActivity {
 
     private TextView textViewNombreEntrenamiento;
     private TextView textViewDuracion;
@@ -42,10 +46,13 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
     private ImageButton imageButtonAdoptar;
     private ImageButton imageButtonEjercicios;
     private RatingBar ratingBarEntrenamiento;
+    private Button buttonReseñar;
 
     private Entrenamiento entrenamiento;
     private Usuario usuarioCreador;
     private String llaveEntrenamiento;
+    private Usuario usuario;
+    private ReseñaAdaptador adaptador;
 
     private DatabaseReference myRef;
     private FirebaseDatabase database;
@@ -54,7 +61,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_informacion_entrenamiento);
+        setContentView(R.layout.activity_informacion_entrenamiento_resenar);
 
         textViewNombreEntrenamiento = (TextView)findViewById(R.id.textViewNombreEntrenamiento);
         textViewDuracion = (TextView)findViewById(R.id.textViewDuracion);
@@ -69,6 +76,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
 
         imageButtonAdoptar = (ImageButton) findViewById(R.id.imageButtonAdoptar);
         imageButtonEjercicios = (ImageButton) findViewById(R.id.imageButtonVerEjerciciosEntrenamiento);
+        buttonReseñar = (Button) findViewById(R.id.buttonReseñar);
 
         ratingBarEntrenamiento = (RatingBar) findViewById(R.id.ratingBarEntrenamiento);
 
@@ -87,7 +95,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
         ratingBarEntrenamiento.setRating(entrenamiento.calcularRating());
 
 
-        ReseñaAdaptador adaptador = new ReseñaAdaptador(this,R.layout.elemento_lista_resena_parque,entrenamiento.getReseñas());
+        adaptador = new ReseñaAdaptador(this,R.layout.elemento_lista_resena_parque,entrenamiento.getReseñas());
 
         listViewReseñas.setAdapter(adaptador);
 
@@ -133,6 +141,20 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
 
             }
         });
+
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usuario = dataSnapshot.getValue(Usuario.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         imageButtonAdoptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,10 +167,47 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
                 ejercicios();
             }
         });
+        buttonReseñar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                reseñar();
+            }
+        });
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == Utils.REQUEST_CODE_RESENA  && resultCode==RESULT_OK){
+            Reseña reseñarecibida = (Reseña) data.getExtras().getSerializable(StringsSebastian.LLAVE_RESENA);
+            subirReseña(reseñarecibida);
+            adaptador.notifyDataSetChanged();
+        }
+
+
+    }
+
+    private void reseñar() {
+
+        Intent intent = new Intent(InformacionEntrenamientoReseñarActivity.this, PopResenar.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, usuario);
+        intent.putExtras(bundle);
+        startActivityForResult(intent, Utils.REQUEST_CODE_RESENA);
+
+
+    }
+    public void subirReseña (Reseña reseña){
+        entrenamiento.getReseñas().add(reseña);
+        database = FirebaseDatabase.getInstance();
+        String key =  llaveEntrenamiento ;
+        myRef=database.getReference(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+key);
+        myRef.setValue(entrenamiento);
+    }
     private void ejercicios() {
-        Intent intent = new Intent(InformacionEntrenamientoActivity.this, InformacionEntrenamientoEjerciciosActivity.class);
+        Intent intent = new Intent(InformacionEntrenamientoReseñarActivity.this, InformacionEntrenamientoEjerciciosActivity.class);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
@@ -158,7 +217,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
     }
 
     private void adoptar() {
-        Intent intent = new Intent(InformacionEntrenamientoActivity.this, AdoptarEntrenamientoActivity.class);
+        Intent intent = new Intent(InformacionEntrenamientoReseñarActivity.this, AdoptarEntrenamientoActivity.class);
         intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
         startActivity(intent);
         finish();

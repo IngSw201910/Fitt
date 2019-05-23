@@ -18,7 +18,7 @@ public class Reseña implements Serializable {
     }
 
     public Reseña() {
-
+        
     }
 
     public Usuario getUsuario() {

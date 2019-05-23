@@ -18,6 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.MisEntrenamientosAdapter;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDistancia;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
+import co.edu.javeriana.bittus.fitt.Modelo.EjercicioTiempo;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EntrenamientoAdoptado;
 import co.edu.javeriana.bittus.fitt.R;
@@ -66,7 +71,7 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
 
             @Override
             public void onBtnClickInfo(int position) {
-                mostrarInfo(entrenamientos.get(position));
+                obtenerKeys(entrenamientos.get(position));
             }
 
             @Override
@@ -81,10 +86,10 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
     }
 
     private void mostrarInfo(Entrenamiento entrenamiento) {
-        Intent intent = new Intent(MisEntrenamientosActivity.this, InformacionEntrenamientoActivity.class);
+        Intent intent = new Intent(MisEntrenamientosActivity.this, InformacionMiEntrenamientoActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
-        obtenerKeys(entrenamiento);
+
         bundle.putSerializable(StringsMiguel.LLAVE_LLAVE,llave );
         intent.putExtras(bundle);
         startActivity(intent);
@@ -100,6 +105,36 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
                     Entrenamiento entrenamiento = singleSnapshot.getValue(Entrenamiento.class);
                     entrenamientos.add(entrenamiento);
+                    List<EjercicioEntrenamiento> ejercicioEntrenamientos = new ArrayList<>();
+                    String llaveEntrenamiento = singleSnapshot.getKey();
+                    Log.i("ENTRENAMIENTO_KEY", llaveEntrenamiento);
+                    DataSnapshot singleSnapshotE = singleSnapshot.child("ejercicioEntrenamientoList");
+                    for(DataSnapshot singleSnapshotF: singleSnapshotE.getChildren()){
+                        EjercicioEntrenamiento ejercicioEntrenamiento = singleSnapshotF.getValue(EjercicioEntrenamiento.class);
+
+                        if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_REPETICIÓN)){
+                            EjercicioRepeticiones ejercicioRepeticiones = singleSnapshotF.getValue(EjercicioRepeticiones.class);
+                            ejercicioEntrenamientos.add(ejercicioRepeticiones);
+                        }
+                        if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DESCANSO)){
+                            EjercicioDescanso ejercicioDescanso = singleSnapshotF.getValue(EjercicioDescanso.class);
+                            ejercicioEntrenamientos.add(ejercicioDescanso);
+                        }
+                        if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_TIEMPO)){
+                            EjercicioTiempo ejercicioTiempo = singleSnapshotF.getValue(EjercicioTiempo.class);
+                            ejercicioEntrenamientos.add(ejercicioTiempo);
+                        }
+                        if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DISTANCIA)){
+                            EjercicioDistancia ejercicioDistancia = singleSnapshotF.getValue(EjercicioDistancia.class);
+                            ejercicioEntrenamientos.add(ejercicioDistancia);
+                        }
+
+
+                    }
+
+
+
+                    entrenamiento.setEjercicioEntrenamientoList(ejercicioEntrenamientos);
                     adoptado.add(Boolean.FALSE);
                     adapter.notifyDataSetChanged();
                 }
@@ -130,6 +165,37 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
                             }
                         }
                         if(!existe){
+
+                            List<EjercicioEntrenamiento> ejercicioEntrenamientos = new ArrayList<>();
+                            String llaveEntrenamiento = singleSnapsho2.getKey();
+                            Log.i("ENTRENAMIENTO_KEY", llaveEntrenamiento);
+                            DataSnapshot singleSnapshotE = singleSnapsho2.child("entrenamiento").child("ejercicioEntrenamientoList");
+                            for(DataSnapshot singleSnapshotF: singleSnapshotE.getChildren()){
+                                EjercicioEntrenamiento ejercicioEntrenamiento = singleSnapshotF.getValue(EjercicioEntrenamiento.class);
+
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_REPETICIÓN)){
+                                    EjercicioRepeticiones ejercicioRepeticiones = singleSnapshotF.getValue(EjercicioRepeticiones.class);
+                                    ejercicioEntrenamientos.add(ejercicioRepeticiones);
+                                }
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DESCANSO)){
+                                    EjercicioDescanso ejercicioDescanso = singleSnapshotF.getValue(EjercicioDescanso.class);
+                                    ejercicioEntrenamientos.add(ejercicioDescanso);
+                                }
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_TIEMPO)){
+                                    EjercicioTiempo ejercicioTiempo = singleSnapshotF.getValue(EjercicioTiempo.class);
+                                    ejercicioEntrenamientos.add(ejercicioTiempo);
+                                }
+                                if(ejercicioEntrenamiento.getEjercicio().getTipo().equals(StringsMiguel.EJERCICIO_TIPO_DISTANCIA)){
+                                    EjercicioDistancia ejercicioDistancia = singleSnapshotF.getValue(EjercicioDistancia.class);
+                                    ejercicioEntrenamientos.add(ejercicioDistancia);
+                                }
+
+
+                            }
+
+
+
+                            entrenamientoAdoptado.getEntrenamiento().setEjercicioEntrenamientoList(ejercicioEntrenamientos);
                             entrenamientos.add(entrenamientoAdoptado.getEntrenamiento());
                             adoptado.add(Boolean.TRUE);
                             adapter.notifyDataSetChanged();
@@ -168,6 +234,11 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
 
                         if(entrenamientoE.getNombre().equals(entrenamiento.getNombre())){
                             llave = singleSnapshot2.getKey();
+                            if(singleSnapshot.getKey().equals(firebaseAuth.getCurrentUser().getUid())){
+                                mostrarInfo(entrenamiento);
+                            }else{
+                                mostrarInfoOtro(entrenamiento);
+                            }
 
                         }
 
@@ -183,5 +254,15 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void mostrarInfoOtro(Entrenamiento entrenamiento) {
+        Intent intent = new Intent(MisEntrenamientosActivity.this, InformacionEntrenamientoReseñarActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
+
+        bundle.putSerializable(StringsMiguel.LLAVE_LLAVE,llave );
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

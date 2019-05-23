@@ -34,14 +34,14 @@ public class InformacionMiEntrenamientoActivity extends AppCompatActivity {
     private TextView textViewDescanso;
     private TextView textViewDescripcion;
     private ListView listViewReseñas;
-    private ImageView imageViewFotoCreador;
-    private TextView textViewNombreCreador;
-    private ImageButton imageButtonAdoptar;
+
+
+
     private ImageButton imageButtonEjercicios;
     private RatingBar ratingBarEntrenamiento;
 
     private Entrenamiento entrenamiento;
-    private Usuario usuarioCreador;
+
     private String llaveEntrenamiento;
 
     private DatabaseReference myRef;
@@ -51,20 +51,18 @@ public class InformacionMiEntrenamientoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_informacion_entrenamiento);
+        setContentView(R.layout.activity_informacion_mi_entrenamiento);
 
         textViewNombreEntrenamiento = (TextView)findViewById(R.id.textViewNombreEntrenamiento);
         textViewDuracion = (TextView)findViewById(R.id.textViewDuracion);
         textViewDificultad = (TextView)findViewById(R.id.textViewDificultad);
         textViewDescanso = (TextView)findViewById(R.id.textViewDescanso);
         textViewDescripcion = (TextView)findViewById(R.id.textViewDescripcion);
-        textViewNombreCreador = (TextView)findViewById(R.id.textViewNombreCreador);
+
 
         listViewReseñas = (ListView) findViewById(R.id.listViewResenas);
 
-        imageViewFotoCreador = (ImageView) findViewById(R.id.imageViewPerfilCreador);
 
-        imageButtonAdoptar = (ImageButton) findViewById(R.id.imageButtonAdoptar);
         imageButtonEjercicios = (ImageButton) findViewById(R.id.imageButtonVerEjerciciosEntrenamiento);
 
         ratingBarEntrenamiento = (RatingBar) findViewById(R.id.ratingBarEntrenamiento);
@@ -107,20 +105,7 @@ public class InformacionMiEntrenamientoActivity extends AppCompatActivity {
                         break;
                     }
                 }
-                myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS+keyUsuario);
-                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        usuarioCreador = dataSnapshot.getValue(Usuario.class);
-                        textViewNombreCreador.setText(usuarioCreador.getNombre());
-                        PersistenciaFirebase.descargarFotoYPonerEnImageView(usuarioCreador.getDireccionFoto(),imageViewFotoCreador);
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
             }
 
             @Override
@@ -128,12 +113,7 @@ public class InformacionMiEntrenamientoActivity extends AppCompatActivity {
 
             }
         });
-        imageButtonAdoptar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adoptar();
-            }
-        });
+
         imageButtonEjercicios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
