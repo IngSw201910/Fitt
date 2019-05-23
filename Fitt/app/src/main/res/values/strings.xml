@@ -24,6 +24,9 @@
 
     <!--Strings activity_entrenador_buscar_entrenador.xml-->
     <string name="entrenador_buscarEntrenador_activity_name">Buscar entrenador</string>
+    <string name="entrenador_buscarEntrenador_activity_barraSearch">Ingresa nombre...</string>
+    <string name="entrenador_buscarEntrenador_activity_spinnerStars">Calificación</string>
+    <string name="entrenador_buscarEntrenador_activity_spinnerAnios">Años de Experiencia</string>
 
     <!--Strings activity_entrenador_miEntrenador.xml-->
     <string name="entrenador_miEntrenador_activity_name">Datos de mi entrenador</string>
@@ -39,8 +42,6 @@
     <!--Your comment-->
 
     <string name="google_places_key">AIzaSyCfgUbdpuSBiocdZjspf77fcGavcnDVv4g</string>
-
-
 
     <string-array name="diasSemana">
         <item>Lunes</item>
