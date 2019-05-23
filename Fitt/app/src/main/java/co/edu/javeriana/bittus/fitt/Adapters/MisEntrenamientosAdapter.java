@@ -18,6 +18,7 @@ import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EntrenamientoAdoptado;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerEntrenamientoRow;
+import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerMisEntrenamientoRow;
 
 
 public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
@@ -28,9 +29,9 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
     private int resource;
     private Entrenamiento entrenamiento;
     private RutinasFiltro rutinasFiltro;
-    private BtnClickListenerEntrenamientoRow mClickListener;
+    private BtnClickListenerMisEntrenamientoRow mClickListener;
 
-    public MisEntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerEntrenamientoRow listenerAdoptar, List<Boolean> adoptado) {
+    public MisEntrenamientosAdapter(@NonNull Context context, int resource, List<Entrenamiento> objects, BtnClickListenerMisEntrenamientoRow listenerAdoptar, List<Boolean> adoptado) {
         super(context, resource, objects);
         this.listEntrenamiento = objects;
         this.context = context;
@@ -59,7 +60,7 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         dificultad.setText(entrenamiento.getDificultad());
         ImageButton adoptar = view.findViewById(R.id.adoptar);
         if(adoptado.get(position)){
-            adoptar.setImageResource(R.drawable.borrar);
+            adoptar.setImageResource(R.drawable.ic_delete_forever_black_24dp);
             adoptar.setTag(position);
         }
 
@@ -80,7 +81,7 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
             @Override
             public void onClick(View v) {
                 if(mClickListener != null)
-                    mClickListener.onBtnClickAdoptar((Integer) v.getTag());
+                    mClickListener.onBtnClickAdoptarOEliminar((Integer) v.getTag());
             }
         });
         info.setOnClickListener(new View.OnClickListener() {

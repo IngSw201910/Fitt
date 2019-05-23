@@ -1,9 +1,9 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,8 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
-
 import co.edu.javeriana.bittus.fitt.Adapters.ReseñaAdaptador;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
@@ -27,9 +25,8 @@ import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
-import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
-public class InformacionEntrenamientoActivity extends AppCompatActivity {
+public class InformacionMiEntrenamientoActivity extends AppCompatActivity {
 
     private TextView textViewNombreEntrenamiento;
     private TextView textViewDuracion;
@@ -75,8 +72,6 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         entrenamiento = (Entrenamiento) bundle.getSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO);
         llaveEntrenamiento = (String) bundle.getSerializable(StringsMiguel.LLAVE_LLAVE);
-
-        Log.i("llave", llaveEntrenamiento);
 
         textViewNombreEntrenamiento.setText(entrenamiento.getNombre());
         textViewDuracion.setText(entrenamiento.getDuracion()+" minutos");
@@ -148,7 +143,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
     }
 
     private void ejercicios() {
-        Intent intent = new Intent(InformacionEntrenamientoActivity.this, InformacionEntrenamientoEjerciciosActivity.class);
+        Intent intent = new Intent(InformacionMiEntrenamientoActivity.this, InformacionEntrenamientoEjerciciosActivity.class);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
@@ -158,7 +153,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
     }
 
     private void adoptar() {
-        Intent intent = new Intent(InformacionEntrenamientoActivity.this, AdoptarEntrenamientoActivity.class);
+        Intent intent = new Intent(InformacionMiEntrenamientoActivity.this, AdoptarEntrenamientoActivity.class);
         intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
         startActivity(intent);
         finish();
