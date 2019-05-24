@@ -84,12 +84,9 @@ public class Entrenador_buscarEntrenadorActivity extends AppCompatActivity imple
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
                     Entrenador aux =singleSnapshot.getValue(Entrenador.class);
 
-                    //if(aux.getTipoUsuario() != 0) {
 
-                    if(!aux.getTipo().equals("usuarioPredeterminado")) {
-
+                    if(!aux.getTipo().equals("usuarioPredeterminado"))
                         listUsuarios.add(aux);
-                    //}
                 }
                 adapterUsuarios.notifyDataSetChanged();
             }
