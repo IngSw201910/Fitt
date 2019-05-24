@@ -54,22 +54,6 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextNombre" />
 
     <EditText
-        android:id="@+id/editTextRegistro"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:inputType="text|date"
-        android:singleLine="true"
-        android:text="FechaRegistro"
-        app:layout_constraintEnd_toStartOf="@+id/guideline"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
-
-    <EditText
         android:id="@+id/editTextNaciemiento"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -83,7 +67,7 @@
         android:text="FechaNaciemiento"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRegistro" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
 
     <EditText
         android:id="@+id/editTextPeso"
@@ -124,7 +108,7 @@
         android:id="@+id/imageButtonEditarNacieminnto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#00FFFFFF"
         android:src="@drawable/editar"
         app:layout_constraintStart_toStartOf="@+id/guideline"

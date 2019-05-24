@@ -1,5 +1,7 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -34,8 +36,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.Permisos;
 import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
@@ -65,7 +69,6 @@ public class PerfilFragment extends Fragment {
     EditText nombre;
     EditText correo;
     EditText nacimiento;
-    EditText registro;
     EditText peso;
     EditText altura;
 
@@ -96,8 +99,6 @@ public class PerfilFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
-
-
         editarNombre =v.findViewById(R.id.imageButtonEditarNombre);
         editarCorreo =v.findViewById(R.id.imageButtonEdicarCorreo);
         ediarNacimiento =v.findViewById(R.id.imageButtonEditarNacieminnto);
@@ -119,8 +120,6 @@ public class PerfilFragment extends Fragment {
         nacimiento =v.findViewById(R.id.editTextNaciemiento);
         nacimiento.setEnabled(false);
 
-        registro = v.findViewById(R.id.editTextRegistro);
-        registro.setEnabled(false);
 
         peso =v.findViewById(R.id.editTextPeso);
         peso.setEnabled(false);
@@ -145,7 +144,7 @@ public class PerfilFragment extends Fragment {
                 fecha.setDate(usuario.getFechaNacimiento().getDate());
                 nacimiento.setText(fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear());
                 descargarFotoYPonerEnImageView(usuario.getDireccionFoto(),fotoPerfil);
-                //registro.setText(dataSnapshot.get);
+
 
             }
 
@@ -365,37 +364,53 @@ public class PerfilFragment extends Fragment {
 
 
     private void cargarFoto() {
-        Utils.cargarFotoDesdeCamara(getActivity(), UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO);
+        //Codigo de request recomendado UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO
+        Permisos.requestPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE,"Es necesario para carga una foto", UtilsMiguel.REQUEST_CODE_PERMISSION);
+
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        intent.createChooser(intent, StringsMiguel.SELECCIONAR_APLICACION);
+        startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO);
 
     }
 
     private void tomarFoto() {
-        Utils.tomarFotoDesdeCamara(getActivity(), UtilsMiguel.REQUEST_CODE_TAKE_PHOTO);
+        Permisos.requestPermission(getActivity(), Manifest.permission.CAMERA,"Es necesario para tomar fotos", UtilsMiguel.REQUEST_CODE_PERMISSION);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+          startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_TAKE_PHOTO);
+        }
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
         Bitmap bitmapFoto;
-
-        /*if(requestCode== REQUEST_CODE_TAKE_PHOTO && resultCode==RESULT_OK){
+        Log.i("Ufff", requestCode+ "");
+        if(requestCode== UtilsMiguel.REQUEST_CODE_TAKE_PHOTO && resultCode== Activity.RESULT_OK){
             Bundle extras = data.getExtras();
             bitmapFoto = (Bitmap) extras.get("data");
             //Subir foto a firebase y descargarlas fotos en imagenes, borrar linea de abajo
             imagen=bitmapFoto;
-
-        }else if(requestCode == REQUEST_CODE_UPLOAD_PHOTO  && resultCode==RESULT_OK){
+            PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS,mAuth.getUid(),UtilsMiguel.getImageUri(getActivity(),bitmapFoto,mAuth.getUid()));
+            fotoPerfil.setImageBitmap(bitmapFoto);
+        }else if(requestCode == UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO  && resultCode==Activity.RESULT_OK){
             Uri path = data.getData();
             try {
-                bitmapFoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(),path);
+                bitmapFoto = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),path);
                 //Subir foto a firebase y descargarlas fotos en imagenes, borrar linea de abajo
                 imagen=bitmapFoto;
+                PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS,mAuth.getUid(),UtilsMiguel.getImageUri(getActivity(),bitmapFoto,mAuth.getUid()));
+                fotoPerfil.setImageBitmap(bitmapFoto);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        }*/
+
+        }
 
     }
 

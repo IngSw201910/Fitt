@@ -122,7 +122,7 @@ public class RegistroEntrenadorActivity extends AppCompatActivity {
             FirebaseUser user = firebaseAuth.getCurrentUser();
             Uri uriFoto = UtilsMiguel.getImageUri(RegistroEntrenadorActivity.this,bitmapFoto, user.getUid());
             PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_TITULOS, user.getUid(), uriFoto);
-            Entrenador entrenador = new Entrenador(usuario.getNombre(), usuario.getCorreo(), usuario.getDireccionFoto(), usuario.getFechaNacimiento(), usuario.getSexo(), usuario.getAltura(), usuario.getPeso(), descripcion, nombreDelTitulo, RutasBaseDeDatos.RUTA_FOTO_TITULOS+user.getUid(), porQueElegirme);
+            Entrenador entrenador = new Entrenador(usuario.getNombre(), usuario.getCorreo(), usuario.getDireccionFoto(), usuario.getFechaNacimiento(), usuario.getSexo(), usuario.getAltura(), usuario.getPeso(), descripcion, nombreDelTitulo, RutasBaseDeDatos.RUTA_FOTO_TITULOS+user.getUid(), porQueElegirme, "entrenador");
             PersistenciaFirebase.almacenarInformacionConRuta(RutasBaseDeDatos.RUTA_USUARIOS+user.getUid(), entrenador);
 
             Intent intentMenuPrincipal = new Intent(RegistroEntrenadorActivity.this, MenuPrincipalUsuarioFragment.class);
