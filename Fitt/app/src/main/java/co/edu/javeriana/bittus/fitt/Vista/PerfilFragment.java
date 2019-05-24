@@ -54,31 +54,36 @@ import static co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase.desca
 public class PerfilFragment extends Fragment {
 
 
-    ImageView fotoPerfil;
+    private ImageView fotoPerfil;
 
-    ImageButton editarNombre;
-    ImageButton editarCorreo;
-    ImageButton ediarNacimiento;
-    ImageButton editarPeso;
-    ImageButton editarAltura;
-    ImageButton cambiarFoto;
-    ImageButton tomarFoto;
-    Button seguidores;
-    Button siguiendo;
+    private ImageButton editarNombre;
+    private ImageButton editarCorreo;
+    private ImageButton ediarNacimiento;
+    private ImageButton editarPeso;
+    private ImageButton editarAltura;
+    private ImageButton cambiarFoto;
+    private ImageButton tomarFoto;
+    private Button seguidores;
+    private Button siguiendo;
 
-    EditText nombre;
-    EditText correo;
-    EditText nacimiento;
-    EditText peso;
-    EditText altura;
+    private EditText nombre;
+    private EditText correo;
+    private EditText nacimiento;
+    private EditText peso;
+    private EditText altura;
 
-    CheckBox privacidad;
+    private CheckBox privacidad;
 
     private Bitmap bitmapFoto;
 
-    FirebaseDatabase database;
-    DatabaseReference myRef;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
     private FirebaseUser mAuth;
+
+    private TextView textViewDistancia;
+    private TextView textViewPasos;
+    private TextView textViewCalorias;
+
 
     private Usuario usuario;
 
@@ -109,6 +114,11 @@ public class PerfilFragment extends Fragment {
         fotoPerfil= v.findViewById(R.id.imageViewFotoPerfil);
         cambiarFoto= v.findViewById(R.id.imageButtonCargarFotoPerfil);
         tomarFoto= v.findViewById(R.id.imageButtonTomarFoto);
+        textViewDistancia = v.findViewById(R.id.textViewDistanciaRecorrida);
+        textViewPasos = v.findViewById(R.id.textViewPasosDados);
+        textViewCalorias = v.findViewById(R.id.textViewCalorias);
+        
+
 
         nombre =v.findViewById(R.id.editTextNombre);
         nombre.setEnabled(false);
@@ -136,16 +146,17 @@ public class PerfilFragment extends Fragment {
                 usuario = dataSnapshot.getValue(Usuario.class);
                 nombre.setText(usuario.getNombre());
                 correo.setText(usuario.getCorreo());
-                peso.setText(String.valueOf(usuario.getPeso()));
-                altura.setText(String.valueOf(usuario.getAltura()));
+                peso.setText(String.valueOf(usuario.getPeso())+ " kg");
+                altura.setText(String.valueOf(usuario.getAltura()) + " cm ");
                 Date fecha=new Date();
                 fecha.setYear(usuario.getFechaNacimiento().getYear());
                 fecha.setMonth(usuario.getFechaNacimiento().getMonth());
                 fecha.setDate(usuario.getFechaNacimiento().getDate());
                 nacimiento.setText(fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear());
                 descargarFotoYPonerEnImageView(usuario.getDireccionFoto(),fotoPerfil);
-
-
+                textViewDistancia.setText(Float.toString(usuario.getDistanciaRecorrida()) + "km");
+                textViewPasos.setText(Float.toString(usuario.getPasosDados())+ "pasos");
+                textViewCalorias.setText(Float.toString(usuario.getCaloriasQuemadas())+ "kcal");
             }
 
             @Override

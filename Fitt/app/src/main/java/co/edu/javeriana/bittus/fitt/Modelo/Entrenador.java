@@ -19,6 +19,35 @@ public class Entrenador extends Usuario implements Serializable {
         this.fotoTitulo = fotoTitulo;
         this.porqueElegirme = porqueElegirme;
     }
+
+    public boolean isPrivacidad() {
+        return privacidad;
+    }
+
+    public float getDistanciaRecorrida() {
+        return distanciaRecorrida;
+    }
+
+    public void setDistanciaRecorrida(float distanciaRecorrida) {
+        this.distanciaRecorrida = distanciaRecorrida;
+    }
+
+    public float getPasosDados() {
+        return pasosDados;
+    }
+
+    public void setPasosDados(float pasosDados) {
+        this.pasosDados = pasosDados;
+    }
+
+    public float getCaloriasQuemadas() {
+        return caloriasQuemadas;
+    }
+
+    public void setCaloriasQuemadas(float caloriasQuemadas) {
+        this.caloriasQuemadas = caloriasQuemadas;
+    }
+
     public Entrenador(){
         super();
     }

@@ -4,7 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="vertical"
     tools:context=".Vista.ComunidadFragment">
+
+    <TextView
+        android:id="@+id/textViewDistanciaEjercicio2"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Distancia recorrida:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreEntrenador" />
+
+    <TextView
+        android:id="@+id/textViewDistanciaEjercicio4"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="Calorías quemadas:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDistanciaEjercicio5" />
+
+    <TextView
+        android:id="@+id/textViewDistanciaEjercicio5"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="Pasos dados:"
+        android:textColor="#4BC6AA"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDistanciaEjercicio2" />
 
     <ImageView
         android:id="@+id/imageViewFotoPerfil"
@@ -175,9 +204,42 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="44dp"
         android:layout_marginTop="24dp"
-        android:text="NombreEntrenador"
+        android:text="Sin entrenador"
         app:layout_constraintStart_toEndOf="@+id/imageViewEntrenador"
         app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+    <TextView
+        android:id="@+id/textViewDistanciaRecorrida"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:text="distancia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewDistanciaEjercicio2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreEntrenador" />
+
+    <TextView
+        android:id="@+id/textViewCalorias"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="calorias"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewDistanciaEjercicio4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPasosDados" />
+
+    <TextView
+        android:id="@+id/textViewPasosDados"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="pasos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewDistanciaEjercicio4"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDistanciaRecorrida" />
 
     <TextView
         android:id="@+id/textViewPrivaciodad"
@@ -194,11 +256,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
         android:text="Privacidad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPrivaciodad" />
 
@@ -255,7 +316,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.38" />
 
     <android.support.constraint.Barrier
         android:id="@+id/barrier2"

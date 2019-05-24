@@ -71,6 +71,7 @@ public class MisEntrenamientosAdapter extends ArrayAdapter<Entrenamiento> {
         info.setTag(position);
 
         RatingBar ratingBar = view.findViewById(R.id.ratingBarEntrenamiento);
+        ratingBar.setRating(0f);
         ratingBar.setRating(entrenamiento.calcularRating());
 
 
