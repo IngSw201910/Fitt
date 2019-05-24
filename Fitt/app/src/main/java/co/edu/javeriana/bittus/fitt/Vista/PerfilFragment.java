@@ -65,7 +65,6 @@ public class PerfilFragment extends Fragment {
     EditText nombre;
     EditText correo;
     EditText nacimiento;
-    EditText registro;
     EditText peso;
     EditText altura;
 
@@ -96,8 +95,6 @@ public class PerfilFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
-
-
         editarNombre =v.findViewById(R.id.imageButtonEditarNombre);
         editarCorreo =v.findViewById(R.id.imageButtonEdicarCorreo);
         ediarNacimiento =v.findViewById(R.id.imageButtonEditarNacieminnto);
@@ -119,8 +116,6 @@ public class PerfilFragment extends Fragment {
         nacimiento =v.findViewById(R.id.editTextNaciemiento);
         nacimiento.setEnabled(false);
 
-        registro = v.findViewById(R.id.editTextRegistro);
-        registro.setEnabled(false);
 
         peso =v.findViewById(R.id.editTextPeso);
         peso.setEnabled(false);
@@ -145,7 +140,7 @@ public class PerfilFragment extends Fragment {
                 fecha.setDate(usuario.getFechaNacimiento().getDate());
                 nacimiento.setText(fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear());
                 descargarFotoYPonerEnImageView(usuario.getDireccionFoto(),fotoPerfil);
-                //registro.setText(dataSnapshot.get);
+
 
             }
 

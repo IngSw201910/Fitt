@@ -46,7 +46,6 @@ public class PerfilEntrenadorFragment extends Fragment {
     EditText nombre;
     EditText correo;
     EditText nacimiento;
-    EditText registro;
     EditText peso;
     EditText altura;
     EditText experiencia;
@@ -99,10 +98,6 @@ public class PerfilEntrenadorFragment extends Fragment {
 
         nacimiento =v.findViewById(R.id.editTextNaciemiento);
         nacimiento.setEnabled(false);
-
-
-        registro = v.findViewById(R.id.editTextRegistro);
-        registro.setEnabled(false);
 
 
         peso =v.findViewById(R.id.editTextPeso);

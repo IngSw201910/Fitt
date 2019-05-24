@@ -51,6 +51,7 @@ public class BuscarUsuarioActivity extends AppCompatActivity implements TextWatc
     private FirebaseUser mAuth;
 
     private Usuario usuario;
+    private Entrenador usuarioE;
     private Usuario item;
     private String uidUsuario;
     private int positionEditar;
@@ -103,6 +104,9 @@ abrirSiguienteVentanaUS(listUsuarios.get(position), uidsUsuarios.get(position));
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 usuario = dataSnapshot.getValue(Usuario.class);
+                if(usuario.getTipo().compareTo("entrenador")==0){
+                    usuarioE= dataSnapshot.getValue(Entrenador.class);
+                }
 
             }
 

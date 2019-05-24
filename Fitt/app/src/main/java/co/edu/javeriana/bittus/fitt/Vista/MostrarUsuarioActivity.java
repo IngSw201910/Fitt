@@ -38,7 +38,7 @@ import static co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase.desca
 public class MostrarUsuarioActivity extends AppCompatActivity {
 
 
-    private Entrenador aux;
+    private Entrenador usuarioE;
     private Usuario item;
     private Usuario usuarioConectado;
 
@@ -79,6 +79,9 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 usuarioConectado = dataSnapshot.getValue(Usuario.class);
+                if(usuarioConectado.getTipo().compareTo("entrenador")==0){
+                    usuarioE=dataSnapshot.getValue(Entrenador.class);
+                }
                 seguir.setOnClickListener(new View.OnClickListener(){
                     @Override
                     public void onClick(View v) {
@@ -141,26 +144,52 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
 
     private void seguirUsuario() {
 
-        usuarioConectado.getSeguidosList().add(uidUsuario);
-        if(item.getTipo().compareTo("entrenador")==0){
-            myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                    Entrenador aux= (Entrenador) item;
-                    aux.getSeguidoresList().add(mAuth.getUid());
-                    myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
-                    myRef.setValue(aux);
-                }
-            });
+        if(usuarioConectado.getTipo().compareTo("entrenador")==0){
+            usuarioE.getSeguidosList().add(uidUsuario);
+            if(item.getTipo().compareTo("entrenador")==0){
+                myRef.setValue(usuarioE, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        Entrenador aux= (Entrenador) item;
+                        aux.getSeguidoresList().add(mAuth.getUid());
+                        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                        myRef.setValue(aux);
+                    }
+                });
+            }else {
+                myRef.setValue(usuarioE, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        item.getSeguidoresList().add(mAuth.getUid());
+                        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                        myRef.setValue(item);
+                    }
+                });
+            }
+
         }else {
-            myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                    item.getSeguidoresList().add(mAuth.getUid());
-                    myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
-                    myRef.setValue(item);
-                }
-            });
+
+            usuarioConectado.getSeguidosList().add(uidUsuario);
+            if (item.getTipo().compareTo("entrenador") == 0) {
+                myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        Entrenador aux = (Entrenador) item;
+                        aux.getSeguidoresList().add(mAuth.getUid());
+                        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                        myRef.setValue(aux);
+                    }
+                });
+            } else {
+                myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        item.getSeguidoresList().add(mAuth.getUid());
+                        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                        myRef.setValue(item);
+                    }
+                });
+            }
         }
 
     }
