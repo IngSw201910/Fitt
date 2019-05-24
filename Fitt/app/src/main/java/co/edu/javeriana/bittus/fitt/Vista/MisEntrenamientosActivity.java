@@ -275,11 +275,11 @@ public class MisEntrenamientosActivity extends AppCompatActivity {
                                     EjercicioDistancia ejercicioDistancia = singleSnapshotF.getValue(EjercicioDistancia.class);
                                     ejercicioEntrenamientos.add(ejercicioDistancia);
                                 }
-                                adoptado.add(Boolean.TRUE);
-                                entrenamientoAdoptado.getEntrenamiento().setEjercicioEntrenamientoList(ejercicioEntrenamientos);
-                                entrenamientos.add(entrenamientoAdoptado.getEntrenamiento());
-                            }
 
+                            }
+                            adoptado.add(Boolean.TRUE);
+                            entrenamientoAdoptado.getEntrenamiento().setEjercicioEntrenamientoList(ejercicioEntrenamientos);
+                            entrenamientos.add(entrenamientoAdoptado.getEntrenamiento());
                             adapter.notifyDataSetChanged();
                         }
                     }

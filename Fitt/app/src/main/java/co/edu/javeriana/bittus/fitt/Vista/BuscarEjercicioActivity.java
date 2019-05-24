@@ -71,7 +71,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
 
 
-        if(getIntent().getStringExtra("LLAVE").equals("llave")){
+        if(getIntent().getStringExtra("LLAVE")!=null){
             buscar = true;
         }
 
