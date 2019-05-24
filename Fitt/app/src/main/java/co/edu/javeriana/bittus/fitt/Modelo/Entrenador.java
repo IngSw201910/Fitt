@@ -10,7 +10,7 @@ public class Entrenador extends Usuario implements Serializable {
     private String nombreTitulo;
     private String fotoTitulo;
     private String porqueElegirme;
-    private List<Usuario> clientes;
+    private List<String> clientes;
 
 
 
@@ -39,6 +39,14 @@ public class Entrenador extends Usuario implements Serializable {
 
     public void setPasosDados(float pasosDados) {
         this.pasosDados = pasosDados;
+    }
+
+    public String getIdEntrenador() {
+        return idEntrenador;
+    }
+
+    public void setIdEntrenador(String idEntrenador) {
+        this.idEntrenador = idEntrenador;
     }
 
     public float getCaloriasQuemadas() {

@@ -49,7 +49,7 @@ public class nuevoMensajeActivity extends AppCompatActivity {
 
     private void readUsers(){
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Usuarios");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("usuarios");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -59,11 +59,10 @@ public class nuevoMensajeActivity extends AppCompatActivity {
                     Usuario usuario = snapshot.getValue(Usuario.class);
                     assert usuario != null;
                     assert firebaseUser != null;
-                    /*
-                    if(!usuario.getId().equals(firebaseUser.getUid().toString())){
+                    if(!snapshot.getKey().equals(firebaseUser.getUid().toString())){
                         mUsuarios.add(usuario);
-                        Log.d("CHAT_DATABASE", "Usuario:" + usuario.getId() + " - " + firebaseUser.getUid());
-                    }*/
+                        Log.d("CHAT_DATABASE", "Usuario:" + snapshot.getKey() + " - " + firebaseUser.getUid());
+                    }
                 }
                 adapter = new MensajeUsuarioAdapter(getApplicationContext(), mUsuarios);
                 recyclerView.setAdapter(adapter);

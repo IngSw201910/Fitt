@@ -67,7 +67,7 @@ public class EntrenadorActivity extends AppCompatActivity {
     }
 
     public void obtenerObjetoEntrenador(){
-        myRef = database.getReference("Usuarios");
+        myRef = database.getReference("usuarios");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

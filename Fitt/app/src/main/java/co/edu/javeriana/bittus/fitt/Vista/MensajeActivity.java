@@ -71,8 +71,7 @@ public class MensajeActivity extends AppCompatActivity {
         userid = intent.getStringExtra("id");
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Usuarios").child(userid);
-
+        databaseReference = FirebaseDatabase.getInstance().getReference("usuarios").child(userid);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
