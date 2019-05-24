@@ -78,7 +78,7 @@ public class PerfilEntrenadorFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(RutasBaseDeDatos.getRutaEntrenadores()).child(mAuth.getUid());
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
         editarNombre =v.findViewById(R.id.imageButtonEditarNombreE);
         editarCorreo =v.findViewById(R.id.imageButtonEditarCorreoE);
@@ -129,15 +129,19 @@ public class PerfilEntrenadorFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                entrenador = dataSnapshot.getValue(Entrenador.class);
-                nombre.setText(entrenador.getNombre());
-                correo.setText(entrenador.getCorreo());
-                peso.setText(String.valueOf(entrenador.getPeso()));
-                altura.setText(String.valueOf(entrenador.getAltura()));
-                nacimiento.setText(entrenador.getFechaNacimiento().getDate()+"/"+entrenador.getFechaNacimiento().getMonth()+"/"+entrenador.getFechaNacimiento().getYear());
-                //puntaje.setRating(entrenador.get);
-                experiencia.setText(entrenador.getDescripccion());
-                descargarFotoYPonerEnImageView(entrenador.getDireccionFoto(),fotoPerfil);
+                Usuario usuario=dataSnapshot.getValue(Usuario.class);
+                if(usuario.getTipo().compareTo("entrenador")==0){
+                    entrenador = dataSnapshot.getValue(Entrenador.class);
+                    nombre.setText(entrenador.getNombre());
+                    correo.setText(entrenador.getCorreo());
+                    peso.setText(String.valueOf(entrenador.getPeso()));
+                    altura.setText(String.valueOf(entrenador.getAltura()));
+                    nacimiento.setText(entrenador.getFechaNacimiento().getDate()+"/"+entrenador.getFechaNacimiento().getMonth()+"/"+entrenador.getFechaNacimiento().getYear());
+                    //puntaje.setRating(entrenador.get);
+                    experiencia.setText(entrenador.getDescripccion());
+                    descargarFotoYPonerEnImageView(entrenador.getDireccionFoto(),fotoPerfil);
+                }
+
 
             }
 
