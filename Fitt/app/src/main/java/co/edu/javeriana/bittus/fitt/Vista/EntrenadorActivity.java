@@ -41,7 +41,7 @@ public class EntrenadorActivity extends AppCompatActivity {
         //Checar si tiene el cliente un entrenador asociado;
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("Usuarios").child(mAuth.getUid());
+        myRef = database.getReference("usuarios").child(mAuth.getUid());
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

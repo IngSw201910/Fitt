@@ -113,6 +113,7 @@ public class MapaUsuariosActivity extends AppCompatActivity implements OnMapRead
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked gps icon");
                 requestLocation();
+                buscarUsuarios();
             }
         });
 
@@ -179,15 +180,17 @@ public class MapaUsuariosActivity extends AppCompatActivity implements OnMapRead
                         Toast.makeText(getBaseContext(), "longitud: " + location.getLongitude() + "latitud: " + location.getLatitude(), Toast.LENGTH_SHORT).show();*/
                         moveCamera(new LatLng(location.getLatitude(), location.getLongitude()), DEFAULT_ZOOM);
                         miPosicion = new LatLng(location.getLatitude(), location.getLongitude());
-                        CircleOptions circleOptions = new CircleOptions()
-                                .center(miPosicion)
-                                .radius(350)
-                                .strokeWidth(10)
-                                .strokeColor(Color.argb(0,64,224,208))
-                                .fillColor(Color.argb(135,0,128,128))
-                                .clickable(true);
-                        mMap.addCircle(circleOptions);
-                        Log.i(TAG, "llega");
+
+                        mMap.clear();
+                            CircleOptions circleOptions = new CircleOptions()
+                                    .center(miPosicion)
+                                    .radius(1000)
+                                    .strokeWidth(10)
+                                    .strokeColor(Color.argb(0, 64, 224, 208))
+                                    .fillColor(Color.argb(135, 0, 128, 128))
+                                    .clickable(true);
+                            mMap.addCircle(circleOptions);
+                            Log.i(TAG, "llega");
                     }
                 }
             });
@@ -205,8 +208,9 @@ public class MapaUsuariosActivity extends AppCompatActivity implements OnMapRead
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     LocalizacionUsuario localizacionUsuario = singleSnapshot.getValue(LocalizacionUsuario.class);
                     distanciaKM = UtilsJhonny.distance(miPosicion.latitude,miPosicion.longitude,localizacionUsuario.getLatitud(), localizacionUsuario.getLongitud());
-                    if (distanciaKM < 0.35){
+                    if (distanciaKM < 1){
                         //añadir marcadores con la posicion
+                        alguno = true;
                         Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(localizacionUsuario.getLatitud(), localizacionUsuario.getLongitud()))
                                 .snippet("Distancia: "+ distanciaKM)
                                 .title(localizacionUsuario.getUsuario().getNombre())

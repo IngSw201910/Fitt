@@ -42,30 +42,6 @@
         android:text="estatusTitulo"
         android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/aniosExpEntrenador_E"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="70dp"
-        android:layout_toRightOf="@id/imagenPerfilUser_E"
-        android:text="# Años de experiencia"
-        android:textSize="16sp" />
-
-    <RatingBar
-        android:id="@+id/ratingBarDetalle_E"
-        style="@style/Widget.AppCompat.RatingBar.Indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginLeft="20dp"
-        android:clickable="false"
-        android:numStars="5"
-        android:rating="2"
-        android:stepSize="1"
-        android:layout_toRightOf="@id/imagenPerfilUser_E"
-        />
-
     <ImageView
         android:id="@+id/masInfoImg_E"
         android:layout_width="50dp"

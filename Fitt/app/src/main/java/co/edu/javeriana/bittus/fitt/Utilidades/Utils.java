@@ -58,6 +58,7 @@ public class Utils {
         //Codigo de request recomendado UtilsMiguel.REQUEST_CODE_TAKE_PHOTO
 
         Permisos.requestPermission(context, Manifest.permission.CAMERA,"Es necesario para tomar fotos", UtilsMiguel.REQUEST_CODE_PERMISSION);
+        Permisos.requestPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE,"Es necesario para carga una foto", UtilsMiguel.REQUEST_CODE_PERMISSION);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         if (intent.resolveActivity(context.getPackageManager()) != null) {
