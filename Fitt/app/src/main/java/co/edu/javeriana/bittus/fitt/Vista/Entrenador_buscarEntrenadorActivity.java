@@ -77,14 +77,12 @@ public class Entrenador_buscarEntrenadorActivity extends AppCompatActivity imple
     }
 
     private void descargarUsuarios (){
-        myRef = database.getReference("Usuarios");
+        myRef = database.getReference("usuarios");
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
                     Entrenador aux =singleSnapshot.getValue(Entrenador.class);
-
-
                     if(!aux.getTipo().equals("usuarioPredeterminado"))
                         listUsuarios.add(aux);
                 }
