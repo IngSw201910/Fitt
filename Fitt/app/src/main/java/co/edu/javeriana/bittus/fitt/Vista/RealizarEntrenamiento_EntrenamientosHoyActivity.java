@@ -197,6 +197,7 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
                 @Override
                 public void onSuccess(Location location) {
                     if (location != null) {
+                        Log.w("ENTRAAA:", location.getLatitude()+ location.getLongitude()+"");
                         miPosicion = new LatLng(location.getLatitude(), location.getLongitude());
                     }
                 }
