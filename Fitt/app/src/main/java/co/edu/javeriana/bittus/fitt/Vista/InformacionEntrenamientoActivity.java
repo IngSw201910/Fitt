@@ -76,6 +76,8 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
         entrenamiento = (Entrenamiento) bundle.getSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO);
         llaveEntrenamiento = (String) bundle.getSerializable(StringsMiguel.LLAVE_LLAVE);
 
+        Log.i("llave", llaveEntrenamiento);
+
         textViewNombreEntrenamiento.setText(entrenamiento.getNombre());
         textViewDuracion.setText(entrenamiento.getDuracion()+" minutos");
         textViewDificultad.setText(entrenamiento.getDificultad());

@@ -27,6 +27,7 @@ import java.util.List;
 import co.edu.javeriana.bittus.fitt.Filtros.UsuarioFiltro;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerSeguir;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Vista.BuscarUsuarioActivity;
 import co.edu.javeriana.bittus.fitt.Vista.MostrarUsuarioActivity;
@@ -42,6 +43,7 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
     private int resource;
     private Usuario usuarioSeleccionado;
     private UsuarioFiltro usuariosFiltro;
+    private BtnClickListenerSeguir mClickListenerSeguir = null;
 
 
 
@@ -51,6 +53,7 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
         this.listUsuarios = objects;
         this.context = context;
         this.resource = resource;
+
 
     }
 
@@ -79,7 +82,7 @@ public class UsuariosAdapter extends ArrayAdapter<Usuario> {
         descargarFotoYPonerEnImageView(usuario.getDireccionFoto(),foto);
 
 
-        Button bSeguir =view.findViewById(R.id.buttonSeguirBusqueda);
+
 
 
 

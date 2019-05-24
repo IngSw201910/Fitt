@@ -11,7 +11,6 @@ public class Entrenador extends Usuario implements Serializable {
     private String porqueElegirme;
 
 
-
     public Entrenador(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso, String descripccion, String nombreTitulo, String fotoTitulo, String porqueElegirme) {
         super(nombre, correo, direccionFoto, fechaNacimiento, sexo, altura, peso);
         this.descripccion = descripccion;
@@ -87,6 +86,34 @@ public class Entrenador extends Usuario implements Serializable {
     public void setEntrenamientoList(List<Entrenamiento> entrenamientoList) {
         this.entrenamientoList = entrenamientoList;
     }
+
+
+
+    public  List<String> getSeguidosList(){
+        return seguidosList;
+    }
+
+    public void setSeguidosList(List<String> seguidosList){
+        this.seguidosList=seguidosList;
+    }
+
+    public List<String> getSeguidoresList(){
+        return seguidoresList;
+    }
+
+    public void setSeguidoresList(List<String> seguidoresList){
+        this.seguidoresList=seguidoresList;
+    }
+
+    public boolean getPrivacidad(){
+        return privacidad;
+    }
+
+    public void setPrivacidad(boolean privacidad) {
+        this.privacidad = privacidad;
+    }
+
+
 
 
     public String getDescripccion() {

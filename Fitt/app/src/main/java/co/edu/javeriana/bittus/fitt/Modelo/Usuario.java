@@ -26,19 +26,10 @@ public class Usuario implements Serializable {
 
 
 
-
-
-
-
     public Usuario(String correo, String nombre) {
         this.nombre = nombre;
         this.correo = correo;
     }
-
-
-
-
-
 
 
     public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
@@ -150,6 +141,15 @@ public class Usuario implements Serializable {
 
     public void setPrivacidad(boolean privacidad) {
         this.privacidad = privacidad;
+    }
+
+    public boolean validarSeguido(String uidUsuario) {
+        for(String usuario: seguidosList){
+            if(usuario.compareTo(uidUsuario)==0){
+                return true;
+            }
+        }
+        return false;
     }
 
     //usuario cambiado
