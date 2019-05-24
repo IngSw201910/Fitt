@@ -29,6 +29,7 @@ import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Adapters.UsuariosAdapter;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenador;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.BtnClickListenerSeguir;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
@@ -162,7 +163,13 @@ abrirSiguienteVentanaUS(listUsuarios.get(position), uidsUsuarios.get(position));
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
                     Usuario aux =singleSnapshot.getValue(Usuario.class);
                     uidsUsuarios.add(singleSnapshot.getKey());
-                    listUsuarios.add(aux);
+
+                    if(aux.getTipo().compareTo("entrenador")==0){
+                        Entrenador entrenador=singleSnapshot.getValue(Entrenador.class);
+                        listUsuarios.add(entrenador);
+                    }else {
+                        listUsuarios.add(aux);
+                    }
                 }
                 if(listUsuarios!=null) {
                     adapterUsuarios.notifyDataSetChanged();
@@ -192,29 +199,5 @@ abrirSiguienteVentanaUS(listUsuarios.get(position), uidsUsuarios.get(position));
 
     }
 
-    private void seguirUsuario() {
 
-        usuario.getSeguidosList().add(uidUsuario);
-       myRef.setValue(usuario, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                item.getSeguidoresList().add(mAuth.getUid());
-                myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
-                myRef.setValue(item);
-            }
-        });
-
-    }
-
-    public void dejarDeSeguir(){
-        usuario.getSeguidosList().remove(uidUsuario);
-        myRef.setValue(usuario, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                item.getSeguidoresList().remove(mAuth.getUid());
-                myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
-                myRef.setValue(item);
-            }
-        });
-    }
 }

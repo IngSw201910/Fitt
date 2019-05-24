@@ -142,15 +142,26 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
     private void seguirUsuario() {
 
         usuarioConectado.getSeguidosList().add(uidUsuario);
-        Entrenador aux= (Entrenador) usuarioConectado;
-        myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                item.getSeguidoresList().add(mAuth.getUid());
-                myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
-                myRef.setValue(item);
-            }
-        });
+        if(item.getTipo().compareTo("entrenador")==0){
+            myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    Entrenador aux= (Entrenador) item;
+                    aux.getSeguidoresList().add(mAuth.getUid());
+                    myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                    myRef.setValue(aux);
+                }
+            });
+        }else {
+            myRef.setValue(usuarioConectado, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                    item.getSeguidoresList().add(mAuth.getUid());
+                    myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(uidUsuario);
+                    myRef.setValue(item);
+                }
+            });
+        }
 
     }
     private boolean SePuedeSeguir(){
