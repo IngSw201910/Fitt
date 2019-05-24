@@ -6,54 +6,54 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/imagenPerfilUser"
-        android:layout_width="100dp"
+        android:id="@+id/imagenPerfilUser_E"
+        android:layout_width="80dp"
         android:layout_height="100dp"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/item_nombreEntrenador"
+        android:id="@+id/nombreEntrenador_E"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="username"
-        android:layout_toRightOf="@id/imagenPerfilUser"
+        android:layout_toRightOf="@id/imagenPerfilUser_E"
         android:layout_marginLeft="20dp"
         android:textColor="@color/verdeFitt"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/item_numClientesEntrenador"
+        android:id="@+id/numClientesEntrenador_E"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
-        android:layout_toRightOf="@id/imagenPerfilUser"
+        android:layout_toRightOf="@id/imagenPerfilUser_E"
         android:text="# Clientes"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/item_estatus_titulo"
+        android:id="@+id/estatus_titulo_E"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="50dp"
-        android:layout_toRightOf="@id/imagenPerfilUser"
+        android:layout_toRightOf="@id/imagenPerfilUser_E"
         android:text="estatusTitulo"
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/item_aniosExpEntrenador"
+        android:id="@+id/aniosExpEntrenador_E"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="70dp"
-        android:layout_toRightOf="@id/imagenPerfilUser"
+        android:layout_toRightOf="@id/imagenPerfilUser_E"
         android:text="# Años de experiencia"
         android:textSize="16sp" />
 
     <RatingBar
-        android:id="@+id/ratingBarDetalle"
+        android:id="@+id/ratingBarDetalle_E"
         style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,11 +63,11 @@
         android:numStars="5"
         android:rating="2"
         android:stepSize="1"
-        android:layout_toRightOf="@id/imagenPerfilUser"
+        android:layout_toRightOf="@id/imagenPerfilUser_E"
         />
 
     <ImageView
-        android:id="@+id/masInfoImg"
+        android:id="@+id/masInfoImg_E"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"

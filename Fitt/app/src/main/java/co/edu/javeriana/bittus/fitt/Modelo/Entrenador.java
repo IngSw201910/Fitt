@@ -1,6 +1,7 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class Entrenador extends Usuario implements Serializable {
     private String nombreTitulo;
     private String fotoTitulo;
     private String porqueElegirme;
+    private List<Usuario> clientes;
 
 
     public Entrenador(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso, String descripccion, String nombreTitulo, String fotoTitulo, String porqueElegirme) {
@@ -17,9 +19,11 @@ public class Entrenador extends Usuario implements Serializable {
         this.nombreTitulo = nombreTitulo;
         this.fotoTitulo = fotoTitulo;
         this.porqueElegirme = porqueElegirme;
+        clientes = new ArrayList<Usuario>();
     }
     public Entrenador(){
         super();
+        clientes = new ArrayList<Usuario>();
     }
 
     public String getNombre() {
@@ -141,5 +145,13 @@ public class Entrenador extends Usuario implements Serializable {
 
     public void setPorqueElegirme(String porqueElegirme) {
         this.porqueElegirme = porqueElegirme;
+    }
+
+    public List<Usuario> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Usuario> clientes) {
+        this.clientes = clientes;
     }
 }
