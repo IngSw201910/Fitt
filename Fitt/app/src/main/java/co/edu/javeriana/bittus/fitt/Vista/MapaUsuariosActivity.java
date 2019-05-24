@@ -184,7 +184,7 @@ public class MapaUsuariosActivity extends AppCompatActivity implements OnMapRead
                         mMap.clear();
                             CircleOptions circleOptions = new CircleOptions()
                                     .center(miPosicion)
-                                    .radius(350)
+                                    .radius(1000)
                                     .strokeWidth(10)
                                     .strokeColor(Color.argb(0, 64, 224, 208))
                                     .fillColor(Color.argb(135, 0, 128, 128))
@@ -208,7 +208,7 @@ public class MapaUsuariosActivity extends AppCompatActivity implements OnMapRead
                 for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     LocalizacionUsuario localizacionUsuario = singleSnapshot.getValue(LocalizacionUsuario.class);
                     distanciaKM = UtilsJhonny.distance(miPosicion.latitude,miPosicion.longitude,localizacionUsuario.getLatitud(), localizacionUsuario.getLongitud());
-                    if (distanciaKM < 0.35){
+                    if (distanciaKM < 1){
                         //añadir marcadores con la posicion
                         alguno = true;
                         Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(localizacionUsuario.getLatitud(), localizacionUsuario.getLongitud()))
