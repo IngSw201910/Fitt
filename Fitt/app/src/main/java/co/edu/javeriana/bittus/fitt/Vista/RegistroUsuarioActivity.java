@@ -111,7 +111,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
+                if (user != null&&usuarioNuevo!=null) {
                     usuarioNuevo.setDireccionFoto(RutasBaseDeDatos.RUTA_FOTO_USUARIOS+user.getUid());
                     PersistenciaFirebase.almacenarInformacionConRuta(RutasBaseDeDatos.RUTA_USUARIOS+user.getUid(), usuarioNuevo);
                     Uri uriFoto = UtilsMiguel.getImageUri(RegistroUsuarioActivity.this,bitmapFoto, user.getUid());
@@ -124,12 +124,12 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
                         Bundle bundle = new Bundle();
                         bundle.putSerializable(StringsMiguel.LLAVE_USUARIO, usuarioNuevo);
                         intent.putExtras(bundle);
-                        firebaseAuth.removeAuthStateListener(mAuthListener);
+                        //firebaseAuth.removeAuthStateListener(mAuthListener);
                         startActivity(intent);
                     }else{
                         intentMenuPrincipal = new Intent(RegistroUsuarioActivity.this, MenuPrincipalUsuarioFragment.class);
                         Toast.makeText(getApplicationContext(), StringsMiguel.REGISTRO_USUARIO_CORRECTO,Toast.LENGTH_LONG).show();
-                        firebaseAuth.removeAuthStateListener(mAuthListener);
+                        //firebaseAuth.removeAuthStateListener(mAuthListener);
                         startActivity(intentMenuPrincipal);
                         finish();
                     }
