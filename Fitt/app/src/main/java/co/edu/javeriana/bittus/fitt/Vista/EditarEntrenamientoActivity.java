@@ -1,9 +1,8 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -16,20 +15,17 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioEntrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
-import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
-import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
 import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 
-public class CrearEntrenamientoActivity extends AppCompatActivity {
+public class EditarEntrenamientoActivity extends AppCompatActivity {
 
     private ImageButton ImageButtonSiguiente;
     private Spinner spinnerDificultad;
@@ -39,7 +35,11 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
     private EditText editTextDescripcion;
     private EditText editTextDuracion;
 
+    private Entrenamiento entrenamientoActual;
+    private String llave;
+
     private RadioButton radioButtonPublica;
+    private RadioButton radioButtonPrivada;
 
     private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private static FirebaseUser user = mAuth.getCurrentUser();
@@ -56,6 +56,18 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
         editTextDescripcion = (EditText)findViewById(R.id.editTextDescripcionEntrenamiento);
         editTextDuracion = (EditText) findViewById(R.id.editTextDuracion);
         radioButtonPublica = (RadioButton) findViewById(R.id.radioButtonPublica);
+        radioButtonPrivada = (RadioButton) findViewById(R.id.radioButtonPrivada);
+
+        entrenamientoActual= (Entrenamiento) getIntent().getSerializableExtra(StringsMiguel.LLAVE_ENTRENAMIENTO);
+        llave = (String) getIntent().getStringExtra(StringsMiguel.LLAVE_LLAVE);
+
+
+        editTextNombreEntrenamiento.setText(entrenamientoActual.getNombre());
+        editTextDescripcion.setText(entrenamientoActual.getDescripcion());
+        editTextDuracion.setText(Integer.toString(entrenamientoActual.getDuracion()));
+
+
+
 
         List<String> stringDificultadList = new ArrayList<>();
         Collections.addAll(stringDificultadList, StringsMiguel.DIFICULTADES_ENTRENAMIENTOS);
@@ -63,14 +75,65 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
         spinnerDificultad.setAdapter(comboAdapterDificultad);
 
 
+        switch (entrenamientoActual.getDificultad()){
+
+            case "Fácil":{
+                spinnerDificultad.setSelection(0);
+                break;
+            }
+            case "Media":{
+                spinnerDificultad.setSelection(1);
+                break;
+            }
+            case "Difícil":{
+                spinnerDificultad.setSelection(2);
+                break;
+            }
+        }
+
+        if(!entrenamientoActual.isPublica()){
+            radioButtonPrivada.setChecked(true);
+            radioButtonPublica.setChecked(false);
+        }
+
         List<String> stringDescansoList = new ArrayList<>();
         Collections.addAll(stringDescansoList, StringsMiguel.ENTRENAMIENTOS_DESCANSOS_STRING);
         ArrayAdapter<String> comboAdapterDescanso = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, stringDescansoList);
         spinnerDescanso.setAdapter(comboAdapterDescanso);
 
+        switch (entrenamientoActual.getNumDiasDescanso()){
 
+            case 0:{
+                spinnerDescanso.setSelection(0);
+                break;
+            }
+            case 1:{
+                spinnerDescanso.setSelection(1);
+                break;
+            }
+            case 2:{
+                spinnerDescanso.setSelection(2);
+                break;
+            }
+            case 3:{
+                spinnerDescanso.setSelection(3);
+                break;
+            }
+            case 4:{
+                spinnerDescanso.setSelection(4);
+                break;
+            }
+            case 5:{
+                spinnerDescanso.setSelection(5);
+                break;
+            }
+            case 6:{
+                spinnerDescanso.setSelection(6);
+                break;
+            }
 
-
+        }
+        
         ImageButtonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +160,12 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
         }
 
         if(completo){
-            startActivityForResult(new Intent(CrearEntrenamientoActivity.this, CrearEntrenamientoEjerciciosActivity.class),Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS);
+
+            Intent intent = new Intent(EditarEntrenamientoActivity.this, EditarEntrenamientoEjerciciosActivity.class);
+
+            intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamientoActual);
+
+            startActivityForResult(intent,Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS);
         }
 
     }
@@ -111,26 +179,31 @@ public class CrearEntrenamientoActivity extends AppCompatActivity {
         {
             List<EjercicioEntrenamiento> entrenamientoList = (List<EjercicioEntrenamiento>) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIOS_ENTRENAMIENTO);
 
-            String nombreRutina = editTextNombreEntrenamiento.getText().toString();
-            String descripcion = editTextDescripcion.getText().toString();
-            String dificultad = (String) spinnerDificultad.getSelectedItem();
+            entrenamientoActual.setNombre(editTextNombreEntrenamiento.getText().toString());
+            entrenamientoActual.setDescripcion(editTextDescripcion.getText().toString());
+            entrenamientoActual.setDificultad((String) spinnerDificultad.getSelectedItem());
             String sDuracion = editTextDuracion.getText().toString();
 
             boolean publica = radioButtonPublica.isChecked();
             String sDiasDescanso = (String) spinnerDescanso.getSelectedItem();
 
 
+            if(!publica){
+                entrenamientoActual.setPublica(false);
+            }
+
             int diasDescanso = Integer.parseInt(sDiasDescanso);
             int duracion = Integer.parseInt(sDuracion);
+            entrenamientoActual.setDuracion(duracion);
+            entrenamientoActual.setNumDiasDescanso(diasDescanso);
 
 
-            Entrenamiento entrenamiento = new Entrenamiento(diasDescanso,descripcion,dificultad,publica,nombreRutina,duracion);
-            entrenamiento.setEjercicioEntrenamientoList(entrenamientoList);
+            entrenamientoActual.setEjercicioEntrenamientoList(entrenamientoList);
 
 
-            String key = PersistenciaFirebase.almacenarInformacionConKey(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+user.getUid()+"/", entrenamiento);
-            if (entrenamiento.isPublica())
-                PersistenciaFirebase.almacenarInformacionConKeyPersonalizada(RutasBaseDeDatos.getRutaEntrenamientosPublicos(),entrenamiento, key);
+            PersistenciaFirebase.almacenarInformacionConKeyPersonalizada(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+user.getUid()+"/", entrenamientoActual, llave);
+            if (publica)
+                PersistenciaFirebase.almacenarInformacionConKeyPersonalizada(RutasBaseDeDatos.getRutaEntrenamientosPublicos(),entrenamientoActual, llave);
 
             finish();
         }

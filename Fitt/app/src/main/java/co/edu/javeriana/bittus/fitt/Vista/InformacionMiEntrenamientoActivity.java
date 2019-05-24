@@ -1,9 +1,9 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -18,8 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
-
 import co.edu.javeriana.bittus.fitt.Adapters.ReseñaAdaptador;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
@@ -27,9 +25,8 @@ import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
-import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
-public class InformacionEntrenamientoActivity extends AppCompatActivity {
+public class InformacionMiEntrenamientoActivity extends AppCompatActivity {
 
     private TextView textViewNombreEntrenamiento;
     private TextView textViewDuracion;
@@ -37,14 +34,14 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
     private TextView textViewDescanso;
     private TextView textViewDescripcion;
     private ListView listViewReseñas;
-    private ImageView imageViewFotoCreador;
-    private TextView textViewNombreCreador;
-    private ImageButton imageButtonAdoptar;
+
+
+
     private ImageButton imageButtonEjercicios;
     private RatingBar ratingBarEntrenamiento;
 
     private Entrenamiento entrenamiento;
-    private Usuario usuarioCreador;
+
     private String llaveEntrenamiento;
 
     private DatabaseReference myRef;
@@ -54,20 +51,18 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_informacion_entrenamiento);
+        setContentView(R.layout.activity_informacion_mi_entrenamiento);
 
         textViewNombreEntrenamiento = (TextView)findViewById(R.id.textViewNombreEntrenamiento);
         textViewDuracion = (TextView)findViewById(R.id.textViewDuracion);
         textViewDificultad = (TextView)findViewById(R.id.textViewDificultad);
         textViewDescanso = (TextView)findViewById(R.id.textViewDescanso);
         textViewDescripcion = (TextView)findViewById(R.id.textViewDescripcion);
-        textViewNombreCreador = (TextView)findViewById(R.id.textViewNombreCreador);
+
 
         listViewReseñas = (ListView) findViewById(R.id.listViewResenas);
 
-        imageViewFotoCreador = (ImageView) findViewById(R.id.imageViewPerfilCreador);
 
-        imageButtonAdoptar = (ImageButton) findViewById(R.id.imageButtonAdoptar);
         imageButtonEjercicios = (ImageButton) findViewById(R.id.imageButtonVerEjerciciosEntrenamiento);
 
         ratingBarEntrenamiento = (RatingBar) findViewById(R.id.ratingBarEntrenamiento);
@@ -75,8 +70,6 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         entrenamiento = (Entrenamiento) bundle.getSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO);
         llaveEntrenamiento = (String) bundle.getSerializable(StringsMiguel.LLAVE_LLAVE);
-
-        Log.i("llave", llaveEntrenamiento);
 
         textViewNombreEntrenamiento.setText(entrenamiento.getNombre());
         textViewDuracion.setText(entrenamiento.getDuracion()+" minutos");
@@ -112,20 +105,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
                         break;
                     }
                 }
-                myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS+keyUsuario);
-                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        usuarioCreador = dataSnapshot.getValue(Usuario.class);
-                        textViewNombreCreador.setText(usuarioCreador.getNombre());
-                        PersistenciaFirebase.descargarFotoYPonerEnImageView(usuarioCreador.getDireccionFoto(),imageViewFotoCreador);
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
             }
 
             @Override
@@ -133,12 +113,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
 
             }
         });
-        imageButtonAdoptar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adoptar();
-            }
-        });
+
         imageButtonEjercicios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,7 +123,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
     }
 
     private void ejercicios() {
-        Intent intent = new Intent(InformacionEntrenamientoActivity.this, InformacionEntrenamientoEjerciciosActivity.class);
+        Intent intent = new Intent(InformacionMiEntrenamientoActivity.this, InformacionEntrenamientoEjerciciosActivity.class);
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
@@ -158,7 +133,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
     }
 
     private void adoptar() {
-        Intent intent = new Intent(InformacionEntrenamientoActivity.this, AdoptarEntrenamientoActivity.class);
+        Intent intent = new Intent(InformacionMiEntrenamientoActivity.this, AdoptarEntrenamientoActivity.class);
         intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamiento);
         startActivity(intent);
         finish();

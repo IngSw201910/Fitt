@@ -105,7 +105,7 @@ public class InicioUsuarioFragment extends Fragment {
         misRutinasB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MisRutinasActivity.class));
+                startActivity(new Intent(getActivity(), MisEntrenamientosActivity.class));
             }
         });
 

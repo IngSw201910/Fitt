@@ -13,7 +13,6 @@ public class Usuario implements Serializable {
 
     protected List<Entrenamiento> entrenamientoList;
     protected String nombre;
-    protected String id;
     protected String correo;
     protected String direccionFoto;
     protected Date fechaNacimiento;
@@ -26,15 +25,11 @@ public class Usuario implements Serializable {
 
 
 
+
     public Usuario(String correo, String nombre) {
         this.nombre = nombre;
         this.correo = correo;
     }
-
-
-
-
-
 
 
     public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
