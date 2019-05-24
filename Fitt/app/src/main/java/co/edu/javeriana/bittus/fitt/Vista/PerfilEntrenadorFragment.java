@@ -88,23 +88,23 @@ public class PerfilEntrenadorFragment extends Fragment {
         puntaje.setNumStars(5);
         puntaje.setEnabled(false);
 
-        nombre =v.findViewById(R.id.editTextNombre);
+        nombre =v.findViewById(R.id.editTextNombreE);
         nombre.setEnabled(false);
 
 
-        correo =v.findViewById(R.id.editTextCorreo);
+        correo =v.findViewById(R.id.editTextCorreoE);
         correo.setEnabled(false);
 
 
-        nacimiento =v.findViewById(R.id.editTextNaciemiento);
+        nacimiento =v.findViewById(R.id.editTextNacimientoE);
         nacimiento.setEnabled(false);
 
 
-        peso =v.findViewById(R.id.editTextPeso);
+        peso =v.findViewById(R.id.editTextPesoE);
         peso.setEnabled(false);
 
 
-        altura =v.findViewById(R.id.editTextAltura);
+        altura =v.findViewById(R.id.editTextAlturaE);
         altura.setEnabled(false);
 
 
@@ -156,7 +156,11 @@ public class PerfilEntrenadorFragment extends Fragment {
                                 String nombreUs= nombre.getText().toString();
 
                                 nombre.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setNombre(nombreUs);
+
+                                myRef.setValue(entrenador);
+                                nombre.setText(nombreUs);
+                                nombre.setEnabled(false);
 
                             }
 
@@ -184,7 +188,11 @@ public class PerfilEntrenadorFragment extends Fragment {
                             if(correo.getText()!=null){
                                 String correoNew= correo.getText().toString();
                                 correo.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setCorreo(correoNew);
+
+                                myRef.setValue(entrenador);
+                                correo.setText(correoNew);
+                                correo.setEnabled(false);
 
                             }
 
@@ -211,7 +219,11 @@ public class PerfilEntrenadorFragment extends Fragment {
                             if(nacimiento.getText()!=null){
                                 String nacimientoNew= nacimiento.getText().toString();
                                 nacimiento.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setNombre(nacimientoNew);
+
+                                myRef.setValue(entrenador);
+                                nacimiento.setText(nacimientoNew);
+                                nacimiento.setEnabled(false);
 
                             }
 
@@ -238,7 +250,11 @@ public class PerfilEntrenadorFragment extends Fragment {
                             if(altura.getText()!=null){
                                 float alturaNew= Float.parseFloat(altura.getText().toString());
                                 altura.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setAltura(alturaNew);
+
+                                myRef.setValue(entrenador);
+
+                                nombre.setEnabled(false);
 
                             }
 
@@ -264,8 +280,9 @@ public class PerfilEntrenadorFragment extends Fragment {
 
                             if(peso.getText()!=null){
                                 float pesoNew= Float.parseFloat(peso.getText().toString());
+                                entrenador.setPeso(pesoNew);
+                                myRef.setValue(entrenador);
                                 peso.setEnabled(false);
-                                //Guardar nuevo nombre
 
                             }
 
@@ -292,7 +309,10 @@ public class PerfilEntrenadorFragment extends Fragment {
                             if(experiencia.getText()!=null){
                                 String experienciaNew= experiencia.getText().toString();
                                 experiencia.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setDescripccion(experienciaNew);
+                                myRef.setValue(entrenador);
+                                experiencia.setText(experienciaNew);
+                                experiencia.setEnabled(false);
 
                             }
 
@@ -324,9 +344,11 @@ public class PerfilEntrenadorFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if(isChecked){
-                    //Cambiar a privado
+                    entrenador.setPrivacidad(true);
+                    myRef.setValue(entrenador);
                 }else{
-                    //Cambiar a publico
+                    entrenador.setPrivacidad(true);
+                    myRef.setValue(entrenador);
                 }
             }
         });
