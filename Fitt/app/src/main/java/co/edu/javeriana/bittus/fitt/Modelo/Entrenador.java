@@ -13,14 +13,44 @@ public class Entrenador extends Usuario implements Serializable {
     private List<Usuario> clientes;
 
 
-    public Entrenador(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso, String descripccion, String nombreTitulo, String fotoTitulo, String porqueElegirme) {
-        super(nombre, correo, direccionFoto, fechaNacimiento, sexo, altura, peso);
+
+    public Entrenador(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso, String descripccion, String nombreTitulo, String fotoTitulo, String porqueElegirme, String tipo) {
+        super(nombre, correo, direccionFoto, fechaNacimiento, sexo, altura, peso,tipo);
         this.descripccion = descripccion;
         this.nombreTitulo = nombreTitulo;
         this.fotoTitulo = fotoTitulo;
         this.porqueElegirme = porqueElegirme;
         clientes = new ArrayList<Usuario>();
     }
+
+    public boolean isPrivacidad() {
+        return privacidad;
+    }
+
+    public float getDistanciaRecorrida() {
+        return distanciaRecorrida;
+    }
+
+    public void setDistanciaRecorrida(float distanciaRecorrida) {
+        this.distanciaRecorrida = distanciaRecorrida;
+    }
+
+    public float getPasosDados() {
+        return pasosDados;
+    }
+
+    public void setPasosDados(float pasosDados) {
+        this.pasosDados = pasosDados;
+    }
+
+    public float getCaloriasQuemadas() {
+        return caloriasQuemadas;
+    }
+
+    public void setCaloriasQuemadas(float caloriasQuemadas) {
+        this.caloriasQuemadas = caloriasQuemadas;
+    }
+
     public Entrenador(){
         super();
         clientes = new ArrayList<Usuario>();
@@ -83,6 +113,14 @@ public class Entrenador extends Usuario implements Serializable {
         this.peso = peso;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
     public List<Entrenamiento> getEntrenamientoList() {
         return entrenamientoList;
     }
@@ -92,19 +130,20 @@ public class Entrenador extends Usuario implements Serializable {
     }
 
 
-    public  List<Usuario> getSeguidosList(){
+
+    public  List<String> getSeguidosList(){
         return seguidosList;
     }
 
-    public void setSeguidosList(List<Usuario> seguidosList){
+    public void setSeguidosList(List<String> seguidosList){
         this.seguidosList=seguidosList;
     }
 
-    public List<Usuario> getSeguidoresList(){
+    public List<String> getSeguidoresList(){
         return seguidoresList;
     }
 
-    public void setSeguidoresList(List<Usuario> seguidoresList){
+    public void setSeguidoresList(List<String> seguidoresList){
         this.seguidoresList=seguidoresList;
     }
 
@@ -115,6 +154,10 @@ public class Entrenador extends Usuario implements Serializable {
     public void setPrivacidad(boolean privacidad) {
         this.privacidad = privacidad;
     }
+
+
+
+
     public String getDescripccion() {
         return descripccion;
     }
@@ -147,6 +190,7 @@ public class Entrenador extends Usuario implements Serializable {
         this.porqueElegirme = porqueElegirme;
     }
 
+
     public List<Usuario> getClientes() {
         return clientes;
     }
@@ -154,4 +198,7 @@ public class Entrenador extends Usuario implements Serializable {
     public void setClientes(List<Usuario> clientes) {
         this.clientes = clientes;
     }
+
+
+
 }

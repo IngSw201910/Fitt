@@ -112,7 +112,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    usuarioNuevo.setDireccionFoto(RutasBaseDeDatos.RUTA_USUARIOS+user.getUid());
+                    usuarioNuevo.setDireccionFoto(RutasBaseDeDatos.RUTA_FOTO_USUARIOS+user.getUid());
                     PersistenciaFirebase.almacenarInformacionConRuta(RutasBaseDeDatos.RUTA_USUARIOS+user.getUid(), usuarioNuevo);
                     Uri uriFoto = UtilsMiguel.getImageUri(RegistroUsuarioActivity.this,bitmapFoto, user.getUid());
                     PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS, user.getUid(), uriFoto);
@@ -237,7 +237,7 @@ public class RegistroUsuarioActivity extends AppCompatActivity implements View.O
             }else if(radioButtonOtro.isChecked()){
                 sexo = "Otro";
             }
-            usuarioNuevo = new Usuario(nombre,correo,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso));
+            usuarioNuevo = new Usuario(nombre,correo,"dirección",fechaNacimiento,sexo,Float.parseFloat(sAltura),Float.parseFloat(sPeso),"usuarioPredeterminado");
 
 
 

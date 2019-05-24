@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -31,9 +32,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.Permisos;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.UtilsJhonny;
 
 public class IniciarRecorridoActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -63,12 +73,14 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
 
     private TextView tituloRecorrido;
 
-
-
+    private Usuario usuario;
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
+    private FirebaseUser mAuth;
 
     private double latitudUltimaUbicacion;
     private double longitudUltimaUbicacion;
-
+    private  SupportMapFragment mapFragment;
     private Location ultimaUbiacion;
 
     private boolean inicioColocado = false;
@@ -80,7 +92,7 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iniciar_recorrido);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
 
@@ -95,8 +107,10 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
 
         tituloRecorrido = findViewById(R.id.tituloRecorridoL);
 
+        database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance().getCurrentUser();
 
-
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
         //Lo que se hace cada 20 segs que se recibe una nueva ubicación
         mLocationCallback = new LocationCallback() {
@@ -113,7 +127,22 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
                 }
             }
         };
-        inicializarCronometro();
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usuario = (Usuario)dataSnapshot.getValue(Usuario.class);
+
+                inicializarCronometro();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         mapFragment.getMapAsync(this);
 
     }
@@ -206,11 +235,28 @@ public class IniciarRecorridoActivity extends FragmentActivity implements OnMapR
         tituloRecorrido.setText("RESUMEN RECORRIDO");
         colocarMarcador(ultimaUbiacion, "Final recorrido", BitmapDescriptorFactory.HUE_RED);
 
-        //se deben almacenar las estadisticas en la información del usuario
-        Toast.makeText(getApplicationContext(), "Información del recorrido almacenada!" , Toast.LENGTH_SHORT).show();
 
         finalizarRecorrido.setColorFilter(getResources().getColor(R.color.gris));
         finalizarRecorrido.setClickable(false);
+
+        usuario.setCaloriasQuemadas(usuario.getCaloriasQuemadas()+(float)caloriasRecorridoN);
+        usuario.setPasosDados(usuario.getPasosDados() + (float)pasosRecorridosN);
+        usuario.setDistanciaRecorrida(usuario.getDistanciaRecorrida() + (float) distanciaRecorridoN);
+
+        myRef.setValue(usuario, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                Toast.makeText(getApplicationContext(), "Información del recorrido almacenada!" , Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+
+
+
+
+
+
+
         
     }
 

@@ -45,7 +45,7 @@ public class ReseñaAdaptador extends ArrayAdapter<Reseña> {
         TextView comentario = (TextView) vista.findViewById(R.id.textViewComentario);
         RatingBar calificacion = (RatingBar) vista.findViewById(R.id.ratingBarSP);
         ImageView fotoUsuario = (ImageView) vista.findViewById(R.id.imageViewFotoUsuarioRP);
-
+        calificacion.setRating(0f);
         if (!reseñas.isEmpty()) {
             nombreUsuario.setText(reseñas.get(i).getUsuario().getNombre());
             fecha.setText(reseñas.get(i).getFecha().getDate()+"/"+(reseñas.get(i).getFecha().getMonth()+1)+"/"+(reseñas.get(i).getFecha().getYear()+1900));
