@@ -126,7 +126,8 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(MostrarUsuarioActivity.this, SeguidoresActivity.class);
-                intent.putExtra("listaSeguidores", (Serializable) item.getSeguidoresList());
+                intent.putExtra("usuario", (Serializable) item);
+                intent.putExtra("id",(Serializable) uidUsuario);
                 startActivity(intent);
             }
         });
@@ -136,7 +137,8 @@ public class MostrarUsuarioActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intent =new Intent(MostrarUsuarioActivity.this, SeguidosActivity.class);
-                intent.putExtra("listaSeguidos", (Serializable) item.getSeguidosList());
+                intent.putExtra("usuario", (Serializable) item);
+                intent.putExtra("id",(Serializable) uidUsuario);
                 startActivity(intent);
             }
         });
