@@ -55,7 +55,7 @@ public class SeguidosActivity extends AppCompatActivity implements TextWatcher  
         item= (Usuario) getIntent().getSerializableExtra("usuario");
         idUsConectado= (String) getIntent().getSerializableExtra("id");
 
-        listViewUsuarios = (ListView)findViewById(R.id.listUsuariosBuscar);
+        listViewUsuarios = (ListView)findViewById(R.id.listUsuariosSeguidos);
         listUsuarios = new ArrayList<Usuario>();
         ImageButtonBuscarUsuarios = (ImageButton) findViewById(R.id.imageButtonBuscarUsuarioSeguido);
         EditTextNombreUsuarioABuscar = (EditText) findViewById(R.id.editTextUsuarioSeguido);

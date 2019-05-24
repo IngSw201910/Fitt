@@ -22,7 +22,10 @@ public class Usuario implements Serializable {
     protected List<String> seguidosList;
     protected List<String> seguidoresList;
     protected boolean privacidad;
-
+    protected String tipo;
+    protected float distanciaRecorrida;
+    protected float pasosDados;
+    protected float caloriasQuemadas;
 
 
 
@@ -32,7 +35,11 @@ public class Usuario implements Serializable {
     }
 
 
-    public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
+
+
+
+    public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso, String tipo) {
+
         this.nombre = nombre;
         this.correo = correo;
         this.direccionFoto = direccionFoto;
@@ -41,9 +48,13 @@ public class Usuario implements Serializable {
         this.altura = altura;
         this.peso = peso;
         this.privacidad =false;
+        this.tipo=tipo;
         entrenamientoList = new ArrayList<Entrenamiento>();
         seguidosList = new ArrayList<String>();
         seguidoresList = new ArrayList<String>();
+        distanciaRecorrida = 0;
+        pasosDados = 0;
+        caloriasQuemadas = 0;
     }
 
 
@@ -53,6 +64,30 @@ public class Usuario implements Serializable {
         seguidoresList = new ArrayList<String>();
     }
 
+
+    public float getDistanciaRecorrida() {
+        return distanciaRecorrida;
+    }
+
+    public void setDistanciaRecorrida(float distanciaRecorrida) {
+        this.distanciaRecorrida = distanciaRecorrida;
+    }
+
+    public float getPasosDados() {
+        return pasosDados;
+    }
+
+    public void setPasosDados(float pasosDados) {
+        this.pasosDados = pasosDados;
+    }
+
+    public float getCaloriasQuemadas() {
+        return caloriasQuemadas;
+    }
+
+    public void setCaloriasQuemadas(float caloriasQuemadas) {
+        this.caloriasQuemadas = caloriasQuemadas;
+    }
 
     public String getNombre() {
         return nombre;
@@ -141,6 +176,14 @@ public class Usuario implements Serializable {
 
     public void setPrivacidad(boolean privacidad) {
         this.privacidad = privacidad;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public boolean validarSeguido(String uidUsuario) {

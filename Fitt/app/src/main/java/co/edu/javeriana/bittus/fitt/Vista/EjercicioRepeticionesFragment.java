@@ -62,7 +62,7 @@ public class EjercicioRepeticionesFragment extends Fragment {
     public interface FragmentEjercicioRepeticionesListener {
         void mostrarSiguienteEjercicio();
 
-        void iniciarMusicaEjercicioRepeticionOTiempo();
+        void iniciarMusicaEjercicioRepeticionOTiempo(boolean iniciarInmediatamente);
         void detenerMusica();
 
         void darInstrucciones(String texto);
@@ -137,22 +137,32 @@ public class EjercicioRepeticionesFragment extends Fragment {
                         instruccionInicial += ". " + "Serie " + serie + "," + ejercicioRepeticiones.getRepeticiones() + "repeticiones";
 
                         listener.darInstrucciones(instruccionInicial);
-                        while (listener.estaDandoInstrucciones()) ;
 
-                        estado = CORRIENDO;
+                            while (listener.estaDandoInstrucciones()) ;
+
+                            if (estado != PAUSADO) {
+                                estado = CORRIENDO;
+                                listener.iniciarMusicaEjercicioRepeticionOTiempo(true);
+                            } else {
+                                listener.iniciarMusicaEjercicioRepeticionOTiempo(false);
+                            }
+
 
                     }
-                    listener.iniciarMusicaEjercicioRepeticionOTiempo();
+
                     while (repeticion < ejercicioRepeticiones.getRepeticiones()) {
+
                         if (estado == CORRIENDO) {
-                            listener.darInstrucciones("1");
+                            if (estado == CORRIENDO)
+                                listener.darInstrucciones("1");
                             try {
                                 sleep(1000);
                             } catch (InterruptedException e) {
                                 this.interrupt();
                                 break;
                             }
-                            listener.darInstrucciones("2");
+                            if (estado == CORRIENDO)
+                                listener.darInstrucciones("2");
                             repeticion++;
                             getActivity().runOnUiThread(new Runnable() {
 
@@ -200,6 +210,7 @@ public class EjercicioRepeticionesFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof FragmentEjercicioRepeticionesListener) {
             listener = (FragmentEjercicioRepeticionesListener) context;
+            listener.detenerMusica();
         }
     }
 
@@ -216,13 +227,12 @@ public class EjercicioRepeticionesFragment extends Fragment {
     }
 
     public void pausar(){
-        if (estado == CORRIENDO)
+        if (estado == CORRIENDO || estado == COMENZANDO)
             estado = PAUSADO;
-
     }
     public void reanudar(){
         if (estado == PAUSADO)
-        estado = CORRIENDO;
+            estado = CORRIENDO;
     }
 
 

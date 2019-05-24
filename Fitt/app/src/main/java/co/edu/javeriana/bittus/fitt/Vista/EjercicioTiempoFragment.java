@@ -71,7 +71,7 @@ public class EjercicioTiempoFragment extends Fragment {
 
         void darInstrucciones(String texto);
 
-        void iniciarMusicaEjercicioRepeticionOTiempo();
+        void iniciarMusicaEjercicioRepeticionOTiempo(boolean iniciarInmediatamente);
 
         void detenerMusica();
 
@@ -146,17 +146,27 @@ public class EjercicioTiempoFragment extends Fragment {
                         instruccionInicial += ". " + "Serie " + serie + "," + ejercicioTiempo.getTiempo() + "segundos";
                         listener.darInstrucciones(instruccionInicial);
                         while (listener.estaDandoInstrucciones()) ;
-                        estado = CORRIENDO;
 
-                    }
-                    listener.iniciarMusicaEjercicioRepeticionOTiempo();
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-                            chrono.start();
+                            if (estado != PAUSADO) {
+                                estado = CORRIENDO;
+                                listener.iniciarMusicaEjercicioRepeticionOTiempo(true);
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+                                        chrono.start();
+                                    }
+                                });
+                            }
                         }
-                    });
+                        else{
+                            listener.iniciarMusicaEjercicioRepeticionOTiempo(false);
+                        }
+
+
+
+
+
                 } catch (Exception e) {
                     //Se termino corto la ejecución del ejercicio
                     e.printStackTrace();
@@ -210,6 +220,7 @@ public class EjercicioTiempoFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof FragmentEjercicioRepeticionesListener) {
             listener = (FragmentEjercicioRepeticionesListener) context;
+            listener.detenerMusica();
             Log.i("Si inicio el listener", "síiii");
         }
     }
@@ -229,6 +240,9 @@ public class EjercicioTiempoFragment extends Fragment {
             timeWhenStopped = (chrono.getBase() - SystemClock.elapsedRealtime());
             chrono.stop();
         }
+        if (estado == COMENZANDO)
+            estado = PAUSADO;
+
     }
 
     public void reanudar(){

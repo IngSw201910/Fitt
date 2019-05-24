@@ -71,7 +71,7 @@ public class InformacionEntrenamientoActivity extends AppCompatActivity {
         imageButtonEjercicios = (ImageButton) findViewById(R.id.imageButtonVerEjerciciosEntrenamiento);
 
         ratingBarEntrenamiento = (RatingBar) findViewById(R.id.ratingBarEntrenamiento);
-
+        ratingBarEntrenamiento.setRating(0f);
         Bundle bundle = getIntent().getExtras();
         entrenamiento = (Entrenamiento) bundle.getSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO);
         llaveEntrenamiento = (String) bundle.getSerializable(StringsMiguel.LLAVE_LLAVE);
