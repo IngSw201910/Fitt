@@ -15,7 +15,6 @@ public class Usuario implements Serializable {
     protected String nombre;
     protected String idEntrenador = "default";
     protected String id;
-
     protected String correo;
     protected String direccionFoto;
     protected Date fechaNacimiento;
