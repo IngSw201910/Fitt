@@ -50,7 +50,9 @@ public class nuevoMensajeActivity extends AppCompatActivity {
 
     private void readUsers(){
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(RutasBaseDeDatos.RUTA_USUARIOS);
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("usuarios");
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

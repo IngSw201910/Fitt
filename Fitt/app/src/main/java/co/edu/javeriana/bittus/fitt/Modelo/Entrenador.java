@@ -41,6 +41,14 @@ public class Entrenador extends Usuario implements Serializable {
         this.pasosDados = pasosDados;
     }
 
+    public String getIdEntrenador() {
+        return idEntrenador;
+    }
+
+    public void setIdEntrenador(String idEntrenador) {
+        this.idEntrenador = idEntrenador;
+    }
+
     public float getCaloriasQuemadas() {
         return caloriasQuemadas;
     }

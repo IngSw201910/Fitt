@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,11 @@ public class MensajeRecienteAdapter extends RecyclerView.Adapter<MensajeReciente
 
     private Context mContext;
     private List<Usuario> mUsuarios;
+    FirebaseUser mAuth;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef;
+    String idNewUser = "";
+
 
     String theLastMessage;
 
@@ -45,19 +51,37 @@ public class MensajeRecienteAdapter extends RecyclerView.Adapter<MensajeReciente
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MensajeRecienteAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final MensajeRecienteAdapter.ViewHolder viewHolder, int i) {
         final Usuario usuario = mUsuarios.get(i);
         viewHolder.username.setText(usuario.getNombre());
         //Falta obtener el enlace de donde esta guardado la imagen en Firebase
         viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
-        lastMessage(usuario.getId(), viewHolder.last_msg);
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, MensajeActivity.class);
-                intent.putExtra("id", usuario.getId());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
+                myRef = database.getReference("usuarios");
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                            Usuario aux = singleSnapshot.getValue(Usuario.class);
+                            if(usuario.getCorreo().equals(aux.getCorreo())){
+                                String idTemp = singleSnapshot.getKey();
+                                idNewUser = idTemp;
+                                Log.d("MATCH", idNewUser);
+                                Intent intent = new Intent(mContext, MensajeActivity.class);
+                                lastMessage(idNewUser, viewHolder.last_msg);
+                                intent.putExtra("id", idNewUser);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                mContext.startActivity(intent);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }

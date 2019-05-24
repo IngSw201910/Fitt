@@ -83,7 +83,7 @@ public class ChatsActivity extends AppCompatActivity {
 
     private void chatList() {
         mUsuarios = new ArrayList<>();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Usuarios");
+        databaseReference = FirebaseDatabase.getInstance().getReference("usuarios");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -91,7 +91,7 @@ public class ChatsActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Usuario user = snapshot.getValue(Usuario.class);
                     for (Chatlist chatlist : usersList){
-                        if (user.getId().equals(chatlist.getId())){
+                        if (snapshot.getKey().equals(chatlist.getId())){
                             mUsuarios.add(user);
                         }
                     }

@@ -126,7 +126,7 @@ public class InicioEntrenadorFragment extends Fragment {
         misClientesB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), EntrenadorActivity.class));
+                startActivity(new Intent(getActivity(), ChatsActivity.class));
             }
         });
 

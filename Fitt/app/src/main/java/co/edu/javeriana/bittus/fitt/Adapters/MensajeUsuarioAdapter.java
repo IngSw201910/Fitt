@@ -4,14 +4,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.List;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Entrenador;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Vista.MensajeActivity;
@@ -20,6 +29,10 @@ public class MensajeUsuarioAdapter extends RecyclerView.Adapter<MensajeUsuarioAd
 
     private Context mContext;
     private List<Usuario> mUsuarios;
+    FirebaseUser mAuth;
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef;
+    String idNewUser = "";
 
     public MensajeUsuarioAdapter(Context mContext, List<Usuario> mUsuarios){
         this.mUsuarios = mUsuarios;
@@ -39,14 +52,32 @@ public class MensajeUsuarioAdapter extends RecyclerView.Adapter<MensajeUsuarioAd
         viewHolder.username.setText(usuario.getNombre());
         //Falta obtener el enlace de donde esta guardado la imagen en Firebase
         viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
-
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, MensajeActivity.class);
-                //intent.putExtra("id", usuario.getId());
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
+
+                myRef = database.getReference("usuarios");
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
+                            Usuario aux = singleSnapshot.getValue(Usuario.class);
+                            if(usuario.getCorreo().equals(aux.getCorreo())){
+                                String idTemp = singleSnapshot.getKey();
+                                idNewUser = idTemp;
+                                Log.d("MATCH", idNewUser);
+                                Intent intent = new Intent(mContext, MensajeActivity.class);
+                                intent.putExtra("id", idNewUser);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                mContext.startActivity(intent);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }

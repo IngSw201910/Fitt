@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
 import java.util.List;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
@@ -23,6 +24,8 @@ import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenador;
 import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+
+import static co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase.descargarFotoYPonerEnImageView;
 
 public class Entrenador_miEntrenadorActivity extends AppCompatActivity {
 
@@ -81,6 +84,19 @@ public class Entrenador_miEntrenadorActivity extends AppCompatActivity {
             }
         });
 
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usuario = dataSnapshot.getValue(Usuario.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         //buscar si existe el usuario en lista clientes
         actualizarEstadoBotton();
 
@@ -120,5 +136,9 @@ public class Entrenador_miEntrenadorActivity extends AppCompatActivity {
         List<String> clientesTemp = entrenador.getClientes();
         clientesTemp.add(idUsuario);
         PersistenciaFirebase.almacenarInformacionConRuta(RutasBaseDeDatos.RUTA_USUARIOS+idEntrenador+"/clientes/", clientesTemp);
+
+        DatabaseReference myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+        usuario.setIdEntrenador(idEntrenador);
+        myRef.setValue(usuario);
     }
 }
