@@ -36,6 +36,7 @@ import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoDistancia;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoTiempo;
 import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopCrearEjercicioEntrenamientoRepeticion;
+import co.edu.javeriana.bittus.fitt.Vista.PopUps.PopEditarEjercicioEntrenamientoDistancia;
 
 public class BuscarEjercicioActivity extends AppCompatActivity implements TextWatcher {
 
@@ -51,7 +52,7 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
     private EjercicioDistancia ejercicioDistancia;
     private EjercicioTiempo ejercicioTiempo;
     private EjercicioRepeticiones ejercicioRepeticion;
-
+    private boolean buscar = false;
     FirebaseDatabase database;
     DatabaseReference myRef;
 
@@ -70,6 +71,10 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
 
 
+        if(getIntent().getStringExtra("LLAVE").equals("llave")){
+            buscar = true;
+        }
+
         adapterEjercicios = new EjerciciosAdapter(BuscarEjercicioActivity.this,R.layout.item_ejercicio_row,listEjercicios);
 
 
@@ -78,7 +83,12 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ejercicioSeleccionado = listEjercicios.get(position);
-                abrirPopUp();
+                if(!buscar){
+                    abrirPopUp();
+                }
+                else{
+                    abrirInforEjercicio(listEjercicios.get(position));
+                }
             }
         });
 
@@ -96,6 +106,13 @@ public class BuscarEjercicioActivity extends AppCompatActivity implements TextWa
 
     }
 
+    private void abrirInforEjercicio(Ejercicio ejercicio) {
+        Intent inten = new Intent(BuscarEjercicioActivity.this, InformacionEjercicioActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(StringsMiguel.LLAVE_EJERCICIO,ejercicio);
+        inten.putExtras(bundle);
+        startActivity(inten);
+    }
 
 
     public void abrirPopUp(){

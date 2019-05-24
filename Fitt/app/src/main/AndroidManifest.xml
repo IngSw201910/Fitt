@@ -63,7 +63,6 @@
             android:name=".Vista.PruebaMapas"
             android:label="@string/title_activity_prueba_mapas" />
         <activity android:name=".Vista.RealizarEntrenamiento_EntrenamientosHoyActivity" />
-        <activity android:name=".Vista.EjerciciosActivity" />
         <activity android:name=".Vista.BuscarUsuarioActivity" />
         <activity android:name=".Vista.MapaUsuariosActivity" />
         <activity android:name=".Vista.ChatsActivity" />
