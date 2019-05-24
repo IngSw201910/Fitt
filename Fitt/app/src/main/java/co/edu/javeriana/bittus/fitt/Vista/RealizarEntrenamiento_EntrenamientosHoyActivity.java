@@ -196,9 +196,12 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
+                    Log.i("prueba:", "tiene permiso");
                     if (location != null) {
-                        Log.w("ENTRAAA:", location.getLatitude()+ location.getLongitude()+"");
+                        Log.i("ENTRAAA:", location.getLatitude()+ location.getLongitude()+"");
                         miPosicion = new LatLng(location.getLatitude(), location.getLongitude());
+                        Log.i("Location:", "Latitud:"+ location.getLatitude());
+                        Log.i("Location:", "Longitud:"+ location.getLongitude());
                     }
                 }
             });
