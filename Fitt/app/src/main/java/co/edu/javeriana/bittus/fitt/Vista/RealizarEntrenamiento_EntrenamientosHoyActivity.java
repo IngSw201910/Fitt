@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -85,7 +86,7 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
         fecha = findViewById(R.id.fechaMisEntrenamientosTV);
         entrenamientosL = findViewById(R.id.listViewEntrenamientosHoy);
         compartirUbicacion = (CheckBox) findViewById(R.id.checkBox);
-
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         adapter = new EntrenamientosHoyAdapter(this ,R.layout.item_entrenamiento_adoptado_row, listaEntrenamientosAdoptadosHoy);
         entrenamientosL.setAdapter(adapter);
 
