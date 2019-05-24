@@ -31,6 +31,7 @@ public class EntrenadorActivity extends AppCompatActivity {
     DatabaseReference myRef;
     private FirebaseUser mAuth;
     Usuario usuario;
+    private Entrenador entrenador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class EntrenadorActivity extends AppCompatActivity {
                 usuario = dataSnapshot.getValue(Usuario.class);
                 idEntrenador = usuario.getIdEntrenador();
                 Log.d("GETTING_IDENTRENADOR", idEntrenador);
+                obtenerObjetoEntrenador();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -64,11 +66,30 @@ public class EntrenadorActivity extends AppCompatActivity {
         }
     }
 
+    public void obtenerObjetoEntrenador(){
+        myRef = database.getReference("Usuarios");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
+                    if(singleSnapshot.getKey().equals(idEntrenador)){
+                        entrenador = singleSnapshot.getValue(Entrenador.class);
+                        Log.w("ACK:ENTRENADOR",entrenador.getNombre());
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("ERROR:ENTRENADOR:", "Error en la consulta", databaseError.toException());
+            }
+        });
+    }
+
     public void goToMiEntrenador(View view){
         if(tieneEntrenador(idEntrenador)){
-            Intent nextActivity = new Intent(this, Entrenador_miEntrenadorActivity.class);
-            //nextActivity.putExtra("entrenador", coach);
-            //startActivity(nextActivity);
+            Intent intent = new Intent(this, Entrenador_miEntrenadorActivity.class);
+            intent.putExtra("objectData",entrenador);
+            startActivity(intent);
         }else{
             Intent nextPopUp = new Intent(this, PopSolicitarEntrenador.class);
             startActivity(nextPopUp);
