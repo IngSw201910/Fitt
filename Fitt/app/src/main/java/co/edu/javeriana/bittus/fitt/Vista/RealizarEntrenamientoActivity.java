@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,15 @@ import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +36,16 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioDescanso;
 
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EntrenamientoAdoptado;
+import co.edu.javeriana.bittus.fitt.Modelo.LocalizacionUsuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
+import co.edu.javeriana.bittus.fitt.Utilidades.UtilsJhonny;
 
 public class RealizarEntrenamientoActivity extends AppCompatActivity implements EjercicioRepeticionesFragment.FragmentEjercicioRepeticionesListener, EjercicioTiempoFragment.FragmentEjercicioRepeticionesListener, EjercicioDescansoFragment.FragmentEjercicioRepeticionesListener, EntrenamientoTerminadoFragment.FragmentEjercicioRepeticionesListener {
+
+    private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private boolean localizacionActiva;
 
     private Chronometer chrono;
 
@@ -81,10 +97,13 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
 
         inicializarCronometro();
 
-        Intent intent = this.getIntent();
-        Bundle bundle = intent.getExtras();
+        /*Intent intent = this.getIntent();
+        Bundle bundle = intent.getExtras();*/
+
+        Bundle bundle = getIntent().getBundleExtra("bundle");
 
         entrenamiento = (Entrenamiento) bundle.getSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO);
+        localizacionActiva = bundle.getBoolean("localizacionActiva");
 
 
 
@@ -335,6 +354,9 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
         if (reproductor != null) {
             reproductor.stop();
         }
+        if (localizacionActiva){
+            borrarLocalizacionUsuario();
+        }
     }
 
 
@@ -509,5 +531,18 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
         if(textToSpeech !=null){
             textToSpeech.stop();
         }
+        if (localizacionActiva){
+            borrarLocalizacionUsuario();
+        }
     }
+
+    public void borrarLocalizacionUsuario(){
+        DatabaseReference myRef;
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        myRef=database.getReference(RutasBaseDeDatos.getRutaUsuariosLocalizacion());
+        String key =  mAuth.getUid();
+        myRef=database.getReference(RutasBaseDeDatos.getRutaUsuariosLocalizacion()+key);
+        myRef.removeValue();
+    }
+
 }
