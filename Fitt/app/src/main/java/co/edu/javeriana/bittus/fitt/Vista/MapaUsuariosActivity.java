@@ -207,6 +207,7 @@ public class MapaUsuariosActivity extends AppCompatActivity implements OnMapRead
                     distanciaKM = UtilsJhonny.distance(miPosicion.latitude,miPosicion.longitude,localizacionUsuario.getLatitud(), localizacionUsuario.getLongitud());
                     if (distanciaKM < 0.35){
                         //añadir marcadores con la posicion
+                        alguno = true;
                         Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(localizacionUsuario.getLatitud(), localizacionUsuario.getLongitud()))
                                 .snippet("Distancia: "+ distanciaKM)
                                 .title(localizacionUsuario.getUsuario().getNombre())

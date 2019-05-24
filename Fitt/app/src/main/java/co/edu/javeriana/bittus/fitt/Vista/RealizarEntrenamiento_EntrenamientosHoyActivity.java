@@ -1,15 +1,25 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.location.Location;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,6 +45,9 @@ import co.edu.javeriana.bittus.fitt.Modelo.EjercicioRepeticiones;
 import co.edu.javeriana.bittus.fitt.Modelo.EjercicioTiempo;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenamiento;
 import co.edu.javeriana.bittus.fitt.Modelo.EntrenamientoAdoptado;
+import co.edu.javeriana.bittus.fitt.Modelo.LocalizacionUsuario;
+import co.edu.javeriana.bittus.fitt.Modelo.Reseña;
+import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
@@ -46,6 +59,10 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
 
     private TextView diaSemana;
     private TextView fecha;
+    private CheckBox compartirUbicacion;
+    private FusedLocationProviderClient mFusedLocationClient;
+    private LatLng miPosicion;
+    private Usuario usuario;
 
     private ListView entrenamientosL;
     private List<EntrenamientoAdoptado> listaEntrenamientosAdoptadosHoy = new ArrayList<>();;
@@ -67,9 +84,12 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
         diaSemana = findViewById(R.id.diaSemanaEntrenamientosTV);
         fecha = findViewById(R.id.fechaMisEntrenamientosTV);
         entrenamientosL = findViewById(R.id.listViewEntrenamientosHoy);
+        compartirUbicacion = (CheckBox) findViewById(R.id.checkBox);
 
         adapter = new EntrenamientosHoyAdapter(this ,R.layout.item_entrenamiento_adoptado_row, listaEntrenamientosAdoptadosHoy);
         entrenamientosL.setAdapter(adapter);
+
+        buscarUsuario();
 
         entrenamientosL.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,6 +97,9 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
                 EntrenamientoAdoptado entrenamientoAdoptado = listaEntrenamientosAdoptadosHoy.get(position);
                 Intent intent = new Intent (RealizarEntrenamiento_EntrenamientosHoyActivity.this, RealizarEntrenamientoActivity.class);
                 intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO,entrenamientoAdoptado.getEntrenamiento());
+                if(compartirUbicacion.isChecked()){
+                    subirUbicacion();
+                }
                 startActivity(intent);
             }
         });
@@ -159,6 +182,52 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
         });
     }
 
+    private void subirUbicacion(){
+        String uid;
+        requestLocation();
+        uid = mAuth.getUid();
+        LocalizacionUsuario localizacionUsuario = new LocalizacionUsuario(uid,miPosicion.latitude,miPosicion.longitude,usuario);
+        subirLocalizacionUsuario(localizacionUsuario);
+    }
+
+    private void requestLocation () {
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        miPosicion = new LatLng(location.getLatitude(), location.getLongitude());
+                    }
+                }
+            });
+        }
+    }
+
+    private void buscarUsuario(){
+        DatabaseReference myRef;
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usuario = dataSnapshot.getValue(Usuario.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void subirLocalizacionUsuario (LocalizacionUsuario localizacionUsuario){
+        DatabaseReference myRef;
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        myRef=database.getReference(RutasBaseDeDatos.getRutaUsuariosLocalizacion());
+        String key =  localizacionUsuario.getUID();
+        myRef=database.getReference(RutasBaseDeDatos.getRutaUsuariosLocalizacion()+key);
+        myRef.setValue(localizacionUsuario);
+    }
 
 
 
