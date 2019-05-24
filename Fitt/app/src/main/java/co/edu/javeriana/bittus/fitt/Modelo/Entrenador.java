@@ -20,9 +20,7 @@ public class Entrenador extends Usuario implements Serializable {
         this.porqueElegirme = porqueElegirme;
     }
 
-    public boolean isPrivacidad() {
-        return privacidad;
-    }
+
 
     public float getDistanciaRecorrida() {
         return distanciaRecorrida;
