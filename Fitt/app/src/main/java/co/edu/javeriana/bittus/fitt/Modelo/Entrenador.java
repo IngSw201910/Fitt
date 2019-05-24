@@ -23,9 +23,7 @@ public class Entrenador extends Usuario implements Serializable {
         clientes = new ArrayList<Usuario>();
     }
 
-    public boolean isPrivacidad() {
-        return privacidad;
-    }
+
 
     public float getDistanciaRecorrida() {
         return distanciaRecorrida;
