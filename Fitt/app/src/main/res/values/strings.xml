@@ -42,7 +42,7 @@
     <!--Your comment-->
 
     <string name="google_places_key">AIzaSyCfgUbdpuSBiocdZjspf77fcGavcnDVv4g</string>
-    
+
     <string-array name="diasSemana">
         <item>Lunes</item>
         <item>Martes</item>

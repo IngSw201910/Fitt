@@ -30,7 +30,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Vista.InformacionEntrenamientoEjerciciosActivity"></activity>
+        <activity android:name=".Vista.MisClientesActivity"></activity>
+        <activity android:name=".Vista.InformacionEntrenamientoEjerciciosActivity" />
         <activity android:name=".Vista.InformacionEntrenamientoActivity" />
         <activity
             android:name=".Vista.PopUps.PopResenar"
@@ -42,11 +43,11 @@
         <activity android:name=".Vista.registroPrueba" />
         <activity android:name=".Vista.RealizarEntrenamientoActivity" />
         <activity android:name=".Vista.Entrenador_buscarEntrenadorActivity" />
-        <activity android:name=".Vista.InformacionMiEntrenamientoActivity"/>
-        <activity android:name=".Vista.InformacionEntrenamientoReseñarActivity"/>
+        <activity android:name=".Vista.InformacionMiEntrenamientoActivity" />
+        <activity android:name=".Vista.InformacionEntrenamientoReseñarActivity" />
         <activity android:name=".Vista.Entrenador_miEntrenadorActivity" />
-        <activity android:name=".Vista.EditarEntrenamientoActivity"/>
-        <activity android:name=".Vista.EditarEntrenamientoEjerciciosActivity"/>
+        <activity android:name=".Vista.EditarEntrenamientoActivity" />
+        <activity android:name=".Vista.EditarEntrenamientoEjerciciosActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

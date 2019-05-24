@@ -22,7 +22,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logout" />
 
     <ImageButton
-        android:id="@+id/btnEntrenador"
+        android:id="@+id/btnMisClientes"
         android:layout_width="74dp"
         android:layout_height="74dp"
         android:layout_marginTop="40dp"
@@ -44,7 +44,7 @@
         android:layout_weight="0.3"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
-        app:layout_constraintEnd_toStartOf="@+id/btnEntrenador"
+        app:layout_constraintEnd_toStartOf="@+id/btnMisClientes"
         app:layout_constraintStart_toEndOf="@+id/btnRealizarEntrenamiento"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:srcCompat="@drawable/calendario" />
@@ -158,12 +158,12 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="60dp"
         android:layout_weight="0.3"
-        android:text="Entrenador"
+        android:text="Mis clientes"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEntrenador" />
+        app:layout_constraintTop_toBottomOf="@+id/btnMisClientes" />
 
     <TextView
         android:id="@+id/text"
@@ -230,7 +230,7 @@
         android:id="@+id/logout"
         android:layout_width="74dp"
         android:layout_height="74dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="60dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
@@ -243,7 +243,6 @@
         android:layout_width="73dp"
         android:layout_height="38dp"
         android:layout_gravity="center_horizontal|center_vertical"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_weight="0.3"
         android:text="Iniciar Recorrido"
@@ -251,7 +250,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/text5"
-        app:layout_constraintHorizontal_bias="0.553"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toEndOf="@+id/text3"
         app:layout_constraintTop_toBottomOf="@+id/btnIniciarRecorrido" />
 
