@@ -10,7 +10,7 @@ public class Entrenador extends Usuario implements Serializable {
     private String nombreTitulo;
     private String fotoTitulo;
     private String porqueElegirme;
-    private List<Usuario> clientes;
+    private List<String> clientes;
 
 
 
@@ -20,7 +20,7 @@ public class Entrenador extends Usuario implements Serializable {
         this.nombreTitulo = nombreTitulo;
         this.fotoTitulo = fotoTitulo;
         this.porqueElegirme = porqueElegirme;
-        clientes = new ArrayList<Usuario>();
+        clientes = new ArrayList<String>();
     }
 
 
@@ -51,7 +51,7 @@ public class Entrenador extends Usuario implements Serializable {
 
     public Entrenador(){
         super();
-        clientes = new ArrayList<Usuario>();
+        clientes = new ArrayList<String>();
     }
 
     public String getNombre() {
@@ -189,11 +189,11 @@ public class Entrenador extends Usuario implements Serializable {
     }
 
 
-    public List<Usuario> getClientes() {
+    public List<String> getClientes() {
         return clientes;
     }
 
-    public void setClientes(List<Usuario> clientes) {
+    public void setClientes(List<String> clientes) {
         this.clientes = clientes;
     }
 

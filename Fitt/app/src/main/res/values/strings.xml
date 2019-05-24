@@ -36,6 +36,8 @@
     <string name="miEntrenador_AniosExp">## Años de Experiencía</string>
     <string name="miEntrenador_AboutMe">Acerca de mi</string>
     <string name="miEntrenador_AboutMe_Desc">Descripcción</string>
+    <string name="miEntrenador_button">Añadir Entrenador</string>
+    <string name="miEntrenador_buttonasignado">Entrenador Actual</string>
 
     <!--Strings activity_nuevo_mensaje.xml-->
     <string name="nuevoMensaje_activity_name">Contactos</string>
