@@ -91,6 +91,10 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
             }
         }
 
+        if(!entrenamientoActual.isPublica()){
+            radioButtonPrivada.setChecked(true);
+            radioButtonPublica.setChecked(false);
+        }
 
         List<String> stringDescansoList = new ArrayList<>();
         Collections.addAll(stringDescansoList, StringsMiguel.ENTRENAMIENTOS_DESCANSOS_STRING);
@@ -156,7 +160,12 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
         }
 
         if(completo){
-            startActivityForResult(new Intent(EditarEntrenamientoActivity.this, CrearEntrenamientoEjerciciosActivity.class),Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS);
+
+            Intent intent = new Intent(EditarEntrenamientoActivity.this, EditarEntrenamientoEjerciciosActivity.class);
+
+            intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO, entrenamientoActual);
+
+            startActivityForResult(intent,Utils.REQUEST_CODE_CREAR_ENTRENAMIENTO_EJERCICIOS);
         }
 
     }
@@ -170,26 +179,31 @@ public class EditarEntrenamientoActivity extends AppCompatActivity {
         {
             List<EjercicioEntrenamiento> entrenamientoList = (List<EjercicioEntrenamiento>) data.getExtras().getSerializable(StringsMiguel.LLAVE_EJERCICIOS_ENTRENAMIENTO);
 
-            String nombreRutina = editTextNombreEntrenamiento.getText().toString();
-            String descripcion = editTextDescripcion.getText().toString();
-            String dificultad = (String) spinnerDificultad.getSelectedItem();
+            entrenamientoActual.setNombre(editTextNombreEntrenamiento.getText().toString());
+            entrenamientoActual.setDescripcion(editTextDescripcion.getText().toString());
+            entrenamientoActual.setDificultad((String) spinnerDificultad.getSelectedItem());
             String sDuracion = editTextDuracion.getText().toString();
 
             boolean publica = radioButtonPublica.isChecked();
             String sDiasDescanso = (String) spinnerDescanso.getSelectedItem();
 
 
+            if(!publica){
+                entrenamientoActual.setPublica(false);
+            }
+
             int diasDescanso = Integer.parseInt(sDiasDescanso);
             int duracion = Integer.parseInt(sDuracion);
+            entrenamientoActual.setDuracion(duracion);
+            entrenamientoActual.setNumDiasDescanso(diasDescanso);
 
 
-            Entrenamiento entrenamiento = new Entrenamiento(diasDescanso,descripcion,dificultad,publica,nombreRutina,duracion);
-            entrenamiento.setEjercicioEntrenamientoList(entrenamientoList);
+            entrenamientoActual.setEjercicioEntrenamientoList(entrenamientoList);
 
 
-            String key = PersistenciaFirebase.almacenarInformacionConKey(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+user.getUid()+"/", entrenamiento);
-            if (entrenamiento.isPublica())
-                PersistenciaFirebase.almacenarInformacionConKeyPersonalizada(RutasBaseDeDatos.getRutaEntrenamientosPublicos(),entrenamiento, key);
+            PersistenciaFirebase.almacenarInformacionConKeyPersonalizada(RutasBaseDeDatos.RUTA_ENTRENAMIENTOS+user.getUid()+"/", entrenamientoActual, llave);
+            if (publica)
+                PersistenciaFirebase.almacenarInformacionConKeyPersonalizada(RutasBaseDeDatos.getRutaEntrenamientosPublicos(),entrenamientoActual, llave);
 
             finish();
         }
