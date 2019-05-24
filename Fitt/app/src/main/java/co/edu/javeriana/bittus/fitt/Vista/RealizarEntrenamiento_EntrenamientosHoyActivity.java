@@ -64,6 +64,7 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
     private FusedLocationProviderClient mFusedLocationClient;
     private LatLng miPosicion;
     private Usuario usuario;
+    private boolean localizacionActiva;
 
     private ListView entrenamientosL;
     private List<EntrenamientoAdoptado> listaEntrenamientosAdoptadosHoy = new ArrayList<>();;
@@ -97,10 +98,16 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 EntrenamientoAdoptado entrenamientoAdoptado = listaEntrenamientosAdoptadosHoy.get(position);
                 Intent intent = new Intent (RealizarEntrenamiento_EntrenamientosHoyActivity.this, RealizarEntrenamientoActivity.class);
-                intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO,entrenamientoAdoptado.getEntrenamiento());
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(StringsMiguel.LLAVE_ENTRENAMIENTO,entrenamientoAdoptado.getEntrenamiento());
+                //intent.putExtra(StringsMiguel.LLAVE_ENTRENAMIENTO,entrenamientoAdoptado.getEntrenamiento());
+                localizacionActiva = false;
                 if(compartirUbicacion.isChecked()){
                     subirUbicacion();
+                    localizacionActiva = true;
                 }
+                bundle.putBoolean("localizacionActiva", localizacionActiva);
+                intent.putExtra("bundle", bundle);
                 startActivity(intent);
             }
         });
