@@ -31,6 +31,11 @@
     <!--Strings activity_entrenador_miEntrenador.xml-->
     <string name="entrenador_miEntrenador_activity_name">Datos de mi entrenador</string>
     <string name="entrenador_miEntrenador_activity_username">Username</string>
+    <string name="miEntrenador_numero_users">## Clientes</string>
+    <string name="miEntrenador_Titulo">Status Titulo</string>
+    <string name="miEntrenador_AniosExp">## Años de Experiencía</string>
+    <string name="miEntrenador_AboutMe">Acerca de mi</string>
+    <string name="miEntrenador_AboutMe_Desc">Descripcción</string>
 
     <!--Strings activity_nuevo_mensaje.xml-->
     <string name="nuevoMensaje_activity_name">Contactos</string>
