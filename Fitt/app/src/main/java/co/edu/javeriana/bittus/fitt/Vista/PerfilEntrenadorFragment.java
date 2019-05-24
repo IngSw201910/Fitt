@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -30,6 +31,8 @@ import co.edu.javeriana.bittus.fitt.Modelo.Entrenador;
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+
+import static co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase.descargarFotoYPonerEnImageView;
 
 public class PerfilEntrenadorFragment extends Fragment {
 
@@ -53,6 +56,8 @@ public class PerfilEntrenadorFragment extends Fragment {
     CheckBox privacidad;
 
     RatingBar puntaje;
+
+    ImageView fotoPerfil;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -83,6 +88,7 @@ public class PerfilEntrenadorFragment extends Fragment {
         editarExperiencia =v.findViewById(R.id.imageButtonEdiatExperiencia);
         seguidores =v.findViewById(R.id.buttonSeguidoresE);
         siguiendo =v.findViewById(R.id.buttonSiguiendoE);
+        fotoPerfil= v.findViewById(R.id.imageViewFotoPerfilE);
 
         puntaje=v.findViewById(R.id.ratingBarPerfilE);
         puntaje.setNumStars(5);
@@ -131,6 +137,7 @@ public class PerfilEntrenadorFragment extends Fragment {
                 nacimiento.setText(entrenador.getFechaNacimiento().getDate()+"/"+entrenador.getFechaNacimiento().getMonth()+"/"+entrenador.getFechaNacimiento().getYear());
                 //puntaje.setRating(entrenador.get);
                 experiencia.setText(entrenador.getDescripccion());
+                descargarFotoYPonerEnImageView(entrenador.getDireccionFoto(),fotoPerfil);
 
             }
 
