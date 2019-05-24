@@ -117,8 +117,8 @@ public class Entrenador_miEntrenadorActivity extends AppCompatActivity {
     }
 
     private void agregarUsuario(){
-        List<String> clientesTemp = entrenador.getClientes();
-        clientesTemp.add(idUsuario);
-        PersistenciaFirebase.almacenarInformacionConRuta(RutasBaseDeDatos.RUTA_USUARIOS+idEntrenador+"/clientes/", clientesTemp);
+        //List<String> clientesTemp = entrenador.getClientes();
+        //clientesTemp.add(idUsuario);
+        //PersistenciaFirebase.almacenarInformacionConRuta(RutasBaseDeDatos.RUTA_USUARIOS+idEntrenador+"/clientes/", clientesTemp);
     }
 }

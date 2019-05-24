@@ -10,7 +10,7 @@ public class Entrenador extends Usuario implements Serializable {
     private String nombreTitulo;
     private String fotoTitulo;
     private String porqueElegirme;
-    private List<String> clientes;
+    private List<Usuario> clientes;
 
 
 
