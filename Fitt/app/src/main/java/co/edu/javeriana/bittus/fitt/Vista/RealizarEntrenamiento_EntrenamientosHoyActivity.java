@@ -71,7 +71,7 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
     private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private static FirebaseUser user = mAuth.getCurrentUser();
 
-
+    private String uid;
 
     private EntrenamientosHoyAdapter adapter;
 
@@ -184,15 +184,15 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
     }
 
     private void subirUbicacion(){
-        String uid;
-        requestLocation();
         uid = mAuth.getUid();
-        LocalizacionUsuario localizacionUsuario = new LocalizacionUsuario(uid,miPosicion.latitude,miPosicion.longitude,usuario);
-        subirLocalizacionUsuario(localizacionUsuario);
+        requestLocation();
+
     }
 
     private void requestLocation () {
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)){
+
+            Log.i("prueba:", "tiene permiso");
             mFusedLocationClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
                 @Override
                 public void onSuccess(Location location) {
@@ -202,6 +202,9 @@ public class RealizarEntrenamiento_EntrenamientosHoyActivity extends AppCompatAc
                         miPosicion = new LatLng(location.getLatitude(), location.getLongitude());
                         Log.i("Location:", "Latitud:"+ location.getLatitude());
                         Log.i("Location:", "Longitud:"+ location.getLongitude());
+
+                        LocalizacionUsuario localizacionUsuario = new LocalizacionUsuario(uid,miPosicion.latitude,miPosicion.longitude,usuario);
+                        subirLocalizacionUsuario(localizacionUsuario);
                     }
                 }
             });
