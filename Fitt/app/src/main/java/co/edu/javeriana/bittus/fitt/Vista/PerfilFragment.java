@@ -146,8 +146,8 @@ public class PerfilFragment extends Fragment {
                 usuario = dataSnapshot.getValue(Usuario.class);
                 nombre.setText(usuario.getNombre());
                 correo.setText(usuario.getCorreo());
-                peso.setText(String.valueOf(usuario.getPeso())+ " kg");
-                altura.setText(String.valueOf(usuario.getAltura()) + " cm ");
+                peso.setText(String.valueOf(usuario.getPeso()));
+                altura.setText(String.valueOf(usuario.getAltura()) );
                 Date fecha=new Date();
                 fecha.setYear(usuario.getFechaNacimiento().getYear());
                 fecha.setMonth(usuario.getFechaNacimiento().getMonth());
