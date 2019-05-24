@@ -106,13 +106,13 @@ public class RealizarEntrenamientoActivity extends AppCompatActivity implements 
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
-                    /*Locale locSpanish = new Locale("spa", "MEX");
+                    Locale locSpanish = new Locale("spa", "MEX");
 
 
-                    int result = textToSpeech.setLanguage(locSpanish);*/
+                    int result = textToSpeech.setLanguage(locSpanish);
                     //int result = textToSpeech.setLanguage(locSpanish);
                     //Locale loc = new Locale ("spa", "ESP");
-                    int result = textToSpeech.setLanguage(Locale.US);
+                    //int result = textToSpeech.setLanguage(Locale.US);
                     if (result == TextToSpeech.LANG_MISSING_DATA
                             || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                         Toast.makeText(RealizarEntrenamientoActivity.this, "Lenguaje no soportado en su celular.", Toast.LENGTH_LONG).show();
