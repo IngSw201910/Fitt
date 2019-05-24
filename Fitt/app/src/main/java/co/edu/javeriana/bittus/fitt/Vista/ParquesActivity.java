@@ -226,12 +226,13 @@ public class ParquesActivity extends AppCompatActivity implements OnMapReadyCall
         String url = stringBuilder.toString();
         Log.d(TAG, "url"+url );
 
-        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(ParquesActivity.this));
 
+        mMap.setInfoWindowAdapter(new CustomInfoWindowAdapter(this));
         Object dataTransfer[] = new Object[3];
         dataTransfer[0] = mMap;
         dataTransfer[1] = url;
         dataTransfer[2] = miPosicion;
+
 
         GetNearbyPlaces getNearbyPlaces = new GetNearbyPlaces(this);
         getNearbyPlaces.execute(dataTransfer);

@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -21,6 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import co.edu.javeriana.bittus.fitt.Adapters.CustomInfoWindowAdapter;
 import co.edu.javeriana.bittus.fitt.Vista.ParquesActivity;
 
 public class GetNearbyPlaces extends AsyncTask<Object,String,String> {
@@ -98,8 +100,8 @@ public class GetNearbyPlaces extends AsyncTask<Object,String,String> {
                     Double distancia = utilsJhonny.distance(latLng.latitude, latLng.longitude, miPosicion.latitude, miPosicion.longitude );
 
 
-                    mMap.addMarker(new MarkerOptions().position(latLng)
-                        .snippet("Dirección: "+vicininty+"\nDistancia: "+ distancia+"Km")
+                    Marker marker = mMap.addMarker(new MarkerOptions().position(latLng)
+                        .snippet("Dirección: "+vicininty+"\nDistancia: "+ distancia+"Km"+"\nLongitud: "+latLng.longitude+" \nLatitud: "+latLng.latitude)
                         .title(name_park)
                         .alpha(0.5f)); //Transparencia
 

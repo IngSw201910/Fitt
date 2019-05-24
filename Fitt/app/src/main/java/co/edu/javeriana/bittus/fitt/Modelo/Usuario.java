@@ -1,40 +1,57 @@
 package co.edu.javeriana.bittus.fitt.Modelo;
 
+import com.google.firebase.database.Exclude;
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@IgnoreExtraProperties
 public class Usuario implements Serializable {
 
-    private List<Entrenamiento> entrenamientoList;
-    private String nombre;
-    private String id;
-    private String correo;
-    private String direccionFoto;
-    private Date fechaNacimiento;
-    private String sexo;
-    private float altura;
-    private float peso;
-    private List<Usuario> seguidosList;
-    private List<Usuario> seguidoresList;
-    private boolean privacidad;
 
-    public Usuario(){
-        //No-argument constructor
-        entrenamientoList = new ArrayList<Entrenamiento>();
-        seguidosList = new ArrayList<Usuario>();
-        seguidoresList = new ArrayList<Usuario>();
+
+    protected List<Entrenamiento> entrenamientoList;
+    protected String nombre;
+    protected String idEntrenador = "default";
+    protected String id;
+    protected String correo;
+    protected String direccionFoto;
+    protected Date fechaNacimiento;
+    protected String sexo;
+    protected float altura;
+    protected float peso;
+    protected List<String> seguidosList;
+    protected List<String> seguidoresList;
+    protected boolean privacidad;
+    protected String tipo;
+    protected float distanciaRecorrida;
+    protected float pasosDados;
+    protected float caloriasQuemadas;
+
+
+
+
+
+    public Usuario(String correo, String id, String nombre) {
+        this.correo = correo;
+        this.nombre = nombre;
+        this.id = id;
+
     }
+    public Usuario(String correo, String nombre) {
 
-    public Usuario(String correo, String id, String nombre){
         this.nombre = nombre;
         this.correo = correo;
-        this.id = id;
     }
 
 
-    public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso) {
+
+
+
+    public Usuario(String nombre, String correo, String direccionFoto, Date fechaNacimiento, String sexo, float altura, float peso, String tipo) {
+
         this.nombre = nombre;
         this.correo = correo;
         this.direccionFoto = direccionFoto;
@@ -43,20 +60,46 @@ public class Usuario implements Serializable {
         this.altura = altura;
         this.peso = peso;
         this.privacidad =false;
+        this.tipo=tipo;
         entrenamientoList = new ArrayList<Entrenamiento>();
-        seguidosList = new ArrayList<Usuario>();
-        seguidoresList = new ArrayList<Usuario>();
+        seguidosList = new ArrayList<String>();
+        seguidoresList = new ArrayList<String>();
+        distanciaRecorrida = 0;
+        pasosDados = 0;
+        caloriasQuemadas = 0;
+    }
+
+
+    public Usuario() {
+        entrenamientoList = new ArrayList<Entrenamiento>();
+        seguidosList = new ArrayList<String>();
+        seguidoresList = new ArrayList<String>();
     }
 
 
 
-
-    public String getId() {
-        return id;
+    public float getDistanciaRecorrida() {
+        return distanciaRecorrida;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setDistanciaRecorrida(float distanciaRecorrida) {
+        this.distanciaRecorrida = distanciaRecorrida;
+    }
+
+    public float getPasosDados() {
+        return pasosDados;
+    }
+
+    public void setPasosDados(float pasosDados) {
+        this.pasosDados = pasosDados;
+    }
+
+    public float getCaloriasQuemadas() {
+        return caloriasQuemadas;
+    }
+
+    public void setCaloriasQuemadas(float caloriasQuemadas) {
+        this.caloriasQuemadas = caloriasQuemadas;
     }
 
     public String getNombre() {
@@ -74,7 +117,6 @@ public class Usuario implements Serializable {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
-
 
     public String getDireccionFoto() {
         return direccionFoto;
@@ -124,19 +166,19 @@ public class Usuario implements Serializable {
         this.entrenamientoList = entrenamientoList;
     }
 
-    public  List<Usuario> getSeguidosList(){
+    public  List<String> getSeguidosList(){
         return seguidosList;
     }
 
-    public void setSeguidosList(List<Usuario> seguidosList){
+    public void setSeguidosList(List<String> seguidosList){
         this.seguidosList=seguidosList;
     }
 
-    public List<Usuario> getSeguidoresList(){
+    public List<String> getSeguidoresList(){
         return seguidoresList;
     }
 
-    public void setSeguidoresList(List<Usuario> seguidoresList){
+    public void setSeguidoresList(List<String> seguidoresList){
         this.seguidoresList=seguidoresList;
     }
 
@@ -147,6 +189,38 @@ public class Usuario implements Serializable {
     public void setPrivacidad(boolean privacidad) {
         this.privacidad = privacidad;
     }
+    public String getTipo() {
+        return tipo;
+    }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public boolean validarSeguido(String uidUsuario) {
+        for(String usuario: seguidosList){
+            if(usuario.compareTo(uidUsuario)==0){
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    public String getIdEntrenador() {
+        return idEntrenador;
+    }
+
+    public void setIdEntrenador(String idEntrenador) {
+        this.idEntrenador = idEntrenador;
+    }
     //usuario cambiado
 }

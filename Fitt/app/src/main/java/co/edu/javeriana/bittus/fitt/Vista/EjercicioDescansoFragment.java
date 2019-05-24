@@ -61,7 +61,7 @@ public class EjercicioDescansoFragment extends Fragment {
 
         void darInstrucciones(String texto);
 
-        void iniciarMusicaEjercicioDescanso();
+        void iniciarMusicaEjercicioDescanso(boolean iniciarInmediatamente);
 
         void detenerMusica();
 
@@ -107,17 +107,25 @@ public class EjercicioDescansoFragment extends Fragment {
 
                         listener.darInstrucciones("Descanso.   " + ejercicioDescanso.getDuracion() + "segundos");
                         while (listener.estaDandoInstrucciones()) ;
-                        estado = CORRIENDO;
+                        if (estado != PAUSADO) {
+                            estado = CORRIENDO;
+                            listener.iniciarMusicaEjercicioDescanso(true);
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
+                                    chrono.start();
+                                }
+                            });
+
+                        }
+                        else{
+                            listener.iniciarMusicaEjercicioDescanso(false);
+                        }
 
                     }
-                    listener.iniciarMusicaEjercicioDescanso();
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            chrono.setBase(SystemClock.elapsedRealtime() + timeWhenStopped);
-                            chrono.start();
-                        }
-                    });
+
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -184,11 +192,12 @@ public class EjercicioDescansoFragment extends Fragment {
 
     public void pausar(){
         if (estado == CORRIENDO) {
-
             estado = PAUSADO;
             timeWhenStopped = (chrono.getBase() - SystemClock.elapsedRealtime());
             chrono.stop();
         }
+        if (estado == COMENZANDO)
+            estado = PAUSADO;
     }
 
     public void reanudar(){

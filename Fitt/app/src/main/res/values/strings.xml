@@ -24,20 +24,29 @@
 
     <!--Strings activity_entrenador_buscar_entrenador.xml-->
     <string name="entrenador_buscarEntrenador_activity_name">Buscar entrenador</string>
+    <string name="entrenador_buscarEntrenador_activity_barraSearch">Ingresa nombre...</string>
+    <string name="entrenador_buscarEntrenador_activity_spinnerStars">Calificación</string>
+    <string name="entrenador_buscarEntrenador_activity_spinnerAnios">Años de Experiencia</string>
 
     <!--Strings activity_entrenador_miEntrenador.xml-->
     <string name="entrenador_miEntrenador_activity_name">Datos de mi entrenador</string>
     <string name="entrenador_miEntrenador_activity_username">Username</string>
+    <string name="miEntrenador_numero_users">## Clientes</string>
+    <string name="miEntrenador_Titulo">Status Titulo</string>
+    <string name="miEntrenador_AniosExp">## Años de Experiencía</string>
+    <string name="miEntrenador_AboutMe">Acerca de mi</string>
+    <string name="miEntrenador_AboutMe_Desc">Descripcción</string>
 
     <!--Strings activity_nuevo_mensaje.xml-->
     <string name="nuevoMensaje_activity_name">Contactos</string>
 
-
+    <!--Strings activity_pop_solicitarentrenador.xml-->
+    <string name="solicitarEntrenador_name">Al parecer no tienes entrenador</string>
+    <string name="solicitarEntrenador_descripccion">Para acceder a esta función necesitas un entrenador, agrega a uno ahora.</string>
+    <string name="solicitarEntrenador_button">Buscar Entrenador</string>
     <!--Your comment-->
 
     <string name="google_places_key">AIzaSyCfgUbdpuSBiocdZjspf77fcGavcnDVv4g</string>
-
-
 
     <string-array name="diasSemana">
         <item>Lunes</item>
@@ -48,7 +57,6 @@
         <item>Sábado</item>
         <item>Domingo</item>
     </string-array>
-
 
 
 </resources>

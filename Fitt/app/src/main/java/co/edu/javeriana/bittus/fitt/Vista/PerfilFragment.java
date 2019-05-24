@@ -1,7 +1,12 @@
 package co.edu.javeriana.bittus.fitt.Vista;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -27,38 +33,61 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
+import co.edu.javeriana.bittus.fitt.Utilidades.Permisos;
+import co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
+import co.edu.javeriana.bittus.fitt.Utilidades.StringsMiguel;
+import co.edu.javeriana.bittus.fitt.Utilidades.Utils;
+import co.edu.javeriana.bittus.fitt.Utilidades.UtilsMiguel;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import static co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase.descargarFotoYPonerEnImageView;
 
 public class PerfilFragment extends Fragment {
 
 
-    ImageButton editarNombre;
-    ImageButton editarCorreo;
-    ImageButton ediarNacimiento;
-    ImageButton editarPeso;
-    ImageButton editarAltura;
-    Button seguidores;
-    Button siguiendo;
+    private ImageView fotoPerfil;
 
-    EditText nombre;
-    EditText correo;
-    EditText nacimiento;
-    EditText registro;
-    EditText peso;
-    EditText altura;
+    private ImageButton editarNombre;
+    private ImageButton editarCorreo;
+    private ImageButton ediarNacimiento;
+    private ImageButton editarPeso;
+    private ImageButton editarAltura;
+    private ImageButton cambiarFoto;
+    private ImageButton tomarFoto;
+    private Button seguidores;
+    private Button siguiendo;
 
-    CheckBox privacidad;
+    private EditText nombre;
+    private EditText correo;
+    private EditText nacimiento;
+    private EditText peso;
+    private EditText altura;
 
-    FirebaseDatabase database;
-    DatabaseReference myRef;
+    private CheckBox privacidad;
+
+    private Bitmap bitmapFoto;
+
+    private FirebaseDatabase database;
+    private DatabaseReference myRef;
     private FirebaseUser mAuth;
 
+    private TextView textViewDistancia;
+    private TextView textViewPasos;
+    private TextView textViewCalorias;
+
+
     private Usuario usuario;
+
+    Bitmap imagen;
 
     @Nullable
     @Override
@@ -73,9 +102,7 @@ public class PerfilFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios()).child(mAuth.getUid());
-
-
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
         editarNombre =v.findViewById(R.id.imageButtonEditarNombre);
         editarCorreo =v.findViewById(R.id.imageButtonEdicarCorreo);
@@ -84,6 +111,14 @@ public class PerfilFragment extends Fragment {
         editarAltura =v.findViewById(R.id.imageButtonEditarAltura);
         seguidores =v.findViewById(R.id.buttonSeguidoresUsuario);
         siguiendo =v.findViewById(R.id.buttonSiguiendo);
+        fotoPerfil= v.findViewById(R.id.imageViewFotoPerfil);
+        cambiarFoto= v.findViewById(R.id.imageButtonCargarFotoPerfil);
+        tomarFoto= v.findViewById(R.id.imageButtonTomarFoto);
+        textViewDistancia = v.findViewById(R.id.textViewDistanciaRecorrida);
+        textViewPasos = v.findViewById(R.id.textViewPasosDados);
+        textViewCalorias = v.findViewById(R.id.textViewCalorias);
+        
+
 
         nombre =v.findViewById(R.id.editTextNombre);
         nombre.setEnabled(false);
@@ -95,8 +130,6 @@ public class PerfilFragment extends Fragment {
         nacimiento =v.findViewById(R.id.editTextNaciemiento);
         nacimiento.setEnabled(false);
 
-        registro = v.findViewById(R.id.editTextRegistro);
-        registro.setEnabled(false);
 
         peso =v.findViewById(R.id.editTextPeso);
         peso.setEnabled(false);
@@ -106,7 +139,7 @@ public class PerfilFragment extends Fragment {
 
         privacidad =v.findViewById(R.id.radioButtonPrivacidad);
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -114,13 +147,36 @@ public class PerfilFragment extends Fragment {
                 nombre.setText(usuario.getNombre());
                 correo.setText(usuario.getCorreo());
                 peso.setText(String.valueOf(usuario.getPeso()));
-                altura.setText(String.valueOf(usuario.getAltura()));
-                nacimiento.setText(String.valueOf(usuario.getFechaNacimiento()));
-
+                altura.setText(String.valueOf(usuario.getAltura()) );
+                Date fecha=new Date();
+                fecha.setYear(usuario.getFechaNacimiento().getYear());
+                fecha.setMonth(usuario.getFechaNacimiento().getMonth());
+                fecha.setDate(usuario.getFechaNacimiento().getDate());
+                nacimiento.setText(fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getYear());
+                descargarFotoYPonerEnImageView(usuario.getDireccionFoto(),fotoPerfil);
+                textViewDistancia.setText(Float.toString(usuario.getDistanciaRecorrida()) + "km");
+                textViewPasos.setText(Float.toString(usuario.getPasosDados())+ "pasos");
+                textViewCalorias.setText(Float.toString(usuario.getCaloriasQuemadas())+ "kcal");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        cambiarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargarFoto();
+
+            }
+        });
+
+        tomarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tomarFoto();
 
             }
         });
@@ -282,7 +338,8 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent =new Intent(getActivity(), SeguidoresActivity.class);
-               // intent.putExtra("listaSeguidores",);
+                intent.putExtra("usuario", (Serializable) usuario);
+                intent.putExtra("id",(Serializable) mAuth.getUid());
                 startActivity(intent);
             }
         });
@@ -292,7 +349,8 @@ public class PerfilFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent intent =new Intent(getActivity(), SeguidosActivity.class);
-                // intent.putExtra("listaSeguidos",);
+                 intent.putExtra("usuario", (Serializable) usuario);
+                 intent.putExtra("id",(Serializable) mAuth.getUid());
                 startActivity(intent);
             }
         });
@@ -315,27 +373,56 @@ public class PerfilFragment extends Fragment {
 
     }
 
-    private void descargarUsuarios (){
 
-        myRef = database.getReference(RutasBaseDeDatos.getRutaUsuarios());
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()){
-                    Usuario aux =singleSnapshot.getValue(Usuario.class);
+    private void cargarFoto() {
+        //Codigo de request recomendado UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO
+        Permisos.requestPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE,"Es necesario para carga una foto", UtilsMiguel.REQUEST_CODE_PERMISSION);
 
-                    if(aux.getCorreo().compareTo(mAuth.getEmail())==0){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        intent.createChooser(intent, StringsMiguel.SELECCIONAR_APLICACION);
+        startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO);
 
-                    }
-                    //Log.i("Prueba", singleSnapshot.getValue(Usuario.class).getDireccionFoto());
-                }
+    }
 
+    private void tomarFoto() {
+        Permisos.requestPermission(getActivity(), Manifest.permission.CAMERA,"Es necesario para tomar fotos", UtilsMiguel.REQUEST_CODE_PERMISSION);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+          startActivityForResult(intent, UtilsMiguel.REQUEST_CODE_TAKE_PHOTO);
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        Bitmap bitmapFoto;
+        Log.i("Ufff", requestCode+ "");
+        if(requestCode== UtilsMiguel.REQUEST_CODE_TAKE_PHOTO && resultCode== Activity.RESULT_OK){
+            Bundle extras = data.getExtras();
+            bitmapFoto = (Bitmap) extras.get("data");
+            //Subir foto a firebase y descargarlas fotos en imagenes, borrar linea de abajo
+            imagen=bitmapFoto;
+            PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS,mAuth.getUid(),UtilsMiguel.getImageUri(getActivity(),bitmapFoto,mAuth.getUid()));
+            fotoPerfil.setImageBitmap(bitmapFoto);
+        }else if(requestCode == UtilsMiguel.REQUEST_CODE_UPLOAD_PHOTO  && resultCode==Activity.RESULT_OK){
+            Uri path = data.getData();
+            try {
+                bitmapFoto = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(),path);
+                //Subir foto a firebase y descargarlas fotos en imagenes, borrar linea de abajo
+                imagen=bitmapFoto;
+                PersistenciaFirebase.subirArchivoFirebase(RutasBaseDeDatos.RUTA_FOTO_USUARIOS,mAuth.getUid(),UtilsMiguel.getImageUri(getActivity(),bitmapFoto,mAuth.getUid()));
+                fotoPerfil.setImageBitmap(bitmapFoto);
+
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("Error:", "Error en la consulta", databaseError.toException());
-            }
-        });
+
+
+        }
+
     }
 
 

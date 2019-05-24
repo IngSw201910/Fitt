@@ -79,7 +79,9 @@ public class ComunidadFragment extends Fragment {
         ejerciciosB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), EjerciciosActivity.class));
+                Intent intent = new Intent(getActivity(), BuscarEjercicioActivity.class);
+                intent.putExtra("LLAVE", "llave");
+                startActivity(intent);
             }
         });
 

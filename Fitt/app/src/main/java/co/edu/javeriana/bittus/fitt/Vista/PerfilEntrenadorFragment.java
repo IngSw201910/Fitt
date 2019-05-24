@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -31,6 +32,8 @@ import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Utilidades.RutasBaseDeDatos;
 
+import static co.edu.javeriana.bittus.fitt.Utilidades.PersistenciaFirebase.descargarFotoYPonerEnImageView;
+
 public class PerfilEntrenadorFragment extends Fragment {
 
     ImageButton editarNombre;
@@ -46,7 +49,6 @@ public class PerfilEntrenadorFragment extends Fragment {
     EditText nombre;
     EditText correo;
     EditText nacimiento;
-    EditText registro;
     EditText peso;
     EditText altura;
     EditText experiencia;
@@ -54,6 +56,8 @@ public class PerfilEntrenadorFragment extends Fragment {
     CheckBox privacidad;
 
     RatingBar puntaje;
+
+    ImageView fotoPerfil;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -74,7 +78,7 @@ public class PerfilEntrenadorFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance().getCurrentUser();
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(RutasBaseDeDatos.getRutaEntrenadores()).child(mAuth.getUid());
+        myRef = database.getReference(RutasBaseDeDatos.RUTA_USUARIOS).child(mAuth.getUid());
 
         editarNombre =v.findViewById(R.id.imageButtonEditarNombreE);
         editarCorreo =v.findViewById(R.id.imageButtonEditarCorreoE);
@@ -84,28 +88,29 @@ public class PerfilEntrenadorFragment extends Fragment {
         editarExperiencia =v.findViewById(R.id.imageButtonEdiatExperiencia);
         seguidores =v.findViewById(R.id.buttonSeguidoresE);
         siguiendo =v.findViewById(R.id.buttonSiguiendoE);
+        fotoPerfil= v.findViewById(R.id.imageViewFotoPerfilE);
 
-        nombre =v.findViewById(R.id.editTextNombre);
+        puntaje=v.findViewById(R.id.ratingBarPerfilE);
+        puntaje.setNumStars(5);
+        puntaje.setEnabled(false);
+
+        nombre =v.findViewById(R.id.editTextNombreE);
         nombre.setEnabled(false);
 
 
-        correo =v.findViewById(R.id.editTextCorreo);
+        correo =v.findViewById(R.id.editTextCorreoE);
         correo.setEnabled(false);
 
 
-        nacimiento =v.findViewById(R.id.editTextNaciemiento);
+        nacimiento =v.findViewById(R.id.editTextNacimientoE);
         nacimiento.setEnabled(false);
 
 
-        registro = v.findViewById(R.id.editTextRegistro);
-        registro.setEnabled(false);
-
-
-        peso =v.findViewById(R.id.editTextPeso);
+        peso =v.findViewById(R.id.editTextPesoE);
         peso.setEnabled(false);
 
 
-        altura =v.findViewById(R.id.editTextAltura);
+        altura =v.findViewById(R.id.editTextAlturaE);
         altura.setEnabled(false);
 
 
@@ -124,12 +129,18 @@ public class PerfilEntrenadorFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                entrenador = dataSnapshot.getValue(Entrenador.class);
-                nombre.setText(entrenador.getNombre());
-                /*correo.setText(entrenador.getCorreo());
-                peso.setText(String.valueOf(entrenador.getPeso()));
-                altura.setText(String.valueOf(entrenador.getAltura()));
-                nacimiento.setText(String.valueOf(entrenador.getFechaNacimiento()));*/
+                Usuario usuario=dataSnapshot.getValue(Usuario.class);
+                if(usuario.getTipo().compareTo("entrenador")==0){
+                    entrenador = dataSnapshot.getValue(Entrenador.class);
+                    nombre.setText(entrenador.getNombre());
+                    correo.setText(entrenador.getCorreo());
+                    peso.setText(String.valueOf(entrenador.getPeso()));
+                    altura.setText(String.valueOf(entrenador.getAltura()));
+                    nacimiento.setText(entrenador.getFechaNacimiento().getDate()+"/"+entrenador.getFechaNacimiento().getMonth()+"/"+entrenador.getFechaNacimiento().getYear());
+                    //puntaje.setRating(entrenador.get);
+                    experiencia.setText(entrenador.getDescripccion());
+                    descargarFotoYPonerEnImageView(entrenador.getDireccionFoto(),fotoPerfil);
+                }
 
 
             }
@@ -156,7 +167,11 @@ public class PerfilEntrenadorFragment extends Fragment {
                                 String nombreUs= nombre.getText().toString();
 
                                 nombre.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setNombre(nombreUs);
+
+                                myRef.setValue(entrenador);
+                                nombre.setText(nombreUs);
+                                nombre.setEnabled(false);
 
                             }
 
@@ -184,7 +199,11 @@ public class PerfilEntrenadorFragment extends Fragment {
                             if(correo.getText()!=null){
                                 String correoNew= correo.getText().toString();
                                 correo.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setCorreo(correoNew);
+
+                                myRef.setValue(entrenador);
+                                correo.setText(correoNew);
+                                correo.setEnabled(false);
 
                             }
 
@@ -211,7 +230,11 @@ public class PerfilEntrenadorFragment extends Fragment {
                             if(nacimiento.getText()!=null){
                                 String nacimientoNew= nacimiento.getText().toString();
                                 nacimiento.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setNombre(nacimientoNew);
+
+                                myRef.setValue(entrenador);
+                                nacimiento.setText(nacimientoNew);
+                                nacimiento.setEnabled(false);
 
                             }
 
@@ -238,7 +261,11 @@ public class PerfilEntrenadorFragment extends Fragment {
                             if(altura.getText()!=null){
                                 float alturaNew= Float.parseFloat(altura.getText().toString());
                                 altura.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setAltura(alturaNew);
+
+                                myRef.setValue(entrenador);
+
+                                nombre.setEnabled(false);
 
                             }
 
@@ -264,8 +291,9 @@ public class PerfilEntrenadorFragment extends Fragment {
 
                             if(peso.getText()!=null){
                                 float pesoNew= Float.parseFloat(peso.getText().toString());
+                                entrenador.setPeso(pesoNew);
+                                myRef.setValue(entrenador);
                                 peso.setEnabled(false);
-                                //Guardar nuevo nombre
 
                             }
 
@@ -292,7 +320,10 @@ public class PerfilEntrenadorFragment extends Fragment {
                             if(experiencia.getText()!=null){
                                 String experienciaNew= experiencia.getText().toString();
                                 experiencia.setEnabled(false);
-                                //Guardar nuevo nombre
+                                entrenador.setDescripccion(experienciaNew);
+                                myRef.setValue(entrenador);
+                                experiencia.setText(experienciaNew);
+                                experiencia.setEnabled(false);
 
                             }
 
@@ -324,9 +355,11 @@ public class PerfilEntrenadorFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if(isChecked){
-                    //Cambiar a privado
+                    entrenador.setPrivacidad(true);
+                    myRef.setValue(entrenador);
                 }else{
-                    //Cambiar a publico
+                    entrenador.setPrivacidad(true);
+                    myRef.setValue(entrenador);
                 }
             }
         });

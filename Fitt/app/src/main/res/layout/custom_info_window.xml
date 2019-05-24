@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/white_border"
+    android:backgroundTint="#FFFFFF"
     android:orientation="horizontal"
     android:padding="10dp">
 
@@ -25,12 +26,14 @@
         android:id="@+id/snippet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="28dp"
         android:ellipsize="end"
         android:maxLines="10"
         android:textColor="#000"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toEndOf="@+id/imageViewParque"
         app:layout_constraintTop_toBottomOf="@+id/tituloInformacion" />
 
@@ -39,18 +42,20 @@
         style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:isIndicator="true"
         android:numStars="5"
-        android:rating="0"
+        android:rating="0.0"
+        android:stepSize="1.0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageViewParque"
-        app:layout_constraintTop_toBottomOf="@+id/snippet" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewParque" />
 
     <ImageView
         android:id="@+id/imageViewParque"
-        android:layout_width="150dp"
-        android:layout_height="130dp"
+        android:layout_width="148dp"
+        android:layout_height="110dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tituloInformacion"

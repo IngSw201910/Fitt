@@ -4,22 +4,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import co.edu.javeriana.bittus.fitt.Modelo.Usuario;
 import co.edu.javeriana.bittus.fitt.R;
 import co.edu.javeriana.bittus.fitt.Modelo.Entrenador;
 
 public class Entrenador_miEntrenadorActivity extends AppCompatActivity {
 
+    private Entrenador item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entrenador_mi_entrenador);
-        TextView nombre = (TextView) findViewById(R.id.txt_nameEntrenador);
+        item= (Entrenador) getIntent().getSerializableExtra("objectData");
 
-        Bundle extras = getIntent().getExtras();
-        Entrenador coach = extras.getParcelable("entrenador");
+        TextView nombre = (TextView) findViewById(R.id.entrenador_nombre);
+        nombre.setText(item.getNombre());
 
-        if(coach != null){
-            nombre.setText(coach.getNombre());
-        }
     }
 }
